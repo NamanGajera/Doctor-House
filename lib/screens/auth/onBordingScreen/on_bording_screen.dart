@@ -1,15 +1,17 @@
 import 'package:dr_house/common/buttons/simplebutton.dart';
+import 'package:dr_house/controller/authsScreenController/onBordingController/onBordingController.dart';
 import 'package:dr_house/screens/auth/onBordingScreen/widget/welcomtext.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/size.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OnBordingScreen extends StatelessWidget {
   const OnBordingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    OnBordingController controller = Get.put(OnBordingController());
     return Scaffold(
       body: Container(
         height: Nsize.screenheight,
@@ -17,6 +19,7 @@ class OnBordingScreen extends StatelessWidget {
         color: Ncolor.darkblue1,
         child: Stack(
           children: [
+            /// Onbording Image
             Positioned(
               right: -Nsize.screenwidth * 0.06,
               bottom: Nsize.screenheight * 0,
@@ -27,6 +30,8 @@ class OnBordingScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+
+            /// Welcome Text
             Positioned(
               top: Nsize.screenheight * 0.03,
               left: Nsize.screenwidth * 0.015,
@@ -37,6 +42,8 @@ class OnBordingScreen extends StatelessWidget {
                 textColor: Ncolor.lightblue,
               ),
             ),
+
+            /// welcome Text
             Positioned(
               top: Nsize.screenheight * 0.057,
               left: Nsize.screenwidth * 0.1,
@@ -47,6 +54,8 @@ class OnBordingScreen extends StatelessWidget {
                 textColor: Ncolor.lightblue,
               ),
             ),
+
+            /// Welcome Text
             Positioned(
               top: Nsize.screenheight * 0.072,
               left: Nsize.screenwidth * 0.015,
@@ -57,11 +66,15 @@ class OnBordingScreen extends StatelessWidget {
                 fontweight: FontWeight.bold,
               ),
             ),
+
+            /// Sign Up Button
             Positioned(
               bottom: Nsize.screenheight * 0.03,
               left: Nsize.screenwidth * 0.03,
               child: SimpleButton(
-                onTap: () {},
+                onTap: () {
+                  controller.goTosignUpScreen();
+                },
                 height: Nsize.screenheight * 0.022,
                 width: Nsize.screenwidth * 0.13,
                 buttonText: 'SIGN UP',
@@ -76,11 +89,15 @@ class OnBordingScreen extends StatelessWidget {
                 spreadRadius: 2,
               ),
             ),
+
+            /// Login Button
             Positioned(
               bottom: Nsize.screenheight * 0.065,
               left: Nsize.screenwidth * 0.03,
               child: SimpleButton(
-                onTap: () {},
+                onTap: () {
+                  controller.goToLoginScreen();
+                },
                 height: Nsize.screenheight * 0.022,
                 width: Nsize.screenwidth * 0.13,
                 buttonText: 'LOGIN',
