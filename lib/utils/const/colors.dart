@@ -6,4 +6,6 @@ class Ncolor {
   static const Color darkblue2 = Color(0xff427D9D);
   static const Color darkblue3 = Color(0xff9BBEC8);
   static const Color darkblue4 = Color(0xffDDF2FD);
+  static const Color backgroundcolor = Color(0xff96B6C5);
+  static const Color lightblacktext = Colors.black54;
 }

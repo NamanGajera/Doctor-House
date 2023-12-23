@@ -3,8 +3,11 @@ import 'package:dr_house/controller/authsScreenController/onBordingController/on
 import 'package:dr_house/screens/auth/onBordingScreen/widget/welcomtext.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/size.dart';
+import 'package:dr_house/utils/const/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../utils/const/images.dart';
 
 class OnBordingScreen extends StatelessWidget {
   const OnBordingScreen({super.key});
@@ -24,7 +27,7 @@ class OnBordingScreen extends StatelessWidget {
               right: -Nsize.screenwidth * 0.06,
               bottom: Nsize.screenheight * 0,
               child: Image.asset(
-                'assets/images/doc.png',
+                Nimages.onbordingImg,
                 height: Nsize.screenheight * 0.33,
                 width: Nsize.screenwidth * 0.33,
                 fit: BoxFit.cover,
@@ -77,10 +80,10 @@ class OnBordingScreen extends StatelessWidget {
                 },
                 height: Nsize.screenheight * 0.022,
                 width: Nsize.screenwidth * 0.13,
-                buttonText: 'SIGN UP',
+                buttonText: Ntext.signup.toUpperCase(),
                 backgroundColor: Ncolor.darkblue2,
                 fontSize: 20,
-                applyblod: true,
+                applybold: true,
                 applyborderRadius: true,
                 borderRadius: 12,
                 applyboxShadow: true,
@@ -100,10 +103,10 @@ class OnBordingScreen extends StatelessWidget {
                 },
                 height: Nsize.screenheight * 0.022,
                 width: Nsize.screenwidth * 0.13,
-                buttonText: 'LOGIN',
+                buttonText: Ntext.login.toUpperCase(),
                 backgroundColor: Ncolor.darkblue2,
                 fontSize: 20,
-                applyblod: true,
+                applybold: true,
                 applyborderRadius: true,
                 borderRadius: 12,
                 applyboxShadow: true,

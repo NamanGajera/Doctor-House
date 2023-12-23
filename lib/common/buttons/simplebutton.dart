@@ -1,6 +1,4 @@
 // ignore_for_file: must_be_immutable
-
-import 'package:dr_house/utils/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,7 +16,7 @@ class SimpleButton extends StatelessWidget {
     required this.buttonText,
     this.buttonTextColor,
     this.fontSize,
-    required this.applyblod,
+    required this.applybold,
     this.borderRadius,
     required this.onTap,
   });
@@ -34,7 +32,7 @@ class SimpleButton extends StatelessWidget {
   String buttonText;
   Color? buttonTextColor;
   double? fontSize;
-  bool applyblod = true;
+  bool applybold = true;
   double? borderRadius;
   Function() onTap;
 
@@ -63,10 +61,10 @@ class SimpleButton extends StatelessWidget {
         ),
         child: Text(
           buttonText,
-          style: GoogleFonts.lato(
+          style: GoogleFonts.akatab(
             color: buttonTextColor,
             fontSize: fontSize,
-            fontWeight: applyblod ? FontWeight.bold : FontWeight.normal,
+            fontWeight: applybold ? FontWeight.bold : FontWeight.normal,
           ),
         ),
       ),
