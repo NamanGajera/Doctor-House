@@ -77,12 +77,12 @@ class SignUpScreenBody extends StatelessWidget {
           ),
           const SizedBox(height: Nsize.spaceBetweenTextField * 3),
 
-          /// login button
+          /// Sign Up button
           SimpleButton(
             height: Nsize.screenheight * 0.022,
-            width: Nsize.screenwidth * 0.2,
+            width: Nsize.screenwidth,
             applyborderRadius: true,
-            borderRadius: 26,
+            borderRadius: 15,
             applyboxShadow: false,
             buttonText: Ntext.signup.toUpperCase(),
             applybold: true,

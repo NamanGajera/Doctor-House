@@ -5,6 +5,8 @@ import 'package:dr_house/screens/auth/loginScree/widgets/loginscreen_header.dart
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../controller/authsScreenController/LoginController/logincontroller.dart';
 import 'widgets/loginscreen_body.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -12,11 +14,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usernamecontroller = TextEditingController();
-    final passwordcontroller = TextEditingController();
+    final controller = Get.put(LoginController());
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Ncolor.backgroundcolor,
+        backgroundColor: Ncolor.lightCream,
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -30,8 +31,8 @@ class LoginScreen extends StatelessWidget {
 
                 /// Body Section :- Form
                 LoginScreenBody(
-                  usernamecontroller: usernamecontroller,
-                  passwordcontroller: passwordcontroller,
+                  usernamecontroller: controller.usernamecontroller,
+                  passwordcontroller: controller.passwordcontroller,
                 ),
                 const SizedBox(height: Nsize.spaceBetweenTextField * 5),
 
