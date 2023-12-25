@@ -5,8 +5,13 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   final usernamecontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
+  RxBool obscureText = true.obs;
 
   goToSignUpScreen() {
     Get.to(const SignUpScreen());
+  }
+
+  showandHidePassword() {
+    obscureText.value = !obscureText.value;
   }
 }

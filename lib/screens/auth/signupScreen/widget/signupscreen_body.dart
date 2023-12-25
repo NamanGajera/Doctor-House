@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-
+import 'package:animate_do/animate_do.dart';
 import '../../../../common/buttons/simplebutton.dart';
 import '../../../../common/textfield/textfield.dart';
 import '../../../../utils/const/colors.dart';
@@ -28,70 +28,75 @@ class SignUpScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      child: Column(
-        children: [
-          /// username
-          NtextField(
-            bordercolor: Ncolor.darkblue1,
-            controller: usernamecontroller,
-            labelText: Ntext.username,
-            icon: Iconsax.user_octagon,
-          ),
-          const SizedBox(height: Nsize.spaceBetweenTextField),
+      child: ElasticIn(
+        animate: true,
+        delay: const Duration(milliseconds: 600),
+        duration: const Duration(milliseconds: 600),
+        child: Column(
+          children: [
+            /// username
+            NtextField(
+              bordercolor: Ncolor.darkblue1,
+              controller: usernamecontroller,
+              labelText: Ntext.username,
+              icon: Iconsax.user_octagon,
+            ),
+            const SizedBox(height: Nsize.spaceBetweenTextField),
 
-          /// email
-          NtextField(
-            bordercolor: Ncolor.darkblue1,
-            controller: passwordcontroller,
-            labelText: Ntext.email,
-            icon: Icons.email_outlined,
-          ),
+            /// email
+            NtextField(
+              bordercolor: Ncolor.darkblue1,
+              controller: passwordcontroller,
+              labelText: Ntext.email,
+              icon: Icons.email_outlined,
+            ),
 
-          const SizedBox(height: Nsize.spaceBetweenTextField),
+            const SizedBox(height: Nsize.spaceBetweenTextField),
 
-          /// phone
-          NtextField(
-            bordercolor: Ncolor.darkblue1,
-            controller: usernamecontroller,
-            labelText: Ntext.phone,
-            icon: Iconsax.call,
-            keybordtype: TextInputType.phone,
-          ),
-          const SizedBox(height: Nsize.spaceBetweenTextField),
+            /// phone
+            NtextField(
+              bordercolor: Ncolor.darkblue1,
+              controller: usernamecontroller,
+              labelText: Ntext.phone,
+              icon: Iconsax.call,
+              keybordtype: TextInputType.phone,
+            ),
+            const SizedBox(height: Nsize.spaceBetweenTextField),
 
-          /// password
-          NtextField(
-            bordercolor: Ncolor.darkblue1,
-            controller: usernamecontroller,
-            labelText: Ntext.password,
-            icon: Iconsax.lock_1,
-          ),
-          const SizedBox(height: Nsize.spaceBetweenTextField),
+            /// password
+            NtextField(
+              bordercolor: Ncolor.darkblue1,
+              controller: usernamecontroller,
+              labelText: Ntext.password,
+              icon: Iconsax.lock_1,
+            ),
+            const SizedBox(height: Nsize.spaceBetweenTextField),
 
-          /// phone
-          NtextField(
-            bordercolor: Ncolor.darkblue1,
-            controller: usernamecontroller,
-            labelText: Ntext.confpassword,
-            icon: Iconsax.lock_1,
-          ),
-          const SizedBox(height: Nsize.spaceBetweenTextField * 3),
+            /// phone
+            NtextField(
+              bordercolor: Ncolor.darkblue1,
+              controller: usernamecontroller,
+              labelText: Ntext.confpassword,
+              icon: Iconsax.lock_1,
+            ),
+            const SizedBox(height: Nsize.spaceBetweenTextField * 3),
 
-          /// Sign Up button
-          SimpleButton(
-            height: Nsize.screenheight * 0.022,
-            width: Nsize.screenwidth,
-            applyborderRadius: true,
-            borderRadius: 15,
-            applyboxShadow: false,
-            buttonText: Ntext.signup.toUpperCase(),
-            applybold: true,
-            backgroundColor: Ncolor.darkblue2,
-            fontSize: 26,
-            buttonTextColor: Colors.black,
-            onTap: () {},
-          ),
-        ],
+            /// Sign Up button
+            SimpleButton(
+              height: Nsize.screenheight * 0.022,
+              width: Nsize.screenwidth,
+              applyborderRadius: true,
+              borderRadius: 15,
+              applyboxShadow: false,
+              buttonText: Ntext.signup.toUpperCase(),
+              applybold: true,
+              backgroundColor: Ncolor.darkblue2,
+              fontSize: 26,
+              buttonTextColor: Colors.black,
+              onTap: () {},
+            ),
+          ],
+        ),
       ),
     );
   }

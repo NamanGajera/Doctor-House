@@ -1,24 +1,29 @@
-// ignore_for_file: must_be_immutable
-
+import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/helper/function.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+
 import '../../utils/const/size.dart';
 
-class NtextField extends StatelessWidget {
-  NtextField({
+class PasswordTextField extends StatelessWidget {
+  const PasswordTextField({
     super.key,
     required this.controller,
     required this.bordercolor,
     this.icon,
     required this.labelText,
     this.keybordtype,
+    required this.obscureText,
+    required this.onPressed,
   });
 
-  TextEditingController controller;
-  Color? bordercolor;
-  String labelText;
-  IconData? icon;
-  TextInputType? keybordtype;
+  final TextEditingController controller;
+  final Color? bordercolor;
+  final String labelText;
+  final IconData? icon;
+  final TextInputType? keybordtype;
+  final bool obscureText;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +58,21 @@ class NtextField extends StatelessWidget {
             color: bordercolor!,
           ),
         ),
+        suffixIcon: IconButton(
+          onPressed: onPressed,
+          icon: obscureText
+              ? const Icon(
+                  Iconsax.eye_slash,
+                  color: Ncolor.darkblue1,
+                )
+              : const Icon(
+                  Iconsax.eye,
+                  color: Ncolor.darkblue1,
+                ),
+        ),
       ),
       keyboardType: keybordtype,
+      obscureText: obscureText,
       onTapOutside: Nhelper.hideKeybord,
     );
   }
