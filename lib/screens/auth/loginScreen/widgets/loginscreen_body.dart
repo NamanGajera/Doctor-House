@@ -1,8 +1,8 @@
 import 'package:dr_house/controller/authsScreenController/LoginController/logincontroller.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-
 import '../../../../common/buttons/simplebutton.dart';
 import '../../../../common/textfield/passwordTextField.dart';
 import '../../../../common/textfield/textfield.dart';
@@ -24,7 +24,9 @@ class LoginScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
+    final formkey = GlobalKey<FormState>();
     return Form(
+      key: formkey,
       child: ElasticIn(
         animate: true,
         delay: const Duration(milliseconds: 500),
@@ -37,6 +39,7 @@ class LoginScreenBody extends StatelessWidget {
               controller: usernamecontroller,
               labelText: Ntext.username,
               icon: Iconsax.user_octagon,
+              validator: ValidationBuilder().required().build(),
             ),
             const SizedBox(height: Nsize.spaceBetweenTextField),
 
@@ -49,6 +52,7 @@ class LoginScreenBody extends StatelessWidget {
                 icon: Iconsax.lock_1,
                 obscureText: controller.obscureText.value,
                 onPressed: controller.showandHidePassword,
+                validator: ValidationBuilder().minLength(6).required().build(),
               ),
             ),
 
@@ -80,7 +84,11 @@ class LoginScreenBody extends StatelessWidget {
               backgroundColor: Ncolor.darkblue2,
               fontSize: 26,
               buttonTextColor: Colors.black,
-              onTap: () {},
+              onTap: () {
+                if (formkey.currentState!.validate()) {
+                  controller.gotToMainScreen();
+                }
+              },
             ),
           ],
         ),

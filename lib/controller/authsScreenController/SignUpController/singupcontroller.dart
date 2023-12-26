@@ -1,4 +1,4 @@
-import 'package:dr_house/screens/auth/loginScree/loginScreen.dart';
+import 'package:dr_house/screens/auth/loginScreen/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +10,6 @@ class SignUpController extends GetxController {
   final passwordcontroller = TextEditingController();
 
   goToLoginScreen() {
-    Get.off(const LoginScreen());
+    Get.to(const LoginScreen());
   }
 }

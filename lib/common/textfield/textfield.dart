@@ -12,6 +12,7 @@ class NtextField extends StatelessWidget {
     this.icon,
     required this.labelText,
     this.keybordtype,
+    this.validator,
   });
 
   TextEditingController controller;
@@ -19,6 +20,7 @@ class NtextField extends StatelessWidget {
   String labelText;
   IconData? icon;
   TextInputType? keybordtype;
+  String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,7 @@ class NtextField extends StatelessWidget {
       ),
       keyboardType: keybordtype,
       onTapOutside: Nhelper.hideKeybord,
+      validator: validator,
     );
   }
 }

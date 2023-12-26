@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
-import 'package:dr_house/screens/auth/loginScree/widgets/loginscreen_footer.dart';
-import 'package:dr_house/screens/auth/loginScree/widgets/loginscreen_header.dart';
+import 'package:dr_house/screens/auth/loginScreen/widgets/loginscreen_footer.dart';
+import 'package:dr_house/screens/auth/loginScreen/widgets/loginscreen_header.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,9 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:dr_house/controller/authsScreenController/SignUpController/singupcontroller.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../../../common/buttons/simplebutton.dart';
@@ -12,22 +15,14 @@ import '../../../../utils/const/text.dart';
 class SignUpScreenBody extends StatelessWidget {
   SignUpScreenBody({
     super.key,
-    required this.usernamecontroller,
-    required this.emailcontroller,
-    required this.phonecontroller,
-    required this.passwordcontroller,
-    required this.confpasswordcontroller,
   });
-
-  TextEditingController usernamecontroller;
-  TextEditingController emailcontroller;
-  TextEditingController phonecontroller;
-  TextEditingController passwordcontroller;
-  TextEditingController confpasswordcontroller;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(SignUpController());
+    final formkey = GlobalKey<FormState>();
     return Form(
+      key: formkey,
       child: ElasticIn(
         animate: true,
         delay: const Duration(milliseconds: 600),
@@ -37,18 +32,20 @@ class SignUpScreenBody extends StatelessWidget {
             /// username
             NtextField(
               bordercolor: Ncolor.darkblue1,
-              controller: usernamecontroller,
+              controller: controller.usernamecontroller,
               labelText: Ntext.username,
               icon: Iconsax.user_octagon,
+              validator: ValidationBuilder().required().build(),
             ),
             const SizedBox(height: Nsize.spaceBetweenTextField),
 
             /// email
             NtextField(
               bordercolor: Ncolor.darkblue1,
-              controller: passwordcontroller,
+              controller: controller.emailcontroller,
               labelText: Ntext.email,
               icon: Icons.email_outlined,
+              validator: ValidationBuilder().required().email().build(),
             ),
 
             const SizedBox(height: Nsize.spaceBetweenTextField),
@@ -56,28 +53,31 @@ class SignUpScreenBody extends StatelessWidget {
             /// phone
             NtextField(
               bordercolor: Ncolor.darkblue1,
-              controller: usernamecontroller,
+              controller: controller.phonecontroller,
               labelText: Ntext.phone,
               icon: Iconsax.call,
               keybordtype: TextInputType.phone,
+              validator: ValidationBuilder().required().phone().build(),
             ),
             const SizedBox(height: Nsize.spaceBetweenTextField),
 
             /// password
             NtextField(
               bordercolor: Ncolor.darkblue1,
-              controller: usernamecontroller,
+              controller: controller.passwordcontroller,
               labelText: Ntext.password,
               icon: Iconsax.lock_1,
+              validator: ValidationBuilder().required().minLength(6).build(),
             ),
             const SizedBox(height: Nsize.spaceBetweenTextField),
 
-            /// phone
+            /// confirm password
             NtextField(
               bordercolor: Ncolor.darkblue1,
-              controller: usernamecontroller,
+              controller: controller.confpasscontroller,
               labelText: Ntext.confpassword,
               icon: Iconsax.lock_1,
+              validator: ValidationBuilder().required().minLength(6).build(),
             ),
             const SizedBox(height: Nsize.spaceBetweenTextField * 3),
 
@@ -93,7 +93,11 @@ class SignUpScreenBody extends StatelessWidget {
               backgroundColor: Ncolor.darkblue2,
               fontSize: 26,
               buttonTextColor: Colors.black,
-              onTap: () {},
+              onTap: () {
+                if (formkey.currentState!.validate()) {
+                  controller.goToLoginScreen();
+                }
+              },
             ),
           ],
         ),

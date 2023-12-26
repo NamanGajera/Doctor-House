@@ -15,6 +15,7 @@ class PasswordTextField extends StatelessWidget {
     this.keybordtype,
     required this.obscureText,
     required this.onPressed,
+    this.validator,
   });
 
   final TextEditingController controller;
@@ -24,6 +25,7 @@ class PasswordTextField extends StatelessWidget {
   final TextInputType? keybordtype;
   final bool obscureText;
   final Function() onPressed;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,7 @@ class PasswordTextField extends StatelessWidget {
       keyboardType: keybordtype,
       obscureText: obscureText,
       onTapOutside: Nhelper.hideKeybord,
+      validator: validator,
     );
   }
 }
