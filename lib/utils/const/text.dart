@@ -7,6 +7,7 @@ class Ntext {
   static const String confpassword = 'Confirm Password';
   static const String email = 'Email';
   static const String phone = 'Phone';
+  static const String seeall = 'see all';
 
   /// OnBording Screen Text
   static const String onbordingScreen1headline = 'Book Doctor Appointment';
@@ -34,4 +35,13 @@ class Ntext {
   static const String signupSubHeadline =
       'create an account to get all features';
   static const String haveanacc = 'Already have an account?';
+
+  /// Home Screen Text
+  static const String userName = 'Hii User Name!';
+  static const String intro = 'How are you felling now?';
+  static const String docSpeciality = 'Doctor Speciality';
+  static const String topDoc = 'Top Doctor';
+  static const String docName = 'Doctor Name';
+  static const String docCatagery = 'General Doctor';
+  static const String ourServices = 'Our Services';
 }

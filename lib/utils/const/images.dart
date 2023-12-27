@@ -13,4 +13,7 @@ class Nimages {
   static const String loginscreenImg = 'assets/images/loginscreenimg.png';
   static const String googleicon = 'assets/icons/ic_google.png';
   static const String facebookicon = 'assets/icons/ic_facebook.png';
+
+  /// Home Screen Images
+  static const String docProfile = 'assets/images/docprofile.jpg';
 }
