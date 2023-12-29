@@ -19,50 +19,53 @@ class DoctorSpeciality extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Ncolor.lightCream,
         appBar: Nappbar.appbar(Ntext.docSpeciality),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
 
-              /// Doctor Speciality
-              IconGridView(
-                hightofGridView: Nsize.screenheight * 0.165,
-                itemCount: Nlist.docTypeName.length,
-                crossAxisCount: 4,
-                iconimg: Nlist.docTypeIcon,
-                iconName: Nlist.docTypeName,
-                fontsize: 14,
-                circlesize: Nsize.screenheight * 0.027,
-                imgheight: Nsize.screenheight * 0.018,
-                imgwidth: Nsize.screenheight * 0.018,
-              ),
-
-              /// Top Doctor
-              Heading(
-                heading: Ntext.topDoc,
-                wantseebtn: false,
-                headingFontSize: 20,
-              ),
-              const SizedBox(height: 10),
-              for (int i = 0; i <= 4; i++)
-                DoctorCard(
-                  borderradius: 18,
-                  cardHeight: Nsize.screenheight * 0.06,
-                  imageHeight: Nsize.screenheight * 0.1,
-                  imageWidth: Nsize.screenwidth * 0.11,
-                  elevation: 8,
-                  cardWidth: double.infinity,
-                  imagePath: Nimages.docProfile,
-                  doctorName: Ntext.docName,
-                  doctorType: Ntext.docCatagery,
-                  docnamefontSize: 20,
-                  docntypefontSize: 14,
-                  ratting: '4.1',
-                  stariconSize: 20,
-                  cityName: 'Ahemdabad',
+                /// Doctor Speciality
+                IconGridView(
+                  hightofGridView: Nsize.screenheight * 0.165,
+                  itemCount: Nlist.docTypeName.length,
+                  crossAxisCount: 4,
+                  iconimg: Nlist.docTypeIcon,
+                  iconName: Nlist.docTypeName,
+                  fontsize: 14,
+                  circlesize: Nsize.screenheight * 0.027,
+                  imgheight: Nsize.screenheight * 0.018,
+                  imgwidth: Nsize.screenheight * 0.018,
                 ),
-            ],
+
+                /// Top Doctor
+                Heading(
+                  heading: Ntext.topDoc,
+                  wantseebtn: false,
+                  headingFontSize: 20,
+                ),
+                const SizedBox(height: 10),
+                for (int i = 0; i <= 4; i++)
+                  DoctorCard(
+                    borderradius: 18,
+                    cardHeight: Nsize.screenheight * 0.06,
+                    imageHeight: Nsize.screenheight * 0.1,
+                    imageWidth: Nsize.screenwidth * 0.11,
+                    elevation: 8,
+                    cardWidth: double.infinity,
+                    imagePath: Nimages.docProfile,
+                    doctorName: Ntext.docName,
+                    doctorType: Ntext.docCatagery,
+                    docnamefontSize: 20,
+                    docntypefontSize: 14,
+                    ratting: '4.1',
+                    stariconSize: 20,
+                    cityName: 'Ahemdabad',
+                  ),
+              ],
+            ),
           ),
         ),
       ),

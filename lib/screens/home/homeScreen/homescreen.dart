@@ -21,7 +21,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeScreenController());
-    controller.onInit();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Ncolor.lightCream,
