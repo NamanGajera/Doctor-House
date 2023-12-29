@@ -11,6 +11,7 @@ class Heading extends StatelessWidget {
     required this.headingFontSize,
     this.seeall,
     this.seeallFontSize,
+    this.onTap,
   });
 
   final String heading;
@@ -18,6 +19,7 @@ class Heading extends StatelessWidget {
   final String? seeall;
   final double headingFontSize;
   final double? seeallFontSize;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +38,14 @@ class Heading extends StatelessWidget {
 
         /// See All Button
         wantseebtn
-            ? Text(
-                seeall!,
-                style: TextStyle(
-                  fontSize: seeallFontSize,
-                  color: Ncolor.darkblue2,
+            ? GestureDetector(
+                onTap: onTap,
+                child: Text(
+                  seeall!,
+                  style: TextStyle(
+                    fontSize: seeallFontSize,
+                    color: Ncolor.darkblue2,
+                  ),
                 ),
               )
             : const SizedBox(),

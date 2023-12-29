@@ -1,4 +1,4 @@
-import 'package:dr_house/controller/homeScreenController/home_controller.dart';
+import 'package:dr_house/controller/homeScreenController/mainHome_controller.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ class MainHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
+    final controller = Get.put(MainHomeController());
 
     return Obx(
       () => Scaffold(

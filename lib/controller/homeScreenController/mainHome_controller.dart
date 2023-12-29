@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../screens/home/alertScreen/alertscreen.dart';
 
-class HomeController extends GetxController {
+class MainHomeController extends GetxController {
   List pages = [
     const HomeScreen(),
     const AppointmentScreen(),

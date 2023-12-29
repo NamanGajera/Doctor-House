@@ -16,4 +16,23 @@ class Nimages {
 
   /// Home Screen Images
   static const String docProfile = 'assets/images/docprofile.jpg';
+  static const String generalPhy = 'assets/icons/ic_generalphy.png';
+  static const String cardiologist = 'assets/icons/ic_cardiologist.png';
+  static const String gynecologist = 'assets/icons/ic_gynecologist.png';
+  static const String dentist = 'assets/icons/ic_dentist.png';
+  static const String neurologist = 'assets/icons/ic_neurologist.png';
+  static const String physician = 'assets/icons/ic_physician.png';
+  static const String urologist = 'assets/icons/ic_urologist.png';
+  static const String orthopedics = 'assets/icons/ic_orthopedics.png';
+  static const String appointment = 'assets/icons/ic_appointment.png';
+  static const String consultation = 'assets/icons/ic_consultation.png';
+  static const String healthtips = 'assets/icons/ic_healthtips.png';
+  static const String medicalrecords = 'assets/icons/ic_medicalrecords.png';
+  static const String oncologist = 'assets/icons/ic_oncology.png';
+  static const String dermatologist = 'assets/icons/ic_dermatologist.png';
+  static const String psychiatrist = 'assets/icons/ic_psychiatry.png';
+  static const String allergist = 'assets/icons/ic_allergist.png';
+  static const String otolaryngologists =
+      'assets/icons/ic_otolaryngologists.png';
+  static const String nephrologists = 'assets/icons/ic_nephrologists.png';
 }

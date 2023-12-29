@@ -1,9 +1,13 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({
+  DoctorCard({
     super.key,
     this.elevation,
     required this.borderradius,
@@ -38,6 +42,7 @@ class DoctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeScreenController());
     return Card(
       elevation: elevation,
       shape: RoundedRectangleBorder(
@@ -131,9 +136,18 @@ class DoctorCard extends StatelessWidget {
             /// Favorite Icon
             Container(
               alignment: Alignment.topCenter,
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(Iconsax.heart),
+              child: Obx(
+                () => IconButton(
+                  onPressed: controller.addToFavorite,
+                  icon: Icon(
+                    controller.addfavorite.value
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: controller.addfavorite.value
+                        ? Colors.red
+                        : Colors.black,
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 5),

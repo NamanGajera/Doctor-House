@@ -7,19 +7,26 @@ class IconGridView extends StatelessWidget {
     required this.hightofGridView,
     required this.itemCount,
     required this.crossAxisCount,
-    required this.iconImage,
+    required this.iconimg,
     required this.iconName,
     this.fontsize,
     this.radius,
+    required this.circlesize,
+    this.imgheight,
+    this.imgwidth,
   });
 
   final double hightofGridView;
   final int itemCount;
   final int crossAxisCount;
-  final String iconImage;
-  final String iconName;
+  // final String iconName;
   final double? radius;
   final double? fontsize;
+  final List iconimg;
+  final List iconName;
+  final double circlesize;
+  final double? imgheight;
+  final double? imgwidth;
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +41,23 @@ class IconGridView extends StatelessWidget {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              CircleAvatar(
-                backgroundColor: Ncolor.darkblue3,
-                backgroundImage: AssetImage(
-                  iconImage,
+              Container(
+                alignment: Alignment.center,
+                height: circlesize,
+                decoration: const BoxDecoration(
+                  color: Ncolor.darkblue3,
+                  shape: BoxShape.circle,
                 ),
-                radius: radius,
+                child: Image(
+                  image: AssetImage(iconimg[index]),
+                  height: imgheight,
+                  width: imgwidth,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(height: 5),
               Text(
-                iconName,
+                iconName[index],
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

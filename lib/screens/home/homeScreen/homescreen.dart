@@ -1,4 +1,5 @@
 import 'package:dr_house/common/textfield/textfield.dart';
+import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/userIntro.dart';
 import 'package:dr_house/utils/const/colors.dart';
@@ -6,9 +7,10 @@ import 'package:dr_house/utils/const/images.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:dr_house/utils/const/text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../utils/const/list.dart';
 import 'widgets/heading.dart';
 import 'widgets/icon_grid_view.dart';
 
@@ -17,11 +19,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchController = TextEditingController();
+    final controller = Get.put(HomeScreenController());
+    controller.onInit();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Ncolor.lightCream,
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.only(top: 10, right: 12, left: 12),
             child: Column(
@@ -35,7 +39,7 @@ class HomeScreen extends StatelessWidget {
 
                 /// Search Bar
                 NtextField(
-                  controller: searchController,
+                  controller: controller.searchController,
                   bordercolor: Ncolor.darkblue1,
                   labelText: 'Search',
                   icon: Iconsax.search_favorite_1,
@@ -49,6 +53,7 @@ class HomeScreen extends StatelessWidget {
                   wantseebtn: true,
                   seeall: Ntext.seeall,
                   seeallFontSize: 16,
+                  onTap: () {},
                 ),
                 const SizedBox(height: 10),
 
@@ -57,10 +62,13 @@ class HomeScreen extends StatelessWidget {
                   hightofGridView: Nsize.screenheight * 0.08,
                   crossAxisCount: 4,
                   itemCount: 8,
-                  iconImage: Nimages.appIcon,
-                  iconName: 'Icon',
-                  fontsize: 18,
+                  iconimg: Nlist.docTypeIcon,
+                  iconName: Nlist.docTypeName,
+                  fontsize: 14,
                   radius: 30,
+                  circlesize: Nsize.screenheight * 0.027,
+                  imgheight: Nsize.screenheight * 0.018,
+                  imgwidth: Nsize.screenheight * 0.018,
                 ),
                 const SizedBox(height: 15),
 
@@ -116,22 +124,23 @@ class HomeScreen extends StatelessWidget {
                 /// Our Service Heading
                 Heading(
                   heading: Ntext.ourServices,
-                  wantseebtn: true,
+                  wantseebtn: false,
                   headingFontSize: 22,
-                  seeall: Ntext.seeall,
-                  seeallFontSize: 16,
                 ),
                 const SizedBox(height: 10),
 
                 /// Our Services
                 IconGridView(
-                  hightofGridView: Nsize.screenheight * 0.05,
-                  itemCount: 4,
+                  hightofGridView: Nsize.screenheight * 0.045,
                   crossAxisCount: 4,
-                  iconImage: Nimages.appIcon,
-                  iconName: 'Icon',
-                  fontsize: 18,
+                  itemCount: 4,
+                  iconimg: Nlist.servicesIcon,
+                  iconName: Nlist.servicesName,
+                  fontsize: 14,
                   radius: 30,
+                  circlesize: Nsize.screenheight * 0.027,
+                  imgheight: Nsize.screenheight * 0.018,
+                  imgwidth: Nsize.screenheight * 0.018,
                 ),
               ],
             ),
