@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class DoctorCard extends StatelessWidget {
-  DoctorCard({
+  const DoctorCard({
     super.key,
     this.elevation,
     required this.borderradius,
@@ -49,14 +49,15 @@ class DoctorCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderradius),
       ),
       color: Ncolor.lightCream,
-      child: SizedBox(
+      child: Container(
+        padding: const EdgeInsets.all(8),
         height: cardHeight,
         width: cardWidth,
         child: Row(
           children: [
             /// Doctor Image
             ClipRRect(
-              borderRadius: BorderRadius.circular(borderradius),
+              borderRadius: BorderRadius.circular(14),
               child: Image(
                 image: AssetImage(imagePath),
                 width: imageWidth,

@@ -10,7 +10,6 @@ class IconGridView extends StatelessWidget {
     required this.iconimg,
     required this.iconName,
     this.fontsize,
-    this.radius,
     required this.circlesize,
     this.imgheight,
     this.imgwidth,
@@ -19,8 +18,6 @@ class IconGridView extends StatelessWidget {
   final double hightofGridView;
   final int itemCount;
   final int crossAxisCount;
-  // final String iconName;
-  final double? radius;
   final double? fontsize;
   final List iconimg;
   final List iconName;

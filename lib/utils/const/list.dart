@@ -10,6 +10,12 @@ class Nlist {
     Nimages.dentist,
     Nimages.physician,
     Nimages.urologist,
+    Nimages.oncologist,
+    Nimages.dermatologist,
+    Nimages.psychiatrist,
+    Nimages.allergist,
+    Nimages.otolaryngologists,
+    Nimages.nephrologists,
   ];
 
   static const List docTypeName = [
@@ -21,6 +27,12 @@ class Nlist {
     'Dentist',
     'Physician',
     'Urologist',
+    'Oncologist',
+    'Dermatologist',
+    'Psychiatrist',
+    'Allergist',
+    'Otolaryngologists',
+    'Nephrologists',
   ];
   static const List servicesIcon = [
     Nimages.appointment,
