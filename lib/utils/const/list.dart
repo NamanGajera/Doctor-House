@@ -47,4 +47,22 @@ class Nlist {
     'Medical Records',
     'Health Tips',
   ];
+
+  static const List doctorCategories = [
+    ' All ',
+    'General physician',
+    'Neurologist',
+    'Gynecologist',
+    'Cardiologist',
+    'Orthopedic',
+    'Dentist',
+    'Physician',
+    'Urologist',
+    'Oncologist',
+    'Dermatologist',
+    'Psychiatrist',
+    'Allergist',
+    'Otolaryngologists',
+    'Nephrologists',
+  ];
 }

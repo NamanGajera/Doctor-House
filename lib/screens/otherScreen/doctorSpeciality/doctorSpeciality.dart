@@ -1,11 +1,13 @@
 import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/heading.dart';
-import 'package:dr_house/screens/home/homeScreen/widgets/icon_grid_view.dart';
+import 'package:dr_house/screens/home/homeScreen/widgets/doctortypes_icon.dart';
+import 'package:dr_house/screens/otherScreen/doctorSpeciality/doctorcategories.dart';
 import 'package:dr_house/utils/const/images.dart';
 import 'package:dr_house/utils/const/list.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:dr_house/utils/const/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../common/appbar/appbar.dart';
 import '../../../utils/const/colors.dart';
@@ -28,7 +30,7 @@ class DoctorSpeciality extends StatelessWidget {
                 const SizedBox(height: 10),
 
                 /// Doctor Speciality
-                IconGridView(
+                DoctorTypesIcon(
                   hightofGridView: Nsize.screenheight * 0.165,
                   itemCount: Nlist.docTypeName.length,
                   crossAxisCount: 4,

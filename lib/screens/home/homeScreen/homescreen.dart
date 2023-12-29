@@ -2,6 +2,7 @@ import 'package:dr_house/common/textfield/textfield.dart';
 import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/userIntro.dart';
+import 'package:dr_house/screens/otherScreen/doctor%20details/doctordetails.dart';
 import 'package:dr_house/screens/otherScreen/doctorSpeciality/doctorSpeciality.dart';
 import 'package:dr_house/screens/otherScreen/topDoctor/topdoctor.dart';
 import 'package:dr_house/utils/const/colors.dart';
@@ -13,7 +14,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../utils/const/list.dart';
 import 'widgets/heading.dart';
-import 'widgets/icon_grid_view.dart';
+import 'widgets/doctortypes_icon.dart';
+import 'widgets/servicestypes_icon.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -60,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 10),
 
                 /// Doctor Speciality
-                IconGridView(
+                DoctorTypesIcon(
                   hightofGridView: Nsize.screenheight * 0.08,
                   crossAxisCount: 4,
                   itemCount: 8,
@@ -71,6 +73,7 @@ class HomeScreen extends StatelessWidget {
                   imgheight: Nsize.screenheight * 0.018,
                   imgwidth: Nsize.screenheight * 0.018,
                 ),
+
                 const SizedBox(height: 15),
 
                 /// Top Doctor Heading
@@ -102,6 +105,9 @@ class HomeScreen extends StatelessWidget {
                   ratting: '4.1',
                   stariconSize: 20,
                   cityName: 'Ahemdabad',
+                  onTap: () {
+                    Get.to(() => DoctorDetails());
+                  },
                 ),
                 const SizedBox(height: 10),
 
@@ -134,7 +140,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 10),
 
                 /// Our Services
-                IconGridView(
+                ServicesTypesIcon(
                   hightofGridView: Nsize.screenheight * 0.045,
                   crossAxisCount: 4,
                   itemCount: 4,

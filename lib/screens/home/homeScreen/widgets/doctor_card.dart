@@ -23,6 +23,7 @@ class DoctorCard extends StatelessWidget {
     this.stariconSize,
     required this.ratting,
     required this.cityName,
+    this.onTap,
   });
 
   final double? elevation;
@@ -39,120 +40,124 @@ class DoctorCard extends StatelessWidget {
   final double? stariconSize;
   final String ratting;
   final String cityName;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeScreenController());
-    return Card(
-      elevation: elevation,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(borderradius),
-      ),
-      color: Ncolor.lightCream,
-      child: Container(
-        padding: const EdgeInsets.all(8),
-        height: cardHeight,
-        width: cardWidth,
-        child: Row(
-          children: [
-            /// Doctor Image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(14),
-              child: Image(
-                image: AssetImage(imagePath),
-                width: imageWidth,
-                height: imageHeight,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(width: 10),
-
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 5),
-
-                /// Doctor Name
-                Text(
-                  doctorName,
-                  style: TextStyle(
-                    fontSize: docnamefontSize,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-
-                /// Doctor Type
-                Text(
-                  doctorType,
-                  style: TextStyle(
-                    fontSize: docntypefontSize,
-                    color: Ncolor.lightblacktext,
-                  ),
-                ),
-                const SizedBox(height: 5),
-
-                /// Location
-                Row(
-                  children: [
-                    const Icon(
-                      Iconsax.location,
-                      size: 16,
-                      color: Ncolor.darkblue1,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      cityName,
-                      style: const TextStyle(
-                        color: Ncolor.lightblacktext,
-                      ),
-                    ),
-                  ],
-                ),
-
-                const Spacer(),
-
-                /// Ratting
-                Row(
-                  children: [
-                    Icon(
-                      Iconsax.star,
-                      size: stariconSize,
-                      color: Ncolor.darkblue1,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      ratting,
-                      style: const TextStyle(
-                        color: Ncolor.lightblacktext,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-              ],
-            ),
-
-            const Spacer(),
-
-            /// Favorite Icon
-            Container(
-              alignment: Alignment.topCenter,
-              child: Obx(
-                () => IconButton(
-                  onPressed: controller.addToFavorite,
-                  icon: Icon(
-                    controller.addfavorite.value
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: controller.addfavorite.value
-                        ? Colors.red
-                        : Colors.black,
-                  ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: elevation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderradius),
+        ),
+        color: Ncolor.lightCream,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          height: cardHeight,
+          width: cardWidth,
+          child: Row(
+            children: [
+              /// Doctor Image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(14),
+                child: Image(
+                  image: AssetImage(imagePath),
+                  width: imageWidth,
+                  height: imageHeight,
+                  fit: BoxFit.cover,
                 ),
               ),
-            ),
-            const SizedBox(width: 5),
-          ],
+              const SizedBox(width: 10),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 5),
+
+                  /// Doctor Name
+                  Text(
+                    doctorName,
+                    style: TextStyle(
+                      fontSize: docnamefontSize,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+
+                  /// Doctor Type
+                  Text(
+                    doctorType,
+                    style: TextStyle(
+                      fontSize: docntypefontSize,
+                      color: Ncolor.lightblacktext,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+
+                  /// Location
+                  Row(
+                    children: [
+                      const Icon(
+                        Iconsax.location,
+                        size: 16,
+                        color: Ncolor.darkblue1,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        cityName,
+                        style: const TextStyle(
+                          color: Ncolor.lightblacktext,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const Spacer(),
+
+                  /// Ratting
+                  Row(
+                    children: [
+                      Icon(
+                        Iconsax.star,
+                        size: stariconSize,
+                        color: Ncolor.darkblue1,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        ratting,
+                        style: const TextStyle(
+                          color: Ncolor.lightblacktext,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+
+              const Spacer(),
+
+              /// Favorite Icon
+              Container(
+                alignment: Alignment.topCenter,
+                child: Obx(
+                  () => IconButton(
+                    onPressed: controller.addToFavorite,
+                    icon: Icon(
+                      controller.addfavorite.value
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: controller.addfavorite.value
+                          ? Colors.red
+                          : Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 5),
+            ],
+          ),
         ),
       ),
     );

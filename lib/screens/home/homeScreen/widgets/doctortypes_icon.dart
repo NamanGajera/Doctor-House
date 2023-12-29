@@ -1,8 +1,10 @@
+import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../utils/const/colors.dart';
 
-class IconGridView extends StatelessWidget {
-  const IconGridView({
+class DoctorTypesIcon extends StatelessWidget {
+  const DoctorTypesIcon({
     super.key,
     required this.hightofGridView,
     required this.itemCount,
@@ -27,6 +29,7 @@ class IconGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeScreenController());
     return SizedBox(
       height: hightofGridView,
       child: GridView.builder(
@@ -38,18 +41,23 @@ class IconGridView extends StatelessWidget {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                height: circlesize,
-                decoration: const BoxDecoration(
-                  color: Ncolor.darkblue3,
-                  shape: BoxShape.circle,
-                ),
-                child: Image(
-                  image: AssetImage(iconimg[index]),
-                  height: imgheight,
-                  width: imgwidth,
-                  fit: BoxFit.cover,
+              GestureDetector(
+                onTap: () {
+                  controller.iconOnClick(index);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: circlesize,
+                  decoration: const BoxDecoration(
+                    color: Ncolor.darkblue3,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image(
+                    image: AssetImage(iconimg[index]),
+                    height: imgheight,
+                    width: imgwidth,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox(height: 5),
