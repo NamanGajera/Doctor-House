@@ -2,6 +2,7 @@
 
 import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/utils/const/colors.dart';
+import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -71,76 +72,90 @@ class DoctorCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
 
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 5),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 5),
 
-                  /// Doctor Name
-                  Text(
-                    doctorName,
-                    style: TextStyle(
-                      fontSize: docnamefontSize,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-
-                  /// Doctor Type
-                  Text(
-                    doctorType,
-                    style: TextStyle(
-                      fontSize: docntypefontSize,
-                      color: Ncolor.lightblacktext,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-
-                  /// Location
-                  Row(
-                    children: [
-                      const Icon(
-                        Iconsax.location,
-                        size: 16,
-                        color: Ncolor.darkblue1,
+                    /// Doctor Name
+                    Expanded(
+                      child: Text(
+                        doctorName,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: docnamefontSize,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        cityName,
-                        style: const TextStyle(
+                    ),
+
+                    /// Doctor Type
+                    Expanded(
+                      child: Text(
+                        doctorType,
+                        style: TextStyle(
+                          fontSize: docntypefontSize,
                           color: Ncolor.lightblacktext,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 5),
 
-                  const Spacer(),
-
-                  /// Ratting
-                  Row(
-                    children: [
-                      Icon(
-                        Iconsax.star,
-                        size: stariconSize,
-                        color: Ncolor.darkblue1,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        ratting,
-                        style: const TextStyle(
-                          color: Ncolor.lightblacktext,
+                    /// Location
+                    Row(
+                      children: [
+                        const Icon(
+                          Iconsax.location,
+                          size: 16,
+                          color: Ncolor.darkblue1,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                ],
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            cityName,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Ncolor.lightblacktext,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const Spacer(),
+
+                    /// Ratting
+                    Row(
+                      children: [
+                        Icon(
+                          Iconsax.star,
+                          size: stariconSize,
+                          color: Ncolor.darkblue1,
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            ratting,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Ncolor.lightblacktext,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
               ),
 
-              const Spacer(),
+              // const Spacer(),
 
               /// Favorite Icon
               Container(
                 alignment: Alignment.topCenter,
+                // width: Nsize.screenwidth * 0.01,
                 child: Obx(
                   () => IconButton(
                     onPressed: controller.addToFavorite,
@@ -155,7 +170,6 @@ class DoctorCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(width: 5),
             ],
           ),
         ),

@@ -1,13 +1,11 @@
 import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/heading.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/doctortypes_icon.dart';
-import 'package:dr_house/screens/otherScreen/doctorSpeciality/doctorcategories.dart';
 import 'package:dr_house/utils/const/images.dart';
 import 'package:dr_house/utils/const/list.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:dr_house/utils/const/text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../common/appbar/appbar.dart';
 import '../../../utils/const/colors.dart';
@@ -58,13 +56,13 @@ class DoctorSpeciality extends StatelessWidget {
                     elevation: 8,
                     cardWidth: double.infinity,
                     imagePath: Nimages.docProfile,
-                    doctorName: Ntext.docName,
-                    doctorType: Ntext.docCatagery,
+                    doctorName: Nlist.doclist[i]['name'],
+                    doctorType: Nlist.doclist[i]['type'],
                     docnamefontSize: 20,
                     docntypefontSize: 14,
-                    ratting: '4.1',
+                    ratting: Nlist.doclist[i]['ratting'].toString(),
                     stariconSize: 20,
-                    cityName: 'Ahemdabad',
+                    cityName: Nlist.doclist[i]['city'],
                   ),
               ],
             ),
