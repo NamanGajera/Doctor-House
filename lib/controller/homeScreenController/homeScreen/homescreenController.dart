@@ -1,4 +1,5 @@
 // ignore_for_file: file_names
+import 'package:dr_house/screens/otherScreen/doctor%20details/doctordetails.dart';
 import 'package:dr_house/screens/otherScreen/doctorSpeciality/doctorcategories.dart';
 import 'package:dr_house/utils/const/list.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class HomeScreenController extends GetxController {
     Get.to(() => DoctorCategories(title: Nlist.docTypeName[index]));
   }
 
-  // changeCategoryIndex(int index) {
-  //   currentCategoriesIndex.value = index;
-  // }
+  openDoctorDetails() {
+    Get.to(() => const DoctorDetails());
+  }
 }

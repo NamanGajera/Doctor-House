@@ -1,7 +1,7 @@
+import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/utils/const/colors.dart';
-import 'package:dr_house/utils/const/text.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../../common/appbar/appbar.dart';
 import '../../../utils/const/images.dart';
 import '../../../utils/const/list.dart';
@@ -13,6 +13,7 @@ class FavoriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeScreenController());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Ncolor.lightCream,
@@ -41,6 +42,9 @@ class FavoriteScreen extends StatelessWidget {
                   ratting: Nlist.doclist[index]['ratting'].toString(),
                   stariconSize: 20,
                   cityName: Nlist.doclist[index]['city'],
+                  onTap: () {
+                    controller.openDoctorDetails();
+                  },
                 );
               },
             ),

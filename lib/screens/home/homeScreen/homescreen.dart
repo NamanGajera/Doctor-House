@@ -2,7 +2,6 @@ import 'package:dr_house/common/textfield/textfield.dart';
 import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/userIntro.dart';
-import 'package:dr_house/screens/otherScreen/doctor%20details/doctordetails.dart';
 import 'package:dr_house/screens/otherScreen/doctorSpeciality/allDocTypes.dart';
 import 'package:dr_house/screens/otherScreen/topDoctor/topdoctor.dart';
 import 'package:dr_house/utils/const/colors.dart';
@@ -106,6 +105,9 @@ class HomeScreen extends StatelessWidget {
                     ratting: Nlist.doclist[i]['ratting'].toString(),
                     stariconSize: 20,
                     cityName: Nlist.doclist[i]['city'],
+                    onTap: () {
+                      controller.openDoctorDetails();
+                    },
                   ),
 
                 /// Doctor 2 Details

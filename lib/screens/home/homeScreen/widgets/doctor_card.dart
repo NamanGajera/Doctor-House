@@ -2,7 +2,6 @@
 
 import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/utils/const/colors.dart';
-import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';

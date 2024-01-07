@@ -54,6 +54,9 @@ class TopDoctor extends StatelessWidget {
                         ratting: Nlist.doclist[index]['ratting'].toString(),
                         stariconSize: 20,
                         cityName: Nlist.doclist[index]['city'],
+                        onTap: () {
+                          controller.openDoctorDetails();
+                        },
                       );
                     },
                   ),
