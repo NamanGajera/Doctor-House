@@ -55,7 +55,13 @@ class TopDoctor extends StatelessWidget {
                         stariconSize: 20,
                         cityName: Nlist.doclist[index]['city'],
                         onTap: () {
-                          controller.openDoctorDetails();
+                          controller.openDoctorDetails(
+                            Nlist.doclist[index]['name'],
+                            Nlist.doclist[index]['type'],
+                            Nlist.doclist[index]['city'],
+                            Nlist.doclist[index]['degree'],
+                            Nlist.doclist[index]['details'],
+                          );
                         },
                       );
                     },

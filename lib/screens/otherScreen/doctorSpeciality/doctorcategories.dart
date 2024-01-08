@@ -1,11 +1,12 @@
 import 'package:dr_house/common/appbar/appbar.dart';
+import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../utils/const/images.dart';
 import '../../../utils/const/list.dart';
 import '../../../utils/const/size.dart';
-import '../../../utils/const/text.dart';
 
 class DoctorCategories extends StatelessWidget {
   const DoctorCategories({
@@ -17,6 +18,7 @@ class DoctorCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeScreenController());
     return SafeArea(
       child: Scaffold(
         appBar: Nappbar.appbar(title),
@@ -25,8 +27,6 @@ class DoctorCategories extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              /// Search Bar
-
               const SizedBox(height: 10),
 
               /// Doctor Details
@@ -50,6 +50,15 @@ class DoctorCategories extends StatelessWidget {
                       ratting: Nlist.doclist[index]['ratting'].toString(),
                       stariconSize: 20,
                       cityName: Nlist.doclist[index]['city'],
+                      onTap: () {
+                        controller.openDoctorDetails(
+                          Nlist.doclist[index]['name'],
+                          Nlist.doclist[index]['type'],
+                          Nlist.doclist[index]['city'],
+                          Nlist.doclist[index]['degree'],
+                          Nlist.doclist[index]['details'],
+                        );
+                      },
                     );
                   },
                   separatorBuilder: (context, index) =>

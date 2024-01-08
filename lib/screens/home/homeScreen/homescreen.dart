@@ -2,7 +2,7 @@ import 'package:dr_house/common/textfield/textfield.dart';
 import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/userIntro.dart';
-import 'package:dr_house/screens/otherScreen/doctorSpeciality/allDocTypes.dart';
+import 'package:dr_house/screens/otherScreen/doctorSpeciality/doctor_speciality.dart';
 import 'package:dr_house/screens/otherScreen/topDoctor/topdoctor.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/images.dart';
@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../utils/const/list.dart';
 import 'widgets/heading.dart';
-import 'widgets/doctortypes_icon.dart';
+import '../../../common/gridview/doctortypes_icon.dart';
 import 'widgets/servicestypes_icon.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -106,12 +106,15 @@ class HomeScreen extends StatelessWidget {
                     stariconSize: 20,
                     cityName: Nlist.doclist[i]['city'],
                     onTap: () {
-                      controller.openDoctorDetails();
+                      controller.openDoctorDetails(
+                        Nlist.doclist[i]['name'],
+                        Nlist.doclist[i]['type'],
+                        Nlist.doclist[i]['city'],
+                        Nlist.doclist[i]['degree'],
+                        Nlist.doclist[i]['details'],
+                      );
                     },
                   ),
-
-                /// Doctor 2 Details
-
                 const SizedBox(height: 18),
 
                 /// Our Service Heading

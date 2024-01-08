@@ -19,7 +19,16 @@ class HomeScreenController extends GetxController {
     Get.to(() => DoctorCategories(title: Nlist.docTypeName[index]));
   }
 
-  openDoctorDetails() {
-    Get.to(() => const DoctorDetails());
+  openDoctorDetails(String docname, String doctype, String doccity,
+      String docdegree, String docdescription) {
+    Get.to(
+      () => DoctorDetails(
+        docname: docname,
+        doctype: doctype,
+        doccity: doccity,
+        docdegree: docdegree,
+        docdescription: docdescription,
+      ),
+    );
   }
 }

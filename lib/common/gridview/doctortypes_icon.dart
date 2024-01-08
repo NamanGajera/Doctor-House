@@ -1,7 +1,7 @@
 import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../utils/const/colors.dart';
+import '../../utils/const/colors.dart';
 
 class DoctorTypesIcon extends StatelessWidget {
   const DoctorTypesIcon({

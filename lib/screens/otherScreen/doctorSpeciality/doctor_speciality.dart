@@ -1,11 +1,13 @@
+import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/heading.dart';
-import 'package:dr_house/screens/home/homeScreen/widgets/doctortypes_icon.dart';
+import 'package:dr_house/common/gridview/doctortypes_icon.dart';
 import 'package:dr_house/utils/const/images.dart';
 import 'package:dr_house/utils/const/list.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:dr_house/utils/const/text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../common/appbar/appbar.dart';
 import '../../../utils/const/colors.dart';
@@ -15,6 +17,7 @@ class DoctorSpeciality extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeScreenController());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Ncolor.lightCream,
@@ -63,6 +66,15 @@ class DoctorSpeciality extends StatelessWidget {
                     ratting: Nlist.doclist[i]['ratting'].toString(),
                     stariconSize: 20,
                     cityName: Nlist.doclist[i]['city'],
+                    onTap: () {
+                      controller.openDoctorDetails(
+                        Nlist.doclist[i]['name'],
+                        Nlist.doclist[i]['type'],
+                        Nlist.doclist[i]['city'],
+                        Nlist.doclist[i]['degree'],
+                        Nlist.doclist[i]['details'],
+                      );
+                    },
                   ),
               ],
             ),
