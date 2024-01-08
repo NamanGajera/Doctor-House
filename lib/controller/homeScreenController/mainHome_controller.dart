@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:dr_house/screens/home/appointmentScreen/appointmentscreen.dart';
 import 'package:dr_house/screens/home/favoriteScreen/favoritescreen.dart';
 import 'package:dr_house/screens/home/homeScreen/homescreen.dart';

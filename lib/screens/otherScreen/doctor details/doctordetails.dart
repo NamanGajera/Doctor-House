@@ -34,11 +34,11 @@ class DoctorDetails extends StatelessWidget {
             children: [
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 8, right: 15, left: 15),
+                  padding: const EdgeInsets.only(top: 8, right: 15, left: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
                       /// Doctor Details: photo, name, city etc.
                       DocDetailsHeader(
@@ -47,7 +47,7 @@ class DoctorDetails extends StatelessWidget {
                         doccity: doccity,
                         docdegree: docdegree,
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
                       /// Doctor Details: description, working hours
                       DocDetailsBody(docdescription: docdescription),

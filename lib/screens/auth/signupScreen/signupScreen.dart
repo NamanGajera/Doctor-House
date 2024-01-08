@@ -31,7 +31,7 @@ class SignUpScreen extends StatelessWidget {
                   const SizedBox(height: 30),
 
                   /// Body :- Form And Buttons
-                  SignUpScreenBody(),
+                  const SignUpScreenBody(),
                   SizedBox(height: Nsize.screenheight * 0.075),
 
                   /// footer :- Text and Login Button

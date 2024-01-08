@@ -13,7 +13,7 @@ import '../../../../utils/const/size.dart';
 import '../../../../utils/const/text.dart';
 
 class SignUpScreenBody extends StatelessWidget {
-  SignUpScreenBody({
+  const SignUpScreenBody({
     super.key,
   });
 

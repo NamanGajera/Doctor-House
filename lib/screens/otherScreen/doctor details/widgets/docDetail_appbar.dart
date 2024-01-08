@@ -1,7 +1,8 @@
-import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// ignore_for_file: file_names
 
+import 'package:flutter/material.dart';
+import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
+import 'package:get/get.dart';
 import '../../../../utils/const/colors.dart';
 
 class DocDetailsAppBar {

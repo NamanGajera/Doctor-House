@@ -13,7 +13,7 @@ class DocName extends StatelessWidget {
       docname,
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
       ),

@@ -17,6 +17,6 @@ class LoginController extends GetxController {
   }
 
   gotToMainScreen() {
-    Get.to(MainHomeScreen());
+    Get.to(const MainHomeScreen());
   }
 }

@@ -12,7 +12,7 @@ class DocDegree extends StatelessWidget {
       maxLines: 2,
       textAlign: TextAlign.center,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 16,
         color: Ncolor.lightblacktext,
       ),

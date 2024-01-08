@@ -13,7 +13,7 @@ class DocCity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(
+        const Icon(
           Iconsax.location,
           size: 20,
         ),
@@ -22,7 +22,7 @@ class DocCity extends StatelessWidget {
           maxLines: 2,
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             color: Ncolor.lightblacktext,
           ),
