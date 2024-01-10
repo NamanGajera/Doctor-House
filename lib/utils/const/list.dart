@@ -1,4 +1,5 @@
 import 'package:dr_house/utils/const/images.dart';
+import 'package:iconsax/iconsax.dart';
 
 class Nlist {
   static const List docTypeIcon = [
@@ -65,7 +66,40 @@ class Nlist {
     'Otolaryngologists',
     'Nephrologists',
   ];
+  static const List accountInfoList = [
+    'Your Profile',
+    'Notification',
+    'Favourite',
+    'Payment',
+    'Security',
+    'Help Center',
+    'Setting',
+    'Privacy Policy',
+    'Log Out'
+  ];
 
+  static const List accountInfoIconList = [
+    Iconsax.user,
+    Iconsax.notification,
+    Iconsax.heart,
+    Iconsax.card,
+    Iconsax.security,
+    Iconsax.info_circle,
+    Iconsax.setting,
+    Iconsax.lock,
+    Iconsax.logout,
+  ];
+  static const List accountInfoTralingIcon = [
+    Iconsax.arrow_right,
+    Iconsax.arrow_right,
+    Iconsax.arrow_right,
+    Iconsax.arrow_right,
+    Iconsax.arrow_right,
+    Iconsax.arrow_right,
+    Iconsax.arrow_right,
+    Iconsax.arrow_right,
+    null,
+  ];
   static List doclist = [
     {
       "id": 1,
