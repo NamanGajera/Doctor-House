@@ -13,23 +13,21 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Ncolor.lightCream,
-        body: Scaffold(
-          appBar: Nappbar.appbar('Profile'),
-          body: SizedBox(
-            height: Nsize.screenheight,
-            width: Nsize.screenwidth,
-            child: const Column(
-              children: [
-                SizedBox(height: 20),
+        appBar: Nappbar.appbar('Profile'),
+        body: SizedBox(
+          height: Nsize.screenheight,
+          width: Nsize.screenwidth,
+          child: const Column(
+            children: [
+              SizedBox(height: 20),
 
-                /// Profile Image
-                ProfileImage(),
-                SizedBox(height: 10),
+              /// Profile Image
+              ProfileImage(),
+              SizedBox(height: 10),
 
-                /// Profile Items
-                ProfileItems(),
-              ],
-            ),
+              /// Profile Items
+              ProfileItems(),
+            ],
           ),
         ),
       ),

@@ -71,6 +71,7 @@ class DoctorCard extends StatelessWidget {
               ),
               const SizedBox(width: 10),
 
+              /// Doctor Details
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,8 +149,6 @@ class DoctorCard extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // const Spacer(),
 
               /// Favorite Icon
               Container(
