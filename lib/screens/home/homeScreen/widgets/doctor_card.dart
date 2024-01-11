@@ -153,7 +153,6 @@ class DoctorCard extends StatelessWidget {
               /// Favorite Icon
               Container(
                 alignment: Alignment.topCenter,
-                // width: Nsize.screenwidth * 0.01,
                 child: Obx(
                   () => IconButton(
                     onPressed: controller.addToFavorite,

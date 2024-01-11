@@ -100,6 +100,7 @@ class Nlist {
     Iconsax.arrow_right,
     null,
   ];
+
   static List doclist = [
     {
       "id": 1,

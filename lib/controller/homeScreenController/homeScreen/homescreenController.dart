@@ -9,7 +9,6 @@ class HomeScreenController extends GetxController {
   RxBool addfavorite = false.obs;
   final searchController = TextEditingController();
   RxInt currentCategoriesIndex = 0.obs;
-  int clickedindex = 0;
 
   void addToFavorite() {
     addfavorite.value = !addfavorite.value;
