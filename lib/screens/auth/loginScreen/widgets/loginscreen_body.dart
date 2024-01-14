@@ -86,7 +86,7 @@ class LoginScreenBody extends StatelessWidget {
               buttonTextColor: Colors.black,
               onTap: () {
                 if (formkey.currentState!.validate()) {
-                  controller.gotToMainScreen();
+                  controller.logIn();
                 }
               },
             ),

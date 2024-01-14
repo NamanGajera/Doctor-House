@@ -20,9 +20,8 @@ class SignUpScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignUpController());
-    final formkey = GlobalKey<FormState>();
     return Form(
-      key: formkey,
+      key: controller.signupFormkey,
       child: ElasticIn(
         animate: true,
         delay: const Duration(milliseconds: 600),
@@ -94,9 +93,7 @@ class SignUpScreenBody extends StatelessWidget {
               fontSize: 26,
               buttonTextColor: Colors.black,
               onTap: () {
-                if (formkey.currentState!.validate()) {
-                  controller.goToLoginScreen();
-                }
+                controller.sigup();
               },
             ),
           ],

@@ -18,8 +18,8 @@ class AuthenticatonRepository extends GetxController {
 
   screenRedirect() async {
     deviceStorage.writeIfNull('isFirstTime', true);
-    deviceStorage.read('isFirstTime') != true
-        ? Get.offAll(() => const LoginScreen())
-        : Get.offAll(() => const OnBordingScreen());
+    deviceStorage.read('isFirstTime') == true
+        ? Get.offAll(() => const OnBordingScreen())
+        : Get.offAll(() => const LoginScreen());
   }
 }
