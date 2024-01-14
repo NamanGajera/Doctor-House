@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "42515664464",
+    "project_id": "doctor-house-23326",
+    "storage_bucket": "doctor-house-23326.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42515664464:android:e5694b132f1e4908c38b55",
+        "android_client_info": {
+          "package_name": "com.example.dr_house"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCa5nMCP_Ybag-RKcXFUv392tJpdbGo3uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,7 @@
 import 'package:dr_house/screens/auth/signupScreen/signupScreen.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 import '../../../screens/auth/onBordingScreen/widget/OnBordingPage.dart';
@@ -56,6 +57,8 @@ class OnBordingController extends GetxController {
   }
 
   openSignUpScreen() {
+    final deviceStorage = GetStorage();
+    deviceStorage.write('isFirstTime', false);
     Get.offAll(() => const SignUpScreen());
   }
 }

@@ -1,10 +1,26 @@
+import 'package:dr_house/repositories/authentication/authentication_repository.dart';
 import 'package:dr_house/screens/auth/onBordingScreen/on_bording_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:get_storage/get_storage.dart';
+import 'firebase_options.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'screens/home/home.dart';
+void main() async {
+  final WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+  await GetStorage.init();
+
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ).then(
+    (value) => Get.put(AuthenticatonRepository()),
+  );
   runApp(const DrHouse());
 }
 
@@ -15,7 +31,7 @@ class DrHouse extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainHomeScreen(),
+      home: OnBordingScreen(),
     );
   }
 }

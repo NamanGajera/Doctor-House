@@ -45,6 +45,9 @@ dependencies:
   form_validator: ^2.1.1
   curved_navigation_bar: ^1.0.3
   readmore: ^2.2.0
+  firebase_core: ^2.24.2
+  get_storage: ^2.1.1
+  flutter_native_splash: ^2.3.7
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +63,16 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/icons/ic_appicon.png
+  color_dark: "#121212"
+  image_dark: assets/icons/ic_appicon.png
+
+  android_12:
+    image: assets/icons/ic_appicon.png
+    image_dark: assets/icons/ic_appicon.png
+
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -73,6 +86,9 @@ flutter:
     - assets/images/
     - assets/icons/
 
+  
+      
+  
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
