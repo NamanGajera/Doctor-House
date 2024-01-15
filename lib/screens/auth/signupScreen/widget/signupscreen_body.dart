@@ -92,6 +92,7 @@ class SignUpScreenBody extends StatelessWidget {
               backgroundColor: Ncolor.darkblue2,
               fontSize: 26,
               buttonTextColor: Colors.black,
+              loading: controller.loading.value,
               onTap: () {
                 controller.sigup();
               },

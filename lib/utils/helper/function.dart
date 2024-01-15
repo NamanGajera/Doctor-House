@@ -28,7 +28,7 @@ class Nhelper {
       isDismissible: true,
       shouldIconPulse: true,
       colorText: Ncolor.darkblue1,
-      backgroundColor: Ncolor.darkblue3,
+      backgroundColor: Ncolor.darkblue4,
       snackPosition: SnackPosition.BOTTOM,
       duration: Duration(seconds: duration),
       margin: const EdgeInsets.all(10),

@@ -73,6 +73,7 @@ class DoctorDetails extends StatelessWidget {
                     buttonText: 'Book Appointment',
                     backgroundColor: Ncolor.darkblue2,
                     fontSize: 22,
+                    loading: false,
                     onTap: () {},
                   ),
                 ),

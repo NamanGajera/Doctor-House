@@ -19,6 +19,7 @@ class SimpleButton extends StatelessWidget {
     required this.applybold,
     this.borderRadius,
     required this.onTap,
+    required this.loading,
   });
 
   double height;
@@ -35,6 +36,7 @@ class SimpleButton extends StatelessWidget {
   bool applybold = true;
   double? borderRadius;
   Function() onTap;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +61,18 @@ class SimpleButton extends StatelessWidget {
                 : const BoxShadow()
           ],
         ),
-        child: Text(
-          buttonText,
-          style: GoogleFonts.akatab(
-            color: buttonTextColor,
-            fontSize: fontSize,
-            fontWeight: applybold ? FontWeight.bold : FontWeight.normal,
-          ),
-        ),
+        child: loading
+            ? const CircularProgressIndicator(
+                color: Colors.white,
+              )
+            : Text(
+                buttonText,
+                style: GoogleFonts.akatab(
+                  color: buttonTextColor,
+                  fontSize: fontSize,
+                  fontWeight: applybold ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
       ),
     );
   }

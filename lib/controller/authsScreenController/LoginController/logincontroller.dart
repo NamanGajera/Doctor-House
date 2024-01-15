@@ -9,9 +9,11 @@ import '../../../utils/helper/function.dart';
 class LoginController extends GetxController {
   final usernamecontroller = TextEditingController();
   final passwordcontroller = TextEditingController();
+  final loginFormkey = GlobalKey<FormState>();
   RxBool obscureText = true.obs;
   final _auth = FirebaseAuth.instance;
   final deviceStorage = GetStorage();
+  final RxBool loading = false.obs;
 
   goToSignUpScreen() {
     Get.to(() => const SignUpScreen());
@@ -23,6 +25,8 @@ class LoginController extends GetxController {
 
   logIn() async {
     try {
+      if (!loginFormkey.currentState!.validate()) return;
+      loading.value = true;
       await _auth
           .signInWithEmailAndPassword(
         email: usernamecontroller.text.trim(),
@@ -30,15 +34,17 @@ class LoginController extends GetxController {
       )
           .then(
         (value) {
+          loading.value = false;
           Nhelper.successSnackBar(title: 'Successfully', message: 'Login');
           Get.offAll(() => const MainHomeScreen());
         },
-      ).onError(
-        (error, stackTrace) =>
-            Nhelper.errorSnackBar(title: 'Error', message: error),
-      );
+      ).onError((error, stackTrace) {
+        Nhelper.errorSnackBar(title: 'Error', message: error.toString());
+        print(error.toString());
+      });
     } catch (e) {
       Nhelper.errorSnackBar(title: 'Error', message: e.toString());
+      print(e.toString());
     }
   }
 }

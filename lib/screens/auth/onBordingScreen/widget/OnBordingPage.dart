@@ -99,23 +99,26 @@ class OnBordingPage extends StatelessWidget {
               ? Column(
                   children: [
                     const SizedBox(height: 90),
-                    Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: SimpleButton(
-                        height: Nsize.screenheight * 0.025,
-                        width: double.infinity,
-                        backgroundColor: Ncolor.lighttomato,
-                        applyborderRadius: true,
-                        borderRadius: 15,
-                        applyboxShadow: true,
-                        blurRadius: 10,
-                        shadowColor: Ncolor.lightCream,
-                        spreadRadius: 1,
-                        buttonText: Ntext.onbordingScreen3Buttontext,
-                        buttonTextColor: Ncolor.darkblue1,
-                        fontSize: 20,
-                        applybold: true,
-                        onTap: obController.openSignUpScreen,
+                    Obx(
+                      () => Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: SimpleButton(
+                          height: Nsize.screenheight * 0.025,
+                          width: double.infinity,
+                          backgroundColor: Ncolor.lighttomato,
+                          applyborderRadius: true,
+                          borderRadius: 15,
+                          applyboxShadow: true,
+                          blurRadius: 10,
+                          shadowColor: Ncolor.lightCream,
+                          spreadRadius: 1,
+                          buttonText: Ntext.onbordingScreen3Buttontext,
+                          buttonTextColor: Ncolor.darkblue1,
+                          fontSize: 20,
+                          applybold: true,
+                          loading: obController.loading.value,
+                          onTap: obController.openSignUpScreen,
+                        ),
                       ),
                     ),
                   ],

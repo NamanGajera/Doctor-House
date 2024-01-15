@@ -14,19 +14,13 @@ import 'package:animate_do/animate_do.dart';
 class LoginScreenBody extends StatelessWidget {
   const LoginScreenBody({
     super.key,
-    required this.usernamecontroller,
-    required this.passwordcontroller,
   });
-
-  final TextEditingController usernamecontroller;
-  final TextEditingController passwordcontroller;
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
-    final formkey = GlobalKey<FormState>();
     return Form(
-      key: formkey,
+      key: controller.loginFormkey,
       child: ElasticIn(
         animate: true,
         delay: const Duration(milliseconds: 500),
@@ -36,7 +30,7 @@ class LoginScreenBody extends StatelessWidget {
             /// username
             NtextField(
               bordercolor: Ncolor.darkblue1,
-              controller: usernamecontroller,
+              controller: controller.usernamecontroller,
               labelText: Ntext.username,
               icon: Iconsax.user_octagon,
               validator: ValidationBuilder().required().build(),
@@ -47,7 +41,7 @@ class LoginScreenBody extends StatelessWidget {
             Obx(
               () => PasswordTextField(
                 bordercolor: Ncolor.darkblue1,
-                controller: passwordcontroller,
+                controller: controller.passwordcontroller,
                 labelText: Ntext.password,
                 icon: Iconsax.lock_1,
                 obscureText: controller.obscureText.value,
@@ -73,22 +67,23 @@ class LoginScreenBody extends StatelessWidget {
             const SizedBox(height: Nsize.spaceBetweenTextField * 2),
 
             /// login button
-            SimpleButton(
-              height: Nsize.screenheight * 0.022,
-              width: Nsize.screenwidth,
-              applyborderRadius: true,
-              borderRadius: 15,
-              applyboxShadow: false,
-              buttonText: Ntext.login.toUpperCase(),
-              applybold: true,
-              backgroundColor: Ncolor.darkblue2,
-              fontSize: 26,
-              buttonTextColor: Colors.black,
-              onTap: () {
-                if (formkey.currentState!.validate()) {
+            Obx(
+              () => SimpleButton(
+                height: Nsize.screenheight * 0.022,
+                width: Nsize.screenwidth,
+                applyborderRadius: true,
+                borderRadius: 15,
+                applyboxShadow: false,
+                buttonText: Ntext.login.toUpperCase(),
+                applybold: true,
+                backgroundColor: Ncolor.darkblue2,
+                fontSize: 26,
+                buttonTextColor: Colors.black,
+                loading: controller.loading.value,
+                onTap: () {
                   controller.logIn();
-                }
-              },
+                },
+              ),
             ),
           ],
         ),

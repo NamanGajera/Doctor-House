@@ -14,6 +14,7 @@ class SignUpController extends GetxController {
   final signupFormkey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance.collection('Users');
+  final RxBool loading = false.obs;
 
   goToLoginScreen() {
     Get.to(() => const LoginScreen());
@@ -24,6 +25,7 @@ class SignUpController extends GetxController {
       // Validation
       if (!signupFormkey.currentState!.validate()) return;
 
+      loading.value = true;
       // Register user in FireBase
       await _auth
           .createUserWithEmailAndPassword(
@@ -34,6 +36,7 @@ class SignUpController extends GetxController {
         (value) {
           Nhelper.successSnackBar(title: 'Successfully', message: 'Register');
           Get.off(() => const LoginScreen());
+          loading.value = false;
         },
       ).onError(
         (error, stackTrace) =>

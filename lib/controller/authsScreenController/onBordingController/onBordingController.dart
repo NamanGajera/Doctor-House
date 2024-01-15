@@ -13,6 +13,7 @@ import '../../../utils/const/text.dart';
 
 class OnBordingController extends GetxController {
   RxInt dotCurrentIndex = 0.obs;
+  RxBool loading = false.obs;
   final pages = [
     OnBordingPage(
       backgroundColor: Ncolor.lightCream,
@@ -57,8 +58,10 @@ class OnBordingController extends GetxController {
   }
 
   openSignUpScreen() {
+    loading.value = true;
     final deviceStorage = GetStorage();
     deviceStorage.write('isFirstTime', false);
     Get.offAll(() => const SignUpScreen());
+    loading.value = false;
   }
 }
