@@ -79,6 +79,12 @@ class DoctorDetails extends StatelessWidget {
                     loading: false,
                     onTap: () {
                       bookingcontroller.openBookAppointment();
+                      bookingcontroller.doctorName = docname;
+                      bookingcontroller.doctorType = doctype;
+                      bookingcontroller.doctorCity = doccity;
+                      print(bookingcontroller.doctorCity);
+                      print(bookingcontroller.doctorName);
+                      print(bookingcontroller.doctorType);
                     },
                   ),
                 ),

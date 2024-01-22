@@ -1,5 +1,8 @@
+import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
+import 'package:get/get.dart';
 
 import '../../../../utils/const/colors.dart';
 import '../../../../utils/const/size.dart';
@@ -8,21 +11,22 @@ import '../../../../utils/helper/function.dart';
 class PatientDetailForm extends StatelessWidget {
   const PatientDetailForm({
     super.key,
-    required this.fullname,
     required this.items,
     required this.selectedValue,
   });
 
-  final TextEditingController fullname;
   final List<String> items;
   final String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(BookingController());
     return Form(
+      key: controller.patientFormKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          /// Full Name
           const Text(
             'Full Name',
             style: TextStyle(
@@ -32,7 +36,8 @@ class PatientDetailForm extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            controller: fullname,
+            controller: controller.fullnamecontroller,
+            autocorrect: true,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(26),
@@ -59,9 +64,11 @@ class PatientDetailForm extends StatelessWidget {
               hintText: '  Enter Full Patient Name',
             ),
             onTapOutside: Nhelper.hideKeybord,
-            // validator: validator,
+            validator: ValidationBuilder().required().build(),
           ),
           const SizedBox(height: 10),
+
+          /// Gender
           const Text(
             'Gender',
             style: TextStyle(
@@ -108,6 +115,8 @@ class PatientDetailForm extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
+
+          /// Age
           const Text(
             'Your Age',
             style: TextStyle(
@@ -117,7 +126,8 @@ class PatientDetailForm extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            controller: fullname,
+            controller: controller.ageController,
+            autocorrect: true,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(26),
@@ -145,9 +155,11 @@ class PatientDetailForm extends StatelessWidget {
             ),
             onTapOutside: Nhelper.hideKeybord,
             keyboardType: TextInputType.number,
-            // validator: validator,
+            validator: ValidationBuilder().required().build(),
           ),
           const SizedBox(height: 10),
+
+          /// Write Your Problem
           const Text(
             'Write Your Problem',
             style: TextStyle(
@@ -157,7 +169,6 @@ class PatientDetailForm extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           TextFormField(
-            controller: fullname,
             maxLines: 10,
             decoration: InputDecoration(
               border: OutlineInputBorder(

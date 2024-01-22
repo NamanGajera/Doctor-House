@@ -1,9 +1,11 @@
 import 'package:dr_house/common/appbar/appbar.dart';
 import 'package:dr_house/common/buttons/simplebutton.dart';
+import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/list.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'widget/patientDetailsForm.dart';
 
 class PatientDetails extends StatelessWidget {
@@ -11,8 +13,7 @@ class PatientDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fullname = TextEditingController();
-
+    final bookingcontroller = Get.put(BookingController());
     String? selectedValue;
 
     return SafeArea(
@@ -31,7 +32,6 @@ class PatientDetails extends StatelessWidget {
                 children: [
                   const SizedBox(height: 15),
                   PatientDetailForm(
-                    fullname: fullname,
                     items: Nlist.genderList,
                     selectedValue: selectedValue,
                   ),
@@ -50,7 +50,19 @@ class PatientDetails extends StatelessWidget {
                       backgroundColor: Ncolor.darkblue2,
                       fontSize: 22,
                       loading: false,
-                      onTap: () {},
+                      onTap: () {
+                        if (bookingcontroller.patientFormKey.currentState!
+                            .validate()) {
+                          bookingcontroller.openPaymentScreen();
+                          bookingcontroller.patientAge =
+                              bookingcontroller.ageController.text.toString();
+                          bookingcontroller.patientName = bookingcontroller
+                              .fullnamecontroller.text
+                              .toString();
+                          print(bookingcontroller.patientName);
+                          print(bookingcontroller.patientName);
+                        }
+                      },
                     ),
                   ),
                 ],

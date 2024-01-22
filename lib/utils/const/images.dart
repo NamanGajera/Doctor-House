@@ -35,4 +35,11 @@ class Nimages {
   static const String otolaryngologists =
       'assets/icons/ic_otolaryngologists.png';
   static const String nephrologists = 'assets/icons/ic_nephrologists.png';
+
+  /// Boooking Screen Icon
+  static const String googlepayIcon = 'assets/icons/ic_gpay.png';
+  static const String paytmIcon = 'assets/icons/ic_paytm.png';
+  static const String phonepayIcon = 'assets/icons/ic_phonepay.png';
+  static const String paypalIcon = 'assets/icons/ic_paypal.png';
+  static const String upiIcon = 'assets/icons/ic_upi.png';
 }

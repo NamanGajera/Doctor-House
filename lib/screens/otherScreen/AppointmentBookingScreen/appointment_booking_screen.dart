@@ -14,7 +14,7 @@ class AppointmentBookingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookingcontroller = Get.put(BookingController());
-    DateTime selectedDate = DateTime.now();
+    int currenttimeindex = 0;
     // bookingcontroller.bookingloading.value = false;
     return SafeArea(
       child: Scaffold(
@@ -42,7 +42,10 @@ class AppointmentBookingScreen extends StatelessWidget {
                     initialDate: DateTime.now(),
                     firstDate: DateTime.now(),
                     lastDate: DateTime.now().add(const Duration(days: 90)),
-                    onDateChanged: (value) {}),
+                    onDateChanged: (value) {
+                      bookingcontroller.date =
+                          '${value.day}-${value.month}-${value.year}';
+                    }),
 
                 const SizedBox(height: 10),
                 // Select Time
@@ -74,6 +77,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                       return InkWell(
                         onTap: () {
                           bookingcontroller.selecttime(index);
+                          currenttimeindex = index;
                         },
                         child: Obx(
                           () => Container(
@@ -138,6 +142,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                       return InkWell(
                         onTap: () {
                           bookingcontroller.selecttime(index + 6);
+                          currenttimeindex = index + 6;
                         },
                         child: Obx(
                           () => Container(
@@ -198,6 +203,8 @@ class AppointmentBookingScreen extends StatelessWidget {
                       loading: false,
                       onTap: () {
                         bookingcontroller.openPatientDetails();
+                        bookingcontroller.time =
+                            Nlist.morningTime[currenttimeindex];
                       },
                     ),
                   ),
