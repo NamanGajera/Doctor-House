@@ -1,4 +1,5 @@
 import 'package:dr_house/screens/otherScreen/AppointmentBookingScreen/appointment_booking_screen.dart';
+import 'package:dr_house/screens/otherScreen/AppointmentBookingScreen/patientDetails.dart';
 import 'package:get/get.dart';
 
 class BookingController extends GetxController {
@@ -8,11 +9,11 @@ class BookingController extends GetxController {
     Get.to(() => const AppointmentBookingScreen());
   }
 
-  selectmorningtime(int index) {
+  selecttime(int index) {
     currentindex.value = index;
   }
 
-  selectafternoontime(int index) {
-    currentindex.value = index;
+  openPatientDetails() {
+    Get.to(() => const PatientDetails());
   }
 }

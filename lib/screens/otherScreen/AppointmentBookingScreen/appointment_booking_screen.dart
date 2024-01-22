@@ -6,9 +6,7 @@ import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/list.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
-import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 class AppointmentBookingScreen extends StatelessWidget {
   const AppointmentBookingScreen({super.key});
@@ -17,8 +15,10 @@ class AppointmentBookingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final bookingcontroller = Get.put(BookingController());
     DateTime selectedDate = DateTime.now();
+    // bookingcontroller.bookingloading.value = false;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Ncolor.lightCream,
         appBar: Nappbar.appbar('Book Appointment'),
         body: SizedBox(
           height: Nsize.screenheight - MediaQuery.of(context).padding.top,
@@ -73,7 +73,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          bookingcontroller.selectmorningtime(index);
+                          bookingcontroller.selecttime(index);
                         },
                         child: Obx(
                           () => Container(
@@ -137,7 +137,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          bookingcontroller.selectafternoontime(index + 6);
+                          bookingcontroller.selecttime(index + 6);
                         },
                         child: Obx(
                           () => Container(
@@ -196,7 +196,9 @@ class AppointmentBookingScreen extends StatelessWidget {
                       backgroundColor: Ncolor.darkblue2,
                       fontSize: 22,
                       loading: false,
-                      onTap: () {},
+                      onTap: () {
+                        bookingcontroller.openPatientDetails();
+                      },
                     ),
                   ),
                 )

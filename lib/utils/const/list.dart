@@ -115,6 +115,12 @@ class Nlist {
     '17:30',
   ];
 
+  static const List<String> genderList = [
+    'Male',
+    'FeMale',
+    'Other',
+  ];
+
   static List doclist = [
     {
       "id": 1,
