@@ -40,11 +40,11 @@ class LoginController extends GetxController {
         },
       ).onError((error, stackTrace) {
         Nhelper.errorSnackBar(title: 'Error', message: error.toString());
-        print(error.toString());
+        loading.value = false;
       });
     } catch (e) {
       Nhelper.errorSnackBar(title: 'Error', message: e.toString());
-      print(e.toString());
+      loading.value = false;
     }
   }
 }

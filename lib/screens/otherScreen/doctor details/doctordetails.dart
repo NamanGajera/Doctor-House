@@ -1,6 +1,8 @@
+import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../common/buttons/simplebutton.dart';
 import 'doc_details_body.dart';
 import 'doc_details_header.dart';
@@ -23,6 +25,7 @@ class DoctorDetails extends StatelessWidget {
   final String docdescription;
   @override
   Widget build(BuildContext context) {
+    final bookingcontroller = Get.put(BookingController());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Ncolor.lightCream,
@@ -74,10 +77,12 @@ class DoctorDetails extends StatelessWidget {
                     backgroundColor: Ncolor.darkblue2,
                     fontSize: 22,
                     loading: false,
-                    onTap: () {},
+                    onTap: () {
+                      bookingcontroller.openBookAppointment();
+                    },
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

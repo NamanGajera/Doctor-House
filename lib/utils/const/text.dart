@@ -37,11 +37,13 @@ class Ntext {
   static const String haveanacc = 'Already have an account?';
 
   /// Home Screen Text
-  static const String userName = 'Hii User Name!';
+  // static const String userName = 'Hii User Name!';
   static const String intro = 'How are you felling now?';
   static const String docSpeciality = 'Doctor Speciality';
   static const String topDoc = 'Top Doctor';
   static const String docName = 'Doctor Name';
   static const String docCatagery = 'General Doctor';
   static const String ourServices = 'Our Services';
+  static String userName = '';
+  static String userEmail = '';
 }

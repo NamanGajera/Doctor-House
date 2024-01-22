@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dr_house/common/textfield/textfield.dart';
 import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
@@ -8,6 +9,7 @@ import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/images.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:dr_house/utils/const/text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -16,8 +18,21 @@ import 'widgets/heading.dart';
 import '../../../common/gridview/doctortypes_icon.dart';
 import 'widgets/servicestypes_icon.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    getdata();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +47,8 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 /// User Name and Intro
-                const UserIntro(
-                  userName: Ntext.userName,
+                UserIntro(
+                  userName: 'Hii ${Ntext.userName}!',
                   intro: Ntext.intro,
                 ),
                 const SizedBox(height: 15),
@@ -143,5 +158,18 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void getdata() async {
+    User? user = auth.currentUser;
+    final uid = user?.uid;
+
+    final DocumentSnapshot userdoc =
+        await FirebaseFirestore.instance.collection('Users').doc(uid).get();
+
+    setState(() {
+      Ntext.userName = userdoc.get('name');
+      Ntext.userEmail = userdoc.get('email');
+    });
   }
 }

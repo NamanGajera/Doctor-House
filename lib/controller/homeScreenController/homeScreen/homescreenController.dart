@@ -2,6 +2,7 @@
 import 'package:dr_house/screens/otherScreen/doctor%20details/doctordetails.dart';
 import 'package:dr_house/screens/otherScreen/doctorSpeciality/doctorcategories.dart';
 import 'package:dr_house/utils/const/list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,7 @@ class HomeScreenController extends GetxController {
   RxBool addfavorite = false.obs;
   final searchController = TextEditingController();
   RxInt currentCategoriesIndex = 0.obs;
+  final uid = FirebaseAuth.instance.currentUser?.uid;
 
   void addToFavorite() {
     addfavorite.value = !addfavorite.value;

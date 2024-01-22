@@ -38,10 +38,10 @@ class SignUpController extends GetxController {
           Get.off(() => const LoginScreen());
           loading.value = false;
         },
-      ).onError(
-        (error, stackTrace) =>
-            Nhelper.errorSnackBar(title: 'Error', message: error.reactive),
-      );
+      ).onError((error, stackTrace) {
+        Nhelper.errorSnackBar(title: 'Error', message: error.reactive);
+        loading.value = false;
+      });
 
       // save user data
       final User? user = _auth.currentUser;
@@ -59,6 +59,7 @@ class SignUpController extends GetxController {
       );
     } catch (e) {
       Nhelper.errorSnackBar(title: 'Error', message: e.toString());
+      loading.value = false;
     }
   }
 }
