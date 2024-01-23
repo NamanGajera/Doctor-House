@@ -2,15 +2,20 @@ import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenCo
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import '../../../common/appbar/appbar.dart';
 import '../../../utils/const/images.dart';
 import '../../../utils/const/list.dart';
 import '../../../utils/const/size.dart';
-import '../homeScreen/widgets/doctor_card.dart';
 
-class FavoriteScreen extends StatelessWidget {
+class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
 
+  @override
+  State<FavoriteScreen> createState() => _FavoriteScreenState();
+}
+
+class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeScreenController());
@@ -21,40 +26,182 @@ class FavoriteScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.only(top: 8, right: 12, left: 12),
           child: SizedBox(
-            height: Nsize.screenheight - MediaQuery.of(context).padding.top,
-            width: double.infinity,
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return DoctorCard(
-                  borderradius: 18,
-                  cardHeight: Nsize.screenheight * 0.06,
-                  imageHeight: Nsize.screenheight * 0.1,
-                  imageWidth: Nsize.screenwidth * 0.11,
-                  elevation: 8,
-                  cardWidth: double.infinity,
-                  imagePath: Nimages.docProfile,
-                  doctorName: Nlist.doclist[index]['name'],
-                  doctorType: Nlist.doclist[index]['type'],
-                  docnamefontSize: 20,
-                  docntypefontSize: 14,
-                  ratting: Nlist.doclist[index]['ratting'].toString(),
-                  stariconSize: 20,
-                  cityName: Nlist.doclist[index]['city'],
-                  onTap: () {
-                    controller.openDoctorDetails(
-                      Nlist.doclist[index]['name'],
-                      Nlist.doclist[index]['type'],
-                      Nlist.doclist[index]['city'],
-                      Nlist.doclist[index]['degree'],
-                      Nlist.doclist[index]['details'],
-                    );
-                  },
-                );
-              },
-            ),
-          ),
+              height: Nsize.screenheight - MediaQuery.of(context).padding.top,
+              width: double.infinity,
+              child: controller.favorites.isNotEmpty
+                  ? ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: Nlist.doclist.length,
+                      itemBuilder: (context, index) {
+                        if (controller.favorites.keys
+                            .toList()
+                            .contains(Nlist.doclist[index]['id'])) {
+                          return GestureDetector(
+                            onTap: () {
+                              controller.openDoctorDetails(
+                                Nlist.doclist[index]['name'],
+                                Nlist.doclist[index]['type'],
+                                Nlist.doclist[index]['city'],
+                                Nlist.doclist[index]['degree'],
+                                Nlist.doclist[index]['details'],
+                                Nlist.doclist[index]['id'],
+                              );
+                            },
+                            child: Card(
+                              elevation: 8,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              color: Ncolor.lightCream,
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                height: Nsize.screenheight * 0.06,
+                                width: double.infinity,
+                                child: Row(
+                                  children: [
+                                    /// Doctor Image
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(14),
+                                      child: Image(
+                                        image: const AssetImage(
+                                            Nimages.docProfile),
+                                        width: Nsize.screenwidth * 0.11,
+                                        height: Nsize.screenheight * 0.1,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+
+                                    /// Doctor Details
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(height: 5),
+
+                                          /// Doctor Name
+                                          Expanded(
+                                            child: Text(
+                                              Nlist.doclist[index]['name'],
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+
+                                          /// Doctor Type
+                                          Expanded(
+                                            child: Text(
+                                              Nlist.doclist[index]['type'],
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Ncolor.lightblacktext,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+
+                                          /// Location
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                Iconsax.location,
+                                                size: 16,
+                                                color: Ncolor.darkblue1,
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Expanded(
+                                                child: Text(
+                                                  Nlist.doclist[index]['city'],
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                    color:
+                                                        Ncolor.lightblacktext,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+
+                                          const Spacer(),
+
+                                          /// Ratting
+                                          Row(
+                                            children: [
+                                              const Icon(
+                                                Iconsax.star,
+                                                size: 20,
+                                                color: Ncolor.darkblue1,
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Expanded(
+                                                child: Text(
+                                                  Nlist.doclist[index]
+                                                          ['ratting']
+                                                      .toString(),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                    color:
+                                                        Ncolor.lightblacktext,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8),
+                                        ],
+                                      ),
+                                    ),
+
+                                    /// Favorite Icon
+                                    Container(
+                                      alignment: Alignment.topCenter,
+                                      child: Obx(
+                                        () => IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              controller.toggelFavorites(
+                                                  Nlist.doclist[index]['id']);
+                                            });
+                                          },
+                                          icon: Icon(
+                                            controller.isFavorites(
+                                                    Nlist.doclist[index]['id'])
+                                                ? Icons.favorite
+                                                : Icons.favorite_border,
+                                            color: controller.isFavorites(
+                                                    Nlist.doclist[index]['id'])
+                                                ? Colors.red
+                                                : Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      },
+                    )
+                  : const Center(
+                      child: Text(
+                        'No Favorites Yet!',
+                        style: TextStyle(
+                          color: Colors.black38,
+                          fontSize: 30,
+                        ),
+                      ),
+                    )),
         ),
       ),
     );

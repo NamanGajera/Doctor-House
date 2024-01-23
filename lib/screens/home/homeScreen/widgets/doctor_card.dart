@@ -24,6 +24,7 @@ class DoctorCard extends StatelessWidget {
     required this.ratting,
     required this.cityName,
     this.onTap,
+    required this.id,
   });
 
   final double? elevation;
@@ -41,6 +42,7 @@ class DoctorCard extends StatelessWidget {
   final String ratting;
   final String cityName;
   final void Function()? onTap;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +77,10 @@ class DoctorCard extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const SizedBox(height: 5),
-
                     /// Doctor Name
-                    Expanded(
+                    Flexible(
                       child: Text(
                         doctorName,
                         overflow: TextOverflow.ellipsis,
@@ -91,7 +92,7 @@ class DoctorCard extends StatelessWidget {
                     ),
 
                     /// Doctor Type
-                    Expanded(
+                    Flexible(
                       child: Text(
                         doctorType,
                         style: TextStyle(
@@ -100,7 +101,6 @@ class DoctorCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 5),
 
                     /// Location
                     Row(
@@ -111,7 +111,7 @@ class DoctorCard extends StatelessWidget {
                           color: Ncolor.darkblue1,
                         ),
                         const SizedBox(width: 8),
-                        Expanded(
+                        Flexible(
                           child: Text(
                             cityName,
                             overflow: TextOverflow.ellipsis,
@@ -123,8 +123,6 @@ class DoctorCard extends StatelessWidget {
                       ],
                     ),
 
-                    const Spacer(),
-
                     /// Ratting
                     Row(
                       children: [
@@ -134,7 +132,7 @@ class DoctorCard extends StatelessWidget {
                           color: Ncolor.darkblue1,
                         ),
                         const SizedBox(width: 8),
-                        Expanded(
+                        Flexible(
                           child: Text(
                             ratting,
                             overflow: TextOverflow.ellipsis,
@@ -155,12 +153,14 @@ class DoctorCard extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Obx(
                   () => IconButton(
-                    onPressed: controller.addToFavorite,
+                    onPressed: () {
+                      controller.toggelFavorites(id);
+                    },
                     icon: Icon(
-                      controller.addfavorite.value
+                      controller.isFavorites(id)
                           ? Icons.favorite
                           : Icons.favorite_border,
-                      color: controller.addfavorite.value
+                      color: controller.isFavorites(id)
                           ? Colors.red
                           : Colors.black,
                     ),

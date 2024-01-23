@@ -1,4 +1,3 @@
-import 'package:dr_house/screens/home/homeScreen/widgets/doctor_card.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/list.dart';
 import 'package:dr_house/utils/const/size.dart';
@@ -7,12 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../common/appbar/appbar.dart';
 import '../../../controller/homeScreenController/homeScreen/homescreenController.dart';
-import '../../../utils/const/images.dart';
 import 'widget/doc_categories_list.dart';
 
-class TopDoctor extends StatelessWidget {
+class TopDoctor extends StatefulWidget {
   const TopDoctor({super.key});
 
+  @override
+  State<TopDoctor> createState() => _TopDoctorState();
+}
+
+class _TopDoctorState extends State<TopDoctor> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeScreenController());
@@ -28,46 +31,51 @@ class TopDoctor extends StatelessWidget {
               const SizedBox(height: 10),
 
               ///Doctor Catagories List
-              const DocCatagoriesList(),
-
-              /// Doctor List
-
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.only(top: 8, right: 12, left: 12),
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: Nlist.doclist.length,
-                    itemBuilder: (context, index) {
-                      return DoctorCard(
-                        borderradius: 18,
-                        cardHeight: Nsize.screenheight * 0.06,
-                        imageHeight: Nsize.screenheight * 0.1,
-                        imageWidth: Nsize.screenwidth * 0.11,
-                        elevation: 8,
-                        cardWidth: double.infinity,
-                        imagePath: Nimages.docProfile,
-                        doctorName: Nlist.doclist[index]['name'],
-                        doctorType: Nlist.doclist[index]['type'],
-                        docnamefontSize: 20,
-                        docntypefontSize: 14,
-                        ratting: Nlist.doclist[index]['ratting'].toString(),
-                        stariconSize: 20,
-                        cityName: Nlist.doclist[index]['city'],
-                        onTap: () {
-                          controller.openDoctorDetails(
-                            Nlist.doclist[index]['name'],
-                            Nlist.doclist[index]['type'],
-                            Nlist.doclist[index]['city'],
-                            Nlist.doclist[index]['degree'],
-                            Nlist.doclist[index]['details'],
-                          );
-                        },
-                      );
-                    },
-                  ),
+              SizedBox(
+                height: Nsize.screenheight * 0.018,
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: Nlist.doctorCategories.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          controller.currentCategoriesIndex.value = index;
+                        });
+                      },
+                      child: Obx(
+                        () => Container(
+                          alignment: Alignment.center,
+                          height: Nsize.screenheight * 0.018,
+                          padding: const EdgeInsets.only(
+                              top: 5, bottom: 5, right: 10, left: 10),
+                          margin: const EdgeInsets.only(right: 2, left: 8),
+                          decoration: BoxDecoration(
+                            border: Border.all(),
+                            borderRadius: BorderRadius.circular(18),
+                            color:
+                                controller.currentCategoriesIndex.value == index
+                                    ? Ncolor.darkblue3
+                                    : Ncolor.lightCream,
+                          ),
+                          child: Text(
+                            Nlist.doctorCategories[index],
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
+
+              /// Doctor List
+              const DocCatagoriesList(),
             ],
           ),
         ),

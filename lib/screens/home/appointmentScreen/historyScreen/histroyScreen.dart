@@ -1,4 +1,6 @@
-import 'package:dr_house/utils/const/colors.dart';
+// ignore_for_file: file_names
+
+import '../../../../utils/const/colors.dart';
 import 'package:flutter/material.dart';
 import '../../../../utils/const/images.dart';
 import '../appointmentCard/appointment_card.dart';

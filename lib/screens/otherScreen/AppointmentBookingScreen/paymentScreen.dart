@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:dr_house/common/appbar/appbar.dart';
 import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dr_house/utils/const/colors.dart';

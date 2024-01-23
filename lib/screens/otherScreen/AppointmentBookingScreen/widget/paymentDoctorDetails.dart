@@ -1,7 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-
 import '../../../../controller/otherScreenController/booking_controller.dart';
 import '../../../../utils/const/colors.dart';
 import '../../../../utils/const/size.dart';

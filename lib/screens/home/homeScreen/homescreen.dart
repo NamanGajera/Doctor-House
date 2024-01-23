@@ -120,6 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ratting: Nlist.doclist[i]['ratting'].toString(),
                     stariconSize: 20,
                     cityName: Nlist.doclist[i]['city'],
+                    id: Nlist.doclist[i]['id'],
                     onTap: () {
                       controller.openDoctorDetails(
                         Nlist.doclist[i]['name'],
@@ -127,6 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Nlist.doclist[i]['city'],
                         Nlist.doclist[i]['degree'],
                         Nlist.doclist[i]['details'],
+                        Nlist.doclist[i]['id'],
                       );
                     },
                   ),

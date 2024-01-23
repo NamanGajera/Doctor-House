@@ -1,22 +1,19 @@
+// ignore_for_file: file_names
+
 import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:get/get.dart';
-
 import '../../../../utils/const/colors.dart';
+import '../../../../utils/const/list.dart';
 import '../../../../utils/const/size.dart';
 import '../../../../utils/helper/function.dart';
 
 class PatientDetailForm extends StatelessWidget {
   const PatientDetailForm({
     super.key,
-    required this.items,
-    required this.selectedValue,
   });
-
-  final List<String> items;
-  final String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
@@ -83,33 +80,37 @@ class PatientDetailForm extends StatelessWidget {
             decoration: BoxDecoration(
                 border: Border.all(color: Ncolor.darkblue1),
                 borderRadius: BorderRadius.circular(26)),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton2<String>(
-                isExpanded: true,
-                hint: Text(
-                  '  Gender',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context).hintColor,
+            child: Obx(
+              () => DropdownButtonHideUnderline(
+                child: DropdownButton2<String>(
+                  isExpanded: true,
+                  hint: Text(
+                    controller.gender.value,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).hintColor,
+                    ),
                   ),
-                ),
-                items: items
-                    .map((String item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item,
-                            style: const TextStyle(
-                              fontSize: 14,
+                  items: Nlist.genderList
+                      .map((String item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                        ))
-                    .toList(),
-                value: selectedValue,
-                onChanged: (value) {},
-                buttonStyleData: const ButtonStyleData(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  height: 40,
-                  width: 140,
+                          ))
+                      .toList(),
+                  value: controller.gender.value,
+                  onChanged: (value) {
+                    controller.gender.value = value!;
+                  },
+                  buttonStyleData: const ButtonStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    height: 40,
+                    width: 140,
+                  ),
                 ),
               ),
             ),

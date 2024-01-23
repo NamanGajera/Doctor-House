@@ -27,43 +27,53 @@ class DoctorCategories extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              const SizedBox(height: 10),
+              const SizedBox(height: 1),
 
               /// Doctor Details
               Expanded(
                 child: ListView.separated(
-                  itemCount: Nlist.doclist.length,
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return DoctorCard(
-                      borderradius: 18,
-                      cardHeight: Nsize.screenheight * 0.06,
-                      imageHeight: Nsize.screenheight * 0.1,
-                      imageWidth: Nsize.screenwidth * 0.11,
-                      elevation: 8,
-                      cardWidth: double.infinity,
-                      imagePath: Nimages.docProfile,
-                      doctorName: Nlist.doclist[index]['name'],
-                      doctorType: Nlist.doclist[index]['type'],
-                      docnamefontSize: 20,
-                      docntypefontSize: 14,
-                      ratting: Nlist.doclist[index]['ratting'].toString(),
-                      stariconSize: 20,
-                      cityName: Nlist.doclist[index]['city'],
-                      onTap: () {
-                        controller.openDoctorDetails(
-                          Nlist.doclist[index]['name'],
-                          Nlist.doclist[index]['type'],
-                          Nlist.doclist[index]['city'],
-                          Nlist.doclist[index]['degree'],
-                          Nlist.doclist[index]['details'],
+                    itemCount: Nlist.doclist.length,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      if (title == Nlist.doclist[index]['type']) {
+                        return DoctorCard(
+                          borderradius: 18,
+                          cardHeight: Nsize.screenheight * 0.06,
+                          imageHeight: Nsize.screenheight * 0.1,
+                          imageWidth: Nsize.screenwidth * 0.11,
+                          elevation: 8,
+                          cardWidth: double.infinity,
+                          imagePath: Nimages.docProfile,
+                          doctorName: Nlist.doclist[index]['name'],
+                          doctorType: Nlist.doclist[index]['type'],
+                          docnamefontSize: 20,
+                          docntypefontSize: 14,
+                          ratting: Nlist.doclist[index]['ratting'].toString(),
+                          stariconSize: 20,
+                          cityName: Nlist.doclist[index]['city'],
+                          id: Nlist.doclist[index]['id'],
+                          onTap: () {
+                            controller.openDoctorDetails(
+                              Nlist.doclist[index]['name'],
+                              Nlist.doclist[index]['type'],
+                              Nlist.doclist[index]['city'],
+                              Nlist.doclist[index]['degree'],
+                              Nlist.doclist[index]['details'],
+                              Nlist.doclist[index]['id'],
+                            );
+                          },
                         );
-                      },
-                    );
-                  },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
-                ),
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
+                    separatorBuilder: (context, index) {
+                      if (title == Nlist.doclist[index]['type']) {
+                        return const SizedBox(height: 10);
+                      } else {
+                        return const SizedBox();
+                      }
+                    }),
               ),
             ],
           ),

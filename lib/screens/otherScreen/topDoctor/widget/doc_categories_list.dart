@@ -1,10 +1,10 @@
 import 'package:dr_house/controller/homeScreenController/homeScreen/homescreenController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../utils/const/colors.dart';
+import '../../../../utils/const/images.dart';
 import '../../../../utils/const/list.dart';
 import '../../../../utils/const/size.dart';
+import '../../../home/homeScreen/widgets/doctor_card.dart';
 
 class DocCatagoriesList extends StatelessWidget {
   const DocCatagoriesList({
@@ -14,41 +14,77 @@ class DocCatagoriesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeScreenController());
-    return SizedBox(
-      height: Nsize.screenheight * 0.018,
-      child: ListView.builder(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: Nlist.doctorCategories.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () => controller.currentCategoriesIndex.value = index,
-            child: Obx(
-              () => Container(
-                alignment: Alignment.center,
-                height: Nsize.screenheight * 0.018,
-                padding: const EdgeInsets.only(
-                    top: 5, bottom: 5, right: 10, left: 10),
-                margin: const EdgeInsets.only(right: 2, left: 8),
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  borderRadius: BorderRadius.circular(18),
-                  color: controller.currentCategoriesIndex.value == index
-                      ? Ncolor.darkblue3
-                      : Ncolor.lightCream,
-                ),
-                child: Text(
-                  Nlist.doctorCategories[index],
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.only(top: 8, right: 12, left: 12),
+        child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          itemCount: Nlist.doclist.length,
+          itemBuilder: (context, index) {
+            if (controller.currentCategoriesIndex.value == 0) {
+              return DoctorCard(
+                borderradius: 18,
+                cardHeight: Nsize.screenheight * 0.06,
+                imageHeight: Nsize.screenheight * 0.1,
+                imageWidth: Nsize.screenwidth * 0.11,
+                elevation: 8,
+                cardWidth: double.infinity,
+                imagePath: Nimages.docProfile,
+                doctorName: Nlist.doclist[index]['name'],
+                doctorType: Nlist.doclist[index]['type'],
+                docnamefontSize: 20,
+                docntypefontSize: 14,
+                ratting: Nlist.doclist[index]['ratting'].toString(),
+                stariconSize: 20,
+                cityName: Nlist.doclist[index]['city'],
+                id: Nlist.doclist[index]['id'],
+                onTap: () {
+                  controller.openDoctorDetails(
+                    Nlist.doclist[index]['name'],
+                    Nlist.doclist[index]['type'],
+                    Nlist.doclist[index]['city'],
+                    Nlist.doclist[index]['degree'],
+                    Nlist.doclist[index]['details'],
+                    Nlist.doclist[index]['id'],
+                  );
+                },
+              );
+            } else {
+              if (Nlist.doctorCategories[
+                      controller.currentCategoriesIndex.value] ==
+                  Nlist.doclist[index]['type']) {
+                return DoctorCard(
+                  borderradius: 18,
+                  cardHeight: Nsize.screenheight * 0.06,
+                  imageHeight: Nsize.screenheight * 0.1,
+                  imageWidth: Nsize.screenwidth * 0.11,
+                  elevation: 8,
+                  cardWidth: double.infinity,
+                  imagePath: Nimages.docProfile,
+                  doctorName: Nlist.doclist[index]['name'],
+                  doctorType: Nlist.doclist[index]['type'],
+                  docnamefontSize: 20,
+                  docntypefontSize: 14,
+                  ratting: Nlist.doclist[index]['ratting'].toString(),
+                  stariconSize: 20,
+                  cityName: Nlist.doclist[index]['city'],
+                  id: Nlist.doclist[index]['id'],
+                  onTap: () {
+                    controller.openDoctorDetails(
+                      Nlist.doclist[index]['name'],
+                      Nlist.doclist[index]['type'],
+                      Nlist.doclist[index]['city'],
+                      Nlist.doclist[index]['degree'],
+                      Nlist.doclist[index]['details'],
+                      Nlist.doclist[index]['id'],
+                    );
+                  },
+                );
+              }
+              return const SizedBox();
+            }
+          },
+        ),
       ),
     );
   }

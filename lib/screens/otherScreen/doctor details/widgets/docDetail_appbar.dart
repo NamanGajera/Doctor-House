@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../../../../utils/const/colors.dart';
 
 class DocDetailsAppBar {
-  static PreferredSizeWidget appbar() {
+  static PreferredSizeWidget appbar(String id) {
     final controller = Get.put(HomeScreenController());
     return AppBar(
       elevation: 3,
@@ -20,12 +20,14 @@ class DocDetailsAppBar {
       actions: [
         Obx(
           () => IconButton(
-            onPressed: controller.addToFavorite,
+            onPressed: () {
+              controller.toggelFavorites(id);
+            },
             icon: Icon(
-              controller.addfavorite.value
+              controller.isFavorites(id)
                   ? Icons.favorite
                   : Icons.favorite_border,
-              color: controller.addfavorite.value ? Colors.red : Colors.black,
+              color: controller.isFavorites(id) ? Colors.red : Colors.black,
             ),
           ),
         ),

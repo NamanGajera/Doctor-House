@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,7 @@ class PaymentMethods extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
-        color: Color.fromARGB(255, 255, 251, 250),
+        color: const Color.fromARGB(255, 255, 251, 250),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
         ),
@@ -44,7 +46,7 @@ class PaymentMethods extends StatelessWidget {
               const SizedBox(width: 15),
               Text(
                 methodname,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                 ),
               ),
@@ -52,7 +54,7 @@ class PaymentMethods extends StatelessWidget {
               changebtn
                   ? TextButton(
                       onPressed: changeOnTap,
-                      child: Text('Change'),
+                      child: const Text('Change'),
                     )
                   : Obx(
                       () => Container(

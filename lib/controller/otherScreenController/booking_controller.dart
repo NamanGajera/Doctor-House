@@ -23,6 +23,7 @@ class BookingController extends GetxController {
   final patientFormKey = GlobalKey<FormState>();
   final fullnamecontroller = TextEditingController();
   final ageController = TextEditingController();
+  RxString gender = 'Male'.obs;
 
   openBookAppointment() {
     Get.to(() => const AppointmentBookingScreen());
@@ -37,11 +38,11 @@ class BookingController extends GetxController {
   }
 
   openPaymentScreen() {
-    Get.off(() => PaymentScreen());
+    Get.off(() => const PaymentScreen());
   }
 
   changePaymentMethod() {
-    Get.off(() => PaymentScreen());
+    Get.off(() => const PaymentScreen());
   }
 
   openReviewSummary(

@@ -1,8 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:dr_house/common/appbar/appbar.dart';
 import 'package:dr_house/common/buttons/simplebutton.dart';
 import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dr_house/utils/const/colors.dart';
-import 'package:dr_house/utils/const/list.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,6 @@ class PatientDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookingcontroller = Get.put(BookingController());
-    String? selectedValue;
 
     return SafeArea(
       child: Scaffold(
@@ -31,10 +31,7 @@ class PatientDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 15),
-                  PatientDetailForm(
-                    items: Nlist.genderList,
-                    selectedValue: selectedValue,
-                  ),
+                  const PatientDetailForm(),
                   const Spacer(),
                   SizedBox(
                     height: Nsize.screenheight * 0.025,
@@ -59,8 +56,6 @@ class PatientDetails extends StatelessWidget {
                           bookingcontroller.patientName = bookingcontroller
                               .fullnamecontroller.text
                               .toString();
-                          print(bookingcontroller.patientName);
-                          print(bookingcontroller.patientName);
                         }
                       },
                     ),

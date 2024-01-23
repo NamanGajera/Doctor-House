@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:dr_house/screens/auth/loginScreen/loginScreen.dart';
 import 'package:dr_house/utils/helper/function.dart';
 import 'package:get/get.dart';

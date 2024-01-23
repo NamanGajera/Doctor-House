@@ -25,14 +25,14 @@ class PaymentPatientDetails extends StatelessWidget {
             /// Patient Name
             Row(
               children: [
-                Text(
+                const Text(
                   'Patient Name',
                   style: TextStyle(fontSize: 16),
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   controller.patientName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Ncolor.lightblacktext,
                   ),

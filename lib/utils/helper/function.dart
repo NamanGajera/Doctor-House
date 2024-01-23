@@ -35,6 +35,20 @@ class Nhelper {
     );
   }
 
+  static shortSnackBar({required title, message = '', duration = 1}) {
+    Get.snackbar(
+      title,
+      message,
+      isDismissible: true,
+      shouldIconPulse: true,
+      colorText: Ncolor.darkblue1,
+      backgroundColor: Ncolor.darkblue4,
+      snackPosition: SnackPosition.BOTTOM,
+      duration: Duration(seconds: duration),
+      margin: const EdgeInsets.all(10),
+    );
+  }
+
   static successSnackBar({required title, message = '', duration = 2}) {
     Get.snackbar(
       title,

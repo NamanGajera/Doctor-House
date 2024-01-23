@@ -16,6 +16,7 @@ class DoctorDetails extends StatelessWidget {
     required this.doccity,
     required this.docdegree,
     required this.docdescription,
+    required this.id,
   });
 
   final String docname;
@@ -23,13 +24,14 @@ class DoctorDetails extends StatelessWidget {
   final String doccity;
   final String docdegree;
   final String docdescription;
+  final String id;
   @override
   Widget build(BuildContext context) {
     final bookingcontroller = Get.put(BookingController());
     return SafeArea(
       child: Scaffold(
         backgroundColor: Ncolor.lightCream,
-        appBar: DocDetailsAppBar.appbar(),
+        appBar: DocDetailsAppBar.appbar(id),
         body: SizedBox(
           height: Nsize.screenheight - MediaQuery.of(context).padding.top,
           width: Nsize.screenwidth,
@@ -82,9 +84,6 @@ class DoctorDetails extends StatelessWidget {
                       bookingcontroller.doctorName = docname;
                       bookingcontroller.doctorType = doctype;
                       bookingcontroller.doctorCity = doccity;
-                      print(bookingcontroller.doctorCity);
-                      print(bookingcontroller.doctorName);
-                      print(bookingcontroller.doctorType);
                     },
                   ),
                 ),

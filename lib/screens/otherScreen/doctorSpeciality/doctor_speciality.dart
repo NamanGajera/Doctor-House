@@ -66,6 +66,7 @@ class DoctorSpeciality extends StatelessWidget {
                     ratting: Nlist.doclist[i]['ratting'].toString(),
                     stariconSize: 20,
                     cityName: Nlist.doclist[i]['city'],
+                    id: Nlist.doclist[i]['id'],
                     onTap: () {
                       controller.openDoctorDetails(
                         Nlist.doclist[i]['name'],
@@ -73,6 +74,7 @@ class DoctorSpeciality extends StatelessWidget {
                         Nlist.doclist[i]['city'],
                         Nlist.doclist[i]['degree'],
                         Nlist.doclist[i]['details'],
+                        Nlist.doclist[i]['id'],
                       );
                     },
                   ),

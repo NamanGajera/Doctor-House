@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class ChangeUserImage extends StatelessWidget {
@@ -22,7 +24,7 @@ class ChangeUserImage extends StatelessWidget {
           ]),
       child: IconButton(
         onPressed: () {},
-        icon: Icon(
+        icon: const Icon(
           Icons.add_a_photo,
           color: Colors.black,
         ),
