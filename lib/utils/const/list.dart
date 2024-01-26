@@ -100,7 +100,7 @@ class Nlist {
     Iconsax.arrow_right,
     null,
   ];
-  static const List morningTime = [
+  static const List timeSlot = [
     '09:00',
     '09:30',
     '10:00',
@@ -119,6 +119,21 @@ class Nlist {
     'Male',
     'FeMale',
     'Other',
+  ];
+
+  static const List paymentMethodname = [
+    'Pay Pal',
+    'Google Pay',
+    'Phone Pay',
+    'Paytm',
+    'UPI',
+  ];
+  static const List paymentMethodIcon = [
+    Nimages.paypalIcon,
+    Nimages.googlepayIcon,
+    Nimages.phonepayIcon,
+    Nimages.paytmIcon,
+    Nimages.upiIcon,
   ];
 
   static List doclist = [

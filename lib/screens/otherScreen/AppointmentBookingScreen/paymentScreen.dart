@@ -3,13 +3,12 @@
 import 'package:dr_house/common/appbar/appbar.dart';
 import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dr_house/utils/const/colors.dart';
-import 'package:dr_house/utils/const/images.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:dr_house/utils/helper/function.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../common/buttons/simplebutton.dart';
+import '../../../utils/const/list.dart';
 import 'widget/paymentMethods.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -20,20 +19,6 @@ class PaymentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(BookingController());
-    List paymentMethodname = [
-      'Pay Pal',
-      'Google Pay',
-      'Phone Pay',
-      'Paytm',
-      'UPI',
-    ];
-    List paymentMethodIcon = [
-      Nimages.paypalIcon,
-      Nimages.googlepayIcon,
-      Nimages.phonepayIcon,
-      Nimages.paytmIcon,
-      Nimages.upiIcon,
-    ];
     int checkIndex = 6;
     return SafeArea(
       child: Scaffold(
@@ -54,8 +39,8 @@ class PaymentScreen extends StatelessWidget {
               const SizedBox(height: 15),
               for (int i = 0; i < 5; i++)
                 PaymentMethods(
-                  methodIcon: paymentMethodIcon[i],
-                  methodname: paymentMethodname[i],
+                  methodIcon: Nlist.paymentMethodIcon[i],
+                  methodname: Nlist.paymentMethodname[i],
                   paymentindex: i,
                   changebtn: false,
                   onTap: () {
@@ -81,8 +66,8 @@ class PaymentScreen extends StatelessWidget {
                   onTap: () {
                     if (checkIndex > 0 && checkIndex < 6) {
                       controller.openReviewSummary(
-                        paymentMethodIcon[checkIndex],
-                        paymentMethodname[checkIndex],
+                        Nlist.paymentMethodIcon[checkIndex],
+                        Nlist.paymentMethodname[checkIndex],
                       );
                     } else {
                       Nhelper.errorSnackBar(

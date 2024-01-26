@@ -8,13 +8,13 @@ import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AppointmentBookingScreen extends StatelessWidget {
-  const AppointmentBookingScreen({super.key});
+class BookAppointmentScreen extends StatelessWidget {
+  const BookAppointmentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final bookingcontroller = Get.put(BookingController());
-    int currenttimeindex = 0;
+
     // bookingcontroller.bookingloading.value = false;
     return SafeArea(
       child: Scaffold(
@@ -64,8 +64,12 @@ class AppointmentBookingScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
+
+                /// morning slot
+
                 Expanded(
                   child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: 6,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
@@ -77,7 +81,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                       return InkWell(
                         onTap: () {
                           bookingcontroller.selecttime(index);
-                          currenttimeindex = index;
+                          bookingcontroller.currenttimeindex = index;
                         },
                         child: Obx(
                           () => Container(
@@ -102,7 +106,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                                       : 12),
                             ),
                             child: Text(
-                              Nlist.morningTime[index],
+                              Nlist.timeSlot[index],
                               style: TextStyle(
                                 color: bookingcontroller.currentindex.value ==
                                         index
@@ -129,8 +133,11 @@ class AppointmentBookingScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
+
+                /// afternoon slot
                 Expanded(
                   child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: 6,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
@@ -142,7 +149,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                       return InkWell(
                         onTap: () {
                           bookingcontroller.selecttime(index + 6);
-                          currenttimeindex = index + 6;
+                          bookingcontroller.currenttimeindex = index + 6;
                         },
                         child: Obx(
                           () => Container(
@@ -168,7 +175,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                                       : 12),
                             ),
                             child: Text(
-                              Nlist.morningTime[index + 6],
+                              Nlist.timeSlot[index + 6],
                               style: TextStyle(
                                 color: bookingcontroller.currentindex.value ==
                                         index + 6
@@ -184,6 +191,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                   ),
                 ),
 
+                /// Next Button
                 SizedBox(
                   height: Nsize.screenheight * 0.025,
                   width: Nsize.screenwidth,
@@ -201,11 +209,7 @@ class AppointmentBookingScreen extends StatelessWidget {
                       backgroundColor: Ncolor.darkblue2,
                       fontSize: 22,
                       loading: false,
-                      onTap: () {
-                        bookingcontroller.openPatientDetails();
-                        bookingcontroller.time =
-                            Nlist.morningTime[currenttimeindex];
-                      },
+                      onTap: () => bookingcontroller.nextToPatientDetails(),
                     ),
                   ),
                 )
