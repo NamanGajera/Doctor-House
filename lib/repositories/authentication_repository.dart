@@ -33,6 +33,7 @@ class AuthenticatonRepository extends GetxController {
       await NLocalStorage.init(user.uid);
       Get.offAll(() => const MainHomeScreen());
     } else {
+      await NLocalStorage.init(user!.uid);
       Get.offAll(() => const LoginScreen());
     }
   }

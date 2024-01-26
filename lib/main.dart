@@ -1,4 +1,4 @@
-import 'package:dr_house/repositories/authentication/authentication_repository.dart';
+import 'package:dr_house/repositories/authentication_repository.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

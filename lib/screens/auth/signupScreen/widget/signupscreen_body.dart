@@ -81,21 +81,23 @@ class SignUpScreenBody extends StatelessWidget {
             const SizedBox(height: Nsize.spaceBetweenTextField * 3),
 
             /// Sign Up button
-            SimpleButton(
-              height: Nsize.screenheight * 0.022,
-              width: Nsize.screenwidth,
-              applyborderRadius: true,
-              borderRadius: 15,
-              applyboxShadow: false,
-              buttonText: Ntext.signup.toUpperCase(),
-              applybold: true,
-              backgroundColor: Ncolor.darkblue2,
-              fontSize: 26,
-              buttonTextColor: Colors.black,
-              loading: controller.loading.value,
-              onTap: () {
-                controller.sigup();
-              },
+            Obx(
+              () => SimpleButton(
+                height: Nsize.screenheight * 0.022,
+                width: Nsize.screenwidth,
+                applyborderRadius: true,
+                borderRadius: 15,
+                applyboxShadow: false,
+                buttonText: Ntext.signup.toUpperCase(),
+                applybold: true,
+                backgroundColor: Ncolor.darkblue2,
+                fontSize: 26,
+                buttonTextColor: Colors.black,
+                loading: controller.loading.value,
+                onTap: () {
+                  controller.sigup();
+                },
+              ),
             ),
           ],
         ),

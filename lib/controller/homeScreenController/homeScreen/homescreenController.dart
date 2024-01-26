@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dr_house/screens/otherScreen/doctor%20details/doctordetails.dart';
 import 'package:dr_house/screens/otherScreen/doctorSpeciality/doctorcategories.dart';
 import 'package:dr_house/utils/const/list.dart';
@@ -14,11 +15,14 @@ class HomeScreenController extends GetxController {
   final searchController = TextEditingController();
   RxInt currentCategoriesIndex = 0.obs;
   final favorites = <String, bool>{}.obs;
+  List doclist = [];
+  RxList searchlist = [].obs;
 
   @override
   void onInit() {
     super.onInit();
     initfavorites();
+    initSearch();
   }
 
   void addToFavorite() {
@@ -80,5 +84,33 @@ class HomeScreenController extends GetxController {
   void saveFavoritesToStorage() {
     final encodedFavorites = json.encode(favorites);
     NLocalStorage.instance().saveData('favorites', encodedFavorites);
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+  }
+
+  void initSearch() async {
+    await FirebaseFirestore.instance
+        .collection('Doctor')
+        .get()
+        .then((value) => doclist = value.docs);
+    searchlist.value = doclist;
+  }
+
+  void searchdoctor(String docname) {
+    List result = [];
+    if (searchController.text.isEmpty) {
+      result = doclist;
+    } else {
+      result = doclist
+          .where((element) => element['name']
+              .toString()
+              .toLowerCase()
+              .contains(docname.toLowerCase()))
+          .toList();
+    }
+    searchlist.value = result;
   }
 }

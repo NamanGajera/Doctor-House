@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../../utils/helper/function.dart';
+import '../../../utils/local_storage/local_storage.dart';
 
 class LoginController extends GetxController {
   final usernamecontroller = TextEditingController();
@@ -33,7 +34,8 @@ class LoginController extends GetxController {
         password: passwordcontroller.text.trim(),
       )
           .then(
-        (value) {
+        (value) async {
+          await NLocalStorage.init(_auth.currentUser!.uid);
           loading.value = false;
           Nhelper.successSnackBar(title: 'Successfully', message: 'Login');
           Get.offAll(() => const MainHomeScreen());
