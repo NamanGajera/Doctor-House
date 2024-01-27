@@ -18,6 +18,7 @@ class BookingController extends GetxController {
   String doctorCity = '';
   String doctorRatting = '4.2';
   String time = '';
+  DateTime selectedDate = DateTime.now();
   String date =
       '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}';
   String patientName = '';
@@ -29,6 +30,7 @@ class BookingController extends GetxController {
   String currentHour = '${DateTime.now().hour}:${DateTime.now().minute}';
   int currenttimeindex = 0;
   bool isValidTime = true;
+  RxBool bookingloading = false.obs;
 
   openBookAppointment() {
     Get.to(() => const BookAppointmentScreen());
@@ -62,11 +64,10 @@ class BookingController extends GetxController {
 
   checkTimeSlot() {
     var s1 = Nlist.timeSlot[currenttimeindex];
-    var s2 = '${DateTime.now().hour}:${DateTime.now().minute}';
-
-    var t1 = DateTime.parse('2000-01-01 $s1');
-    var t2 = DateTime.parse('2000-01-01 $s2');
-    isValidTime = t1.isAfter(t2);
+    var t1 = DateTime.parse("2023-12-23 $s1");
+    var t = selectedDate.copyWith(hour: t1.hour, minute: t1.minute);
+    var s = DateTime.now();
+    isValidTime = t.isAfter(s);
   }
 
   nextToPatientDetails() {

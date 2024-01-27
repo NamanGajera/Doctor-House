@@ -45,6 +45,7 @@ class BookAppointmentScreen extends StatelessWidget {
                     onDateChanged: (value) {
                       bookingcontroller.date =
                           '${value.day}-${value.month}-${value.year}';
+                      bookingcontroller.selectedDate = value;
                     }),
 
                 const SizedBox(height: 10),

@@ -38,6 +38,7 @@ class ProfileScreen extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
+                      /// Your Porifile
                       ProfileItems(
                         itemText: 'Your Profile',
                         leadingIcon: Iconsax.user,
@@ -47,6 +48,8 @@ class ProfileScreen extends StatelessWidget {
                               title: 'On Tap', message: 'Your Profile');
                         },
                       ),
+
+                      /// Notification
                       ProfileItems(
                         itemText: 'Notification',
                         leadingIcon: Iconsax.notification,
@@ -55,14 +58,18 @@ class ProfileScreen extends StatelessWidget {
                           mainHomeController.navIndex.value = 2;
                         },
                       ),
+
+                      /// Favorites
                       ProfileItems(
-                        itemText: 'Favourite',
+                        itemText: 'Favorite',
                         leadingIcon: Iconsax.heart,
                         tralingIcon: Iconsax.arrow_right,
                         onTap: () {
                           mainHomeController.navIndex.value = 3;
                         },
                       ),
+
+                      /// Payment
                       ProfileItems(
                         itemText: 'Payment',
                         leadingIcon: Iconsax.card,
@@ -72,6 +79,8 @@ class ProfileScreen extends StatelessWidget {
                               title: 'On Tap', message: 'Payment');
                         },
                       ),
+
+                      /// Security
                       ProfileItems(
                         itemText: 'Security',
                         leadingIcon: Iconsax.security,
@@ -81,6 +90,8 @@ class ProfileScreen extends StatelessWidget {
                               title: 'On Tap', message: 'Security');
                         },
                       ),
+
+                      /// Help Center
                       ProfileItems(
                         itemText: 'Help Center',
                         leadingIcon: Iconsax.info_circle,
@@ -90,6 +101,8 @@ class ProfileScreen extends StatelessWidget {
                               title: 'On Tap', message: 'Help Center');
                         },
                       ),
+
+                      /// Setting
                       ProfileItems(
                         itemText: 'Setting',
                         leadingIcon: Iconsax.setting,
@@ -99,6 +112,8 @@ class ProfileScreen extends StatelessWidget {
                               title: 'On Tap', message: 'Setting');
                         },
                       ),
+
+                      /// Privacy Policy
                       ProfileItems(
                         itemText: 'Privacy Policy',
                         leadingIcon: Iconsax.lock,
@@ -108,6 +123,8 @@ class ProfileScreen extends StatelessWidget {
                               title: 'On Tap', message: 'Privacy Policy');
                         },
                       ),
+
+                      /// Logout
                       ProfileItems(
                         itemText: 'Log Out',
                         leadingIcon: Iconsax.logout,
