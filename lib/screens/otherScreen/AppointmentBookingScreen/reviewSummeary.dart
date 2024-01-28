@@ -1,12 +1,18 @@
 // ignore_for_file: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dr_house/common/appbar/appbar.dart';
+import 'package:dr_house/common/dialog/showMyDialog.dart';
 import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dr_house/screens/home/appointmentScreen/appointmentscreen.dart';
 import 'package:dr_house/screens/otherScreen/AppointmentBookingScreen/widget/paymentMethods.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/images.dart';
+import 'package:dr_house/utils/const/list.dart';
 import 'package:dr_house/utils/const/size.dart';
+import 'package:dr_house/utils/const/text.dart';
+import 'package:dr_house/utils/helper/function.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../common/buttons/simplebutton.dart';
@@ -22,8 +28,17 @@ class ReviewSummary extends StatelessWidget {
   });
   final String paymentMethodIcon;
   final String paymentNethodName;
+
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    String id = DateTime.now().millisecondsSinceEpoch.toString();
+
+    final appointmentDB = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(user!.uid)
+        .collection('AppointmentDetails')
+        .doc(id);
     final controller = Get.put(BookingController());
     return SafeArea(
       child: Scaffold(
@@ -78,10 +93,40 @@ class ReviewSummary extends StatelessWidget {
                     onTap: () {
                       controller.bookingloading.value = true;
                       Future.delayed(
-                        const Duration(seconds: 2),
+                        const Duration(seconds: 1),
                         () {
                           controller.bookingloading.value = false;
-                          showCongratulationDialog();
+                          appointmentDB.set({
+                            'id': id,
+                            'docName': controller.doctorName,
+                            'docType': controller.doctorType,
+                            'docCity': controller.doctorCity,
+                            'date': controller.date,
+                            'time': Nlist.timeSlot[controller.currenttimeindex],
+                            'pateintName': controller.patientName,
+                            'pateintAge': controller.patientAge,
+                            'pateintGender': controller.gender.value,
+                            'patientProblem': controller.patientProblem,
+                          }).then((value) {
+                            controller.bookingloading.value = false;
+                            NmyDialog.showCongratulationDialog(
+                              Nimages.appointment,
+                              Ntext.congrats,
+                              Ntext.subconratsText,
+                              Ntext.viewappointment,
+                              Ntext.backbtn,
+                              () {
+                                Get.close(5);
+                                Get.to(() => const AppointmentScreen());
+                              },
+                              () {
+                                Get.close(5);
+                              },
+                            );
+                          }).onError(
+                            (error, stackTrace) => Nhelper.errorSnackBar(
+                                title: 'Error', message: error.hashCode),
+                          );
                         },
                       );
                     },
@@ -92,112 +137,6 @@ class ReviewSummary extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  void showCongratulationDialog() {
-    showDialog(
-      context: Get.context!,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: Ncolor.lightCream,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-          ),
-          contentPadding: const EdgeInsets.all(12),
-          content: SizedBox(
-            height: Nsize.screenheight * 0.14,
-            width: Nsize.screenwidth * 0.1,
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  height: Nsize.screenheight * 0.04,
-                  width: Nsize.screenheight * 0.04,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Ncolor.darkblue3,
-                  ),
-                  child: Image(
-                    image: const AssetImage(Nimages.appointment),
-                    color: Colors.white,
-                    fit: BoxFit.cover,
-                    height: Nsize.screenheight * 0.025,
-                    width: Nsize.screenheight * 0.025,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Congratulations!',
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Ncolor.darkblue2,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 5),
-                const Text(
-                  'Appointment successfully booked.\n You will recived a notification.',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 15),
-                SizedBox(
-                  height: Nsize.screenheight * 0.025,
-                  width: Nsize.screenwidth,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(right: 12, left: 12, bottom: 8),
-                    child: SimpleButton(
-                      height: Nsize.screenheight * 0.025,
-                      width: Nsize.screenwidth,
-                      applyborderRadius: true,
-                      borderRadius: 24,
-                      applyboxShadow: false,
-                      applybold: true,
-                      buttonText: 'View Appointment',
-                      backgroundColor: Ncolor.darkblue3,
-                      fontSize: 18,
-                      loading: false,
-                      onTap: () {
-                        Get.close(5);
-                        Get.to(() => const AppointmentScreen());
-                      },
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                SizedBox(
-                  height: Nsize.screenheight * 0.025,
-                  width: Nsize.screenwidth,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(right: 12, left: 12, bottom: 8),
-                    child: SimpleButton(
-                      height: Nsize.screenheight * 0.025,
-                      width: Nsize.screenwidth,
-                      applyborderRadius: true,
-                      borderRadius: 24,
-                      applyboxShadow: false,
-                      applybold: true,
-                      buttonText: 'Back',
-                      backgroundColor: Ncolor.lightCream,
-                      fontSize: 18,
-                      loading: false,
-                      onTap: () {
-                        Get.back();
-                      },
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

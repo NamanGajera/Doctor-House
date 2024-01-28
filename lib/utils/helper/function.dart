@@ -8,16 +8,21 @@ class Nhelper {
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
-  static showSnackbar(
-      String? title, String message, Color? backgroundColor, Color? colorText) {
+  static showSnackbar({
+    required title,
+    message = '',
+    duration = 2,
+    backgroundColor,
+    colorText,
+  }) {
     Get.snackbar(
       title!,
-      message,
+      message!,
       backgroundColor: backgroundColor,
       colorText: colorText,
       padding: const EdgeInsets.all(16),
       snackPosition: SnackPosition.BOTTOM,
-      duration: const Duration(milliseconds: 700),
+      duration: Duration(seconds: duration),
     );
   }
 

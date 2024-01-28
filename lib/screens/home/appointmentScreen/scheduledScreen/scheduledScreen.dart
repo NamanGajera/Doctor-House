@@ -1,8 +1,15 @@
 // ignore_for_file: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dr_house/controller/homeScreenController/appointmentScreen/appointment_controller.dart';
 import 'package:dr_house/utils/const/images.dart';
+import 'package:dr_house/utils/helper/function.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../../../common/dialog/showMyDialog.dart';
 import '../../../../utils/const/colors.dart';
+import '../../../../utils/const/text.dart';
 import '../appointmentCard/appointment_card.dart';
 import '../appointmentCard/widget/allow_notification.dart';
 
@@ -11,7 +18,14 @@ class ScheduledScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final user = FirebaseAuth.instance.currentUser;
+    final appointmentStream = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(user!.uid)
+        .collection('AppointmentDetails')
+        .snapshots();
+
+    return Scaffold(
       backgroundColor: Ncolor.lightCream,
       body: Padding(
         padding: EdgeInsets.all(12.0),
@@ -21,23 +35,82 @@ class ScheduledScreen extends StatelessWidget {
             Divider(
               thickness: 1.2,
             ),
-            AppointmentCard(
-              dateTimeText: 'Jan 21, 2024 - 10:00 AM',
-              docName: 'Dr. Rupali Gajjar',
-              docCity: 'Ahemdabad',
-              docImage: Nimages.docProfile,
-              bookingId: '#1254789630',
-              canclebtn: true,
+            StreamBuilder(
+              stream: appointmentStream,
+              builder: (context, snapshot) {
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: (context, index) {
+                      String date = snapshot.data?.docs[index]['date'] ?? '';
+                      String time = snapshot.data?.docs[index]['time'] ?? '';
+                      String docName =
+                          snapshot.data?.docs[index]['docName'] ?? '';
+                      String docCity =
+                          snapshot.data?.docs[index]['docCity'] ?? '';
+                      String bookinID = snapshot.data?.docs[index]['id'] ?? '';
+                      return AppointmentCard(
+                        dateTimeText: '$date - $time',
+                        docName: docName,
+                        docCity: docCity,
+                        docImage: Nimages.docProfile,
+                        bookingId: '#$bookinID',
+                        canclebtn: true,
+                        onTap: () {
+                          NmyDialog.showCongratulationDialog(
+                            Nimages.appointment,
+                            Ntext.cancleText,
+                            Ntext.canclesubText,
+                            'Yes',
+                            'No',
+                            () {
+                              Future.delayed(const Duration(seconds: 1), () {
+                                FirebaseFirestore.instance
+                                    .collection('Users')
+                                    .doc(user.uid)
+                                    .collection('AppointmentDetails')
+                                    .doc(bookinID)
+                                    .delete()
+                                    .then(
+                                  (value) {
+                                    Get.back();
+                                    Nhelper.showSnackbar(
+                                      title: 'Successfully',
+                                      message: 'Cancle Appointment',
+                                      duration: 1,
+                                      backgroundColor: Ncolor.darkblue3,
+                                      colorText: Colors.black,
+                                    );
+                                  },
+                                ).onError(
+                                  (error, stackTrace) => Nhelper.errorSnackBar(
+                                    title: 'Error',
+                                    message: error.hashCode.toString(),
+                                  ),
+                                );
+                              });
+                            },
+                            () {
+                              Get.back();
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                );
+              },
             ),
-            SizedBox(height: 10),
-            AppointmentCard(
-              dateTimeText: 'Jan 22, 2024 - 05:00 PM',
-              docName: 'Dr. Naman Gajjar',
-              docCity: 'Surat',
-              docImage: Nimages.docProfile,
-              bookingId: '#1584542630',
-              canclebtn: true,
-            ),
+
+            // SizedBox(height: 10),
+            // AppointmentCard(
+            //   dateTimeText: 'Jan 22, 2024 - 05:00 PM',
+            //   docName: 'Dr. Naman Gajjar',
+            //   docCity: 'Surat',
+            //   docImage: Nimages.docProfile,
+            //   bookingId: '#1584542630',
+            //   canclebtn: true,
+            // ),
           ],
         ),
       ),

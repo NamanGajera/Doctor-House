@@ -171,6 +171,7 @@ class PatientDetailForm extends StatelessWidget {
           const SizedBox(height: 10),
           TextFormField(
             maxLines: 10,
+            controller: controller.problemController,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(26),
@@ -197,7 +198,6 @@ class PatientDetailForm extends StatelessWidget {
               hintText: '  Write Your Problem',
             ),
             onTapOutside: Nhelper.hideKeybord,
-            keyboardType: TextInputType.number,
             // validator: validator,
           ),
         ],

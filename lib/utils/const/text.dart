@@ -46,4 +46,15 @@ class Ntext {
   static const String ourServices = 'Our Services';
   static String userName = '';
   static String userEmail = '';
+
+  /// alert dialog text
+  static const String congrats = 'Congratulations!';
+  static const String subconratsText =
+      'Appointment successfully booked.\n You will recived a notification.';
+  static const String viewappointment = 'View Appointment';
+  static const String canclebtn = 'Cancle';
+  static const String backbtn = 'Back';
+  static const String cancleText = 'Cancle Appointment';
+  static const String canclesubText =
+      'Do you want to cancle your \nappointment';
 }

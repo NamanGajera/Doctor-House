@@ -56,6 +56,9 @@ class PatientDetails extends StatelessWidget {
                           bookingcontroller.patientName = bookingcontroller
                               .fullnamecontroller.text
                               .toString();
+                          bookingcontroller.patientProblem = bookingcontroller
+                              .problemController.text
+                              .toString();
                         }
                       },
                     ),

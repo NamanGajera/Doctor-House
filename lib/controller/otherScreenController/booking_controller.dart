@@ -23,11 +23,13 @@ class BookingController extends GetxController {
       '${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}';
   String patientName = '';
   String patientAge = '';
+  String patientProblem = '';
   final patientFormKey = GlobalKey<FormState>();
   final fullnamecontroller = TextEditingController();
   final ageController = TextEditingController();
+  final problemController = TextEditingController();
   RxString gender = 'Male'.obs;
-  String currentHour = '${DateTime.now().hour}:${DateTime.now().minute}';
+  // String currentHour = '${DateTime.now().hour}:${DateTime.now().minute}';
   int currenttimeindex = 0;
   bool isValidTime = true;
   RxBool bookingloading = false.obs;

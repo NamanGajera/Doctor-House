@@ -12,6 +12,7 @@ class AppointmentCard extends StatelessWidget {
     required this.docCity,
     required this.bookingId,
     required this.canclebtn,
+    this.onTap,
   });
 
   final String dateTimeText;
@@ -20,6 +21,7 @@ class AppointmentCard extends StatelessWidget {
   final String docCity;
   final String bookingId;
   final bool canclebtn;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -65,23 +67,26 @@ class AppointmentCard extends StatelessWidget {
 
             /// Cancle Button
             canclebtn
-                ? Container(
-                    alignment: Alignment.center,
-                    height: Nsize.screenheight * 0.018,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18),
-                      // color: Ncolor.darkblue2,
-                      border: Border.all(
-                        color: Ncolor.darkblue2,
-                        width: 2.5,
+                ? GestureDetector(
+                    onTap: onTap,
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: Nsize.screenheight * 0.018,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        // color: Ncolor.darkblue2,
+                        border: Border.all(
+                          color: Ncolor.darkblue2,
+                          width: 2.5,
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'Cancle',
-                      style: TextStyle(
-                        // color: Colors.Balck,
-                        fontSize: 20,
+                      child: const Text(
+                        'Cancle',
+                        style: TextStyle(
+                          // color: Colors.Balck,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   )
