@@ -1,5 +1,8 @@
 // ignore_for_file: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../../../utils/const/colors.dart';
 import 'package:flutter/material.dart';
 import '../../../../utils/const/images.dart';
@@ -10,30 +13,41 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final user = FirebaseAuth.instance.currentUser;
+    final appointmentStream = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(user!.uid)
+        .collection('AppointmentDetails')
+        .snapshots();
+    return Scaffold(
       backgroundColor: Ncolor.lightCream,
       body: Padding(
         padding: EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            AppointmentCard(
-              dateTimeText: 'Jan 21, 2024 - 10:00 AM',
-              docName: 'Dr. Rupali Gajjar',
-              docCity: 'Ahemdabad',
-              docImage: Nimages.docProfile,
-              bookingId: '#1254789630',
-              canclebtn: false,
-            ),
-            SizedBox(height: 10),
-            AppointmentCard(
-              dateTimeText: 'Jan 22, 2024 - 05:00 PM',
-              docName: 'Dr. Naman Gajjar',
-              docCity: 'Surat',
-              docImage: Nimages.docProfile,
-              bookingId: '#1584542630',
-              canclebtn: false,
-            ),
-          ],
+        child: StreamBuilder(
+          stream: appointmentStream,
+          builder: (context, snapshot) {
+            return ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: snapshot.data?.docs.length,
+              itemBuilder: (context, index) {
+                String date = snapshot.data?.docs[index]['date'] ?? '';
+                String time = snapshot.data?.docs[index]['time'] ?? '';
+                String docName = snapshot.data?.docs[index]['docName'] ?? '';
+                String docCity = snapshot.data?.docs[index]['docCity'] ?? '';
+                String bookinID = snapshot.data?.docs[index]['id'] ?? '';
+
+                return AppointmentCard(
+                  dateTimeText: '$date - $time',
+                  docName: docName,
+                  docCity: docCity,
+                  docImage: Nimages.docProfile,
+                  bookingId: '#$bookinID',
+                  canclebtn: false,
+                  onTap: () {},
+                );
+              },
+            );
+          },
         ),
       ),
     );

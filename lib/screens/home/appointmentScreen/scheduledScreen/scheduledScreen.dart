@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dr_house/controller/homeScreenController/appointmentScreen/appointment_controller.dart';
+import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dr_house/utils/const/images.dart';
 import 'package:dr_house/utils/helper/function.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,15 +24,15 @@ class ScheduledScreen extends StatelessWidget {
         .doc(user!.uid)
         .collection('AppointmentDetails')
         .snapshots();
-
+    final bookingcontroller = Get.put(BookingController());
     return Scaffold(
       backgroundColor: Ncolor.lightCream,
       body: Padding(
-        padding: EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            AllowNotification(),
-            Divider(
+            const AllowNotification(),
+            const Divider(
               thickness: 1.2,
             ),
             StreamBuilder(
@@ -40,6 +40,7 @@ class ScheduledScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 return Expanded(
                   child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     itemCount: snapshot.data?.docs.length,
                     itemBuilder: (context, index) {
                       String date = snapshot.data?.docs[index]['date'] ?? '';
@@ -49,6 +50,7 @@ class ScheduledScreen extends StatelessWidget {
                       String docCity =
                           snapshot.data?.docs[index]['docCity'] ?? '';
                       String bookinID = snapshot.data?.docs[index]['id'] ?? '';
+
                       return AppointmentCard(
                         dateTimeText: '$date - $time',
                         docName: docName,
@@ -101,16 +103,6 @@ class ScheduledScreen extends StatelessWidget {
                 );
               },
             ),
-
-            // SizedBox(height: 10),
-            // AppointmentCard(
-            //   dateTimeText: 'Jan 22, 2024 - 05:00 PM',
-            //   docName: 'Dr. Naman Gajjar',
-            //   docCity: 'Surat',
-            //   docImage: Nimages.docProfile,
-            //   bookingId: '#1584542630',
-            //   canclebtn: true,
-            // ),
           ],
         ),
       ),

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../screens/home/appointmentScreen/appointmentscreen.dart';
 import '../../utils/const/colors.dart';
-import '../../utils/const/images.dart';
 import '../../utils/const/size.dart';
 import '../buttons/simplebutton.dart';
 
