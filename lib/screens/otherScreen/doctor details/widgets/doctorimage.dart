@@ -14,8 +14,8 @@ class DoctorImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(18),
       child: Image(
         image: const AssetImage(Nimages.docProfile),
-        height: Nsize.screenheight * 0.11,
-        width: Nsize.screenheight * 0.07,
+        height: Nsize.screenheight * 0.22,
+        width: Nsize.screenheight * 0.14,
         fit: BoxFit.cover,
       ),
     );

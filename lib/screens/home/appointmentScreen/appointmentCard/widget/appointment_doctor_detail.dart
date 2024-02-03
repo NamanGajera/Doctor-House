@@ -29,8 +29,8 @@ class AppointmentDoctorDetails extends StatelessWidget {
           child: Image(
             image: AssetImage(docImage),
             fit: BoxFit.cover,
-            height: Nsize.screenheight * 0.052,
-            width: Nsize.screenheight * 0.052,
+            height: Nsize.screenheight * 0.1,
+            width: Nsize.screenheight * 0.1,
           ),
         ),
         const SizedBox(width: 12),

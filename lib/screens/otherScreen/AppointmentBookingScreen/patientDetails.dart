@@ -33,11 +33,13 @@ class PatientDetails extends StatelessWidget {
                   const SizedBox(height: 15),
                   const PatientDetailForm(),
                   const Spacer(),
+
+                  /// Next Button
                   SizedBox(
-                    height: Nsize.screenheight * 0.025,
+                    height: Nsize.screenheight * 0.06,
                     width: Nsize.screenwidth,
                     child: SimpleButton(
-                      height: Nsize.screenheight * 0.025,
+                      height: Nsize.screenheight * 0.06,
                       width: Nsize.screenwidth,
                       applyborderRadius: true,
                       borderRadius: 24,

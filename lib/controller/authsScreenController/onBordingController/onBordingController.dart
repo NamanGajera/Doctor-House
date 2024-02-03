@@ -15,6 +15,7 @@ class OnBordingController extends GetxController {
   RxInt dotCurrentIndex = 0.obs;
   RxBool loading = false.obs;
   final pages = [
+    /// Page 1
     OnBordingPage(
       backgroundColor: Ncolor.lightCream,
       height: Nsize.screenheight * 0.18,
@@ -25,6 +26,8 @@ class OnBordingController extends GetxController {
       pageText: Ntext.onbordingScreen1BottomText,
       islastpage: false,
     ),
+
+    /// Page 2
     OnBordingPage(
       backgroundColor: Ncolor.coolgreen,
       height: Nsize.screenheight * 0.18,
@@ -35,6 +38,8 @@ class OnBordingController extends GetxController {
       pageText: Ntext.onbordingScreen2BottomText,
       islastpage: false,
     ),
+
+    /// Page 3
     OnBordingPage(
       backgroundColor: Ncolor.lighttomato,
       height: Nsize.screenheight * 0.18,

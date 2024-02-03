@@ -18,6 +18,7 @@ class HomeScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeScreenController());
     return Column(
       children: [
         /// Doctor Speciality Heading
@@ -35,15 +36,15 @@ class HomeScreenBody extends StatelessWidget {
 
         /// Doctor Speciality
         DoctorTypesIcon(
-          hightofGridView: Nsize.screenheight * 0.08,
+          hightofGridView: Nsize.screenheight * 0.21,
           crossAxisCount: 4,
           itemCount: 8,
           iconimg: Nlist.docTypeIcon,
           iconName: Nlist.docTypeName,
           fontsize: 14,
-          circlesize: Nsize.screenheight * 0.027,
-          imgheight: Nsize.screenheight * 0.018,
-          imgwidth: Nsize.screenheight * 0.018,
+          circlesize: Nsize.screenheight * 0.07,
+          imgheight: Nsize.screenheight * 0.05,
+          imgwidth: Nsize.screenheight * 0.05,
         ),
 
         const SizedBox(height: 15),
@@ -65,9 +66,9 @@ class HomeScreenBody extends StatelessWidget {
         for (int i = 0; i < 2; i++)
           DoctorCard(
             borderradius: 18,
-            cardHeight: Nsize.screenheight * 0.06,
-            imageHeight: Nsize.screenheight * 0.1,
-            imageWidth: Nsize.screenwidth * 0.11,
+            cardHeight: Nsize.screenheight * 0.15,
+            imageHeight: Nsize.screenheight * 0.2,
+            imageWidth: Nsize.screenwidth * 0.22,
             elevation: 8,
             cardWidth: double.infinity,
             imagePath: Nimages.docProfile,
@@ -102,19 +103,17 @@ class HomeScreenBody extends StatelessWidget {
 
         /// Our Services
         ServicesTypesIcon(
-          hightofGridView: Nsize.screenheight * 0.045,
+          hightofGridView: Nsize.screenheight * 0.1,
           crossAxisCount: 4,
           itemCount: 4,
           iconimg: Nlist.servicesIcon,
           iconName: Nlist.servicesName,
           fontsize: 14,
-          circlesize: Nsize.screenheight * 0.027,
-          imgheight: Nsize.screenheight * 0.018,
-          imgwidth: Nsize.screenheight * 0.018,
+          circlesize: Nsize.screenheight * 0.07,
+          imgheight: Nsize.screenheight * 0.05,
+          imgwidth: Nsize.screenheight * 0.05,
         ),
       ],
     );
   }
 }
-
-final controller = Get.put(HomeScreenController());

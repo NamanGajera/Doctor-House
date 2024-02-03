@@ -55,7 +55,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                               color: Ncolor.lightCream,
                               child: Container(
                                 padding: const EdgeInsets.all(8),
-                                height: Nsize.screenheight * 0.06,
+                                height: Nsize.screenheight * 0.15,
                                 width: double.infinity,
                                 child: Row(
                                   children: [
@@ -65,8 +65,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                       child: Image(
                                         image: const AssetImage(
                                             Nimages.docProfile),
-                                        width: Nsize.screenwidth * 0.11,
-                                        height: Nsize.screenheight * 0.1,
+                                        width: Nsize.screenwidth * 0.22,
+                                        height: Nsize.screenheight * 0.2,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -81,29 +81,25 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                           const SizedBox(height: 5),
 
                                           /// Doctor Name
-                                          Expanded(
-                                            child: Text(
-                                              Nlist.doclist[index]['name'],
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                              ),
+                                          Text(
+                                            Nlist.doclist[index]['name'],
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                           ),
-                                          const SizedBox(height: 10),
+                                          const Spacer(),
 
                                           /// Doctor Type
-                                          Expanded(
-                                            child: Text(
-                                              Nlist.doclist[index]['type'],
-                                              style: const TextStyle(
-                                                fontSize: 14,
-                                                color: Ncolor.lightblacktext,
-                                              ),
+                                          Text(
+                                            Nlist.doclist[index]['type'],
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              color: Ncolor.lightblacktext,
                                             ),
                                           ),
-                                          const SizedBox(height: 5),
+                                          const Spacer(),
 
                                           /// Location
                                           Row(
@@ -114,15 +110,11 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 color: Ncolor.darkblue1,
                                               ),
                                               const SizedBox(width: 8),
-                                              Expanded(
-                                                child: Text(
-                                                  Nlist.doclist[index]['city'],
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                    color:
-                                                        Ncolor.lightblacktext,
-                                                  ),
+                                              Text(
+                                                Nlist.doclist[index]['city'],
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(
+                                                  color: Ncolor.lightblacktext,
                                                 ),
                                               ),
                                             ],
@@ -139,17 +131,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                                 color: Ncolor.darkblue1,
                                               ),
                                               const SizedBox(width: 8),
-                                              Expanded(
-                                                child: Text(
-                                                  Nlist.doclist[index]
-                                                          ['ratting']
-                                                      .toString(),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: const TextStyle(
-                                                    color:
-                                                        Ncolor.lightblacktext,
-                                                  ),
+                                              Text(
+                                                Nlist.doclist[index]['ratting']
+                                                    .toString(),
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(
+                                                  color: Ncolor.lightblacktext,
                                                 ),
                                               ),
                                             ],

@@ -38,9 +38,9 @@ class DoctorCategories extends StatelessWidget {
                       if (title == Nlist.doclist[index]['type']) {
                         return DoctorCard(
                           borderradius: 18,
-                          cardHeight: Nsize.screenheight * 0.06,
-                          imageHeight: Nsize.screenheight * 0.1,
-                          imageWidth: Nsize.screenwidth * 0.11,
+                          cardHeight: Nsize.screenheight * 0.12,
+                          imageHeight: Nsize.screenheight * 0.2,
+                          imageWidth: Nsize.screenwidth * 0.22,
                           elevation: 8,
                           cardWidth: double.infinity,
                           imagePath: Nimages.docProfile,

@@ -74,7 +74,7 @@ class BookAppointmentScreen extends StatelessWidget {
                     itemCount: 6,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      mainAxisExtent: Nsize.screenheight * 0.018,
+                      mainAxisExtent: Nsize.screenheight * 0.044,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                     ),
@@ -87,8 +87,8 @@ class BookAppointmentScreen extends StatelessWidget {
                         child: Obx(
                           () => Container(
                             alignment: Alignment.center,
-                            height: Nsize.screenheight * 0.018,
-                            width: Nsize.screenwidth * 0.12,
+                            height: Nsize.screenheight * 0.044,
+                            width: Nsize.screenwidth * 0.24,
                             decoration: BoxDecoration(
                               color:
                                   bookingcontroller.currentindex.value == index
@@ -122,9 +122,6 @@ class BookAppointmentScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
 
                 /// Afternoon Slot
                 const Text(
@@ -142,7 +139,7 @@ class BookAppointmentScreen extends StatelessWidget {
                     itemCount: 6,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
-                      mainAxisExtent: Nsize.screenheight * 0.018,
+                      mainAxisExtent: Nsize.screenheight * 0.044,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                     ),
@@ -155,8 +152,8 @@ class BookAppointmentScreen extends StatelessWidget {
                         child: Obx(
                           () => Container(
                             alignment: Alignment.center,
-                            height: Nsize.screenheight * 0.018,
-                            width: Nsize.screenwidth * 0.12,
+                            height: Nsize.screenheight * 0.044,
+                            width: Nsize.screenwidth * 0.24,
                             decoration: BoxDecoration(
                               color: bookingcontroller.currentindex.value ==
                                       index + 6
@@ -194,13 +191,13 @@ class BookAppointmentScreen extends StatelessWidget {
 
                 /// Next Button
                 SizedBox(
-                  height: Nsize.screenheight * 0.025,
+                  height: Nsize.screenheight * 0.06,
                   width: Nsize.screenwidth,
                   child: Padding(
                     padding:
                         const EdgeInsets.only(right: 12, left: 12, bottom: 8),
                     child: SimpleButton(
-                      height: Nsize.screenheight * 0.025,
+                      height: Nsize.screenheight * 0.06,
                       width: Nsize.screenwidth,
                       applyborderRadius: true,
                       borderRadius: 24,

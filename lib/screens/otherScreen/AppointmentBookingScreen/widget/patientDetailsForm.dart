@@ -75,7 +75,7 @@ class PatientDetailForm extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Container(
-            height: Nsize.screenheight * 0.025,
+            height: Nsize.screenheight * 0.07,
             width: double.infinity,
             decoration: BoxDecoration(
                 border: Border.all(color: Ncolor.darkblue1),

@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dr_house/controller/otherScreenController/booking_controller.dart';
 import 'package:dr_house/utils/const/images.dart';
 import 'package:dr_house/utils/helper/function.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +23,6 @@ class ScheduledScreen extends StatelessWidget {
         .doc(user!.uid)
         .collection('AppointmentDetails')
         .snapshots();
-    final bookingcontroller = Get.put(BookingController());
     return Scaffold(
       backgroundColor: Ncolor.lightCream,
       body: Padding(

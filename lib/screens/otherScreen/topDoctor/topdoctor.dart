@@ -32,7 +32,7 @@ class _TopDoctorState extends State<TopDoctor> {
 
               ///Doctor Catagories List
               SizedBox(
-                height: Nsize.screenheight * 0.018,
+                height: Nsize.screenheight * 0.04,
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
@@ -40,32 +40,29 @@ class _TopDoctorState extends State<TopDoctor> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        setState(() {
-                          controller.currentCategoriesIndex.value = index;
-                        });
+                        controller.currentCategoriesIndex.value = index;
+                        setState(() {});
                       },
-                      child: Obx(
-                        () => Container(
-                          alignment: Alignment.center,
-                          height: Nsize.screenheight * 0.018,
-                          padding: const EdgeInsets.only(
-                              top: 5, bottom: 5, right: 10, left: 10),
-                          margin: const EdgeInsets.only(right: 2, left: 8),
-                          decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius: BorderRadius.circular(18),
-                            color:
-                                controller.currentCategoriesIndex.value == index
-                                    ? Ncolor.darkblue3
-                                    : Ncolor.lightCream,
-                          ),
-                          child: Text(
-                            Nlist.doctorCategories[index],
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                            ),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: Nsize.screenheight * 0.04,
+                        padding: const EdgeInsets.only(
+                            top: 5, bottom: 5, right: 10, left: 10),
+                        margin: const EdgeInsets.only(right: 2, left: 8),
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(18),
+                          color:
+                              controller.currentCategoriesIndex.value == index
+                                  ? Ncolor.darkblue3
+                                  : Ncolor.lightCream,
+                        ),
+                        child: Text(
+                          Nlist.doctorCategories[index],
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
                           ),
                         ),
                       ),

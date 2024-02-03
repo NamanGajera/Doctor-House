@@ -7,7 +7,6 @@ import 'package:dr_house/utils/const/size.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-
 import '../../../common/textfield/textfield.dart';
 import '../../../utils/const/images.dart';
 import '../../home/homeScreen/widgets/doctor_card.dart';
@@ -30,6 +29,8 @@ class SearchBarScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 10),
+
+                /// Search Bar
                 NtextField(
                   controller: controller.searchController,
                   bordercolor: Ncolor.darkblue1,
@@ -39,6 +40,8 @@ class SearchBarScreen extends StatelessWidget {
                     controller.searchdoctor(value);
                   },
                 ),
+
+                /// Body Part
                 Expanded(
                   child: Obx(
                     () => ListView.builder(
@@ -47,9 +50,9 @@ class SearchBarScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return DoctorCard(
                           borderradius: 18,
-                          cardHeight: Nsize.screenheight * 0.06,
-                          imageHeight: Nsize.screenheight * 0.1,
-                          imageWidth: Nsize.screenwidth * 0.11,
+                          cardHeight: Nsize.screenheight * 0.16,
+                          imageHeight: Nsize.screenheight * 0.2,
+                          imageWidth: Nsize.screenwidth * 0.22,
                           elevation: 8,
                           cardWidth: double.infinity,
                           imagePath: Nimages.docProfile,
@@ -84,34 +87,3 @@ class SearchBarScreen extends StatelessWidget {
     );
   }
 }
-
-// Expanded(
-//                   child: Obx(
-//                     () => StreamBuilder(
-//                       stream: doctorData,
-//                       builder: (context, snapshot) {
-//                         if (snapshot.connectionState ==
-//                             ConnectionState.waiting) {
-//                           return Center(
-//                             child: CircularProgressIndicator(
-//                               color: Ncolor.darkblue1,
-//                             ),
-//                           );
-//                         } else if (snapshot.hasError) {
-//                           return const Center(child: Text('Some Error'));
-//                         } else {
-//                           return ListView.builder(
-//                             physics: const BouncingScrollPhysics(),
-//                             itemCount: snapshot.data!.docs.length,
-//                             itemBuilder: (context, index) {
-//                               final id =
-//                                   snapshot.data!.docs[index]['id'].toString();
-                              
-//                             },
-//                           );
-//                         }
-//                       },
-//                     ),
-//                   ),
-//                 ),
-              

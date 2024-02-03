@@ -37,13 +37,16 @@ class PaymentMethods extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
+              /// Payment method icon
               Image(
                 image: AssetImage(methodIcon),
-                height: Nsize.screenheight * 0.015,
-                width: Nsize.screenheight * 0.015,
+                height: Nsize.screenheight * 0.035,
+                width: Nsize.screenheight * 0.035,
                 fit: BoxFit.cover,
               ),
               const SizedBox(width: 15),
+
+              /// Method Name
               Text(
                 methodname,
                 style: const TextStyle(
@@ -51,6 +54,8 @@ class PaymentMethods extends StatelessWidget {
                 ),
               ),
               const Spacer(),
+
+              /// Radio button
               changebtn
                   ? TextButton(
                       onPressed: changeOnTap,
@@ -59,8 +64,8 @@ class PaymentMethods extends StatelessWidget {
                   : Obx(
                       () => Container(
                         alignment: Alignment.center,
-                        height: Nsize.screenheight * 0.01,
-                        width: Nsize.screenheight * 0.008,
+                        height: Nsize.screenheight * 0.022,
+                        width: Nsize.screenheight * 0.018,
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,

@@ -37,6 +37,8 @@ class PaymentScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
+
+              /// Payment Method
               for (int i = 0; i < 5; i++)
                 PaymentMethods(
                   methodIcon: Nlist.paymentMethodIcon[i],
@@ -49,11 +51,13 @@ class PaymentScreen extends StatelessWidget {
                   },
                 ),
               const Spacer(),
+
+              /// Next Button
               SizedBox(
-                height: Nsize.screenheight * 0.025,
+                height: Nsize.screenheight * 0.06,
                 width: Nsize.screenwidth,
                 child: SimpleButton(
-                  height: Nsize.screenheight * 0.025,
+                  height: Nsize.screenheight * 0.06,
                   width: Nsize.screenwidth,
                   applyborderRadius: true,
                   borderRadius: 24,
@@ -74,7 +78,6 @@ class PaymentScreen extends StatelessWidget {
                           title: 'Error',
                           message: 'Select At Least One Option');
                     }
-                    // controller.openReviewSummary();
                   },
                 ),
               ),

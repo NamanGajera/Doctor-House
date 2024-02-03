@@ -24,14 +24,14 @@ class NmyDialog {
           ),
           contentPadding: const EdgeInsets.all(12),
           content: SizedBox(
-            height: Nsize.screenheight * 0.14,
-            width: Nsize.screenwidth * 0.1,
+            height: Nsize.screenheight * 0.32,
+            width: Nsize.screenwidth * 0.2,
             child: Column(
               children: [
                 Container(
                   alignment: Alignment.center,
-                  height: Nsize.screenheight * 0.04,
-                  width: Nsize.screenheight * 0.04,
+                  height: Nsize.screenheight * 0.08,
+                  width: Nsize.screenheight * 0.08,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Ncolor.darkblue3,
@@ -40,8 +40,8 @@ class NmyDialog {
                     image: AssetImage(iconImg),
                     color: Colors.white,
                     fit: BoxFit.cover,
-                    height: Nsize.screenheight * 0.025,
-                    width: Nsize.screenheight * 0.025,
+                    height: Nsize.screenheight * 0.05,
+                    width: Nsize.screenheight * 0.05,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -63,14 +63,16 @@ class NmyDialog {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 15),
+
+                /// First Button
                 SizedBox(
-                  height: Nsize.screenheight * 0.025,
+                  height: Nsize.screenheight * 0.052,
                   width: Nsize.screenwidth,
                   child: Padding(
                     padding:
                         const EdgeInsets.only(right: 12, left: 12, bottom: 8),
                     child: SimpleButton(
-                      height: Nsize.screenheight * 0.025,
+                      height: Nsize.screenheight * 0.05,
                       width: Nsize.screenwidth,
                       applyborderRadius: true,
                       borderRadius: 24,
@@ -85,14 +87,16 @@ class NmyDialog {
                   ),
                 ),
                 const SizedBox(height: 5),
+
+                /// Second Button
                 SizedBox(
-                  height: Nsize.screenheight * 0.025,
+                  height: Nsize.screenheight * 0.052,
                   width: Nsize.screenwidth,
                   child: Padding(
                     padding:
                         const EdgeInsets.only(right: 12, left: 12, bottom: 8),
                     child: SimpleButton(
-                      height: Nsize.screenheight * 0.025,
+                      height: Nsize.screenheight * 0.05,
                       width: Nsize.screenwidth,
                       applyborderRadius: true,
                       borderRadius: 24,

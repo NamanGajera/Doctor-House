@@ -69,7 +69,7 @@ class LoginScreenBody extends StatelessWidget {
             /// login button
             Obx(
               () => SimpleButton(
-                height: Nsize.screenheight * 0.022,
+                height: Nsize.screenheight * 0.05,
                 width: Nsize.screenwidth,
                 applyborderRadius: true,
                 borderRadius: 15,

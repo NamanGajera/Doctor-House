@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Nsize {
   /// Screen Size
-  static final double screenwidth =
-      WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.width;
-  static final double screenheight = WidgetsBinding
-      .instance.platformDispatcher.views.first.physicalSize.height;
+  static final double screenwidth = MediaQuery.of(Get.context!).size.width;
+  static final double screenheight = MediaQuery.of(Get.context!).size.height;
+  // WidgetsBinding
+  //     .instance.platformDispatcher.views.first.physicalSize.height
 
   /// Icon Size
   static const double prifixicon = 26.0;

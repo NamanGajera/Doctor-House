@@ -29,8 +29,8 @@ class PaymentDoctorDetails extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               child: Image(
                 image: AssetImage(controller.doctorImage),
-                height: Nsize.screenheight * 0.052,
-                width: Nsize.screenheight * 0.055,
+                height: Nsize.screenheight * 0.15,
+                width: Nsize.screenheight * 0.13,
                 fit: BoxFit.cover,
               ),
             ),

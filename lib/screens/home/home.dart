@@ -23,7 +23,7 @@ class MainHomeScreen extends StatelessWidget {
         /// Bottom Nav Bar
         bottomNavigationBar: CurvedNavigationBar(
           index: controller.navIndex.value,
-          height: Nsize.screenheight * 0.023,
+          height: Nsize.screenheight * 0.06,
           items: const <Widget>[
             Icon(Iconsax.home, size: 30),
             Icon(Iconsax.calendar_1, size: 30),

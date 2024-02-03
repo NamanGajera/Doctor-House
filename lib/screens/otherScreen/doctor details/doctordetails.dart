@@ -63,13 +63,13 @@ class DoctorDetails extends StatelessWidget {
 
               /// Booking Button
               SizedBox(
-                height: Nsize.screenheight * 0.025,
+                height: Nsize.screenheight * 0.06,
                 width: Nsize.screenwidth,
                 child: Padding(
                   padding:
                       const EdgeInsets.only(right: 12, left: 12, bottom: 8),
                   child: SimpleButton(
-                    height: Nsize.screenheight * 0.025,
+                    height: Nsize.screenheight * 0.06,
                     width: Nsize.screenwidth,
                     applyborderRadius: true,
                     borderRadius: 24,

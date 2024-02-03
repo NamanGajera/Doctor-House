@@ -77,10 +77,10 @@ class ReviewSummary extends StatelessWidget {
               /// Done Button
               Obx(
                 () => SizedBox(
-                  height: Nsize.screenheight * 0.025,
+                  height: Nsize.screenheight * 0.06,
                   width: Nsize.screenwidth,
                   child: SimpleButton(
-                    height: Nsize.screenheight * 0.025,
+                    height: Nsize.screenheight * 0.06,
                     width: Nsize.screenwidth,
                     applyborderRadius: true,
                     borderRadius: 24,

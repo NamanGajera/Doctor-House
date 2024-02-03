@@ -24,8 +24,8 @@ class AllowNotification extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: Nsize.screenheight * 0.013,
-          width: Nsize.screenwidth * 0.05,
+          height: Nsize.screenheight * 0.04,
+          width: Nsize.screenwidth * 0.1,
           child: Obx(
             () => Switch(
               value: controller.switchvalue.value,

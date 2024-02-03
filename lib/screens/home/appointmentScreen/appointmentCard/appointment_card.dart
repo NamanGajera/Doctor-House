@@ -29,7 +29,7 @@ class AppointmentCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Container(
         height:
-            canclebtn ? Nsize.screenheight * 0.106 : Nsize.screenheight * 0.082,
+            canclebtn ? Nsize.screenheight * 0.23 : Nsize.screenheight * 0.18,
         width: Nsize.screenwidth,
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
@@ -71,7 +71,7 @@ class AppointmentCard extends StatelessWidget {
                     onTap: onTap,
                     child: Container(
                       alignment: Alignment.center,
-                      height: Nsize.screenheight * 0.018,
+                      height: Nsize.screenheight * 0.045,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),

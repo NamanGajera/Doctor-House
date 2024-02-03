@@ -24,9 +24,9 @@ class DocCatagoriesList extends StatelessWidget {
             if (controller.currentCategoriesIndex.value == 0) {
               return DoctorCard(
                 borderradius: 18,
-                cardHeight: Nsize.screenheight * 0.06,
-                imageHeight: Nsize.screenheight * 0.1,
-                imageWidth: Nsize.screenwidth * 0.11,
+                cardHeight: Nsize.screenheight * 0.13,
+                imageHeight: Nsize.screenheight * 0.21,
+                imageWidth: Nsize.screenwidth * 0.23,
                 elevation: 8,
                 cardWidth: double.infinity,
                 imagePath: Nimages.docProfile,
@@ -55,9 +55,9 @@ class DocCatagoriesList extends StatelessWidget {
                   Nlist.doclist[index]['type']) {
                 return DoctorCard(
                   borderradius: 18,
-                  cardHeight: Nsize.screenheight * 0.06,
-                  imageHeight: Nsize.screenheight * 0.1,
-                  imageWidth: Nsize.screenwidth * 0.11,
+                  cardHeight: Nsize.screenheight * 0.12,
+                  imageHeight: Nsize.screenheight * 0.2,
+                  imageWidth: Nsize.screenwidth * 0.22,
                   elevation: 8,
                   cardWidth: double.infinity,
                   imagePath: Nimages.docProfile,

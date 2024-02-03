@@ -26,7 +26,7 @@ class ScheduleHistoryButton extends StatelessWidget {
               child: Obx(
                 () => Container(
                   alignment: Alignment.center,
-                  height: Nsize.screenheight * 0.02,
+                  height: Nsize.screenheight * 0.055,
                   decoration: BoxDecoration(
                     color: (controller.pageindex.value == 0)
                         ? Ncolor.darkblue2
@@ -58,7 +58,7 @@ class ScheduleHistoryButton extends StatelessWidget {
               child: Obx(
                 () => Container(
                   alignment: Alignment.center,
-                  height: Nsize.screenheight * 0.02,
+                  height: Nsize.screenheight * 0.055,
                   decoration: BoxDecoration(
                     color: (controller.pageindex.value == 1)
                         ? Ncolor.darkblue2

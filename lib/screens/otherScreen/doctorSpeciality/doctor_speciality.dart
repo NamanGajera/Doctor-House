@@ -8,7 +8,6 @@ import 'package:dr_house/utils/const/size.dart';
 import 'package:dr_house/utils/const/text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../common/appbar/appbar.dart';
 import '../../../utils/const/colors.dart';
 
@@ -32,15 +31,15 @@ class DoctorSpeciality extends StatelessWidget {
 
                 /// Doctor Speciality
                 DoctorTypesIcon(
-                  hightofGridView: Nsize.screenheight * 0.165,
+                  hightofGridView: Nsize.screenheight * 0.43,
                   itemCount: Nlist.docTypeName.length,
                   crossAxisCount: 4,
                   iconimg: Nlist.docTypeIcon,
                   iconName: Nlist.docTypeName,
                   fontsize: 14,
-                  circlesize: Nsize.screenheight * 0.027,
-                  imgheight: Nsize.screenheight * 0.018,
-                  imgwidth: Nsize.screenheight * 0.018,
+                  circlesize: Nsize.screenheight * 0.075,
+                  imgheight: Nsize.screenheight * 0.06,
+                  imgwidth: Nsize.screenheight * 0.06,
                 ),
 
                 /// Top Doctor
@@ -53,9 +52,9 @@ class DoctorSpeciality extends StatelessWidget {
                 for (int i = 0; i <= 4; i++)
                   DoctorCard(
                     borderradius: 18,
-                    cardHeight: Nsize.screenheight * 0.06,
-                    imageHeight: Nsize.screenheight * 0.1,
-                    imageWidth: Nsize.screenwidth * 0.11,
+                    cardHeight: Nsize.screenheight * 0.12,
+                    imageHeight: Nsize.screenheight * 0.2,
+                    imageWidth: Nsize.screenwidth * 0.22,
                     elevation: 8,
                     cardWidth: double.infinity,
                     imagePath: Nimages.docProfile,

@@ -103,7 +103,7 @@ class OnBordingPage extends StatelessWidget {
                       () => Padding(
                         padding: const EdgeInsets.all(24.0),
                         child: SimpleButton(
-                          height: Nsize.screenheight * 0.025,
+                          height: Nsize.screenheight * 0.05,
                           width: double.infinity,
                           backgroundColor: Ncolor.lighttomato,
                           applyborderRadius: true,

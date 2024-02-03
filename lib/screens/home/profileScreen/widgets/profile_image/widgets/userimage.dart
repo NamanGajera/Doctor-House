@@ -13,15 +13,15 @@ class UserImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: Nsize.screenheight * 0.07,
+      height: Nsize.screenheight * 0.14,
       decoration: const BoxDecoration(
         color: Ncolor.darkblue3,
         shape: BoxShape.circle,
       ),
       child: Image(
         image: const AssetImage(Nimages.onbordingImg),
-        height: Nsize.screenheight * 0.065,
-        width: Nsize.screenheight * 0.065,
+        height: Nsize.screenheight * 0.13,
+        width: Nsize.screenheight * 0.13,
         fit: BoxFit.cover,
       ),
     );

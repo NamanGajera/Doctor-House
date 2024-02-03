@@ -79,11 +79,11 @@ class SearchDoctor extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => SearchBarScreen());
+        Get.to(() => const SearchBarScreen());
       },
       child: Container(
         padding: const EdgeInsets.only(left: 10),
-        height: Nsize.screenheight * 0.025,
+        height: Nsize.screenheight * 0.055,
         width: double.infinity,
         decoration: BoxDecoration(
           border: Border.all(color: Ncolor.darkblue1),
