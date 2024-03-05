@@ -36,10 +36,11 @@ class ScheduledScreen extends StatelessWidget {
             StreamBuilder(
               stream: appointmentStream,
               builder: (context, snapshot) {
+                int streamLength = snapshot.data?.docs.length ?? 0;
                 return Expanded(
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: snapshot.data?.docs.length,
+                    itemCount: streamLength,
                     itemBuilder: (context, index) {
                       String date = snapshot.data?.docs[index]['date'] ?? '';
                       String time = snapshot.data?.docs[index]['time'] ?? '';

@@ -44,96 +44,102 @@ class ReviewSummary extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Ncolor.lightCream,
         appBar: Nappbar.appbar('Review Summary'),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
+        body: SingleChildScrollView(
+          child: SizedBox(
+            height: Nsize.screenheight - Nsize.screenheight * 0.095,
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
 
-              /// Doctor Details
-              const PaymentDoctorDetails(),
-              const SizedBox(height: 10),
+                  /// Doctor Details
+                  const PaymentDoctorDetails(),
+                  const SizedBox(height: 10),
 
-              /// Patient Details
-              const PaymentPatientDetails(),
-              const SizedBox(height: 10),
+                  /// Patient Details
+                  const PaymentPatientDetails(),
+                  const SizedBox(height: 10),
 
-              /// Payment Amount Details
-              const PaymentAmount(),
-              const SizedBox(height: 10),
+                  /// Payment Amount Details
+                  const PaymentAmount(),
+                  const SizedBox(height: 10),
 
-              /// Payment Methods
-              PaymentMethods(
-                methodIcon: paymentMethodIcon,
-                methodname: paymentNethodName,
-                paymentindex: 0,
-                changebtn: true,
-                changeOnTap: () {
-                  controller.changePaymentMethod();
-                },
-              ),
-              const Spacer(),
-
-              /// Done Button
-              Obx(
-                () => SizedBox(
-                  height: Nsize.screenheight * 0.06,
-                  width: Nsize.screenwidth,
-                  child: SimpleButton(
-                    height: Nsize.screenheight * 0.06,
-                    width: Nsize.screenwidth,
-                    applyborderRadius: true,
-                    borderRadius: 24,
-                    applyboxShadow: false,
-                    applybold: true,
-                    buttonText: 'Done',
-                    backgroundColor: Ncolor.darkblue2,
-                    fontSize: 22,
-                    loading: controller.bookingloading.value,
-                    onTap: () {
-                      controller.bookingloading.value = true;
-                      Future.delayed(
-                        const Duration(seconds: 1),
-                        () {
-                          controller.bookingloading.value = false;
-                          appointmentDB.set({
-                            'id': id,
-                            'docName': controller.doctorName,
-                            'docType': controller.doctorType,
-                            'docCity': controller.doctorCity,
-                            'date': controller.date,
-                            'time': Nlist.timeSlot[controller.currenttimeindex],
-                            'pateintName': controller.patientName,
-                            'pateintAge': controller.patientAge,
-                            'pateintGender': controller.gender.value,
-                            'patientProblem': controller.patientProblem,
-                          }).then((value) {
-                            controller.bookingloading.value = false;
-                            NmyDialog.showCongratulationDialog(
-                              Nimages.appointment,
-                              Ntext.congrats,
-                              Ntext.subconratsText,
-                              Ntext.viewappointment,
-                              Ntext.backbtn,
-                              () {
-                                Get.close(5);
-                                Get.to(() => const AppointmentScreen());
-                              },
-                              () {
-                                Get.close(5);
-                              },
-                            );
-                          }).onError(
-                            (error, stackTrace) => Nhelper.errorSnackBar(
-                                title: 'Error', message: error.hashCode),
-                          );
-                        },
-                      );
+                  /// Payment Methods
+                  PaymentMethods(
+                    methodIcon: paymentMethodIcon,
+                    methodname: paymentNethodName,
+                    paymentindex: 0,
+                    changebtn: true,
+                    changeOnTap: () {
+                      controller.changePaymentMethod();
                     },
                   ),
-                ),
+                  const Spacer(),
+
+                  /// Done Button
+                  Obx(
+                    () => SizedBox(
+                      height: Nsize.screenheight * 0.06,
+                      width: Nsize.screenwidth,
+                      child: SimpleButton(
+                        height: Nsize.screenheight * 0.06,
+                        width: Nsize.screenwidth,
+                        applyborderRadius: true,
+                        borderRadius: 24,
+                        applyboxShadow: false,
+                        applybold: true,
+                        buttonText: 'Done',
+                        backgroundColor: Ncolor.darkblue2,
+                        fontSize: 22,
+                        loading: controller.bookingloading.value,
+                        onTap: () {
+                          controller.bookingloading.value = true;
+                          Future.delayed(
+                            const Duration(seconds: 1),
+                            () {
+                              controller.bookingloading.value = false;
+                              appointmentDB.set({
+                                'id': id,
+                                'docName': controller.doctorName,
+                                'docType': controller.doctorType,
+                                'docCity': controller.doctorCity,
+                                'date': controller.date,
+                                'time':
+                                    Nlist.timeSlot[controller.currenttimeindex],
+                                'pateintName': controller.patientName,
+                                'pateintAge': controller.patientAge,
+                                'pateintGender': controller.gender.value,
+                                'patientProblem': controller.patientProblem,
+                              }).then((value) {
+                                controller.bookingloading.value = false;
+                                NmyDialog.showCongratulationDialog(
+                                  Nimages.appointment,
+                                  Ntext.congrats,
+                                  Ntext.subconratsText,
+                                  Ntext.viewappointment,
+                                  Ntext.backbtn,
+                                  () {
+                                    Get.close(5);
+                                    Get.to(() => const AppointmentScreen());
+                                  },
+                                  () {
+                                    Get.close(5);
+                                  },
+                                );
+                              }).onError(
+                                (error, stackTrace) => Nhelper.errorSnackBar(
+                                    title: 'Error', message: error.hashCode),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

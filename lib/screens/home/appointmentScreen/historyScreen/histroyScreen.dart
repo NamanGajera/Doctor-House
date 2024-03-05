@@ -22,13 +22,14 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Ncolor.lightCream,
       body: Padding(
-        padding: EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12.0),
         child: StreamBuilder(
           stream: appointmentStream,
           builder: (context, snapshot) {
+            int streamLength = snapshot.data?.docs.length ?? 0;
             return ListView.builder(
               physics: const BouncingScrollPhysics(),
-              itemCount: snapshot.data?.docs.length,
+              itemCount: streamLength,
               itemBuilder: (context, index) {
                 String date = snapshot.data?.docs[index]['date'] ?? '';
                 String time = snapshot.data?.docs[index]['time'] ?? '';

@@ -17,8 +17,8 @@ class AppointmentCard extends StatelessWidget {
 
   final String dateTimeText;
   final String docImage;
-  final String docName;
-  final String docCity;
+  final String? docName;
+  final String? docCity;
   final String bookingId;
   final bool canclebtn;
   final void Function()? onTap;

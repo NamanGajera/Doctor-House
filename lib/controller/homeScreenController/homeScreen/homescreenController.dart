@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreenController extends GetxController {
-  RxBool addfavorite = false.obs;
   final searchController = TextEditingController();
   RxInt currentCategoriesIndex = 0.obs;
   final favorites = <String, bool>{}.obs;
@@ -25,10 +24,7 @@ class HomeScreenController extends GetxController {
     initSearch();
   }
 
-  void addToFavorite() {
-    addfavorite.value = !addfavorite.value;
-  }
-
+  /// open doctor categories
   iconOnClick(int index) {
     Get.to(() => DoctorCategories(title: Nlist.docTypeName[index]));
   }
@@ -63,10 +59,12 @@ class HomeScreenController extends GetxController {
     }
   }
 
+  /// check doctor is favorit or not
   bool isFavorites(String id) {
     return favorites[id] ?? false;
   }
 
+  /// change the favorite
   void toggelFavorites(String id) {
     if (!favorites.containsKey(id)) {
       favorites[id] = true;
@@ -81,16 +79,13 @@ class HomeScreenController extends GetxController {
     }
   }
 
+  /// save favorite doc ist to local storage
   void saveFavoritesToStorage() {
     final encodedFavorites = json.encode(favorites);
     NLocalStorage.instance().saveData('favorites', encodedFavorites);
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
+  /// adding doc data from firebase to list
   void initSearch() async {
     await FirebaseFirestore.instance
         .collection('Doctor')
@@ -99,6 +94,7 @@ class HomeScreenController extends GetxController {
     searchlist.value = doclist;
   }
 
+  /// search doctor acording to user
   void searchdoctor(String docname) {
     List result = [];
     if (searchController.text.isEmpty) {

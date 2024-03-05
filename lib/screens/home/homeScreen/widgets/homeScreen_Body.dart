@@ -36,7 +36,7 @@ class HomeScreenBody extends StatelessWidget {
 
         /// Doctor Speciality
         DoctorTypesIcon(
-          hightofGridView: Nsize.screenheight * 0.21,
+          hightofGridView: Nsize.screenheight * 0.22,
           crossAxisCount: 4,
           itemCount: 8,
           iconimg: Nlist.docTypeIcon,

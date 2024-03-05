@@ -22,8 +22,7 @@ class PatientDetails extends StatelessWidget {
         appBar: Nappbar.appbar('Patient Details'),
         body: SingleChildScrollView(
           child: SizedBox(
-            height: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).padding.top * 2.5,
+            height: Nsize.screenheight - Nsize.screenheight * 0.095,
             width: Nsize.screenwidth,
             child: Padding(
               padding: const EdgeInsets.all(12.0),

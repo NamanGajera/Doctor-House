@@ -14,8 +14,8 @@ class AppointmentDoctorDetails extends StatelessWidget {
   });
 
   final String docImage;
-  final String docName;
-  final String docCity;
+  final String? docName;
+  final String? docCity;
   final String bookingId;
 
   @override
@@ -44,7 +44,7 @@ class AppointmentDoctorDetails extends StatelessWidget {
 
               /// Doctor Name
               Text(
-                docName,
+                docName!,
                 style: const TextStyle(
                   fontSize: 20,
                 ),
@@ -62,7 +62,7 @@ class AppointmentDoctorDetails extends StatelessWidget {
                   const SizedBox(width: 5),
                   Expanded(
                     child: Text(
-                      docCity,
+                      docCity!,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         color: Ncolor.lightblacktext,
