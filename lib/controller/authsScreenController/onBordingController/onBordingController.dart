@@ -18,7 +18,7 @@ class OnBordingController extends GetxController {
     /// Page 1
     OnBordingPage(
       backgroundColor: Ncolor.lightCream,
-      height: Nsize.screenheight * 0.18,
+      height: Nsize.screenheight * 0.55,
       width: Nsize.screenwidth,
       image: Nimages.onbordingImg1,
       headline: Ntext.onbordingScreen1headline,
@@ -30,7 +30,7 @@ class OnBordingController extends GetxController {
     /// Page 2
     OnBordingPage(
       backgroundColor: Ncolor.coolgreen,
-      height: Nsize.screenheight * 0.18,
+      height: Nsize.screenheight * 0.55,
       width: Nsize.screenwidth,
       image: Nimages.onbordingImg2,
       headline: Ntext.onbordingScreen2headline,
@@ -42,7 +42,7 @@ class OnBordingController extends GetxController {
     /// Page 3
     OnBordingPage(
       backgroundColor: Ncolor.lighttomato,
-      height: Nsize.screenheight * 0.18,
+      height: Nsize.screenheight * 0.45,
       width: Nsize.screenwidth,
       image: Nimages.appIcon,
       headline: Ntext.onbordingscreen3Headline,
