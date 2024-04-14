@@ -11,7 +11,6 @@ import '../../../otherScreen/doctorSpeciality/doctor_speciality.dart';
 import '../../../otherScreen/topDoctor/topdoctor.dart';
 import 'doctor_card.dart';
 import 'heading.dart';
-import 'servicestypes_icon.dart';
 
 class HomeScreenBody extends StatelessWidget {
   const HomeScreenBody({super.key});
@@ -63,7 +62,7 @@ class HomeScreenBody extends StatelessWidget {
         const SizedBox(height: 10),
 
         /// Doctor 1 Details
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
           DoctorCard(
             borderradius: 18,
             cardHeight: Nsize.screenheight * 0.15,
@@ -94,25 +93,7 @@ class HomeScreenBody extends StatelessWidget {
         const SizedBox(height: 18),
 
         /// Our Service Heading
-        Heading(
-          heading: Ntext.ourServices,
-          wantseebtn: false,
-          headingFontSize: 22,
-        ),
-        const SizedBox(height: 10),
 
-        /// Our Services
-        ServicesTypesIcon(
-          hightofGridView: Nsize.screenheight * 0.1,
-          crossAxisCount: 4,
-          itemCount: 4,
-          iconimg: Nlist.servicesIcon,
-          iconName: Nlist.servicesName,
-          fontsize: 14,
-          circlesize: Nsize.screenheight * 0.07,
-          imgheight: Nsize.screenheight * 0.05,
-          imgwidth: Nsize.screenheight * 0.05,
-        ),
       ],
     );
   }
