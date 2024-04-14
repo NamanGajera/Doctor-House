@@ -1,5 +1,8 @@
-import 'package:dr_house/controller/homeScreenController/homeScreen/profilrScreenController.dart';
+import 'package:dr_house/controller/homeScreenController/homeScreen/profileScreenController.dart';
 import 'package:dr_house/controller/homeScreenController/mainHome_controller.dart';
+import 'package:dr_house/screens/otherScreen/profileItemsScreen/ProfilePayment.dart';
+import 'package:dr_house/screens/otherScreen/profileItemsScreen/ProfileSecurity.dart';
+import 'package:dr_house/screens/otherScreen/profileItemsScreen/profileNotification.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:dr_house/utils/helper/function.dart';
@@ -40,12 +43,11 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       /// Your Porifile
                       ProfileItems(
-                        itemText: 'Your Profile',
+                        itemText: 'My Profile',
                         leadingIcon: Iconsax.user,
                         tralingIcon: Iconsax.arrow_right,
                         onTap: () {
-                          Nhelper.simpleSnackBar(
-                              title: 'On Tap', message: 'Your Profile');
+                          controller.openProfileScreen();
                         },
                       ),
 
@@ -55,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                         leadingIcon: Iconsax.notification,
                         tralingIcon: Iconsax.arrow_right,
                         onTap: () {
-                          mainHomeController.navIndex.value = 2;
+                          Get.to(() => const ProfileNotification());
                         },
                       ),
 
@@ -75,8 +77,7 @@ class ProfileScreen extends StatelessWidget {
                         leadingIcon: Iconsax.card,
                         tralingIcon: Iconsax.arrow_right,
                         onTap: () {
-                          Nhelper.simpleSnackBar(
-                              title: 'On Tap', message: 'Payment');
+                          Get.to(()=>const ProfilePayment());
                         },
                       ),
 
@@ -86,8 +87,7 @@ class ProfileScreen extends StatelessWidget {
                         leadingIcon: Iconsax.security,
                         tralingIcon: Iconsax.arrow_right,
                         onTap: () {
-                          Nhelper.simpleSnackBar(
-                              title: 'On Tap', message: 'Security');
+                         Get.to(()=>const ProfileSecurity());
                         },
                       ),
 
@@ -99,17 +99,6 @@ class ProfileScreen extends StatelessWidget {
                         onTap: () {
                           Nhelper.simpleSnackBar(
                               title: 'On Tap', message: 'Help Center');
-                        },
-                      ),
-
-                      /// Setting
-                      ProfileItems(
-                        itemText: 'Setting',
-                        leadingIcon: Iconsax.setting,
-                        tralingIcon: Iconsax.arrow_right,
-                        onTap: () {
-                          Nhelper.simpleSnackBar(
-                              title: 'On Tap', message: 'Setting');
                         },
                       ),
 

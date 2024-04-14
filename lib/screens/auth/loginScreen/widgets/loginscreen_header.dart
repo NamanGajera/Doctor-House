@@ -22,8 +22,8 @@ class LoginScreenHeader extends StatelessWidget {
             alignment: Alignment.center,
             child: Image(
               image: const AssetImage(Nimages.loginscreenImg),
-              height: Nsize.screenheight * 0.1,
-              width: Nsize.screenwidth * 0.3,
+              height: Nsize.screenheight * 0.25,
+              width: Nsize.screenwidth ,
               fit: BoxFit.cover,
             ),
           ),

@@ -6,6 +6,7 @@ import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/size.dart';
 import 'package:dr_house/utils/const/text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -98,12 +99,12 @@ class OnBordingPage extends StatelessWidget {
           islastpage
               ? Column(
                   children: [
-                    const SizedBox(height: 90),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.06),
                     Obx(
                       () => Padding(
                         padding: const EdgeInsets.all(24.0),
                         child: SimpleButton(
-                          height: Nsize.screenheight * 0.05,
+                          height: Nsize.screenheight * 0.06,
                           width: double.infinity,
                           backgroundColor: Ncolor.lighttomato,
                           applyborderRadius: true,

@@ -51,6 +51,7 @@ class DoctorCard extends StatelessWidget {
       onTap: onTap,
       child: Card(
         elevation: elevation,
+        surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderradius),
         ),
