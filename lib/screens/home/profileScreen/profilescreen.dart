@@ -1,7 +1,9 @@
 import 'package:dr_house/controller/homeScreenController/homeScreen/profileScreenController.dart';
 import 'package:dr_house/controller/homeScreenController/mainHome_controller.dart';
 import 'package:dr_house/screens/otherScreen/profileItemsScreen/ProfilePayment.dart';
+import 'package:dr_house/screens/otherScreen/profileItemsScreen/ProfilePrivacyPolicy.dart';
 import 'package:dr_house/screens/otherScreen/profileItemsScreen/ProfileSecurity.dart';
+import 'package:dr_house/screens/otherScreen/profileItemsScreen/profileHelpCenter.dart';
 import 'package:dr_house/screens/otherScreen/profileItemsScreen/profileNotification.dart';
 import 'package:dr_house/utils/const/colors.dart';
 import 'package:dr_house/utils/const/size.dart';
@@ -97,8 +99,7 @@ class ProfileScreen extends StatelessWidget {
                         leadingIcon: Iconsax.info_circle,
                         tralingIcon: Iconsax.arrow_right,
                         onTap: () {
-                          Nhelper.simpleSnackBar(
-                              title: 'On Tap', message: 'Help Center');
+                          Get.to(()=>const ProfileHelpCenter());
                         },
                       ),
 
@@ -108,9 +109,8 @@ class ProfileScreen extends StatelessWidget {
                         leadingIcon: Iconsax.lock,
                         tralingIcon: Iconsax.arrow_right,
                         onTap: () {
-                          Nhelper.simpleSnackBar(
-                              title: 'On Tap', message: 'Privacy Policy');
-                        },
+                          Get.to(()=>const ProfilePrivacyPolicy());
+                          },
                       ),
 
                       /// Logout
