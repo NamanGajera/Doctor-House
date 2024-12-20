@@ -1,0 +1,25 @@
+import 'package:doctor_house/models/user_model.dart';
+
+import '../../../core/firebaseFailure/firebase_failure.dart';
+
+abstract class LoginScreenState {}
+
+class LoginScreenInitialState extends LoginScreenState{}
+
+class TogglePasswordVisibilityEventState extends LoginScreenState {
+  final bool showPassword;
+  TogglePasswordVisibilityEventState(this.showPassword);
+}
+
+class FailureState extends LoginScreenState{
+  final FirebaseFailure firebaseFailure;
+  FailureState(this.firebaseFailure);
+}
+
+class LoginUserLoadingState extends LoginScreenState{}
+
+class LoginUserEventState extends LoginScreenState{
+  final UserModel userModel;
+  LoginUserEventState(this.userModel);
+}
+

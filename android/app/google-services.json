@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "35589346759",
+    "project_id": "doctor-house-abf3c",
+    "storage_bucket": "doctor-house-abf3c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35589346759:android:2eed23077221cdf1f335e2",
+        "android_client_info": {
+          "package_name": "com.example.doctor_house"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl8K-YgSOo4A-y8hjnslLLqDSPcjmqqfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
