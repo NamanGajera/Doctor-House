@@ -53,6 +53,12 @@ dependencies:
   # Toast
   toastification: ^2.3.0
 
+  # Svg
+  flutter_svg: ^2.0.16
+
+
+
+
 
 
 

@@ -2,20 +2,24 @@ import 'dart:developer';
 
 import 'package:doctor_house/bloc/authScreenBloc/loginScreenBloc/login_screen_bloc.dart';
 import 'package:doctor_house/bloc/authScreenBloc/loginScreenBloc/login_screen_state.dart';
+import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/constants/images.dart';
+import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
 import 'package:doctor_house/core/constants/widgets.dart';
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:doctor_house/core/extension/navigation_extension.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/screens/authScreen/register_screen.dart';
+import 'package:doctor_house/screens/widgets/bottom_bar_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 
 import '../../bloc/authScreenBloc/loginScreenBloc/login_screen_event.dart';
@@ -44,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
           builder: (context, state) {
             return mainLoginScreen(state);
           },
-          listener: (context, state) {
+          listener: (context, state) async {
             if(state is FailureState){
               CustomToast.show(
                 context: context,
@@ -70,6 +74,20 @@ class _LoginScreenState extends State<LoginScreen> {
             }
             if(state is LoginUserEventState){
               log('Login Done===>>> ${state.userModel.email}');
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+
+              prefs.setString(spUserEmail, state.userModel.email);
+              prefs.setString(spUserId, state.userModel.id);
+              prefs.setString(spUserName, state.userModel.fullName);
+              prefs.setString(spUserRole, state.userModel.role);
+
+              userEmail = state.userModel.email;
+              userId = state.userModel.id;
+              userRole = state.userModel.role;
+              userName = state.userModel.fullName;
+
+              context.pushReplacement(const BottomBarScreen());
+
             }
           }),
     );
@@ -163,6 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             disabledBorderColor: primaryDarkBlueColor,
                             enabledBorderColor: primaryDarkBlueColor,
                             focusedBorderColor: primaryDarkBlueColor,
+                            obscureText: showPassword,
                             suffixIcon: showPassword ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
                             onTapSuffixIcon: () {
                               context.read<LoginScreenBloc>().add(TogglePasswordVisibilityEvent());
