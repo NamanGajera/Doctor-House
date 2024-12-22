@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:doctor_house/core/extension/navigation_extension.dart';
@@ -32,15 +34,22 @@ class _SplashScreenState extends State<SplashScreen> {
     bool? isLogin = prefs.getBool(spLoginKey);
     bool? isOnboarding = prefs.getBool(spOnBoardingKey);
 
-    Future.delayed(const Duration(seconds: 2), () {
-      if (isLogin != null && isLogin == true) {
-        context.replace(homeScreenPath);
-      } else if (isOnboarding != null && isOnboarding == true) {
-        context.replace(onBoardingScreenPath);
-      } else {
-        context.replace(loginScreenPath);
-      }
-    });
+    await Future.delayed(const Duration(seconds: 2));
+    navigateUser(isLogin, isOnboarding);
+  }
+
+  void navigateUser(bool? isLogin, bool? isOnboarding) {
+    if (!mounted) return;
+    if (isOnboarding != true) {
+      log('Onboarding');
+      GoRouter.of(context).pushReplacement(onBoardingScreenPath);
+    } else if (isLogin == true) {
+      log('Home');
+      GoRouter.of(context).pushReplacement(completeProfileScreenPath);
+    } else {
+      log('Login');
+      GoRouter.of(context).pushReplacement(loginScreenPath);
+    }
   }
 
   @override

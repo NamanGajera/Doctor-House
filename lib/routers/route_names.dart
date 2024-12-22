@@ -8,3 +8,4 @@ const String appointmentScreenName = 'appointment';
 const String socialScreenName = 'social';
 const String pharmacyScreenName = 'pharmacy';
 const String menuScreenName = 'menu';
+const String completeProfileScreenName = 'completeProfile';

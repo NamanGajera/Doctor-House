@@ -6,7 +6,6 @@ import 'package:toastification/toastification.dart';
 import 'colors.dart';
 
 // COMMON UI COMPONENTS
-
 class CustomButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
@@ -19,6 +18,7 @@ class CustomButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final double fontSize;
   final TextStyle? textStyle;
+  final double? width; // Added width property
 
   const CustomButton({
     required this.label,
@@ -32,31 +32,36 @@ class CustomButton extends StatelessWidget {
     this.padding,
     this.fontSize = 16.0,
     this.textStyle,
+    this.width, // Added width parameter
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: isLoading ? (){} : onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        padding: padding ?? const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
+    return SizedBox(
+      width: width, // Apply width to SizedBox if it's provided
+      child: ElevatedButton(
+        onPressed: isLoading ? () {} : onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          padding: padding ?? const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
+        ),
+        child: isLoading
+            ? CupertinoActivityIndicator(color: loadingIndicatorColor ?? Colors.white)
+            : Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon != null) Icon(icon, size: 20, color: textColor),
+            if (icon != null) const SizedBox(width: 8),
+            Text(label, style: textStyle ?? TextStyle(fontSize: fontSize, color: textColor)),
+          ],
+        ),
       ),
-      child: isLoading
-          ? CupertinoActivityIndicator(color: loadingIndicatorColor ?? Colors.white)
-          : Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (icon != null) Icon(icon, size: 20, color: textColor),
-                if (icon != null) const SizedBox(width: 8),
-                Text(label, style: textStyle ?? TextStyle(fontSize: fontSize, color: textColor)),
-              ],
-            ),
     );
   }
 }
+
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;

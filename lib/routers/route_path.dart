@@ -8,3 +8,4 @@ const String appointmentScreenPath = '/appointment';
 const String socialScreenPath = '/social';
 const String pharmacyScreenPath = '/pharmacy';
 const String menuScreenPath = '/menu';
+const String completeProfileScreenPath = '/completeProfile';

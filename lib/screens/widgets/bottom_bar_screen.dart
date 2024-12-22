@@ -13,8 +13,6 @@ class BottomBarScreen extends StatefulWidget {
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
 
-  late PageController _pageController;
-  final int _selectedIndex = 0;
 
   List<String> labelText = [
     'Home',
@@ -34,25 +32,19 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
 
   @override
   void initState() {
-    _pageController = PageController(initialPage: _selectedIndex);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        physics:const NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        children: [
-
-        ],
-      ),
+      body: widget.navigationShell,
       bottomNavigationBar: Container(
         height: 58,
         padding: EdgeInsets.only(top: 5),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.black,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15)
@@ -61,29 +53,34 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         child: Row(
           children: List.generate(labelText.length, (index){
             return Expanded(
-              child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 3),
-                child: Column(
-                  children: [
-                    SvgPicture.asset(
-                      iconPath[index],
-                      height: 28,
-                      width: 28,
-                      color: _selectedIndex == index
-                          ? primaryBlueColor
-                          : Colors.grey,
-                    ),
-                    Text(
-                      labelText[index],
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: _selectedIndex == index
+              child: InkWell(
+                onTap: (){
+                  _onItemTap(index);
+                },
+                child: Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: 3),
+                  child: Column(
+                    children: [
+                      SvgPicture.asset(
+                        iconPath[index],
+                        height: 28,
+                        width: 28,
+                        color: widget.navigationShell?.currentIndex == index
                             ? primaryBlueColor
                             : Colors.grey,
                       ),
-                    ),
-                  ],
+                      Text(
+                        labelText[index],
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: widget.navigationShell?.currentIndex == index
+                              ? primaryBlueColor
+                              : Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -92,7 +89,12 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       ),
     );
   }
-  
 
+  void _onItemTap(int index) {
+    print('datsss==>>> ${widget.navigationShell}');
+    if (widget.navigationShell != null) {
+      widget.navigationShell?.goBranch(index, initialLocation: false);
+    }
+  }
 
 }

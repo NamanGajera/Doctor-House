@@ -24,6 +24,22 @@ extension WidgetExtensions on Widget {
     );
   }
 
+  // Expand Widget
+  Widget expand([int flex = 1]) {
+    return Expanded(
+      flex: flex,
+      child: this,
+    );
+  }
+
+  // Flexible Widget
+  Widget flexible([int flex = 1]){
+    return Flexible(
+      flex: flex,
+      child: this,
+    );
+  }
+
   // Wrap a widget in a GestureDetector
   Widget onTap(VoidCallback onTap) {
     return GestureDetector(

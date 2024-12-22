@@ -2,6 +2,7 @@ import 'package:doctor_house/bloc/appThemeBloc/app_theme_bloc.dart';
 import 'package:doctor_house/bloc/appThemeBloc/app_theme_state.dart';
 import 'package:doctor_house/bloc/authScreenBloc/loginScreenBloc/login_screen_bloc.dart';
 import 'package:doctor_house/bloc/authScreenBloc/registerScreenBloc/register_screen_bloc.dart';
+import 'package:doctor_house/bloc/completeProfileScreenBloc/complete_profile_screen_bloc.dart';
 import 'package:doctor_house/bloc/onBoardingScreenBloc/on_boardin_screen_bloc.dart';
 import 'package:doctor_house/core/theme/app_theme.dart';
 import 'package:doctor_house/routers/router.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context)=>OnboardingBloc(sharedPreferences: prefs)),
         BlocProvider(create: (context)=>LoginScreenBloc(FirebaseAuthService())),
         BlocProvider(create: (context)=>RegisterScreenBloc(FirebaseAuthService())),
+        BlocProvider(create: (context)=>CompleteProfileScreenBloc()),
       ],
       child: BlocBuilder<AppThemeBloc,AppThemeState>(
         builder: (context,state){
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               // themeMode: state is DarkThemeState ? ThemeMode.dark : ThemeMode.light,
-              themeMode: ThemeMode.system,
+              themeMode: ThemeMode.light,
               routerConfig: appRouter,
               // home: SplashScreen(),
             ),

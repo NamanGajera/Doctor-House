@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
               userRole = state.userModel.role;
               userName = state.userModel.fullName;
 
-              context.replace(homeScreenPath);
+              context.replace(completeProfileScreenPath);
 
             }
           }),
