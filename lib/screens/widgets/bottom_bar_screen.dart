@@ -1,9 +1,11 @@
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class BottomBarScreen extends StatefulWidget {
-  const BottomBarScreen({super.key});
+  final StatefulNavigationShell? navigationShell;
+  const BottomBarScreen({super.key, this.navigationShell});
 
   @override
   State<BottomBarScreen> createState() => _BottomBarScreenState();

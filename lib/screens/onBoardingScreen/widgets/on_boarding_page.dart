@@ -3,9 +3,12 @@ import 'dart:developer';
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/extension/navigation_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/routers/route_path.dart';
+import 'package:doctor_house/routers/router.dart';
 import 'package:doctor_house/screens/authScreen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/constants/widgets.dart';
@@ -102,7 +105,7 @@ class OnBoardingPage extends StatelessWidget {
               CustomButton(
                 onPressed: (){
                   log('Tappp');
-                  context.pushReplacement(LoginScreen());
+                  context.replace(loginScreenPath);
                 },
                 label: 'Let\'s Start',
                 color: primaryDarkBlueColor,

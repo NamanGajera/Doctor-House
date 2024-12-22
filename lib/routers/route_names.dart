@@ -1,0 +1,10 @@
+const String splashScreenName = 'splash';
+const String onBoardingScreenName = 'onBoarding';
+const String loginScreenName = 'login';
+const String registerScreenName = 'register';
+const String bottomBarScreenName = 'bottomBar';
+const String homeScreenName = 'home';
+const String appointmentScreenName = 'appointment';
+const String socialScreenName = 'social';
+const String pharmacyScreenName = 'pharmacy';
+const String menuScreenName = 'menu';

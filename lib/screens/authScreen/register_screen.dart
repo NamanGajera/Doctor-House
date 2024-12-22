@@ -7,16 +7,22 @@ import 'package:doctor_house/bloc/authScreenBloc/registerScreenBloc/register_scr
 import 'package:doctor_house/core/extension/navigation_extension.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/routers/route_path.dart';
+import 'package:doctor_house/routers/router.dart';
 import 'package:doctor_house/screens/authScreen/login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/images.dart';
+import '../../core/constants/shared_preferences_keys.dart';
 import '../../core/constants/widgets.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -44,7 +50,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           builder: (context, state) {
             return mainRegisterScreen(state);
           },
-          listener: (context, state) {
+          listener: (context, state) async {
             if(state is RegisterFailureState){
               CustomToast.show(
                 context: context,
@@ -72,6 +78,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
             if(state is RegisterUserEventState){
               log('User Register Success ===>>> ${state.user.createdAt}');
               log('User Register Success ===>>> ${state.user.id}');
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+
+              prefs.setString(spUserEmail, state.user.email);
+              prefs.setString(spUserId, state.user.id);
+              prefs.setString(spUserName, state.user.fullName);
+              prefs.setString(spUserRole, state.user.role);
+              prefs.setBool(spLoginKey, true);
+              prefs.setBool(spOnBoardingKey, true);
+
+              userEmail = state.user.email;
+              userId = state.user.id;
+              userRole = state.user.role;
+              userName = state.user.fullName;
+
+              context.replace(homeScreenPath);
             }
           }),
     );
@@ -323,7 +344,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         style: TextStyle(color: primaryDarkBlueColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            context.pushReplacement(LoginScreen());
+                            context.replace(loginScreenPath);
                           })
                   ]),
                 ),

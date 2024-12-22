@@ -1,0 +1,10 @@
+const String splashScreenPath = '/splash';
+const String onBoardingScreenPath = '/onBoarding';
+const String loginScreenPath = '/login';
+const String registerScreenPath = '/register';
+const String bottomBarScreenPath = '/bottomBar';
+const String homeScreenPath = '/home';
+const String appointmentScreenPath = '/appointment';
+const String socialScreenPath = '/social';
+const String pharmacyScreenPath = '/pharmacy';
+const String menuScreenPath = '/menu';

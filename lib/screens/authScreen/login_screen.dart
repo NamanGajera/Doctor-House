@@ -11,6 +11,8 @@ import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:doctor_house/core/extension/navigation_extension.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/routers/route_path.dart';
+import 'package:doctor_house/routers/router.dart';
 import 'package:doctor_house/screens/authScreen/register_screen.dart';
 import 'package:doctor_house/screens/widgets/bottom_bar_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -19,6 +21,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 
@@ -80,13 +83,15 @@ class _LoginScreenState extends State<LoginScreen> {
               prefs.setString(spUserId, state.userModel.id);
               prefs.setString(spUserName, state.userModel.fullName);
               prefs.setString(spUserRole, state.userModel.role);
+              prefs.setBool(spLoginKey, true);
+              prefs.setBool(spOnBoardingKey, true);
 
               userEmail = state.userModel.email;
               userId = state.userModel.id;
               userRole = state.userModel.role;
               userName = state.userModel.fullName;
 
-              context.pushReplacement(const BottomBarScreen());
+              context.replace(homeScreenPath);
 
             }
           }),
@@ -291,7 +296,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: primaryDarkBlueColor
                             ),
                             recognizer: TapGestureRecognizer()..onTap = (){
-                              context.pushReplacement(RegisterScreen());
+                              context.replace(registerScreenPath);
                             }
                         )
                       ]

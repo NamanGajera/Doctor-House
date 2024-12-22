@@ -4,6 +4,7 @@ import 'package:doctor_house/bloc/authScreenBloc/loginScreenBloc/login_screen_bl
 import 'package:doctor_house/bloc/authScreenBloc/registerScreenBloc/register_screen_bloc.dart';
 import 'package:doctor_house/bloc/onBoardingScreenBloc/on_boardin_screen_bloc.dart';
 import 'package:doctor_house/core/theme/app_theme.dart';
+import 'package:doctor_house/routers/router.dart';
 import 'package:doctor_house/screens/widgets/splash_screen.dart';
 import 'package:doctor_house/service/firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,14 +46,15 @@ class MyApp extends StatelessWidget {
         builder: (context,state){
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
-            child: MaterialApp(
+            child: MaterialApp.router(
               title: 'Doctor House',
               debugShowCheckedModeBanner:false,
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               // themeMode: state is DarkThemeState ? ThemeMode.dark : ThemeMode.light,
               themeMode: ThemeMode.system,
-              home: SplashScreen(),
+              routerConfig: appRouter,
+              // home: SplashScreen(),
             ),
           );
         },
