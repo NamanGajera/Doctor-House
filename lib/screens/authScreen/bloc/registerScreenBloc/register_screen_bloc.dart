@@ -1,10 +1,13 @@
-import 'package:doctor_house/bloc/authScreenBloc/registerScreenBloc/register_screen_event.dart';
-import 'package:doctor_house/bloc/authScreenBloc/registerScreenBloc/register_screen_state.dart';
+import 'dart:developer';
+
+import 'package:doctor_house/screens/authScreen/bloc/registerScreenBloc/register_screen_event.dart';
+import 'package:doctor_house/screens/authScreen/bloc/registerScreenBloc/register_screen_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/firebaseFailure/firebase_failure.dart';
-import '../../../service/firebase_auth_service.dart';
+import '../../../../core/firebaseFailure/firebase_failure.dart';
+import '../../../../service/firebase_service_exception.dart';
+import '../../services/firebase_auth_service.dart';
 
 class RegisterScreenBloc extends Bloc<RegisterScreenEvent, RegisterScreenState> {
   final FirebaseAuthService _authService;
@@ -26,13 +29,15 @@ class RegisterScreenBloc extends Bloc<RegisterScreenEvent, RegisterScreenState> 
         emit(RegisterUserEventState(user));
       } else {
         emit(RegisterFailureState(
-          const UnknownFailure('Registration failed for unknown reason'),
+            FirebaseFailure(message: 'Registration failed for unknown reason')
         ));
       }
-    }on FirebaseAuthException catch(e){
-      emit(RegisterFailureState(handleFirebaseException(e)));
-    } catch(e){
-      emit(RegisterFailureState(UnknownFailure(e.toString())));
+    }on FirebaseException catch (e) {
+      log('Login Error ${e}');
+      emit(RegisterFailureState(FirebaseErrorHandler.handle(e)));
+    } catch (e) {
+      log('Login Error ${e}');
+      emit(RegisterFailureState(FirebaseFailure(message:  'Login Error ${e}')));
     }
   }
 }

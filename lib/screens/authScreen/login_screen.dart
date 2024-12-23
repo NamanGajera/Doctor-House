@@ -1,20 +1,13 @@
 import 'dart:developer';
-
-import 'package:doctor_house/bloc/authScreenBloc/loginScreenBloc/login_screen_bloc.dart';
-import 'package:doctor_house/bloc/authScreenBloc/loginScreenBloc/login_screen_state.dart';
+import 'package:doctor_house/screens/authScreen/bloc/loginScreenBloc/login_screen_bloc.dart';
 import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/constants/images.dart';
 import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
 import 'package:doctor_house/core/constants/widgets.dart';
-import 'package:doctor_house/core/extension/build_context_extenstion.dart';
-import 'package:doctor_house/core/extension/navigation_extension.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/routers/route_path.dart';
-import 'package:doctor_house/routers/router.dart';
-import 'package:doctor_house/screens/authScreen/register_screen.dart';
-import 'package:doctor_house/screens/widgets/bottom_bar_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
@@ -25,7 +18,8 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 
-import '../../bloc/authScreenBloc/loginScreenBloc/login_screen_event.dart';
+import 'bloc/loginScreenBloc/login_screen_event.dart';
+import 'bloc/loginScreenBloc/login_screen_state.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -79,10 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
               log('Login Done===>>> ${state.userModel.email}');
               SharedPreferences prefs = await SharedPreferences.getInstance();
 
-              prefs.setString(spUserEmail, state.userModel.email);
+              prefs.setString(spUserEmail, state.userModel.email ?? '');
               prefs.setString(spUserId, state.userModel.id);
-              prefs.setString(spUserName, state.userModel.fullName);
-              prefs.setString(spUserRole, state.userModel.role);
+              prefs.setString(spUserName, state.userModel.fullName??'');
+              prefs.setString(spUserRole, state.userModel.role??'3');
               prefs.setBool(spLoginKey, true);
               prefs.setBool(spOnBoardingKey, true);
 
@@ -90,6 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
               userId = state.userModel.id;
               userRole = state.userModel.role;
               userName = state.userModel.fullName;
+
+              log('UserId >>>  $userId');
 
               context.replace(completeProfileScreenPath);
 

@@ -1,7 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
-
-import 'package:doctor_house/bloc/completeProfileScreenBloc/complete_profile_screen_bloc.dart';
-import 'package:doctor_house/bloc/completeProfileScreenBloc/complete_profile_screen_state.dart';
+import 'package:doctor_house/core/constants/app_constants.dart';
+import 'package:doctor_house/screens/completeProfileScreen/bloc/complete_profile_screen_bloc.dart';
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../bloc/completeProfileScreenBloc/complete_profile_screen_event.dart';
+import 'package:toastification/toastification.dart';
 import '../../core/constants/widgets.dart';
+import 'bloc/complete_profile_screen_event.dart';
+import 'bloc/complete_profile_screen_state.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({super.key});
@@ -46,7 +47,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
       ),
       builder: (context) => Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -75,9 +76,14 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<CompleteProfileScreenBloc, CompleteProfileScreenState>(
+      body: BlocConsumer<CompleteProfileScreenBloc, CompleteProfileScreenState>(
         builder: (context, state) {
           return completeProfileScreen();
+        },
+        listener: (context, state) {
+          if (state is CompleteProfileScreenErrorState) {
+            log('Errorrrrrrrrrrrrrrrrrrrrrr>>>  ${state.firebaseFailure.message}');
+          }
         },
       ),
     );
@@ -114,7 +120,10 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ),
                   clipBehavior: Clip.hardEdge,
                   child: _imageFile != null
-                      ? Image.file(_imageFile!)
+                      ? Image.file(
+                          _imageFile!,
+                          fit: BoxFit.cover,
+                        )
                       : Icon(
                           Icons.person,
                           size: 40,
@@ -134,107 +143,114 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       Icons.edit,
                       size: 18,
                     ),
-                  ),
+                  ).onTap(() {
+                    _showImagePickerBottomSheet();
+                  }),
                 ),
               ],
             ).centered(),
             SizedBox(height: 30),
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// First Name
+                  Text(
+                    'First Name',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
+                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  CustomTextField(
+                    controller: _firstNameController,
+                    hintText: 'Enter First Name',
+                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
+                    hintStyle: Theme.of(context).textTheme.bodySmall,
+                    cursorColor: primaryDarkBlueColor,
+                    prefixIcon: Icons.person,
+                    borderColor: primaryDarkBlueColor,
+                    disabledBorderColor: primaryDarkBlueColor,
+                    enabledBorderColor: primaryDarkBlueColor,
+                    focusedBorderColor: primaryDarkBlueColor,
+                    prefixIconColor: Colors.grey,
+                    contentPadding: EdgeInsets.zero,
+                    borderWidth: 1.5,
+                    validator: (value) {
+                      if (value!.isNullOrEmpty) {
+                        return 'Enter First Name';
+                      }
+                      return null;
+                    },
+                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
+                  SizedBox(height: 20),
 
-            /// First Name
-            Text(
-              'First Name',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
-            ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-            SizedBox(
-              height: 8,
+                  /// Last Name
+                  Text(
+                    'Last Name',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
+                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  CustomTextField(
+                    controller: _lastNameController,
+                    hintText: 'Enter Last Name',
+                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
+                    hintStyle: Theme.of(context).textTheme.bodySmall,
+                    cursorColor: primaryDarkBlueColor,
+                    prefixIcon: Icons.person,
+                    borderColor: primaryDarkBlueColor,
+                    disabledBorderColor: primaryDarkBlueColor,
+                    enabledBorderColor: primaryDarkBlueColor,
+                    focusedBorderColor: primaryDarkBlueColor,
+                    prefixIconColor: Colors.grey,
+                    contentPadding: EdgeInsets.zero,
+                    borderWidth: 1.5,
+                    validator: (value) {
+                      if (value!.isNullOrEmpty) {
+                        return 'Enter Last Name';
+                      }
+                      return null;
+                    },
+                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
+                  SizedBox(height: 20),
+
+                  /// Phone Number Name
+                  Text(
+                    'Phone Number',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
+                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  CustomTextField(
+                    controller: _phoneController,
+                    hintText: 'Enter Phone Number',
+                    keyboardType: TextInputType.phone,
+                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
+                    hintStyle: Theme.of(context).textTheme.bodySmall,
+                    cursorColor: primaryDarkBlueColor,
+                    prefixIcon: Icons.phone,
+                    borderColor: primaryDarkBlueColor,
+                    disabledBorderColor: primaryDarkBlueColor,
+                    enabledBorderColor: primaryDarkBlueColor,
+                    focusedBorderColor: primaryDarkBlueColor,
+                    prefixIconColor: Colors.grey,
+                    contentPadding: EdgeInsets.zero,
+                    borderWidth: 1.5,
+                    validator: (value) {
+                      if (value!.isNullOrEmpty) {
+                        return 'Enter First Name';
+                      }
+                      return null;
+                    },
+                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
+                ],
+              ),
             ),
-            CustomTextField(
-              controller: _firstNameController,
-              hintText: 'Enter First Name',
-              textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
-              hintStyle: Theme.of(context).textTheme.bodySmall,
-              cursorColor: primaryDarkBlueColor,
-              prefixIcon: Icons.person,
-              borderColor: primaryDarkBlueColor,
-              disabledBorderColor: primaryDarkBlueColor,
-              enabledBorderColor: primaryDarkBlueColor,
-              focusedBorderColor: primaryDarkBlueColor,
-              prefixIconColor: Colors.grey,
-              contentPadding: EdgeInsets.zero,
-              borderWidth: 1.5,
-              validator: (value) {
-                if (value!.isNullOrEmpty) {
-                  return 'Enter First Name';
-                }
-                return null;
-              },
-            ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-            SizedBox(height: 20),
-
-            /// Last Name
-            Text(
-              'Last Name',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
-            ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-            SizedBox(
-              height: 8,
-            ),
-            CustomTextField(
-              controller: _lastNameController,
-              hintText: 'Enter Last Name',
-              textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
-              hintStyle: Theme.of(context).textTheme.bodySmall,
-              cursorColor: primaryDarkBlueColor,
-              prefixIcon: Icons.person,
-              borderColor: primaryDarkBlueColor,
-              disabledBorderColor: primaryDarkBlueColor,
-              enabledBorderColor: primaryDarkBlueColor,
-              focusedBorderColor: primaryDarkBlueColor,
-              prefixIconColor: Colors.grey,
-              contentPadding: EdgeInsets.zero,
-              borderWidth: 1.5,
-              validator: (value) {
-                if (value!.isNullOrEmpty) {
-                  return 'Enter Last Name';
-                }
-                return null;
-              },
-            ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-            SizedBox(height: 20),
-
-            /// Phone Number Name
-            Text(
-              'Phone Number',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
-            ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-            SizedBox(
-              height: 8,
-            ),
-            CustomTextField(
-              controller: _phoneController,
-              hintText: 'Enter Phone Number',
-              keyboardType: TextInputType.phone,
-              textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
-              hintStyle: Theme.of(context).textTheme.bodySmall,
-              cursorColor: primaryDarkBlueColor,
-              prefixIcon: Icons.phone,
-              borderColor: primaryDarkBlueColor,
-              disabledBorderColor: primaryDarkBlueColor,
-              enabledBorderColor: primaryDarkBlueColor,
-              focusedBorderColor: primaryDarkBlueColor,
-              prefixIconColor: Colors.grey,
-              contentPadding: EdgeInsets.zero,
-              borderWidth: 1.5,
-              validator: (value) {
-                if (value!.isNullOrEmpty) {
-                  return 'Enter First Name';
-                }
-                return null;
-              },
-            ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-
             SizedBox(height: 30),
-
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -250,23 +266,69 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 ),
                 SizedBox(width: 5),
                 Text('I confirm that I have read and agree to the Terms of Service and Privacy Policy.',
-                style: Theme.of(context).textTheme.labelMedium).onTap((){
+                        style: Theme.of(context).textTheme.labelMedium)
+                    .onTap(() {
                   completeProfileScreenBloc.add(ToggleCheckBoxEvent());
                 }).expand(),
               ],
             ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-
             SizedBox(height: 50),
             CustomButton(
               label: 'Continue',
-              onPressed: (){},
-              textColor: Colors.white,
-              color: primaryBlueColor,
+              onPressed: completeProfileScreenBloc.isCheck
+                  ? () {
+                      if (_formKey.currentState!.validate()) {
+                        log('User Data====>>>>>  ${{
+                          'id': userId,
+                          'firstName': _firstNameController.text.trim(),
+                          'lastName': _lastNameController.text.trim(),
+                          'phoneNumber': _phoneController.text.trim(),
+                          'imageFile': _imageFile,
+                        }}');
+
+                        if (_imageFile == null) {
+                          CustomToast.show(
+                            context: context,
+                            title: const Text(
+                              'Add Profile Image',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 17,
+                              ),
+                            ),
+                            alignment: Alignment.bottomCenter,
+                            showProgressBar: false,
+                            dragToClose: true,
+                            autoCloseDuration: Duration(seconds: 2),
+                            style: ToastificationStyle.fillColored,
+                            primaryColor: Colors.black,
+                            foregroundColor: Colors.black,
+                            icon: Icon(
+                              Icons.error_outline,
+                              color: Colors.white,
+                            ),
+                            backgroundColor: Colors.black,
+                          );
+                        } else {
+                          completeProfileScreenBloc.add(AddUserProfileDataEvent({
+                            'id': userId,
+                            'firstName': _firstNameController.text.trim(),
+                            'lastName': _lastNameController.text.trim(),
+                            'phoneNumber': _phoneController.text.trim(),
+                            'imageFile': _imageFile,
+                          }));
+                        }
+                      }
+                    }
+                  : () {},
+              textColor: completeProfileScreenBloc.isCheck ? Colors.white : Colors.black,
+              color: completeProfileScreenBloc.isCheck ? primaryBlueColor : Colors.grey.shade400,
               borderRadius: 12,
               width: double.infinity,
+              isLoading: completeProfileScreenBloc.isLoading,
               padding: EdgeInsets.symmetric(vertical: 11),
             ).centered().withPadding(EdgeInsets.symmetric(horizontal: 18)),
-
           ],
         ),
       ),

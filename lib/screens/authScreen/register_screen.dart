@@ -1,15 +1,9 @@
 import 'dart:developer';
-
 import 'package:animate_do/animate_do.dart';
-import 'package:doctor_house/bloc/authScreenBloc/registerScreenBloc/register_screen_bloc.dart';
-import 'package:doctor_house/bloc/authScreenBloc/registerScreenBloc/register_screen_event.dart';
-import 'package:doctor_house/bloc/authScreenBloc/registerScreenBloc/register_screen_state.dart';
-import 'package:doctor_house/core/extension/navigation_extension.dart';
+import 'package:doctor_house/screens/authScreen/bloc/registerScreenBloc/register_screen_bloc.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/routers/route_path.dart';
-import 'package:doctor_house/routers/router.dart';
-import 'package:doctor_house/screens/authScreen/login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,12 +12,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
-
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/images.dart';
 import '../../core/constants/shared_preferences_keys.dart';
 import '../../core/constants/widgets.dart';
+import 'bloc/registerScreenBloc/register_screen_event.dart';
+import 'bloc/registerScreenBloc/register_screen_state.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -80,10 +75,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               log('User Register Success ===>>> ${state.user.id}');
               SharedPreferences prefs = await SharedPreferences.getInstance();
 
-              prefs.setString(spUserEmail, state.user.email);
+              prefs.setString(spUserEmail, state.user.email ?? '');
               prefs.setString(spUserId, state.user.id);
-              prefs.setString(spUserName, state.user.fullName);
-              prefs.setString(spUserRole, state.user.role);
+              prefs.setString(spUserName, state.user.fullName ?? '');
+              prefs.setString(spUserRole, state.user.role ?? '3');
               prefs.setBool(spLoginKey, true);
               prefs.setBool(spOnBoardingKey, true);
 

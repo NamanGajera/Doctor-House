@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_house/core/firebaseFailure/firebase_failure.dart';
-import 'package:doctor_house/service/firebase_auth_service.dart';
+import 'package:doctor_house/screens/authScreen/services/firebase_auth_service.dart';
+import 'package:doctor_house/service/firebase_service_exception.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'login_screen_event.dart';
 import 'login_screen_state.dart';
 
@@ -40,15 +42,15 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
         emit(LoginUserEventState(user));
       } else {
         emit(FailureState(
-          const UnknownFailure('Login Failed'),
+          FirebaseFailure(message: 'Login Failed',)
         ));
       }
     } on FirebaseException catch (e) {
       log('Login Error ${e}');
-      emit(FailureState(handleFirebaseException(e)));
+      emit(FailureState(FirebaseErrorHandler.handle(e)));
     } catch (e) {
       log('Login Error ${e}');
-      emit(FailureState(UnknownFailure(e.toString())));
+      emit(FailureState(FirebaseFailure(message:  'Login Error ${e}')));
     }
   }
 }

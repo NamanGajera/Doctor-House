@@ -1,5 +1,4 @@
-import 'package:doctor_house/bloc/onBoardingScreenBloc/on_boardin_screen_bloc.dart';
-import 'package:doctor_house/bloc/onBoardingScreenBloc/on_boardin_screen_state.dart';
+import 'package:doctor_house/screens/onBoardingScreen/bloc/on_boardin_screen_bloc.dart';
 import 'package:doctor_house/core/constants/images.dart';
 import 'package:doctor_house/core/constants/size.dart';
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
@@ -10,10 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../bloc/onBoardingScreenBloc/on_boardin_screen_event.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/widgets.dart';
+import 'bloc/on_boardin_screen_event.dart';
+import 'bloc/on_boardin_screen_state.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});

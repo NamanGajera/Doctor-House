@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'on_boardin_screen_event.dart';
 import 'on_boardin_screen_state.dart';
+
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final SharedPreferences sharedPreferences;
