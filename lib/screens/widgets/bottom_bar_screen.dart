@@ -32,59 +32,68 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
 
   @override
   void initState() {
-
     super.initState();
+  }
+
+  Future<bool> _onWillPop()async{
+    if(widget.navigationShell!.currentIndex != 0){
+      widget.navigationShell!.goBranch(0);
+    }
+    return false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: widget.navigationShell,
-      bottomNavigationBar: Container(
-        height: 58,
-        padding: EdgeInsets.only(top: 5),
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.circular(15)
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        body: widget.navigationShell,
+        bottomNavigationBar: Container(
+          height: 58,
+          padding: EdgeInsets.only(top: 5),
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15)
+            ),
           ),
-        ),
-        child: Row(
-          children: List.generate(labelText.length, (index){
-            return Expanded(
-              child: InkWell(
-                onTap: (){
-                  _onItemTap(index);
-                },
-                child: Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 3),
-                  child: Column(
-                    children: [
-                      SvgPicture.asset(
-                        iconPath[index],
-                        height: 28,
-                        width: 28,
-                        color: widget.navigationShell?.currentIndex == index
-                            ? primaryBlueColor
-                            : Colors.grey,
-                      ),
-                      Text(
-                        labelText[index],
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 10,
+          child: Row(
+            children: List.generate(labelText.length, (index){
+              return Expanded(
+                child: InkWell(
+                  onTap: (){
+                    _onItemTap(index);
+                  },
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 3),
+                    child: Column(
+                      children: [
+                        SvgPicture.asset(
+                          iconPath[index],
+                          height: 28,
+                          width: 28,
                           color: widget.navigationShell?.currentIndex == index
                               ? primaryBlueColor
                               : Colors.grey,
                         ),
-                      ),
-                    ],
+                        Text(
+                          labelText[index],
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: widget.navigationShell?.currentIndex == index
+                                ? primaryBlueColor
+                                : Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+          ),
         ),
       ),
     );

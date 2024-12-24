@@ -1,6 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:doctor_house/core/constants/app_constants.dart';
+import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
+import 'package:doctor_house/routers/route_path.dart';
+import 'package:doctor_house/routers/router.dart';
 import 'package:doctor_house/screens/completeProfileScreen/bloc/complete_profile_screen_bloc.dart';
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
@@ -8,7 +11,9 @@ import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 import '../../core/constants/widgets.dart';
 import 'bloc/complete_profile_screen_event.dart';
@@ -80,9 +85,53 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
         builder: (context, state) {
           return completeProfileScreen();
         },
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is CompleteProfileScreenErrorState) {
             log('Errorrrrrrrrrrrrrrrrrrrrrr>>>  ${state.firebaseFailure.message}');
+            CustomToast.show(
+              context: context,
+              title: Text(state.firebaseFailure.message,style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 17,
+              ),),
+              alignment: Alignment.bottomCenter,
+              callbacks: ToastificationCallbacks(
+                  onTap: (val){
+                    log('On Toast Tap ${val}');
+                  }
+              ),
+              showProgressBar: false,
+              dragToClose: true,
+              style: ToastificationStyle.fillColored,
+              primaryColor: Colors.black,
+              foregroundColor: Colors.black,
+              icon: Icon(Icons.error_outline,color: Colors.white,),
+              backgroundColor: Colors.black,
+            );
+          }
+          if(state is AddUserProfileDataEventState){
+            log('Data Updated ===>>>>');
+            CustomToast.show(
+              context: context,
+              title: Text('Profile Data Updated',style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 17,
+              ),),
+              alignment: Alignment.bottomCenter,
+              showProgressBar: false,
+              dragToClose: true,
+              style: ToastificationStyle.fillColored,
+              primaryColor: Colors.black,
+              foregroundColor: Colors.black,
+              icon: Icon(Icons.error_outline,color: Colors.white,),
+              backgroundColor: Colors.black,
+            );
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setBool(spProfileDataAdd, true);
+
+            context.pushReplacement(homeScreenPath);
           }
         },
       ),

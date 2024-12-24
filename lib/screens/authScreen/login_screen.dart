@@ -79,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
               prefs.setString(spUserRole, state.userModel.role??'3');
               prefs.setBool(spLoginKey, true);
               prefs.setBool(spOnBoardingKey, true);
+              profileDone = prefs.getBool(spProfileDataAdd);
 
               userEmail = state.userModel.email;
               userId = state.userModel.id;
@@ -86,8 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
               userName = state.userModel.fullName;
 
               log('UserId >>>  $userId');
+              if(profileDone == true){
+                context.replace(homeScreenPath);
+              }else{
+                context.replace(completeProfileScreenPath);
+              }
 
-              context.replace(completeProfileScreenPath);
 
             }
           }),

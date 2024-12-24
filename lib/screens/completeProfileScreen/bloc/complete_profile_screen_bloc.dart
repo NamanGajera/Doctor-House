@@ -27,32 +27,36 @@ class CompleteProfileScreenBloc extends Bloc<CompleteProfileScreenEvent, Complet
 
   Future<void> _addUserData(AddUserProfileDataEvent event, Emitter<CompleteProfileScreenState> emit) async {
     isLoading = true;
+    emit(LoadingState(isLoading));
     try{
       log('Image===  ${event.userProfileData['imageFile']}');
 
 
-      final String userProfileImage = await userProfileRepository.uploadProfilePicture(
-        event.userProfileData['id'],
-        event.userProfileData['imageFile'],
-      );
+      // final String userProfileImage = await userProfileRepository.uploadProfilePicture(
+      //   event.userProfileData['id'],
+      //   event.userProfileData['imageFile'],
+      // );
 
       UserModel user = UserModel(
         id: event.userProfileData['id'],
         firstName: event.userProfileData['firstName'],
         lastName: event.userProfileData['lastName'],
         phoneNumber: event.userProfileData['phoneNumber'],
-        profilePicture: userProfileImage,
+        profilePicture: '123',
       );
 
       await userProfileRepository.updateUser(user);
 
       isLoading = false;
+      emit(LoadingState(isLoading));
       emit(AddUserProfileDataEventState(user));
     }on FirebaseException catch (e) {
       isLoading = false;
+      emit(LoadingState(isLoading));
       emit(CompleteProfileScreenErrorState(FirebaseErrorHandler.handle(e)));
     } catch (e) {
       isLoading = false;
+      emit(LoadingState(isLoading));
       emit(CompleteProfileScreenErrorState(FirebaseFailure(message: 'Something went wrong!')));
     }
   }

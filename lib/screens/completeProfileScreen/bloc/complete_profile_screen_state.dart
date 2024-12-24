@@ -10,6 +10,11 @@ class CompleteProfileScreenErrorState extends CompleteProfileScreenState{
   CompleteProfileScreenErrorState(this.firebaseFailure);
 }
 
+class LoadingState extends CompleteProfileScreenState{
+  final bool isCheck;
+  LoadingState(this.isCheck);
+}
+
 class ToggleCheckBoxEventState extends CompleteProfileScreenState{
   final bool isCheck;
   ToggleCheckBoxEventState(this.isCheck);
