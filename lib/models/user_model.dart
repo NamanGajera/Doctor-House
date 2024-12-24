@@ -1,6 +1,3 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class UserModel {
   final String id;
   final String? fullName;
@@ -11,10 +8,6 @@ class UserModel {
   final String? role;
   final String? profilePicture;
   final String? phoneNumber;
-  final bool? isActive;
-  final DateTime? lastLoginAt;
-  final Map<String, dynamic>? settings;
-  final List<String>? deviceTokens;
   final DateTime? updatedAt;
 
   UserModel({
@@ -27,75 +20,55 @@ class UserModel {
     this.lastName,
     this.profilePicture,
     this.phoneNumber,
-    this.isActive = true,
-    this.lastLoginAt,
-    this.settings,
-    this.deviceTokens,
     this.updatedAt,
   });
 
-  // Create a copy of UserModel with optional field updates
   UserModel copyWith({
     String? fullName,
     String? email,
     String? role,
     String? profilePicture,
     String? phoneNumber,
-    bool? isActive,
-    DateTime? lastLoginAt,
-    Map<String, dynamic>? settings,
-    List<String>? deviceTokens,
   }) {
     return UserModel(
-      id: this.id,
+      id: id,
       fullName: fullName ?? this.fullName,
       email: email ?? this.email,
-      createdAt: this.createdAt,
+      createdAt: createdAt,
       role: role ?? this.role,
       profilePicture: profilePicture ?? this.profilePicture,
       phoneNumber: phoneNumber ?? this.phoneNumber,
-      isActive: isActive ?? this.isActive,
-      lastLoginAt: lastLoginAt ?? this.lastLoginAt,
-      settings: settings ?? this.settings,
-      deviceTokens: deviceTokens ?? this.deviceTokens,
       updatedAt: DateTime.now(),
     );
   }
 
-  factory UserModel.fromFirestore(Map<String, dynamic> data, String documentId) {
+  factory UserModel.fromJson(Map<String, dynamic> data, String id) {
     return UserModel(
-      id: documentId,
-      fullName: data['fullName'] ?? '',
-      email: data['email'] ?? '',
-      createdAt: (data['createdAt'] as Timestamp).toDate(),
-      role: data['role'] ?? 'user',
-      profilePicture: data['profilePicture'],
-      phoneNumber: data['phoneNumber'],
-      isActive: data['isActive'] ?? true,
-      lastLoginAt: data['lastLoginAt'] != null
-          ? (data['lastLoginAt'] as Timestamp).toDate()
+      id: id,
+      fullName: data['full_name'],
+      email: data['email'],
+      createdAt: data['created_at'] != null
+          ? DateTime.parse(data['created_at'])
           : null,
-      settings: data['settings'] as Map<String, dynamic>?,
-      deviceTokens: (data['deviceTokens'] as List<dynamic>?)?.cast<String>(),
-      updatedAt: data['updatedAt'] != null
-          ? (data['updatedAt'] as Timestamp).toDate()
+      role: data['role'] ?? 'user',
+      profilePicture: data['profile_picture'],
+      phoneNumber: data['phone_number'],
+      updatedAt: data['updated_at'] != null
+          ? DateTime.parse(data['updated_at'])
           : null,
     );
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toJson() {
     return {
-      'fullName': fullName,
+      'full_name': fullName,
       'email': email,
-      'createdAt': Timestamp.fromDate(createdAt ?? DateTime.now().toLocal()),
+      'created_at': createdAt?.toIso8601String()
+          ?? DateTime.now().toUtc().toIso8601String(),
       'role': role,
-      'profilePicture': profilePicture,
-      'phoneNumber': phoneNumber,
-      'isActive': isActive,
-      'lastLoginAt': lastLoginAt != null ? Timestamp.fromDate(lastLoginAt!) : null,
-      'settings': settings,
-      'deviceTokens': deviceTokens,
-      'updatedAt': Timestamp.fromDate(DateTime.now()),
+      'profile_picture': profilePicture,
+      'phone_number': phoneNumber,
+      'updated_at': DateTime.now().toUtc().toIso8601String(),
     }..removeWhere((key, value) => value == null);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:doctor_house/models/user_model.dart';
+import 'package:doctor_house/service/supabase_exception.dart';
 
 import '../../../../core/firebaseFailure/firebase_failure.dart';
 import '../../../../service/firebase_service_exception.dart';
@@ -13,7 +14,7 @@ class TogglePasswordVisibilityEventState extends LoginScreenState {
 }
 
 class FailureState extends LoginScreenState{
-  final FirebaseFailure firebaseFailure;
+  final SupabaseFailure firebaseFailure;
   FailureState(this.firebaseFailure);
 }
 

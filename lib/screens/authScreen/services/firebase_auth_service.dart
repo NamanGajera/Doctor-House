@@ -22,7 +22,7 @@ class FirebaseAuthService {
 
         if (userDoc.exists) {
           // Map Firestore data to UserModel using documentId
-          UserModel loggedInUser = UserModel.fromFirestore(
+          UserModel loggedInUser = UserModel.fromJson(
             userDoc.data() as Map<String, dynamic>,
             user.uid, // Passing the document ID as the second argument
           );
@@ -65,7 +65,7 @@ class FirebaseAuthService {
         await _firestore
             .collection('users')
             .doc(newUser.id)
-            .set(newUser.toFirestore());
+            .set(newUser.toJson());
 
         return newUser;
       }

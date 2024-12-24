@@ -17,7 +17,7 @@ class UserProfileRepository {
       await _firebaseService.addDocumentWithId(
         collection: _collection,
         documentId: user.id,
-        data: user.toFirestore(),
+        data: user.toJson(),
       );
     } catch (e) {
       throw FirebaseFailure(
@@ -36,7 +36,7 @@ class UserProfileRepository {
 
       if (!doc.exists) return null;
 
-      return UserModel.fromFirestore(
+      return UserModel.fromJson(
         doc.data() as Map<String, dynamic>,
         doc.id,
       );
@@ -53,7 +53,7 @@ class UserProfileRepository {
       await _firebaseService.updateDocument(
         collection: _collection,
         documentId: user.id,
-        data: user.toFirestore(),
+        data: user.toJson(),
         merge: true,
       );
     } catch (e) {
@@ -97,7 +97,7 @@ class UserProfileRepository {
       );
 
       return snapshot.docs.map((doc) =>
-          UserModel.fromFirestore(doc.data() as Map<String, dynamic>, doc.id)
+          UserModel.fromJson(doc.data() as Map<String, dynamic>, doc.id)
       ).toList();
     } catch (e) {
       throw FirebaseFailure(
@@ -121,7 +121,7 @@ class UserProfileRepository {
       );
 
       return snapshot.docs.map((doc) =>
-          UserModel.fromFirestore(doc.data() as Map<String, dynamic>, doc.id)
+          UserModel.fromJson(doc.data() as Map<String, dynamic>, doc.id)
       ).toList();
     } catch (e) {
       throw FirebaseFailure(
@@ -197,7 +197,7 @@ class UserProfileRepository {
       )
           .map((snapshot) {
         if (snapshot.docs.isEmpty) return null;
-        return UserModel.fromFirestore(
+        return UserModel.fromJson(
           snapshot.docs.first.data() as Map<String, dynamic>,
           snapshot.docs.first.id,
         );
