@@ -22,9 +22,11 @@ class SupabaseAuthService {
             .from('users')
             .select()
             .eq('id', user.id)
-            .single();
+            .maybeSingle();
 
-        return UserModel.fromJson(userDetails, user.id);
+        log("Login Response === >> ${userDetails}");
+
+        return UserModel.fromJson(userDetails!, user.id);
       }
       return null;
     } catch (e) {

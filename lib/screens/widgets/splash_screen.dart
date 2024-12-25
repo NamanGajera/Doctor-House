@@ -53,9 +53,9 @@ class _SplashScreenState extends State<SplashScreen> {
       profileDone = prefs.getBool(spProfileDataAdd);
       log('Home');
       if(profileDone == true){
-        GoRouter.of(context).pushReplacement(completeProfileScreenPath);
-      }else{
         GoRouter.of(context).pushReplacement(homeScreenPath);
+      }else{
+        GoRouter.of(context).pushReplacement(completeProfileScreenPath);
       }
     } else {
       log('Login');

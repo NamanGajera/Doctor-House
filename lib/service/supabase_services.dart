@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:doctor_house/service/supabase_exception.dart';
@@ -40,8 +41,27 @@ class SupabaseService {
     required String table,
     required Map<String, dynamic> data,
   }) async {
-    await _retry(() => _supabase.from(table).upsert(data));
+    try {
+      await _supabase.from(table).upsert(data);
+    } catch (e) {
+      log("Supabase upsert error: $e");
+      throw SupabaseFailure(message: 'Failed to upsert data: ${e.toString()}');
+    }
   }
+
+  Future<void> update({
+    required String table,
+    required String userId,
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      await _supabase.from(table).update(data).eq('id', userId);
+    } catch (e) {
+      log("Supabase upsert error: $e");
+      throw SupabaseFailure(message: 'Failed to upsert data: ${e.toString()}');
+    }
+  }
+
 
   Future<Map<String, dynamic>> getRecord({
     required String table,
@@ -62,14 +82,28 @@ class SupabaseService {
     required String path,
     required File file,
   }) async {
-    return await _retry(() async {
+    try {
       final fileExtension = p.extension(file.path);
       final fileName = '${DateTime.now().millisecondsSinceEpoch}$fileExtension';
       final filePath = '$path/$fileName';
-      await _supabase.storage.from(bucket).upload(filePath, file);
-      return _supabase.storage.from(bucket).getPublicUrl(filePath);
-    });
+      log('Upload File Data===>>  ${bucket} == $fileName == $filePath');
+      log('File exists: ${file.existsSync()}');
+      log('File length: ${file.lengthSync()}');
+      await _supabase.storage.from(bucket).upload(
+        filePath,
+        file,
+        fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
+      );
+      final publicUrl = _supabase.storage.from(bucket).getPublicUrl(filePath);
+      log('Public URL: $publicUrl');
+      return publicUrl;
+    } catch (e, stackTrace) {
+      log('Upload error: ${e.toString()}');
+      log('StackTrace: $stackTrace');
+      throw SupabaseFailure(message: 'Failed to upload profile picture: ${e.toString()}');
+    }
   }
+
 
   Future<String> uploadData({
     required String bucket,

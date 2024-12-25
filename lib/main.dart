@@ -11,6 +11,7 @@ import 'package:doctor_house/screens/widgets/splash_screen.dart';
 import 'package:doctor_house/screens/authScreen/services/firebase_auth_service.dart';
 import 'package:doctor_house/secrets/app_secrets.dart';
 import 'package:doctor_house/service/firebase_services.dart';
+import 'package:doctor_house/service/supabase_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context)=>OnboardingBloc(sharedPreferences: prefs)),
         BlocProvider(create: (context)=>LoginScreenBloc(SupabaseAuthService())),
         BlocProvider(create: (context)=>RegisterScreenBloc(SupabaseAuthService())),
-        BlocProvider(create: (context)=>CompleteProfileScreenBloc(UserProfileRepository(FirebaseService()))),
+        BlocProvider(create: (context)=>CompleteProfileScreenBloc(UserProfileRepository(SupabaseService()))),
       ],
       child: BlocBuilder<AppThemeBloc,AppThemeState>(
         builder: (context,state){
