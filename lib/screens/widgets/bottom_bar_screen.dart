@@ -52,7 +52,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           height: 58,
           padding: EdgeInsets.only(top: 5),
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15),
               topRight: Radius.circular(15)
