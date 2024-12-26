@@ -56,17 +56,19 @@ class MyApp extends StatelessWidget {
       ],
       child: BlocBuilder<AppThemeBloc,AppThemeState>(
         builder: (context,state){
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
-            child: MaterialApp.router(
-              title: 'Doctor House',
-              debugShowCheckedModeBanner:false,
-              theme: AppTheme.lightTheme,
-              darkTheme: AppTheme.darkTheme,
-              // themeMode: state is DarkThemeState ? ThemeMode.dark : ThemeMode.light,
-              themeMode: ThemeMode.light,
-              routerConfig: appRouter,
-              // home: SplashScreen(),
+          return SafeArea(
+            child: MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
+              child: MaterialApp.router(
+                title: 'Doctor House',
+                debugShowCheckedModeBanner:false,
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                // themeMode: state is DarkThemeState ? ThemeMode.dark : ThemeMode.light,
+                themeMode: ThemeMode.light,
+                routerConfig: appRouter,
+                // home: SplashScreen(),
+              ),
             ),
           );
         },
