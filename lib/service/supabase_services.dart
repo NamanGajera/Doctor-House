@@ -86,7 +86,7 @@ class SupabaseService {
       final fileExtension = p.extension(file.path);
       final fileName = '${DateTime.now().millisecondsSinceEpoch}$fileExtension';
       final filePath = '$path/$fileName';
-      log('Upload File Data===>>  ${bucket} == $fileName == $filePath');
+      log('Upload File Data===>>  $bucket == $fileName == $filePath');
       log('File exists: ${file.existsSync()}');
       log('File length: ${file.lengthSync()}');
       await _supabase.storage.from(bucket).upload(

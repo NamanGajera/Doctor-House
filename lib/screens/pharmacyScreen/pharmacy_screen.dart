@@ -10,7 +10,7 @@ class PharmacyScreen extends StatefulWidget {
 class _PharmacyScreenState extends State<PharmacyScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text('Pharmacy'),
       ),

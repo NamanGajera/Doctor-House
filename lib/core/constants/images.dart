@@ -1,4 +1,3 @@
-
 /// App Logo
 const String mainAppLogo = 'assets/images/main_logo.png';
 
@@ -28,3 +27,4 @@ const String urologistIcon = 'assets/images/doc_icons/doc_type_urologist.png';
 /// Common Uses Icon And Images
 const String notificationIcon = 'assets/images/notification_icon.png';
 const String searchIcon = 'assets/images/search_icon.png';
+const String doctorProfileImage = 'assets/images/doctor_profile_image.png';

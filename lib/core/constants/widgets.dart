@@ -50,18 +50,17 @@ class CustomButton extends StatelessWidget {
         child: isLoading
             ? CupertinoActivityIndicator(color: loadingIndicatorColor ?? Colors.white)
             : Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (icon != null) Icon(icon, size: 20, color: textColor),
-            if (icon != null) const SizedBox(width: 8),
-            Text(label, style: textStyle ?? TextStyle(fontSize: fontSize, color: textColor)),
-          ],
-        ),
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (icon != null) Icon(icon, size: 20, color: textColor),
+                  if (icon != null) const SizedBox(width: 8),
+                  Text(label, style: textStyle ?? TextStyle(fontSize: fontSize, color: textColor)),
+                ],
+              ),
       ),
     );
   }
 }
-
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -253,11 +252,11 @@ class CustomToast {
   }
 
   static Widget _defaultAnimationBuilder(
-      BuildContext context,
-      Animation<double> animation,
-      Alignment alignment,
-      Widget child,
-      ) {
+    BuildContext context,
+    Animation<double> animation,
+    Alignment alignment,
+    Widget child,
+  ) {
     return FadeTransition(
       opacity: animation,
       child: child,
@@ -265,3 +264,40 @@ class CustomToast {
   }
 }
 
+class CustomIconContainer extends StatelessWidget {
+  final String iconPath;
+  final double height;
+  final double width;
+  final double padding;
+  final Color backgroundColor;
+  final double borderRadius;
+
+  const CustomIconContainer({
+    super.key,
+    required this.iconPath,
+    this.height = 23.0,
+    this.width = 23.0,
+    this.padding = 5.0,
+    this.backgroundColor = const Color(0xffededff),
+    this.borderRadius = 20.0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(padding),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+      child: Align(
+        alignment: Alignment.center,
+        child: Image.asset(
+          iconPath,
+          height: height,
+          width: width,
+        ),
+      ),
+    );
+  }
+}

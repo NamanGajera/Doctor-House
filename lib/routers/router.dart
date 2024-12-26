@@ -8,7 +8,6 @@ import 'package:doctor_house/screens/pharmacyScreen/pharmacy_screen.dart';
 import 'package:doctor_house/screens/socialScreen/social_screen.dart';
 import 'package:doctor_house/screens/widgets/bottom_bar_screen.dart';
 import 'package:doctor_house/screens/widgets/splash_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/completeProfileScreen/complete_profile_screen.dart';
@@ -23,7 +22,7 @@ final GoRouter appRouter = GoRouter(
       path: splashScreenPath,
       name: splashScreenName,
       builder: (context,state){
-        return SplashScreen();
+        return const SplashScreen();
       }
     ),
 
@@ -31,7 +30,7 @@ final GoRouter appRouter = GoRouter(
         path: registerScreenPath,
         name: registerScreenName,
         builder: (context,state){
-          return RegisterScreen();
+          return const RegisterScreen();
         }
     ),
 
@@ -39,7 +38,7 @@ final GoRouter appRouter = GoRouter(
         path: loginScreenPath,
         name: loginScreenName,
         builder: (context,state){
-          return LoginScreen();
+          return const LoginScreen();
         }
     ),
 
@@ -47,7 +46,7 @@ final GoRouter appRouter = GoRouter(
         path: onBoardingScreenPath,
         name: onBoardingScreenName,
         builder: (context,state){
-          return OnBoardingScreen();
+          return const OnBoardingScreen();
         }
     ),
 
@@ -55,7 +54,7 @@ final GoRouter appRouter = GoRouter(
         path: completeProfileScreenPath,
         name: completeProfileScreenPath,
         builder: (context,state){
-          return CompleteProfileScreen();
+          return const CompleteProfileScreen();
         }
     ),
 
@@ -70,7 +69,7 @@ final GoRouter appRouter = GoRouter(
               path: homeScreenPath,
               name: homeScreenName,
               builder: (context, state) {
-                return HomeScreen();
+                return const HomeScreen();
               },
             ),
           ],
@@ -80,7 +79,7 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: appointmentScreenPath,
               name: appointmentScreenName,
-              builder: (context, state) => AppointmentScreen(
+              builder: (context, state) => const AppointmentScreen(
 
               ),
             ),
@@ -91,7 +90,7 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: socialScreenPath,
               name: socialScreenName,
-              builder: (context, state) => SocialScreen(),
+              builder: (context, state) => const SocialScreen(),
             ),
           ],
         ),
@@ -100,7 +99,7 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: pharmacyScreenPath,
               name: pharmacyScreenName,
-              builder: (context, state) => PharmacyScreen(),
+              builder: (context, state) => const PharmacyScreen(),
             ),
           ],
         ),
@@ -109,7 +108,7 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: menuScreenPath,
               name: menuScreenName,
-              builder: (context, state) => MenuScreen(),
+              builder: (context, state) => const MenuScreen(),
             ),
           ],
         ),

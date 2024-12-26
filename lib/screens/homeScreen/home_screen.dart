@@ -1,10 +1,11 @@
 import 'package:doctor_house/core/constants/app_constants.dart';
+import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/constants/images.dart';
 import 'package:doctor_house/core/constants/widgets.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/screens/homeScreen/widgets/doctor_category_list_view.dart';
+import 'package:doctor_house/screens/homeScreen/widgets/upcoming_schedule_view.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/constants/colors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            /// User Name, Search and Notification Button
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -39,32 +41,70 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(width: 20),
-                Row(
+                const Row(
                   children: [
-                    Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(color: Color(0xffededff), borderRadius: BorderRadius.circular(20)),
-                        child: Image.asset(
-                          searchIcon,
-                          height: 23,
-                          width: 23,
-                        ),),
-                    const SizedBox(width: 10),
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(color: Color(0xffededff), borderRadius: BorderRadius.circular(20)),
-                      child: Image.asset(
-                        notificationIcon,
-                        height: 23,
-                        width: 23,
-                      ),),
+                    CustomIconContainer(
+                      iconPath: searchIcon,
+                    ),
+                    SizedBox(width: 10),
+                    CustomIconContainer(
+                      iconPath: notificationIcon,
+                    ),
                   ],
                 ).withPadding(const EdgeInsets.only(top: 3)),
                 const SizedBox(width: 5),
               ],
             ),
+            const SizedBox(height: 8),
+
+            /// Doctors Category List
+            const DoctorCategoryListView(),
+            const SizedBox(height: 8),
+
+            /// Upcoming Schedule Text
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Upcoming Schedule',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    const SizedBox(width: 8),
+                    Container(
+                      height: 20,
+                      width: 20,
+                      decoration: BoxDecoration(
+                        color: primaryDarkBlueColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Text(
+                        '8',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ).centered(),
+                    ),
+                  ],
+                ),
+                const Text(
+                  'See All',
+                  style: TextStyle(
+                    color: primaryBlueColor,
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+
+            /// Upcoming Schedule View
+            const UpcomingScheduleView(),
           ],
-        ).withPadding(EdgeInsets.symmetric(horizontal: 12, vertical: 12)),
+        ).withPadding(const EdgeInsets.symmetric(horizontal: 12, vertical: 12)),
       ),
     );
   }

@@ -11,7 +11,7 @@ class Helper{
             backgroundColor: Colors.white,
             surfaceTintColor: Colors.white,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
@@ -25,18 +25,18 @@ class Helper{
                       Container(
                         height: 80,
                         width: 80,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xff78c3ac),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.check,
                           color: Colors.white,
                           size: 45,
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Text(
+                      const SizedBox(height: 10),
+                      const Text(
                         'Success',
                         style: TextStyle(
                           color: primaryBlueColor,
@@ -44,21 +44,21 @@ class Helper{
                           fontSize: 18,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
-                        '${message}',
+                        message,
                         style: TextStyle(
                           color: Colors.grey.shade700,
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       InkWell(
                         onTap: onTap,
                         child: Container(
                           padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
@@ -66,7 +66,7 @@ class Helper{
                             ),
                           ),
                           alignment: Alignment.center,
-                          child: Text(
+                          child: const Text(
                             'Continue',
                             style: TextStyle(
                               color: Colors.black,
@@ -93,7 +93,7 @@ class Helper{
             backgroundColor: Colors.white,
             surfaceTintColor: Colors.white,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12),
@@ -107,18 +107,18 @@ class Helper{
                       Container(
                         height: 80,
                         width: 80,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xFFF08080),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.close,
                           color: Colors.white,
                           size: 45,
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Text(
+                      const SizedBox(height: 10),
+                      const Text(
                         'Error',
                         style: TextStyle(
                           color: Color(0xFFCD5C5C),
@@ -126,11 +126,11 @@ class Helper{
                           fontSize: 18,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
-                          '${message}',
+                          message,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.grey.shade700,
@@ -139,18 +139,18 @@ class Helper{
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       InkWell(
                         onTap: onTap,
                         child: Container(
                           padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFFF08080),
+                            color: const Color(0xFFF08080),
                           ),
                           alignment: Alignment.center,
-                          child: Text(
+                          child: const Text(
                             'Try Agin',
                             style: TextStyle(
                               color: Colors.white,

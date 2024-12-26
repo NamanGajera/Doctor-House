@@ -50,8 +50,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         body: widget.navigationShell,
         bottomNavigationBar: Container(
           height: 58,
-          padding: EdgeInsets.only(top: 5),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.only(top: 5),
+          decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15),
@@ -66,7 +66,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                     _onItemTap(index);
                   },
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 3),
+                    padding:  const EdgeInsets.symmetric(horizontal: 3),
                     child: Column(
                       children: [
                         SvgPicture.asset(

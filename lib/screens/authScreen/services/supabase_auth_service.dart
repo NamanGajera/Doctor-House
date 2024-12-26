@@ -15,7 +15,7 @@ class SupabaseAuthService {
       );
 
       final user = response.user;
-      log("Login Response === >> ${user}");
+      log("Login Response === >> $user");
 
       if (user != null) {
         final userDetails = await _supabase
@@ -24,7 +24,7 @@ class SupabaseAuthService {
             .eq('id', user.id)
             .maybeSingle();
 
-        log("Login Response === >> ${userDetails}");
+        log("Login Response === >> $userDetails");
 
         return UserModel.fromJson(userDetails!, user.id);
       }
@@ -43,7 +43,7 @@ class SupabaseAuthService {
       );
 
       final user = response.user;
-      log("Register Response === >> ${user}");
+      log("Register Response === >> $user");
       if (user != null) {
         final newUser = UserModel(
           id: user.id,

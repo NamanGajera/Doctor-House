@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
 import 'package:doctor_house/routers/route_path.dart';
-import 'package:doctor_house/routers/router.dart';
 import 'package:doctor_house/screens/completeProfileScreen/bloc/complete_profile_screen_bloc.dart';
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
@@ -32,9 +31,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
-  String _selectedGender = '';
-  bool _termsAccepted = false;
-  String _selectedCountryCode = '+1';
+  final String _selectedGender = '';
+  final bool _termsAccepted = false;
+  final String _selectedCountryCode = '+1';
 
   Future<void> _pickImage(ImageSource source) async {
     final pickedFile = await ImagePicker().pickImage(source: source);
@@ -90,7 +89,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             log('Errorrrrrrrrrrrrrrrrrrrrrr>>>  ${state.firebaseFailure.message}');
             CustomToast.show(
               context: context,
-              title: Text(state.firebaseFailure.message,style: TextStyle(
+              title: Text(state.firebaseFailure.message,style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
                 fontSize: 17,
@@ -98,7 +97,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               alignment: Alignment.bottomCenter,
               callbacks: ToastificationCallbacks(
                   onTap: (val){
-                    log('On Toast Tap ${val}');
+                    log('On Toast Tap $val');
                   }
               ),
               showProgressBar: false,
@@ -106,7 +105,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               style: ToastificationStyle.fillColored,
               primaryColor: Colors.black,
               foregroundColor: Colors.black,
-              icon: Icon(Icons.error_outline,color: Colors.white,),
+              icon: const Icon(Icons.error_outline,color: Colors.white,),
               backgroundColor: Colors.black,
             );
           }
@@ -114,7 +113,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             log('Data Updated ===>>>>');
             CustomToast.show(
               context: context,
-              title: Text('Profile Data Updated',style: TextStyle(
+              title: const Text('Profile Data Updated',style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
                 fontSize: 17,
@@ -125,7 +124,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               style: ToastificationStyle.fillColored,
               primaryColor: Colors.black,
               foregroundColor: Colors.black,
-              icon: Icon(Icons.error_outline,color: Colors.white,),
+              icon: const Icon(Icons.error_outline,color: Colors.white,),
               backgroundColor: Colors.black,
             );
             SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -146,18 +145,18 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 80),
+            const SizedBox(height: 80),
             Text(
               'Complete Your Profile',
               style: Theme.of(context).textTheme.headlineMedium,
             ).centered(),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               "Don't worry, only you can see your personal data.\nNo one else will be able to see it.",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodySmall,
             ).centered(),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Stack(
               children: [
                 Container(
@@ -173,7 +172,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                           _imageFile!,
                           fit: BoxFit.cover,
                         )
-                      : Icon(
+                      : const Icon(
                           Icons.person,
                           size: 40,
                         ),
@@ -182,13 +181,13 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   bottom: 3,
                   right: 3,
                   child: Container(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       color: primaryYellowColor,
                       borderRadius: BorderRadius.circular(55),
                     ),
                     clipBehavior: Clip.hardEdge,
-                    child: Icon(
+                    child: const Icon(
                       Icons.edit,
                       size: 18,
                     ),
@@ -198,7 +197,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 ),
               ],
             ).centered(),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Form(
               key: _formKey,
               child: Column(
@@ -208,8 +207,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   Text(
                     'First Name',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
-                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-                  SizedBox(
+                  ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(
                     height: 8,
                   ),
                   CustomTextField(
@@ -232,15 +231,15 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       }
                       return null;
                     },
-                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-                  SizedBox(height: 20),
+                  ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(height: 20),
 
                   /// Last Name
                   Text(
                     'Last Name',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
-                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-                  SizedBox(
+                  ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(
                     height: 8,
                   ),
                   CustomTextField(
@@ -263,15 +262,15 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       }
                       return null;
                     },
-                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-                  SizedBox(height: 20),
+                  ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(height: 20),
 
                   /// Phone Number Name
                   Text(
                     'Phone Number',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
-                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-                  SizedBox(
+                  ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(
                     height: 8,
                   ),
                   CustomTextField(
@@ -295,11 +294,11 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       }
                       return null;
                     },
-                  ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
+                  ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -313,15 +312,15 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     },
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Text('I confirm that I have read and agree to the Terms of Service and Privacy Policy.',
                         style: Theme.of(context).textTheme.labelMedium)
                     .onTap(() {
                   completeProfileScreenBloc.add(ToggleCheckBoxEvent());
                 }).expand(),
               ],
-            ).withPadding(EdgeInsets.symmetric(horizontal: 18)),
-            SizedBox(height: 50),
+            ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+            const SizedBox(height: 50),
             CustomButton(
               label: 'Continue',
               onPressed: completeProfileScreenBloc.isCheck
@@ -349,11 +348,11 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                             alignment: Alignment.bottomCenter,
                             showProgressBar: false,
                             dragToClose: true,
-                            autoCloseDuration: Duration(seconds: 2),
+                            autoCloseDuration: const Duration(seconds: 2),
                             style: ToastificationStyle.fillColored,
                             primaryColor: Colors.black,
                             foregroundColor: Colors.black,
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.error_outline,
                               color: Colors.white,
                             ),
@@ -376,8 +375,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               borderRadius: 12,
               width: double.infinity,
               isLoading: completeProfileScreenBloc.isLoading,
-              padding: EdgeInsets.symmetric(vertical: 11),
-            ).centered().withPadding(EdgeInsets.symmetric(horizontal: 18)),
+              padding: const EdgeInsets.symmetric(vertical: 11),
+            ).centered().withPadding(const EdgeInsets.symmetric(horizontal: 18)),
           ],
         ),
       ),

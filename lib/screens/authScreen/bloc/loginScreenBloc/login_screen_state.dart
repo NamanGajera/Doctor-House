@@ -1,8 +1,6 @@
 import 'package:doctor_house/models/user_model.dart';
 import 'package:doctor_house/service/supabase_exception.dart';
 
-import '../../../../core/firebaseFailure/firebase_failure.dart';
-import '../../../../service/firebase_service_exception.dart';
 
 abstract class LoginScreenState {}
 

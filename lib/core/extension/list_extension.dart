@@ -1,7 +1,7 @@
 
 extension ListExtensions<T> on List<T> {
   // Check if the list is null or empty
-  bool get isNullOrEmpty => this == null || isEmpty;
+  bool get isNullOrEmpty => isEmpty;
 
   // Get the first element or null
   T? get firstOrNull => isNotEmpty ? this[0] : null;
