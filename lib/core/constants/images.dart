@@ -28,3 +28,6 @@ const String urologistIcon = 'assets/images/doc_icons/doc_type_urologist.png';
 const String notificationIcon = 'assets/images/notification_icon.png';
 const String searchIcon = 'assets/images/search_icon.png';
 const String doctorProfileImage = 'assets/images/doctor_profile_image.png';
+const String chatIcon = 'assets/images/chat_icon.png';
+const String calenderIcon = 'assets/images/calendar_icon.png';
+const String timerIcon = 'assets/images/timer_icon.png';
