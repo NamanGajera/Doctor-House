@@ -1,13 +1,13 @@
 class UserModel {
   final String id;
-  final String? fullName;
-  final String? firstName;
-  final String? lastName;
-  final String? email;
+  final dynamic fullName;
+  final dynamic firstName;
+  final dynamic lastName;
+  final dynamic email;
   final DateTime? createdAt;
-  final String? role;
-  final String? profilePicture;
-  final String? phoneNumber;
+  final dynamic role;
+  final dynamic profilePicture;
+  final dynamic phoneNumber;
   final DateTime? updatedAt;
 
   UserModel({
@@ -24,11 +24,11 @@ class UserModel {
   });
 
   UserModel copyWith({
-    String? fullName,
-    String? email,
-    String? role,
-    String? profilePicture,
-    String? phoneNumber,
+    dynamic fullName,
+    dynamic email,
+    dynamic role,
+    dynamic profilePicture,
+    dynamic phoneNumber,
   }) {
     return UserModel(
       id: id,
@@ -47,15 +47,11 @@ class UserModel {
       id: id,
       fullName: data['full_name'],
       email: data['email'],
-      createdAt: data['created_at'] != null
-          ? DateTime.parse(data['created_at'])
-          : null,
+      createdAt: data['created_at'] != null ? DateTime.parse(data['created_at']) : null,
       role: data['role'] ?? 'user',
       profilePicture: data['profile_picture'],
       phoneNumber: data['phone_number'],
-      updatedAt: data['updated_at'] != null
-          ? DateTime.parse(data['updated_at'])
-          : null,
+      updatedAt: data['updated_at'] != null ? DateTime.parse(data['updated_at']) : null,
     );
   }
 
@@ -63,8 +59,7 @@ class UserModel {
     return {
       'full_name': fullName,
       'email': email,
-      'created_at': createdAt?.toIso8601String()
-          ?? DateTime.now().toUtc().toIso8601String(),
+      'created_at': createdAt?.toIso8601String() ?? DateTime.now().toUtc().toIso8601String(),
       'role': role,
       'profile_picture': profilePicture,
       'phone_number': phoneNumber,

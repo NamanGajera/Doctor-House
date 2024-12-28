@@ -48,3 +48,33 @@ extension WidgetExtensions on Widget {
     );
   }
 }
+
+/// Extension for AutomaticKeepAliveClientMixin
+extension KeepAliveExtension on Widget {
+  /// Wraps the widget with AutomaticKeepAliveClientMixin behavior
+  Widget withAutomaticKeepAlive() {
+    return _KeepAliveWrapper(child: this);
+  }
+}
+
+class _KeepAliveWrapper extends StatefulWidget {
+  final Widget child;
+
+  const _KeepAliveWrapper({required this.child});
+
+  @override
+  _KeepAliveWrapperState createState() => _KeepAliveWrapperState();
+}
+
+class _KeepAliveWrapperState extends State<_KeepAliveWrapper>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context); // Necessary for AutomaticKeepAliveClientMixin
+    return widget.child;
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+}
+

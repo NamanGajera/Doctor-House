@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   /// Variables
   bool showPassword = false;
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
             if(state is FailureState){
               CustomToast.show(
                 context: context,
-                title: Text(state.firebaseFailure.message,style: TextStyle(
+                title: Text(state.firebaseFailure.message,style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 17,
@@ -57,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.bottomCenter,
                 callbacks: ToastificationCallbacks(
                     onTap: (val){
-                      log('On Toast Tap ${val}');
+                      log('On Toast Tap $val');
                     }
                 ),
                 showProgressBar: false,
@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: ToastificationStyle.fillColored,
                 primaryColor: Colors.black,
                 foregroundColor: Colors.black,
-                icon: Icon(Icons.error_outline,color: Colors.white,),
+                icon: const Icon(Icons.error_outline,color: Colors.white,),
                 backgroundColor: Colors.black,
               );
             }
@@ -107,19 +107,19 @@ class _LoginScreenState extends State<LoginScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               Text(
                 'Welcome Back!',
                 style: Theme.of(context).textTheme.headlineMedium,
               ).centered(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'login into your existent account',
                 style: Theme.of(context).textTheme.titleLarge,
               ).centered(),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Form(
@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Email',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
@@ -163,14 +163,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
 
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
 
                       /// Password
                       Text(
                         'Password',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       BlocBuilder<LoginScreenBloc, LoginScreenState>(
@@ -205,7 +205,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
 
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -215,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       ),
                       CustomButton(
@@ -236,27 +236,27 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         isLoading: state is LoginUserLoadingState,
                         label: 'Login',
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
                         ),
                         color: primaryBlueColor,
-                        padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
                       ).centered(),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
                         children: [
-                          Expanded(child: Divider()),
-                          SizedBox(width: 10),
+                          const Expanded(child: Divider()),
+                          const SizedBox(width: 10),
                           Text('Or', style: Theme.of(context).textTheme.bodyMedium),
-                          SizedBox(width: 10),
-                          Expanded(child: Divider()),
+                          const SizedBox(width: 10),
+                          const Expanded(child: Divider()),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
@@ -267,7 +267,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 40,
                             width: 40,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20,
                           ),
                           Image.asset(
@@ -281,10 +281,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ).withPadding(const EdgeInsets.symmetric(horizontal: 20)),
-              SizedBox(height: 230),
+              const SizedBox(height: 230),
               Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(bottom: 10),
+                margin: const EdgeInsets.only(bottom: 10),
                 height: 30,
                 child: RichText(
                   text: TextSpan(
@@ -293,7 +293,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         TextSpan(
                             text: ' Register',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: primaryDarkBlueColor
                             ),
                             recognizer: TapGestureRecognizer()..onTap = (){

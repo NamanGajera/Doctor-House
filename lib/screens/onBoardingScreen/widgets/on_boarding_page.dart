@@ -1,13 +1,9 @@
 import 'dart:developer';
 
 import 'package:doctor_house/core/constants/colors.dart';
-import 'package:doctor_house/core/extension/navigation_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/routers/route_path.dart';
-import 'package:doctor_house/routers/router.dart';
-import 'package:doctor_house/screens/authScreen/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -81,7 +77,7 @@ class OnBoardingPage extends StatelessWidget {
                 color: Colors.grey.shade600,
               ),
             ),
-          ).withPadding(EdgeInsets.symmetric(horizontal: 10)),
+          ).withPadding(const EdgeInsets.symmetric(horizontal: 10)),
           const SizedBox(height: 60),
 
           /// Page Text
@@ -111,7 +107,7 @@ class OnBoardingPage extends StatelessWidget {
                 color: primaryDarkBlueColor,
                 textColor: Colors.white,
                 fontSize: 16,
-                padding: EdgeInsets.symmetric(horizontal: 100,vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 12),
               ),
             ],
           )

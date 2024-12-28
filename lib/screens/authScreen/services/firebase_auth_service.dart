@@ -32,7 +32,7 @@ class FirebaseAuthService {
         }
       }
       return null;
-    } on FirebaseAuthException catch (e){
+    } on FirebaseAuthException {
       rethrow;
     }
     catch (e) {
@@ -70,7 +70,7 @@ class FirebaseAuthService {
         return newUser;
       }
       return null;
-    } on FirebaseAuthException catch (e){
+    } on FirebaseAuthException {
       rethrow;
     }
     catch (e) {

@@ -35,7 +35,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
           event.userProfileData['imageFile'],
         );
 
-        log('userProfileImage===  ${userProfileImage}');
+        log('userProfileImage===  $userProfileImage');
 
         UserModel user = UserModel(
           id: event.userProfileData['id'],

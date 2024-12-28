@@ -1,5 +1,4 @@
 import 'package:doctor_house/models/user_model.dart';
-import 'package:doctor_house/service/firebase_service_exception.dart';
 import 'package:doctor_house/service/supabase_exception.dart';
 
 abstract class CompleteProfileScreenState{}

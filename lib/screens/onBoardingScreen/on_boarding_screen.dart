@@ -1,16 +1,14 @@
-import 'package:doctor_house/screens/onBoardingScreen/bloc/on_boardin_screen_bloc.dart';
 import 'package:doctor_house/core/constants/images.dart';
 import 'package:doctor_house/core/constants/size.dart';
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
-import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/screens/onBoardingScreen/bloc/on_boardin_screen_bloc.dart';
 import 'package:doctor_house/screens/onBoardingScreen/widgets/on_boarding_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:liquid_swipe/PageHelpers/LiquidController.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 import '../../core/constants/colors.dart';
-import '../../core/constants/widgets.dart';
 import 'bloc/on_boardin_screen_event.dart';
 import 'bloc/on_boardin_screen_state.dart';
 
@@ -22,7 +20,6 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-
   final pages = [
     /// Page 1
     OnBoardingPage(
@@ -39,7 +36,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
     /// Page 2
     OnBoardingPage(
-      backgroundColor: lightGreen,
+      backgroundColor: lightGreen1,
       height: screenHeight * 0.2,
       width: screenWidth,
       textColor: Colors.black,
@@ -87,9 +84,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 LiquidSwipe(
                   liquidController: liquidController,
                   pages: pages,
-                  slideIconWidget: currentPage != 2
-                      ? const Icon(Icons.arrow_back_ios)
-                      : const SizedBox(),
+                  slideIconWidget: currentPage != 2 ? const Icon(Icons.arrow_back_ios) : const SizedBox(),
                   enableSideReveal: true,
                   enableLoop: false,
                   positionSlideIcon: 0.85,
@@ -103,11 +98,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     right: 40,
                     child: GestureDetector(
                       onTap: () => context.read<OnboardingBloc>().add(SkipOnboardingEvent()),
-                      child: const Text('Skip',style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,fontSize: 16
-
-                      ),),
+                      child: const Text(
+                        'Skip',
+                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 16),
+                      ),
                     ),
                   ),
                 Positioned(

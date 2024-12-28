@@ -5,7 +5,7 @@ class MyRadioTheme {
 
   static RadioThemeData lightRadioTheme = RadioThemeData(
     fillColor: WidgetStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+      if (states.contains(WidgetState.selected)) {
         return primaryBlueColor;
       }
       return Colors.grey;

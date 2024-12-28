@@ -49,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             if(state is RegisterFailureState){
               CustomToast.show(
                 context: context,
-                title: Text(state.firebaseFailure.message,style: TextStyle(
+                title: Text(state.firebaseFailure.message,style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontSize: 17,
@@ -57,7 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 alignment: Alignment.bottomCenter,
                 callbacks: ToastificationCallbacks(
                   onTap: (val){
-                    log('On Toast Tap ${val}');
+                    log('On Toast Tap $val');
                   }
                 ),
                 showProgressBar: false,
@@ -65,7 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 style: ToastificationStyle.fillColored,
                 primaryColor: Colors.black,
                 foregroundColor: Colors.black,
-                icon: Icon(Icons.error_outline,color: Colors.white,),
+                icon: const Icon(Icons.error_outline,color: Colors.white,),
                 backgroundColor: Colors.black,
               );
               // log('Register Error=====>>>  ${state.firebaseFailure.message}');
@@ -101,19 +101,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               Text(
                 'Let\'s Get Started!',
                 style: Theme.of(context).textTheme.headlineMedium,
               ).centered(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'create an account to get all features',
                 style: Theme.of(context).textTheme.titleLarge,
               ).centered(),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Form(
@@ -130,7 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         'Username',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
@@ -155,14 +155,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
           
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
           
                       /// Email
                       Text(
                         'Email',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
@@ -189,14 +189,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
           
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
           
                       /// Password
                       Text(
                         'Password',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
@@ -223,14 +223,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
           
-                      SizedBox(height: 25),
+                      const SizedBox(height: 25),
           
                       /// Password
                       Text(
                         'Confirm Password',
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
@@ -257,7 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
           
-                      SizedBox(
+                      const SizedBox(
                         height: 40,
                       ),
                       CustomButton(
@@ -282,27 +282,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         label: 'Register',
                         isLoading: state is RegisterLoadingState,
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
                         ),
                         color: primaryBlueColor,
-                        padding: EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
                       ).centered(),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
                         children: [
-                          Expanded(child: Divider()),
-                          SizedBox(width: 10),
+                          const Expanded(child: Divider()),
+                          const SizedBox(width: 10),
                           Text('Or', style: Theme.of(context).textTheme.bodyMedium),
-                          SizedBox(width: 10),
-                          Expanded(child: Divider()),
+                          const SizedBox(width: 10),
+                          const Expanded(child: Divider()),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Row(
@@ -313,7 +313,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             height: 40,
                             width: 40,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20,
                           ),
                           Image.asset(
@@ -327,16 +327,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ).withPadding(const EdgeInsets.symmetric(horizontal: 20)),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
                Container(
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(bottom: 10),
+                margin: const EdgeInsets.only(bottom: 10),
                 height: 30,
                 child: RichText(
                   text: TextSpan(text: 'Already have an account?', style: Theme.of(context).textTheme.titleLarge, children: [
                     TextSpan(
                         text: ' Login',
-                        style: TextStyle(color: primaryDarkBlueColor),
+                        style: const TextStyle(color: primaryDarkBlueColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             context.replace(loginScreenPath);
