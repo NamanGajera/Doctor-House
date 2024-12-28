@@ -18,7 +18,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   List<String> iconPath = [
     'assets/svg/home_icon.svg',
     'assets/svg/appointment_icon.svg',
-    'assets/svg/social_icon.svg',
+    'assets/svg/chat_bottom_icon.svg',
     'assets/svg/pharmacy_icon.svg',
     'assets/svg/menu_icon.svg'
   ];

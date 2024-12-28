@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/images.dart';
 
-class TopSpecialistsView extends StatefulWidget {
-  const TopSpecialistsView({super.key});
+class TrustedHospitalsView extends StatefulWidget {
+  const TrustedHospitalsView({super.key});
 
   @override
-  State<TopSpecialistsView> createState() => _TopSpecialistsViewState();
+  State<TrustedHospitalsView> createState() => _TrustedHospitalsViewState();
 }
 
-class _TopSpecialistsViewState extends State<TopSpecialistsView> {
-  /// Store favorite status for each specialist
+class _TrustedHospitalsViewState extends State<TrustedHospitalsView> {
+  /// Store favorite status for each hospital
   final List<bool> _favorites = List.generate(6, (_) => false);
 
   @override
   Widget build(BuildContext context) {
     /// Main container with horizontal scroll
     return SizedBox(
-      height: 275,
+      height: 320,
       child: ListView.builder(
         itemCount: 6,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.only(right: 16, left: 4, bottom: 12),
         itemBuilder: (context, index) {
-          /// Individual specialist card
+          /// Individual hospital card
           return Container(
             width: 200,
             margin: const EdgeInsets.only(right: 16),
@@ -32,9 +32,9 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
               borderRadius: BorderRadius.circular(18),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.15),
-                  spreadRadius: 1,
-                  blurRadius: 6,
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 2,
+                  blurRadius: 8,
                   offset: const Offset(0, 4),
                 ),
               ],
@@ -44,35 +44,26 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
               children: [
                 /// Image section with rating and favorite button
                 Expanded(
-                  flex: 6,
+                  flex: 7,
                   child: Stack(
                     children: [
-                      /// Doctor image with gradient overlay
+                      /// Hospital image container
                       Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(18),
                             topRight: Radius.circular(18),
                           ),
-                          image: DecorationImage(
-                            image: AssetImage(doctorSampleImage),
+                          image: const DecorationImage(
+                            image: AssetImage(hospitalSampleImage),
+                            fit: BoxFit.cover,
                           ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(18),
-                              topRight: Radius.circular(18),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 8,
                             ),
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.black.withOpacity(0.1),
-                                Colors.black.withOpacity(0.6),
-                              ],
-                            ),
-                          ),
+                          ],
                         ),
                       ),
 
@@ -155,82 +146,47 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                   ),
                 ),
 
-                /// Specialist information section
+                /// Hospital information section
                 Expanded(
-                  flex: 4,
+                  flex: 6,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Dr. Suresh Patel',
+                          'Sterling Hospital',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
                               ),
-                        ),
-                        const SizedBox(height: 6),
-
-                        /// Specialty and experience tags
-                        IntrinsicHeight(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue.shade50,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Text(
-                                    'Orthopedic',
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colors.blue.shade700,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 6),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 8,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.orange.shade50,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Text(
-                                    '10+ yrs',
-                                    textAlign: TextAlign.center,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colors.orange.shade700,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
                         ),
                         const SizedBox(height: 8),
-
-                        /// Location information
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.local_hospital_rounded,
+                              color: Colors.blue.shade400,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Text(
+                                'MultiSpecialist Hospital',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: Colors.grey.shade700,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
                         Row(
                           children: [
                             Icon(
@@ -238,16 +194,34 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                               color: Colors.blue.shade400,
                               size: 16,
                             ),
-                            const SizedBox(width: 4),
+                            const SizedBox(width: 6),
                             Expanded(
                               child: Text(
-                                'City Hospital, Ahmedabad',
+                                'City Hospital, Near Science City, Ahmedabad',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   color: Colors.grey.shade700,
                                   fontSize: 13,
                                 ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.phone_rounded,
+                              color: Colors.blue.shade400,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              '+91 98765 43210',
+                              style: TextStyle(
+                                color: Colors.grey.shade700,
+                                fontSize: 13,
                               ),
                             ),
                           ],
