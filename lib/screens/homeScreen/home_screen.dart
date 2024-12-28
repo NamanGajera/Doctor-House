@@ -4,6 +4,7 @@ import 'package:doctor_house/core/constants/images.dart';
 import 'package:doctor_house/core/constants/widgets.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/screens/homeScreen/widgets/doctor_category_list_view.dart';
+import 'package:doctor_house/screens/homeScreen/widgets/top_specialists_view.dart';
 import 'package:doctor_house/screens/homeScreen/widgets/upcoming_schedule_view.dart';
 import 'package:flutter/material.dart';
 
@@ -103,6 +104,30 @@ class _HomeScreenState extends State<HomeScreen> {
 
             /// Upcoming Schedule View
             const UpcomingScheduleView(),
+            const SizedBox(height: 12),
+
+            /// Top Specialists Text
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Top Specialists',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const Text(
+                  'See All',
+                  style: TextStyle(
+                    color: primaryBlueColor,
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+
+            /// Top Specialist View
+            const TopSpecialistsView(),
+            const SizedBox(height: 10),
           ],
         ).withPadding(const EdgeInsets.symmetric(horizontal: 12, vertical: 12)),
       ),

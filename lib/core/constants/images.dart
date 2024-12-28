@@ -31,3 +31,4 @@ const String doctorProfileImage = 'assets/images/doctor_profile_image.png';
 const String chatIcon = 'assets/images/chat_icon.png';
 const String calenderIcon = 'assets/images/calendar_icon.png';
 const String timerIcon = 'assets/images/timer_icon.png';
+const String doctorSampleImage = 'assets/images/doctor_image.png';

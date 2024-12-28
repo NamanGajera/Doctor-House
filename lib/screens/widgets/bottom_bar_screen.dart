@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 class BottomBarScreen extends StatefulWidget {
   final StatefulNavigationShell? navigationShell;
+
   const BottomBarScreen({super.key, this.navigationShell});
 
   @override
@@ -12,15 +13,7 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-
-
-  List<String> labelText = [
-    'Home',
-    'Appointment',
-    'Social',
-    'Pharmacy',
-    'Menu'
-  ];
+  List<String> labelText = ['Home', 'Appointment', 'Social', 'Pharmacy', 'Menu'];
 
   List<String> iconPath = [
     'assets/svg/home_icon.svg',
@@ -35,8 +28,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     super.initState();
   }
 
-  Future<bool> _onWillPop()async{
-    if(widget.navigationShell!.currentIndex != 0){
+  Future<bool> _onWillPop() async {
+    if (widget.navigationShell!.currentIndex != 0) {
       widget.navigationShell!.goBranch(0);
     }
     return false;
@@ -55,36 +48,32 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             color: Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15),
-              topRight: Radius.circular(15)
+              topRight: Radius.circular(15),
             ),
           ),
           child: Row(
-            children: List.generate(labelText.length, (index){
+            children: List.generate(labelText.length, (index) {
               return Expanded(
                 child: InkWell(
-                  onTap: (){
+                  onTap: () {
                     _onItemTap(index);
                   },
                   child: Padding(
-                    padding:  const EdgeInsets.symmetric(horizontal: 3),
+                    padding: const EdgeInsets.symmetric(horizontal: 3),
                     child: Column(
                       children: [
                         SvgPicture.asset(
                           iconPath[index],
                           height: 28,
                           width: 28,
-                          color: widget.navigationShell?.currentIndex == index
-                              ? primaryBlueColor
-                              : Colors.grey,
+                          color: widget.navigationShell?.currentIndex == index ? primaryBlueColor : Colors.grey,
                         ),
                         Text(
                           labelText[index],
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 10,
-                            color: widget.navigationShell?.currentIndex == index
-                                ? primaryBlueColor
-                                : Colors.grey,
+                            color: widget.navigationShell?.currentIndex == index ? primaryBlueColor : Colors.grey,
                           ),
                         ),
                       ],
@@ -105,5 +94,4 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       widget.navigationShell?.goBranch(index, initialLocation: false);
     }
   }
-
 }
