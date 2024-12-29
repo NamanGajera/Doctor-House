@@ -24,9 +24,6 @@ Future<void> initSharedPreferences() async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
   await Supabase.initialize(
     url: supaBaseProjectUrl,
     anonKey: supaBaseAnonKey,
@@ -58,8 +55,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
-                // themeMode: state is DarkThemeState ? ThemeMode.dark : ThemeMode.light,
-                themeMode: ThemeMode.light,
+                themeMode: context.read<AppThemeBloc>().darkTheme ? ThemeMode.dark : ThemeMode.light,
                 routerConfig: appRouter,
                 // home: SplashScreen(),
               ),

@@ -9,3 +9,6 @@ const String chatScreenPath = '/chat';
 const String pharmacyScreenPath = '/pharmacy';
 const String menuScreenPath = '/menu';
 const String completeProfileScreenPath = '/completeProfile';
+
+/// Menu Screens Route Name
+const String themeChangeScreenPath = '/changeTheme';

@@ -9,3 +9,6 @@ const String chatScreenName = 'chat';
 const String pharmacyScreenName = 'pharmacy';
 const String menuScreenName = 'menu';
 const String completeProfileScreenName = 'completeProfile';
+
+/// Menu Screens Route Name
+const String themeChangeScreenName = 'changeTheme';

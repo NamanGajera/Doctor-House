@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:doctor_house/core/extension/build_context_extenstion.dart';
+import 'package:doctor_house/routers/route_path.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -245,7 +248,7 @@ class _MenuScreenState extends State<MenuScreen> {
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: context.isDarkTheme ? Colors.black : Colors.white,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -367,7 +370,9 @@ class _MenuScreenState extends State<MenuScreen> {
                   title: 'Theme',
                   subtitle: 'Switch between dark and light modes',
                   color: Colors.green,
-                  onTap: () {},
+                  onTap: () {
+                    context.push(themeChangeScreenPath);
+                  },
                 ),
                 MenuTileData(
                   icon: Icons.security,

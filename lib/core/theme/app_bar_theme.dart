@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class MyAppBarTheme {
-
   static AppBarTheme lightAppBarTheme = const AppBarTheme(
     backgroundColor: Colors.white,
     foregroundColor: Colors.black,
@@ -9,6 +8,7 @@ class MyAppBarTheme {
     elevation: 0,
     iconTheme: IconThemeData(color: Colors.black),
     actionsIconTheme: IconThemeData(color: Colors.black),
+    toolbarHeight: 45,
   );
 
   static AppBarTheme darkAppBarTheme = const AppBarTheme(
@@ -18,5 +18,6 @@ class MyAppBarTheme {
     elevation: 0,
     iconTheme: IconThemeData(color: Colors.white),
     actionsIconTheme: IconThemeData(color: Colors.white),
+    toolbarHeight: 45,
   );
 }

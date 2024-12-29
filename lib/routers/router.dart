@@ -5,6 +5,7 @@ import 'package:doctor_house/screens/authScreen/login_screen.dart';
 import 'package:doctor_house/screens/authScreen/register_screen.dart';
 import 'package:doctor_house/screens/chatScreen/chat_screen.dart';
 import 'package:doctor_house/screens/menuScreen/menu_screen.dart';
+import 'package:doctor_house/screens/menuScreen/themeScreen/theme_change_screen.dart';
 import 'package:doctor_house/screens/pharmacyScreen/pharmacy_screen.dart';
 import 'package:doctor_house/screens/widgets/bottom_bar_screen.dart';
 import 'package:doctor_house/screens/widgets/splash_screen.dart';
@@ -101,5 +102,13 @@ final GoRouter appRouter = GoRouter(
         ),
       ],
     ),
+
+    /// Theme Change
+    GoRoute(
+        path: themeChangeScreenPath,
+        name: themeChangeScreenName,
+        builder: (context, state) {
+          return const ThemeChangeScreen();
+        }),
   ],
 );

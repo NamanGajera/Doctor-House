@@ -1,4 +1,5 @@
 import 'package:doctor_house/core/constants/colors.dart';
+import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -44,8 +45,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         bottomNavigationBar: Container(
           height: 58,
           padding: const EdgeInsets.only(top: 5),
-          decoration: const BoxDecoration(
-            color: Colors.white,
+          decoration: BoxDecoration(
+            color: context.isDarkTheme ? Colors.black : Colors.white,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15),
               topRight: Radius.circular(15),

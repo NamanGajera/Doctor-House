@@ -1,3 +1,4 @@
+import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/images.dart';
@@ -28,9 +29,11 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
             width: 200,
             margin: const EdgeInsets.only(right: 16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.isDarkTheme ? Colors.black : Colors.white,
               borderRadius: BorderRadius.circular(18),
-              // border: Border.all(color: Colors.white38),
+              border: Border.all(
+                color: context.isDarkTheme ? Colors.white38 : Colors.transparent,
+              ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.15),
@@ -50,11 +53,12 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                     children: [
                       /// Doctor image with gradient overlay
                       Container(
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(18),
                             topRight: Radius.circular(18),
                           ),
+                          color: Colors.grey.shade100,
                           image: DecorationImage(
                             image: AssetImage(doctorSampleImage),
                           ),

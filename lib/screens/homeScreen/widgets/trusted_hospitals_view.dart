@@ -1,3 +1,4 @@
+import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/images.dart';
@@ -28,8 +29,11 @@ class _TrustedHospitalsViewState extends State<TrustedHospitalsView> {
             width: 200,
             margin: const EdgeInsets.only(right: 16),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.isDarkTheme ? Colors.black : Colors.white,
               borderRadius: BorderRadius.circular(18),
+              border: Border.all(
+                color: context.isDarkTheme ? Colors.white38 : Colors.transparent,
+              ),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.1),
@@ -160,7 +164,6 @@ class _TrustedHospitalsViewState extends State<TrustedHospitalsView> {
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black87,
                               ),
                         ),
                         const SizedBox(height: 8),
@@ -177,11 +180,7 @@ class _TrustedHospitalsViewState extends State<TrustedHospitalsView> {
                                 'MultiSpecialist Hospital',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Colors.grey.shade700,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 13),
                               ),
                             ),
                           ],
@@ -200,10 +199,7 @@ class _TrustedHospitalsViewState extends State<TrustedHospitalsView> {
                                 'City Hospital, Near Science City, Ahmedabad',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Colors.grey.shade700,
-                                  fontSize: 13,
-                                ),
+                                style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 13),
                               ),
                             ),
                           ],
@@ -219,10 +215,7 @@ class _TrustedHospitalsViewState extends State<TrustedHospitalsView> {
                             const SizedBox(width: 6),
                             Text(
                               '+91 98765 43210',
-                              style: TextStyle(
-                                color: Colors.grey.shade700,
-                                fontSize: 13,
-                              ),
+                              style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 13),
                             ),
                           ],
                         ),

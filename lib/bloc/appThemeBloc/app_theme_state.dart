@@ -1,5 +1,9 @@
 abstract class AppThemeState {}
 
-class LightThemeState extends AppThemeState {}
+class AppThemeInitialState extends AppThemeState {}
 
-class DarkThemeState extends AppThemeState {}
+class ToggleThemeEventState extends AppThemeState {
+  final bool themeChange;
+
+  ToggleThemeEventState(this.themeChange);
+}
