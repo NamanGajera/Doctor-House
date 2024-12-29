@@ -30,6 +30,7 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(18),
+              // border: Border.all(color: Colors.white38),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.15),
@@ -169,7 +170,7 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context).textTheme.titleSmall?.copyWith(
                                 fontWeight: FontWeight.w600,
-                                color: Colors.black,
+                                // color: Colors.black,
                               ),
                         ),
                         const SizedBox(height: 6),
@@ -244,10 +245,7 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                                 'City Hospital, Ahmedabad',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Colors.grey.shade700,
-                                  fontSize: 13,
-                                ),
+                                style: Theme.of(context).textTheme.labelLarge,
                               ),
                             ),
                           ],
