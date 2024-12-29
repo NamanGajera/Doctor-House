@@ -12,3 +12,6 @@ const String completeProfileScreenName = 'completeProfile';
 
 /// Menu Screens Route Name
 const String themeChangeScreenName = 'changeTheme';
+
+/// Home Screens Route Name
+const String doctorListScreenName = 'doctorList';

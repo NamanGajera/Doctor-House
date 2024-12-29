@@ -37,18 +37,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => AppThemeBloc(sharedPreferences: prefs)),
-        BlocProvider(create: (context) => OnboardingBloc(sharedPreferences: prefs)),
-        BlocProvider(create: (context) => LoginScreenBloc(SupabaseAuthService())),
-        BlocProvider(create: (context) => RegisterScreenBloc(SupabaseAuthService())),
-        BlocProvider(create: (context) => CompleteProfileScreenBloc(UserProfileRepository(SupabaseService()))),
-      ],
-      child: BlocBuilder<AppThemeBloc, AppThemeState>(
-        builder: (context, state) {
-          return SafeArea(
-            child: MediaQuery(
+    return SafeArea(
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => AppThemeBloc(sharedPreferences: prefs)),
+          BlocProvider(create: (context) => OnboardingBloc(sharedPreferences: prefs)),
+          BlocProvider(create: (context) => LoginScreenBloc(SupabaseAuthService())),
+          BlocProvider(create: (context) => RegisterScreenBloc(SupabaseAuthService())),
+          BlocProvider(create: (context) => CompleteProfileScreenBloc(UserProfileRepository(SupabaseService()))),
+        ],
+        child: BlocBuilder<AppThemeBloc, AppThemeState>(
+          builder: (context, state) {
+            return MediaQuery(
               data: MediaQuery.of(context).copyWith(textScaler: TextScaler.noScaling),
               child: MaterialApp.router(
                 title: 'Doctor House',
@@ -59,9 +59,9 @@ class MyApp extends StatelessWidget {
                 routerConfig: appRouter,
                 // home: SplashScreen(),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

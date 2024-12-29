@@ -8,6 +8,9 @@ import 'package:doctor_house/screens/homeScreen/widgets/top_specialists_view.dar
 import 'package:doctor_house/screens/homeScreen/widgets/trusted_hospitals_view.dart';
 import 'package:doctor_house/screens/homeScreen/widgets/upcoming_schedule_view.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../routers/route_path.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -121,7 +124,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: primaryBlueColor,
                     fontSize: 13,
                   ),
-                ),
+                ).onTap(() {
+                  context.push(doctorListScreenPath);
+                }),
               ],
             ),
             const SizedBox(height: 10),

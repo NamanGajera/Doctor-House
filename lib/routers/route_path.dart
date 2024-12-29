@@ -12,3 +12,6 @@ const String completeProfileScreenPath = '/completeProfile';
 
 /// Menu Screens Route Name
 const String themeChangeScreenPath = '/changeTheme';
+
+/// Home Screens Route Name
+const String doctorListScreenPath = '/doctorList';
