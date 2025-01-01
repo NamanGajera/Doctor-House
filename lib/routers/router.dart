@@ -4,7 +4,8 @@ import 'package:doctor_house/screens/appointmentScreen/appointment_screen.dart';
 import 'package:doctor_house/screens/authScreen/login_screen.dart';
 import 'package:doctor_house/screens/authScreen/register_screen.dart';
 import 'package:doctor_house/screens/chatScreen/chat_screen.dart';
-import 'package:doctor_house/screens/doctor_list_screen/doctor_list_screen.dart';
+import 'package:doctor_house/screens/doctorDetailsScreen/doctor_details_screen.dart';
+import 'package:doctor_house/screens/hospitalListScreen/hospital_list_screen.dart';
 import 'package:doctor_house/screens/menuScreen/menu_screen.dart';
 import 'package:doctor_house/screens/menuScreen/themeScreen/theme_change_screen.dart';
 import 'package:doctor_house/screens/pharmacyScreen/pharmacy_screen.dart';
@@ -13,6 +14,7 @@ import 'package:doctor_house/screens/widgets/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/completeProfileScreen/complete_profile_screen.dart';
+import '../screens/doctorListScreen/doctor_list_screen.dart';
 import '../screens/homeScreen/home_screen.dart';
 import '../screens/onBoardingScreen/on_boarding_screen.dart';
 
@@ -119,6 +121,22 @@ final GoRouter appRouter = GoRouter(
       name: doctorListScreenName,
       builder: (context, state) {
         return const DoctorListScreen();
+      },
+    ),
+
+    GoRoute(
+      path: hospitalListScreenPath,
+      name: hospitalListScreenName,
+      builder: (context, state) {
+        return const HospitalListScreen();
+      },
+    ),
+
+    GoRoute(
+      path: doctorDetailsScreenPath,
+      name: doctorDetailsScreenName,
+      builder: (context, state) {
+        return const DoctorDetailsScreen();
       },
     ),
   ],

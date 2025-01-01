@@ -15,3 +15,5 @@ const String themeChangeScreenPath = '/changeTheme';
 
 /// Home Screens Route Name
 const String doctorListScreenPath = '/doctorList';
+const String hospitalListScreenPath = '/hospitalList';
+const String doctorDetailsScreenPath = '/doctorDetails';

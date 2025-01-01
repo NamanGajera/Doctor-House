@@ -1,5 +1,6 @@
 import 'dart:developer';
-import 'package:doctor_house/screens/authScreen/bloc/loginScreenBloc/login_screen_bloc.dart';
+
+import 'package:animate_do/animate_do.dart';
 import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/constants/images.dart';
@@ -8,9 +9,9 @@ import 'package:doctor_house/core/constants/widgets.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/routers/route_path.dart';
+import 'package:doctor_house/screens/authScreen/bloc/loginScreenBloc/login_screen_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -41,61 +42,69 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<LoginScreenBloc, LoginScreenState>(
-          builder: (context, state) {
-            return mainLoginScreen(state);
-          },
-          listener: (context, state) async {
-            if(state is FailureState){
-              CustomToast.show(
-                context: context,
-                title: Text(state.firebaseFailure.message,style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 17,
-                ),),
-                alignment: Alignment.bottomCenter,
-                callbacks: ToastificationCallbacks(
-                    onTap: (val){
-                      log('On Toast Tap $val');
-                    }
-                ),
-                showProgressBar: false,
-                dragToClose: true,
-                style: ToastificationStyle.fillColored,
-                primaryColor: Colors.black,
-                foregroundColor: Colors.black,
-                icon: const Icon(Icons.error_outline,color: Colors.white,),
-                backgroundColor: Colors.black,
-              );
-            }
-            if(state is LoginUserEventState){
-              log('Login Done===>>> ${state.userModel.email}');
-              SharedPreferences prefs = await SharedPreferences.getInstance();
+      body: BlocConsumer<LoginScreenBloc, LoginScreenState>(builder: (context, state) {
+        return mainLoginScreen(state);
+      }, listener: (context, state) async {
+        if (state is FailureState) {
+          CustomToast.show(
+            context: context,
+            title: Text(
+              state.firebaseFailure.message,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 17,
+              ),
+            ),
+            alignment: Alignment.bottomCenter,
+            callbacks: ToastificationCallbacks(onTap: (val) {
+              log('On Toast Tap $val');
+            }),
+            showProgressBar: false,
+            dragToClose: true,
+            style: ToastificationStyle.fillColored,
+            primaryColor: Colors.black,
+            foregroundColor: Colors.black,
+            icon: const Icon(
+              Icons.error_outline,
+              color: Colors.white,
+            ),
+            backgroundColor: Colors.black,
+          );
+        }
+        if (state is LoginUserEventState) {
+          log('Login Done===>>> ${state.userModel.email}');
+          SharedPreferences prefs = await SharedPreferences.getInstance();
 
-              prefs.setString(spUserEmail, state.userModel.email ?? '');
-              prefs.setString(spUserId, state.userModel.id);
-              prefs.setString(spUserName, state.userModel.fullName??'');
-              prefs.setString(spUserRole, state.userModel.role??'3');
-              prefs.setBool(spLoginKey, true);
-              prefs.setBool(spOnBoardingKey, true);
-              profileDone = prefs.getBool(spProfileDataAdd);
+          prefs.setString(spUserEmail, state.userModel.email ?? '');
+          prefs.setString(spUserId, state.userModel.id);
+          prefs.setString(spUserName, state.userModel.fullName ?? '');
+          prefs.setString(spUserRole, state.userModel.role ?? '3');
+          prefs.setBool(spLoginKey, true);
+          prefs.setBool(spOnBoardingKey, true);
+          prefs.setString(spUserProfile, state.userModel.profilePicture);
+          prefs.setString(spUserFirstName, state.userModel.firstName);
+          prefs.setString(spUserLastName, state.userModel.lastName);
+          prefs.setString(spUserMobileNumber, state.userModel.phoneNumber);
 
-              userEmail = state.userModel.email;
-              userId = state.userModel.id;
-              userRole = state.userModel.role;
-              userName = state.userModel.fullName;
+          profileDone = prefs.getBool(spProfileDataAdd);
+          userEmail = state.userModel.email;
+          userId = state.userModel.id;
+          userRole = state.userModel.role;
+          userName = state.userModel.fullName;
+          userFirstName = state.userModel.firstName;
+          userLastName = state.userModel.lastName;
+          userProfile = state.userModel.profilePicture;
+          userMobileNumber = state.userModel.phoneNumber;
 
-              log('UserId >>>  $userId');
-              if(profileDone == true){
-                context.replace(homeScreenPath);
-              }else{
-                context.replace(completeProfileScreenPath);
-              }
-
-
-            }
-          }),
+          log('UserId >>>  $userId');
+          if (profileDone == true || state.userModel.isProfileDone == true) {
+            context.replace(homeScreenPath);
+          } else {
+            context.replace(completeProfileScreenPath);
+          }
+        }
+      }),
     );
   }
 
@@ -220,18 +229,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       CustomButton(
                         onPressed: () {
-                          if(_formKey.currentState!.validate()){
-                            log('Login Data====>>  ${
-                            {
-                              'email':emailController.text.trim(),
-                              'password':passwordController.text.trim(),
-                            }
-                            }');
+                          if (_formKey.currentState!.validate()) {
+                            log('Login Data====>>  ${{
+                              'email': emailController.text.trim(),
+                              'password': passwordController.text.trim(),
+                            }}');
 
                             context.read<LoginScreenBloc>().add(LoginUserEvent(
-                              emailController.text.trim(),
-                              passwordController.text.trim(),
-                            ));
+                                  emailController.text.trim(),
+                                  passwordController.text.trim(),
+                                ));
                           }
                         },
                         isLoading: state is LoginUserLoadingState,
@@ -281,27 +288,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ).withPadding(const EdgeInsets.symmetric(horizontal: 20)),
-              const SizedBox(height: 230),
+              const SizedBox(height: 190),
               Container(
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(bottom: 10),
                 height: 30,
                 child: RichText(
-                  text: TextSpan(
-                      text: 'Don\'t have an account?',
-                      style: Theme.of(context).textTheme.titleLarge,
-                      children: [
-                        TextSpan(
-                            text: ' Register',
-                            style: const TextStyle(
-                                color: primaryDarkBlueColor
-                            ),
-                            recognizer: TapGestureRecognizer()..onTap = (){
-                              context.replace(registerScreenPath);
-                            }
-                        )
-                      ]
-                  ),
+                  text: TextSpan(text: 'Don\'t have an account?', style: Theme.of(context).textTheme.titleLarge, children: [
+                    TextSpan(
+                        text: ' Register',
+                        style: const TextStyle(color: primaryDarkBlueColor),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            context.replace(registerScreenPath);
+                          })
+                  ]),
                 ),
               ),
             ],

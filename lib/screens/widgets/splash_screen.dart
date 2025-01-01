@@ -47,10 +47,15 @@ class _SplashScreenState extends State<SplashScreen> {
       userName = prefs.getString(spUserName);
       userRole = prefs.getString(spUserRole);
       profileDone = prefs.getBool(spProfileDataAdd);
+      userFirstName = prefs.getString(spUserFirstName);
+      userLastName = prefs.getString(spUserLastName);
+      userProfile = prefs.getString(spUserProfile);
+      userMobileNumber = prefs.getString(spUserMobileNumber);
       log('Home');
-      if(profileDone == true){
+
+      if (profileDone == true) {
         GoRouter.of(context).pushReplacement(homeScreenPath);
-      }else{
+      } else {
         GoRouter.of(context).pushReplacement(completeProfileScreenPath);
       }
     } else {

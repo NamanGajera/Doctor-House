@@ -55,7 +55,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                   hintText: 'Search doctors, specialities...',
                   prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
                   filled: true,
-                  fillColor: context.isDarkTheme ? Colors.black : Colors.white,
+                  fillColor: context.isDarkTheme ? Colors.black : Colors.grey.shade100,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: context.isDarkTheme

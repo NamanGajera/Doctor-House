@@ -9,6 +9,7 @@ class UserModel {
   final dynamic profilePicture;
   final dynamic phoneNumber;
   final DateTime? updatedAt;
+  final bool? isProfileDone;
 
   UserModel({
     required this.id,
@@ -21,6 +22,7 @@ class UserModel {
     this.profilePicture,
     this.phoneNumber,
     this.updatedAt,
+    this.isProfileDone,
   });
 
   UserModel copyWith({
@@ -29,6 +31,7 @@ class UserModel {
     dynamic role,
     dynamic profilePicture,
     dynamic phoneNumber,
+    dynamic isProfileDone,
   }) {
     return UserModel(
       id: id,
@@ -38,6 +41,7 @@ class UserModel {
       role: role ?? this.role,
       profilePicture: profilePicture ?? this.profilePicture,
       phoneNumber: phoneNumber ?? this.phoneNumber,
+      isProfileDone: isProfileDone ?? this.isProfileDone,
       updatedAt: DateTime.now(),
     );
   }
@@ -52,6 +56,7 @@ class UserModel {
       profilePicture: data['profile_picture'],
       phoneNumber: data['phone_number'],
       updatedAt: data['updated_at'] != null ? DateTime.parse(data['updated_at']) : null,
+      isProfileDone: data['isProfileDone'],
     );
   }
 
@@ -63,6 +68,7 @@ class UserModel {
       'role': role,
       'profile_picture': profilePicture,
       'phone_number': phoneNumber,
+      'isProfileDone': isProfileDone,
       'updated_at': DateTime.now().toUtc().toIso8601String(),
     }..removeWhere((key, value) => value == null);
   }

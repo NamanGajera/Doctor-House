@@ -6,3 +6,7 @@ const String spUserName = 'userName';
 const String spUserEmail = 'userEmail';
 const String spUserRole = 'userRole';
 const String spProfileDataAdd = 'isProfileDataAdd';
+const String spUserProfile = 'userProfile';
+const String spUserFirstName = 'userFirstName';
+const String spUserLastName = 'userLastName';
+const String spUserMobileNumber = 'userMobileNumber';

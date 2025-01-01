@@ -14,7 +14,7 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-  List<String> labelText = ['Home', 'Appointment', 'Social', 'Pharmacy', 'Menu'];
+  List<String> labelText = ['Home', 'Appointment', 'Chat', 'Pharmacy', 'Menu'];
 
   List<String> iconPath = [
     'assets/svg/home_icon.svg',

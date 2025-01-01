@@ -1,7 +1,10 @@
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
+import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/images.dart';
+import '../../../routers/route_path.dart';
 
 class TopSpecialistsView extends StatefulWidget {
   const TopSpecialistsView({super.key});
@@ -260,7 +263,9 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                 ),
               ],
             ),
-          );
+          ).onTap(() {
+            context.push(doctorDetailsScreenPath);
+          });
         },
       ),
     );

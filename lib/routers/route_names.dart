@@ -15,3 +15,5 @@ const String themeChangeScreenName = 'changeTheme';
 
 /// Home Screens Route Name
 const String doctorListScreenName = 'doctorList';
+const String hospitalListScreenName = 'hospitalList';
+const String doctorDetailsScreenName = 'doctorDetails';
