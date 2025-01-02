@@ -47,7 +47,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
           padding: const EdgeInsets.only(top: 5),
           decoration: BoxDecoration(
             color: context.isDarkTheme ? Colors.black : Colors.white,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(15),
               topRight: Radius.circular(15),
             ),

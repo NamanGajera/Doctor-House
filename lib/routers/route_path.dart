@@ -17,3 +17,4 @@ const String themeChangeScreenPath = '/changeTheme';
 const String doctorListScreenPath = '/doctorList';
 const String hospitalListScreenPath = '/hospitalList';
 const String doctorDetailsScreenPath = '/doctorDetails';
+const String hospitalDetailsScreenPath = '/hospitalDetails';

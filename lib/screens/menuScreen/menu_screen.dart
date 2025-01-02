@@ -118,10 +118,10 @@ class _MenuScreenState extends State<MenuScreen> {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
-            const Color(0xff0e75f9),
-            const Color(0xff004cdb),
+            Color(0xff0e75f9),
+            Color(0xff004cdb),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -294,7 +294,7 @@ class _MenuScreenState extends State<MenuScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             _buildProfileCard(),
             _buildCategorySection(
               'PERSONAL INFORMATION',

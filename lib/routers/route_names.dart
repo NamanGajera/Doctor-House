@@ -17,3 +17,4 @@ const String themeChangeScreenName = 'changeTheme';
 const String doctorListScreenName = 'doctorList';
 const String hospitalListScreenName = 'hospitalList';
 const String doctorDetailsScreenName = 'doctorDetails';
+const String hospitalDetailScreenName = 'hospitalDetails';

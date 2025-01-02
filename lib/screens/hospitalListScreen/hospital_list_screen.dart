@@ -72,7 +72,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
             SizedBox(
               height: 48,
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
                 itemCount: docTypeName.length,
                 itemBuilder: (context, index) {
@@ -80,11 +80,11 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                   return GestureDetector(
                     onTap: () => setState(() => selectedSpeciality = index),
                     child: Container(
-                      margin: EdgeInsets.only(right: 8, bottom: 6),
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      margin: const EdgeInsets.only(right: 8, bottom: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? Color(0xff50507D)
+                            ? const Color(0xff50507D)
                             : context.isDarkTheme
                                 ? Colors.black
                                 : Colors.white,
@@ -94,7 +94,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                           BoxShadow(
                             color: Colors.black.withOpacity(0.05),
                             blurRadius: 4,
-                            offset: Offset(0, 2),
+                            offset: const Offset(0, 2),
                           ),
                         ],
                       ),
@@ -118,11 +118,11 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
             const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.only(bottom: 16),
+                    margin: const EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
                       color: context.isDarkTheme ? Colors.black : Colors.white,
                       borderRadius: BorderRadius.circular(16),
@@ -132,7 +132,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                           color: Colors.black.withOpacity(0.05),
                           blurRadius: 8,
                           spreadRadius: 1,
-                          offset: Offset(0, 2),
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
@@ -151,8 +151,8 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                     colors: [
-                                      Color(0xff50507D).withOpacity(0.1),
-                                      Color(0xff50507D).withOpacity(0.2),
+                                      const Color(0xff50507D).withOpacity(0.1),
+                                      const Color(0xff50507D).withOpacity(0.2),
                                     ],
                                   ),
                                 ),
@@ -205,7 +205,7 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                                     Row(
                                       children: [
                                         Container(
-                                          padding: EdgeInsets.symmetric(
+                                          padding: const EdgeInsets.symmetric(
                                             horizontal: 8,
                                             vertical: 4,
                                           ),
@@ -269,13 +269,13 @@ class _HospitalListScreenState extends State<HospitalListScreen> {
                         Container(
                           width: double.infinity,
                           height: 46,
-                          margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                           decoration: BoxDecoration(
                             color: primaryDarkBlueColor,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           alignment: Alignment.center,
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(

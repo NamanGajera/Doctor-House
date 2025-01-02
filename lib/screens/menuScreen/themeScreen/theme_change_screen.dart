@@ -24,13 +24,13 @@ class ThemeChangeScreen extends StatelessWidget {
               ).onTap(() {
                 context.pop();
               }),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               Text(
                 'Theme',
                 style: Theme.of(context).textTheme.headlineSmall,
               ).centered(),
             ],
-          ).withPadding(EdgeInsets.symmetric(horizontal: 12, vertical: 5)),
+          ).withPadding(const EdgeInsets.symmetric(horizontal: 12, vertical: 5)),
           const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -236,8 +236,8 @@ class _CustomAnimatedSwitchState extends State<CustomAnimatedSwitch> with Single
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      gradient: LinearGradient(
-                        colors: const [
+                      gradient: const LinearGradient(
+                        colors: [
                           Color(0xFF8A84FF),
                           Color(0xFF6B63FF),
                         ],

@@ -17,10 +17,10 @@ class UpcomingScheduleView extends StatelessWidget {
         height: 155,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [
-              const Color(0xff0165fc),
-              const Color(0xff0858d1),
+              Color(0xff0165fc),
+              Color(0xff0858d1),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -46,7 +46,7 @@ class UpcomingScheduleView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                Expanded(
+                const Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -58,7 +58,7 @@ class UpcomingScheduleView extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      SizedBox(height: 4),
                       Text(
                         'Orthopedic',
                         style: TextStyle(
@@ -103,7 +103,7 @@ class UpcomingScheduleView extends StatelessWidget {
                           color: Colors.white70,
                         ),
                         const SizedBox(width: 8),
-                        Text(
+                        const Text(
                           'Mon, 24 Jan',
                           style: TextStyle(
                             color: Colors.white,
@@ -130,7 +130,7 @@ class UpcomingScheduleView extends StatelessWidget {
                           color: Colors.white70,
                         ),
                         const SizedBox(width: 8),
-                        Text(
+                        const Text(
                           '9:00 - 10:00',
                           style: TextStyle(
                             color: Colors.white,

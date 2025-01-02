@@ -57,12 +57,12 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                       /// Doctor image with gradient overlay
                       Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(18),
                             topRight: Radius.circular(18),
                           ),
                           color: Colors.grey.shade100,
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: AssetImage(doctorSampleImage),
                           ),
                         ),

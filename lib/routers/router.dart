@@ -5,6 +5,7 @@ import 'package:doctor_house/screens/authScreen/login_screen.dart';
 import 'package:doctor_house/screens/authScreen/register_screen.dart';
 import 'package:doctor_house/screens/chatScreen/chat_screen.dart';
 import 'package:doctor_house/screens/doctorDetailsScreen/doctor_details_screen.dart';
+import 'package:doctor_house/screens/hospitalDetailsScreen/hospital_details_screen.dart';
 import 'package:doctor_house/screens/hospitalListScreen/hospital_list_screen.dart';
 import 'package:doctor_house/screens/menuScreen/menu_screen.dart';
 import 'package:doctor_house/screens/menuScreen/themeScreen/theme_change_screen.dart';
@@ -137,6 +138,14 @@ final GoRouter appRouter = GoRouter(
       name: doctorDetailsScreenName,
       builder: (context, state) {
         return const DoctorDetailsScreen();
+      },
+    ),
+
+    GoRoute(
+      path: hospitalDetailsScreenPath,
+      name: hospitalDetailScreenName,
+      builder: (context, state) {
+        return const HospitalDetailsScreen();
       },
     ),
   ],
