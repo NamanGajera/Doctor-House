@@ -3,6 +3,7 @@ import 'package:doctor_house/routers/route_path.dart';
 import 'package:doctor_house/screens/appointmentScreen/appointment_screen.dart';
 import 'package:doctor_house/screens/authScreen/login_screen.dart';
 import 'package:doctor_house/screens/authScreen/register_screen.dart';
+import 'package:doctor_house/screens/bookAppointmentScreen/book_appointment_screen.dart';
 import 'package:doctor_house/screens/chatScreen/chat_screen.dart';
 import 'package:doctor_house/screens/doctorDetailsScreen/doctor_details_screen.dart';
 import 'package:doctor_house/screens/hospitalDetailsScreen/hospital_details_screen.dart';
@@ -148,5 +149,12 @@ final GoRouter appRouter = GoRouter(
         return const HospitalDetailsScreen();
       },
     ),
+
+    GoRoute(
+        path: bookAppointmentScreenPath,
+        name: bookAppointmentScreenName,
+        builder: (context, state) {
+          return const BookAppointmentScreen();
+        }),
   ],
 );

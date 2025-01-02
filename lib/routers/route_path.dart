@@ -18,3 +18,6 @@ const String doctorListScreenPath = '/doctorList';
 const String hospitalListScreenPath = '/hospitalList';
 const String doctorDetailsScreenPath = '/doctorDetails';
 const String hospitalDetailsScreenPath = '/hospitalDetails';
+
+/// Book Appointment Screen Route Name
+const String bookAppointmentScreenPath = '/bookAppointment';

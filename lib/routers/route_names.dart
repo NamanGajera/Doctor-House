@@ -18,3 +18,6 @@ const String doctorListScreenName = 'doctorList';
 const String hospitalListScreenName = 'hospitalList';
 const String doctorDetailsScreenName = 'doctorDetails';
 const String hospitalDetailScreenName = 'hospitalDetails';
+
+/// Book Appointment Screen Route Name
+const String bookAppointmentScreenName = 'bookAppointment';
