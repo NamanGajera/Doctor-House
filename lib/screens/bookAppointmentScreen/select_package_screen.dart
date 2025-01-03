@@ -1,7 +1,9 @@
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/constants/widgets.dart';
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
+import 'package:doctor_house/routers/route_path.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SelectPackageScreen extends StatefulWidget {
   const SelectPackageScreen({super.key});
@@ -153,7 +155,9 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
               const SizedBox(height: 16),
               CustomButton(
                 label: 'Continue',
-                onPressed: () {},
+                onPressed: () {
+                  context.push(patientDetailsScreenPath);
+                },
                 padding: EdgeInsets.symmetric(vertical: 10),
                 width: double.infinity,
                 borderRadius: 12,

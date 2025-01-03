@@ -16,6 +16,7 @@ import 'package:doctor_house/screens/widgets/bottom_bar_screen.dart';
 import 'package:doctor_house/screens/widgets/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
+import '../screens/bookAppointmentScreen/patient_details_screen.dart';
 import '../screens/completeProfileScreen/complete_profile_screen.dart';
 import '../screens/doctorListScreen/doctor_list_screen.dart';
 import '../screens/homeScreen/home_screen.dart';
@@ -160,10 +161,18 @@ final GoRouter appRouter = GoRouter(
     ),
 
     GoRoute(
-        path: selectPackageScreenPath,
-        name: selectPackageScreenName,
+      path: selectPackageScreenPath,
+      name: selectPackageScreenName,
+      builder: (context, state) {
+        return const SelectPackageScreen();
+      },
+    ),
+
+    GoRoute(
+        path: patientDetailsScreenPath,
+        name: patientDetailsScreenName,
         builder: (context, state) {
-          return const SelectPackageScreen();
-        }),
+          return const PatientDetailsScreen();
+        })
   ],
 );

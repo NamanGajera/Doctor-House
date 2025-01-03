@@ -22,3 +22,4 @@ const String hospitalDetailsScreenPath = '/hospitalDetails';
 /// Book Appointment Screen Route Name
 const String bookAppointmentScreenPath = '/bookAppointment';
 const String selectPackageScreenPath = '/selectPackage';
+const String patientDetailsScreenPath = '/patientDetails';
