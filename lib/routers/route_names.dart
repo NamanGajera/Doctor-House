@@ -21,3 +21,4 @@ const String hospitalDetailScreenName = 'hospitalDetails';
 
 /// Book Appointment Screen Route Name
 const String bookAppointmentScreenName = 'bookAppointment';
+const String selectPackageScreenName = 'selectPackage';

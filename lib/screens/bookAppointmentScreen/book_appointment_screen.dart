@@ -1,6 +1,8 @@
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/routers/route_path.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/constants/colors.dart';
@@ -226,7 +228,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
             label: 'Book Appointment',
             textColor: Colors.white,
             onPressed: () {
-              // context.push(bookAppointmentScreenPath);
+              context.push(selectPackageScreenPath);
             },
             width: double.infinity,
             color: primaryBlueColor,

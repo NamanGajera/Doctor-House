@@ -82,10 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
           prefs.setString(spUserRole, state.userModel.role ?? '3');
           prefs.setBool(spLoginKey, true);
           prefs.setBool(spOnBoardingKey, true);
-          prefs.setString(spUserProfile, state.userModel.profilePicture);
-          prefs.setString(spUserFirstName, state.userModel.firstName);
-          prefs.setString(spUserLastName, state.userModel.lastName);
-          prefs.setString(spUserMobileNumber, state.userModel.phoneNumber);
+          prefs.setString(spUserProfile, state.userModel.profilePicture ?? '');
+          prefs.setString(spUserFirstName, state.userModel.firstName ?? '');
+          prefs.setString(spUserLastName, state.userModel.lastName ?? '');
+          prefs.setString(spUserMobileNumber, state.userModel.phoneNumber ?? '');
 
           profileDone = prefs.getBool(spProfileDataAdd);
           userEmail = state.userModel.email;
