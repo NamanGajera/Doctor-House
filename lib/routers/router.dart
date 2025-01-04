@@ -169,10 +169,19 @@ final GoRouter appRouter = GoRouter(
     ),
 
     GoRoute(
-        path: patientDetailsScreenPath,
-        name: patientDetailsScreenName,
-        builder: (context, state) {
-          return const PatientDetailsScreen();
-        })
+      path: patientDetailsScreenPath,
+      name: patientDetailsScreenName,
+      builder: (context, state) {
+        return const PatientDetailsScreen();
+      },
+    ),
+
+    // GoRoute(
+    //   path: myBookingScreenPath,
+    //   name: myBookingScreenName,
+    //   builder: (context, state) {
+    //     return const MyBookingScreen();
+    //   },
+    // ),
   ],
 );
