@@ -1,26 +1,26 @@
+import 'package:doctor_house/features/appointmentScreen/appointment_screen.dart';
+import 'package:doctor_house/features/auth/screens/login_screen.dart';
+import 'package:doctor_house/features/auth/screens/register_screen.dart';
+import 'package:doctor_house/features/bookAppointmentScreen/book_appointment_screen.dart';
+import 'package:doctor_house/features/bookAppointmentScreen/select_package_screen.dart';
+import 'package:doctor_house/features/chatScreen/chat_screen.dart';
+import 'package:doctor_house/features/doctorDetailsScreen/doctor_details_screen.dart';
+import 'package:doctor_house/features/hospitalDetailsScreen/hospital_details_screen.dart';
+import 'package:doctor_house/features/hospitalListScreen/hospital_list_screen.dart';
+import 'package:doctor_house/features/menuScreen/menu_screen.dart';
+import 'package:doctor_house/features/menuScreen/themeScreen/theme_change_screen.dart';
+import 'package:doctor_house/features/pharmacyScreen/pharmacy_screen.dart';
+import 'package:doctor_house/features/widgets/bottom_bar_screen.dart';
+import 'package:doctor_house/features/widgets/splash_screen.dart';
 import 'package:doctor_house/routers/route_names.dart';
 import 'package:doctor_house/routers/route_path.dart';
-import 'package:doctor_house/screens/appointmentScreen/appointment_screen.dart';
-import 'package:doctor_house/screens/authScreen/login_screen.dart';
-import 'package:doctor_house/screens/authScreen/register_screen.dart';
-import 'package:doctor_house/screens/bookAppointmentScreen/book_appointment_screen.dart';
-import 'package:doctor_house/screens/bookAppointmentScreen/select_package_screen.dart';
-import 'package:doctor_house/screens/chatScreen/chat_screen.dart';
-import 'package:doctor_house/screens/doctorDetailsScreen/doctor_details_screen.dart';
-import 'package:doctor_house/screens/hospitalDetailsScreen/hospital_details_screen.dart';
-import 'package:doctor_house/screens/hospitalListScreen/hospital_list_screen.dart';
-import 'package:doctor_house/screens/menuScreen/menu_screen.dart';
-import 'package:doctor_house/screens/menuScreen/themeScreen/theme_change_screen.dart';
-import 'package:doctor_house/screens/pharmacyScreen/pharmacy_screen.dart';
-import 'package:doctor_house/screens/widgets/bottom_bar_screen.dart';
-import 'package:doctor_house/screens/widgets/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
-import '../screens/bookAppointmentScreen/patient_details_screen.dart';
-import '../screens/completeProfileScreen/complete_profile_screen.dart';
-import '../screens/doctorListScreen/doctor_list_screen.dart';
-import '../screens/homeScreen/home_screen.dart';
-import '../screens/onBoardingScreen/on_boarding_screen.dart';
+import '../features/bookAppointmentScreen/patient_details_screen.dart';
+import '../features/doctorListScreen/doctor_list_screen.dart';
+import '../features/homeScreen/home_screen.dart';
+import '../features/onBoarding/screens/complete_profile_screen.dart';
+import '../features/onBoarding/screens/on_boarding_screen.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: splashScreenPath,

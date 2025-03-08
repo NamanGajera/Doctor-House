@@ -1,3 +1,7 @@
+class SharedPreferencesKeys {
+  static const String accessTokenKey = "accessToken";
+}
+
 const String themeKey = 'isDarkTheme';
 const String spLoginKey = 'isAlreadyLogin';
 const String spOnBoardingKey = 'isOnboarding';

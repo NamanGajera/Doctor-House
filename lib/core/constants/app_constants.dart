@@ -1,3 +1,7 @@
+/// API Constants
+String? accessToken;
+
+/// User Constants
 String? userName;
 String? userEmail;
 String? userRole;
