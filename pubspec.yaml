@@ -6,7 +6,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.4
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -56,10 +56,6 @@ dependencies:
 
   # Country Code Picker
   country_code_picker: ^3.1.0
-
-  # Supabase
-  supabase_flutter: ^2.8.2
-
 
 
 

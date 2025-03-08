@@ -1,24 +1,13 @@
-import 'dart:developer';
 import 'dart:io';
 
-import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:doctor_house/core/constants/colors.dart';
-import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
-import 'package:doctor_house/routers/route_path.dart';
-import 'package:doctor_house/screens/completeProfileScreen/bloc/complete_profile_screen_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:toastification/toastification.dart';
 
 import '../../core/constants/widgets.dart';
-import '../../main.dart';
-import 'bloc/complete_profile_screen_event.dart';
-import 'bloc/complete_profile_screen_state.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({super.key});
@@ -82,83 +71,11 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<CompleteProfileScreenBloc, CompleteProfileScreenState>(
-        builder: (context, state) {
-          return completeProfileScreen();
-        },
-        listener: (context, state) async {
-          if (state is CompleteProfileScreenErrorState) {
-            log('Errorrrrrrrrrrrrrrrrrrrrrr>>>  ${state.firebaseFailure.message}');
-            CustomToast.show(
-              context: context,
-              title: Text(
-                state.firebaseFailure.message,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 17,
-                ),
-              ),
-              alignment: Alignment.bottomCenter,
-              callbacks: ToastificationCallbacks(onTap: (val) {
-                log('On Toast Tap $val');
-              }),
-              showProgressBar: false,
-              dragToClose: true,
-              style: ToastificationStyle.fillColored,
-              primaryColor: Colors.black,
-              foregroundColor: Colors.black,
-              icon: const Icon(
-                Icons.error_outline,
-                color: Colors.white,
-              ),
-              backgroundColor: Colors.black,
-            );
-          }
-          if (state is AddUserProfileDataEventState) {
-            log('Data Updated ===>>>>');
-            CustomToast.show(
-              context: context,
-              title: const Text(
-                'Profile Data Updated',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 17,
-                ),
-              ),
-              alignment: Alignment.bottomCenter,
-              showProgressBar: false,
-              dragToClose: true,
-              style: ToastificationStyle.fillColored,
-              primaryColor: Colors.black,
-              foregroundColor: Colors.black,
-              icon: const Icon(
-                Icons.error_outline,
-                color: Colors.white,
-              ),
-              backgroundColor: Colors.black,
-            );
-            prefs.setBool(spProfileDataAdd, true);
-            prefs.setString(spUserProfile, state.userModel.profilePicture);
-            prefs.setString(spUserFirstName, state.userModel.firstName);
-            prefs.setString(spUserLastName, state.userModel.lastName);
-            prefs.setString(spUserMobileNumber, state.userModel.phoneNumber);
-
-            userFirstName = state.userModel.firstName;
-            userLastName = state.userModel.lastName;
-            userProfile = state.userModel.profilePicture;
-            userMobileNumber = state.userModel.phoneNumber;
-
-            context.pushReplacement(homeScreenPath);
-          }
-        },
-      ),
+      body: completeProfileScreen(),
     );
   }
 
   Widget completeProfileScreen() {
-    final completeProfileScreenBloc = context.read<CompleteProfileScreenBloc>();
     return KeyboardDismissOnTap(
       dismissOnCapturedTaps: true,
       child: SingleChildScrollView(
@@ -326,9 +243,10 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   height: 25,
                   width: 25,
                   child: Checkbox(
-                    value: completeProfileScreenBloc.isCheck,
+                    // value: completeProfileScreenBloc.isCheck,
+                    value: true,
                     onChanged: (val) {
-                      completeProfileScreenBloc.add(ToggleCheckBoxEvent());
+                      // completeProfileScreenBloc.add(ToggleCheckBoxEvent());
                     },
                   ),
                 ),
@@ -336,65 +254,19 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 Text('I confirm that I have read and agree to the Terms of Service and Privacy Policy.',
                         style: Theme.of(context).textTheme.labelMedium)
                     .onTap(() {
-                  completeProfileScreenBloc.add(ToggleCheckBoxEvent());
+                  // completeProfileScreenBloc.add(ToggleCheckBoxEvent());
                 }).expand(),
               ],
             ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
             const SizedBox(height: 50),
             CustomButton(
               label: 'Continue',
-              onPressed: completeProfileScreenBloc.isCheck
-                  ? () {
-                      if (_formKey.currentState!.validate()) {
-                        log('User Data====>>>>>  ${{
-                          'id': userId,
-                          'firstName': _firstNameController.text.trim(),
-                          'lastName': _lastNameController.text.trim(),
-                          'phoneNumber': _phoneController.text.trim(),
-                          'imageFile': _imageFile,
-                        }}');
-
-                        if (_imageFile == null) {
-                          CustomToast.show(
-                            context: context,
-                            title: const Text(
-                              'Add Profile Image',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 17,
-                              ),
-                            ),
-                            alignment: Alignment.bottomCenter,
-                            showProgressBar: false,
-                            dragToClose: true,
-                            autoCloseDuration: const Duration(seconds: 2),
-                            style: ToastificationStyle.fillColored,
-                            primaryColor: Colors.black,
-                            foregroundColor: Colors.black,
-                            icon: const Icon(
-                              Icons.error_outline,
-                              color: Colors.white,
-                            ),
-                            backgroundColor: Colors.black,
-                          );
-                        } else {
-                          completeProfileScreenBloc.add(AddUserProfileDataEvent({
-                            'id': userId,
-                            'firstName': _firstNameController.text.trim(),
-                            'lastName': _lastNameController.text.trim(),
-                            'phoneNumber': _phoneController.text.trim(),
-                            'imageFile': _imageFile,
-                          }));
-                        }
-                      }
-                    }
-                  : () {},
-              textColor: completeProfileScreenBloc.isCheck ? Colors.white : Colors.black,
-              color: completeProfileScreenBloc.isCheck ? primaryBlueColor : Colors.grey.shade400,
+              onPressed: () {},
+              // textColor: completeProfileScreenBloc.isCheck ? Colors.white : Colors.black,
+              // color: completeProfileScreenBloc.isCheck ? primaryBlueColor : Colors.grey.shade400,
               borderRadius: 12,
               width: double.infinity,
-              isLoading: completeProfileScreenBloc.isLoading,
+              // isLoading: completeProfileScreenBloc.isLoading,
               padding: const EdgeInsets.symmetric(vertical: 11),
             ).centered().withPadding(const EdgeInsets.symmetric(horizontal: 18)),
           ],

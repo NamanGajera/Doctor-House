@@ -1,26 +1,15 @@
-import 'dart:developer';
-
 import 'package:animate_do/animate_do.dart';
-import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/constants/images.dart';
-import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
 import 'package:doctor_house/core/constants/widgets.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/routers/route_path.dart';
-import 'package:doctor_house/screens/authScreen/bloc/loginScreenBloc/login_screen_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toastification/toastification.dart';
-
-import 'bloc/loginScreenBloc/login_screen_event.dart';
-import 'bloc/loginScreenBloc/login_screen_state.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -42,73 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<LoginScreenBloc, LoginScreenState>(builder: (context, state) {
-        return mainLoginScreen(state);
-      }, listener: (context, state) async {
-        if (state is FailureState) {
-          CustomToast.show(
-            context: context,
-            title: Text(
-              state.firebaseFailure.message,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 17,
-              ),
-            ),
-            alignment: Alignment.bottomCenter,
-            callbacks: ToastificationCallbacks(onTap: (val) {
-              log('On Toast Tap $val');
-            }),
-            showProgressBar: false,
-            dragToClose: true,
-            style: ToastificationStyle.fillColored,
-            primaryColor: Colors.black,
-            foregroundColor: Colors.black,
-            icon: const Icon(
-              Icons.error_outline,
-              color: Colors.white,
-            ),
-            backgroundColor: Colors.black,
-          );
-        }
-        if (state is LoginUserEventState) {
-          log('Login Done===>>> ${state.userModel.email}');
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-
-          prefs.setString(spUserEmail, state.userModel.email ?? '');
-          prefs.setString(spUserId, state.userModel.id);
-          prefs.setString(spUserName, state.userModel.fullName ?? '');
-          prefs.setString(spUserRole, state.userModel.role ?? '3');
-          prefs.setBool(spLoginKey, true);
-          prefs.setBool(spOnBoardingKey, true);
-          prefs.setString(spUserProfile, state.userModel.profilePicture ?? '');
-          prefs.setString(spUserFirstName, state.userModel.firstName ?? '');
-          prefs.setString(spUserLastName, state.userModel.lastName ?? '');
-          prefs.setString(spUserMobileNumber, state.userModel.phoneNumber ?? '');
-
-          profileDone = prefs.getBool(spProfileDataAdd);
-          userEmail = state.userModel.email;
-          userId = state.userModel.id;
-          userRole = state.userModel.role;
-          userName = state.userModel.fullName;
-          userFirstName = state.userModel.firstName;
-          userLastName = state.userModel.lastName;
-          userProfile = state.userModel.profilePicture;
-          userMobileNumber = state.userModel.phoneNumber;
-
-          log('UserId >>>  $userId');
-          if (profileDone == true || state.userModel.isProfileDone == true) {
-            context.replace(homeScreenPath);
-          } else {
-            context.replace(completeProfileScreenPath);
-          }
-        }
-      }),
+      body: mainLoginScreen(),
     );
   }
 
-  Widget mainLoginScreen(LoginScreenState state) {
+  Widget mainLoginScreen() {
     return KeyboardDismissOnTap(
       dismissOnCapturedTaps: true,
       child: Scaffold(
@@ -182,35 +109,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 8,
                       ),
-                      BlocBuilder<LoginScreenBloc, LoginScreenState>(
-                        builder: (context, state) {
-                          final showPassword = state is TogglePasswordVisibilityEventState ? state.showPassword : false;
-                          return CustomTextField(
-                            controller: passwordController,
-                            hintText: 'Enter Password',
-                            textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
-                            hintStyle: Theme.of(context).textTheme.bodySmall,
-                            cursorColor: primaryDarkBlueColor,
-                            prefixIcon: Icons.email,
-                            borderColor: primaryDarkBlueColor,
-                            disabledBorderColor: primaryDarkBlueColor,
-                            enabledBorderColor: primaryDarkBlueColor,
-                            focusedBorderColor: primaryDarkBlueColor,
-                            obscureText: showPassword,
-                            suffixIcon: showPassword ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
-                            onTapSuffixIcon: () {
-                              context.read<LoginScreenBloc>().add(TogglePasswordVisibilityEvent());
-                            },
-                            prefixIconColor: Colors.grey,
-                            contentPadding: EdgeInsets.zero,
-                            borderWidth: 1.5,
-                            validator: (value) {
-                              if (value!.isNullOrEmpty) {
-                                return 'Enter Password';
-                              }
-                              return null;
-                            },
-                          );
+                      CustomTextField(
+                        controller: passwordController,
+                        hintText: 'Enter Password',
+                        textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
+                        hintStyle: Theme.of(context).textTheme.bodySmall,
+                        cursorColor: primaryDarkBlueColor,
+                        prefixIcon: Icons.email,
+                        borderColor: primaryDarkBlueColor,
+                        disabledBorderColor: primaryDarkBlueColor,
+                        enabledBorderColor: primaryDarkBlueColor,
+                        focusedBorderColor: primaryDarkBlueColor,
+                        obscureText: showPassword,
+                        suffixIcon: showPassword ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
+                        onTapSuffixIcon: () {
+                          // context.read<LoginScreenBloc>().add(TogglePasswordVisibilityEvent());
+                        },
+                        prefixIconColor: Colors.grey,
+                        contentPadding: EdgeInsets.zero,
+                        borderWidth: 1.5,
+                        validator: (value) {
+                          if (value!.isNullOrEmpty) {
+                            return 'Enter Password';
+                          }
+                          return null;
                         },
                       ),
 
@@ -228,20 +150,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 25,
                       ),
                       CustomButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            log('Login Data====>>  ${{
-                              'email': emailController.text.trim(),
-                              'password': passwordController.text.trim(),
-                            }}');
-
-                            context.read<LoginScreenBloc>().add(LoginUserEvent(
-                                  emailController.text.trim(),
-                                  passwordController.text.trim(),
-                                ));
-                          }
-                        },
-                        isLoading: state is LoginUserLoadingState,
+                        onPressed: () {},
+                        isLoading: false,
+                        // isLoading: state is LoginUserLoadingState,
                         label: 'Login',
                         textStyle: const TextStyle(
                           color: Colors.white,

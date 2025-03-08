@@ -1,26 +1,16 @@
-import 'dart:developer';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/routers/route_path.dart';
-import 'package:doctor_house/screens/authScreen/bloc/registerScreenBloc/register_screen_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toastification/toastification.dart';
 
-import '../../core/constants/app_constants.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/images.dart';
-import '../../core/constants/shared_preferences_keys.dart';
 import '../../core/constants/widgets.dart';
-import 'bloc/registerScreenBloc/register_screen_event.dart';
-import 'bloc/registerScreenBloc/register_screen_state.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -43,66 +33,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<RegisterScreenBloc, RegisterScreenState>(builder: (context, state) {
-        return mainRegisterScreen(state);
-      }, listener: (context, state) async {
-        if (state is RegisterFailureState) {
-          CustomToast.show(
-            context: context,
-            title: Text(
-              state.firebaseFailure.message,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontSize: 17,
-              ),
-            ),
-            alignment: Alignment.bottomCenter,
-            callbacks: ToastificationCallbacks(onTap: (val) {
-              log('On Toast Tap $val');
-            }),
-            showProgressBar: false,
-            dragToClose: true,
-            style: ToastificationStyle.fillColored,
-            primaryColor: Colors.black,
-            foregroundColor: Colors.black,
-            icon: const Icon(
-              Icons.error_outline,
-              color: Colors.white,
-            ),
-            backgroundColor: Colors.black,
-          );
-          // log('Register Error=====>>>  ${state.firebaseFailure.message}');
-        }
-        if (state is RegisterUserEventState) {
-          log('User Register Success ===>>> ${state.user.createdAt}');
-          log('User Register Success ===>>> ${state.user.id}');
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-
-          prefs.setString(spUserEmail, state.user.email ?? '');
-          prefs.setString(spUserId, state.user.id);
-          prefs.setString(spUserName, state.user.fullName ?? '');
-          prefs.setString(spUserRole, state.user.role ?? '3');
-          prefs.setBool(spLoginKey, true);
-          prefs.setBool(spOnBoardingKey, true);
-          profileDone = prefs.getBool(spProfileDataAdd);
-
-          userEmail = state.user.email;
-          userId = state.user.id;
-          userRole = state.user.role;
-          userName = state.user.fullName;
-
-          if (profileDone == true || state.user.isProfileDone == true) {
-            context.replace(homeScreenPath);
-          } else {
-            context.replace(completeProfileScreenPath);
-          }
-        }
-      }),
+      body: mainRegisterScreen(),
     );
   }
 
-  Widget mainRegisterScreen(RegisterScreenState state) {
+  Widget mainRegisterScreen() {
     return KeyboardDismissOnTap(
       dismissOnCapturedTaps: true,
       child: Scaffold(
@@ -270,23 +205,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: 40,
                       ),
                       CustomButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            log('Register User Data ==>> ${{
-                              'email': emailController.text.toString(),
-                              'userName': userNameController.text.toString(),
-                              'password': passwordController.text.toString(),
-                            }}');
-                            setState(() {});
-                            context.read<RegisterScreenBloc>().add(RegisterUserEvent(
-                                  emailController.text.toString().trim(),
-                                  userNameController.text..toString().trim(),
-                                  passwordController.text.toString().trim(),
-                                ));
-                          }
-                        },
+                        onPressed: () {},
                         label: 'Register',
-                        isLoading: state is RegisterLoadingState,
+                        isLoading: false,
                         textStyle: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,

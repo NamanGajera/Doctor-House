@@ -32,7 +32,8 @@ class _SplashScreenState extends State<SplashScreen> {
     bool? isOnboarding = prefs.getBool(spOnBoardingKey);
 
     await Future.delayed(const Duration(seconds: 2));
-    navigateUser(isLogin, isOnboarding);
+    GoRouter.of(context).pushReplacement(completeProfileScreenPath);
+    // navigateUser(isLogin, isOnboarding);
   }
 
   Future<void> navigateUser(bool? isLogin, bool? isOnboarding) async {
