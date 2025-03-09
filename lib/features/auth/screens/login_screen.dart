@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/constants/images.dart';
+import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
 import 'package:doctor_house/core/constants/widgets.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
@@ -16,6 +18,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../../core/services/shared_prefs_helper.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -45,6 +49,22 @@ class _LoginScreenState extends State<LoginScreen> {
         }
         if (state is LoginUserEventState) {
           log("Login Success State ${state.authModel.toJson()}");
+          userName = state.authModel.user?.name ?? '';
+          userEmail = state.authModel.user?.email ?? '';
+          accessToken = state.authModel.token ?? '';
+          hasAcceptedConsent = state.authModel.user?.hasAcceptedConsent ?? false;
+
+          await SharedPrefsHelper().setString(SharedPreferencesKeys.accessTokenKey, accessToken ?? '');
+          await SharedPrefsHelper().setString(SharedPreferencesKeys.userNameKey, userName ?? '');
+          await SharedPrefsHelper().setString(SharedPreferencesKeys.userEmailKey, userEmail ?? '');
+          await SharedPrefsHelper().setBool(SharedPreferencesKeys.hasCompleteConsent, hasAcceptedConsent ?? false);
+          await SharedPrefsHelper().setBool(SharedPreferencesKeys.onBoardingDone, true);
+
+          if (hasAcceptedConsent == true) {
+            context.pushReplacement(homeScreenPath);
+          } else {
+            context.pushReplacement(completeProfileScreenPath);
+          }
         }
       }),
     );

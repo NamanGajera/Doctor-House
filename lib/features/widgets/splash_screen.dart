@@ -4,6 +4,7 @@ import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/core/services/shared_prefs_helper.dart';
 import 'package:doctor_house/routers/route_path.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -28,12 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
   checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    bool? isLogin = prefs.getBool(spLoginKey);
-    bool? isOnboarding = prefs.getBool(spOnBoardingKey);
+    accessToken = SharedPrefsHelper().getString(SharedPreferencesKeys.accessTokenKey);
+    bool? isOnboarding = prefs.getBool(SharedPreferencesKeys.onBoardingDone);
 
     await Future.delayed(const Duration(seconds: 2));
-    // GoRouter.of(context).pushReplacement(completeProfileScreenPath);
-    navigateUser(isLogin, isOnboarding);
+    // GoRouter.of(context).pushReplacement(homeScreenPath);
+    navigateUser(accessToken != null, isOnboarding);
   }
 
   Future<void> navigateUser(bool? isLogin, bool? isOnboarding) async {
@@ -42,25 +43,16 @@ class _SplashScreenState extends State<SplashScreen> {
       log('Onboarding');
       GoRouter.of(context).pushReplacement(onBoardingScreenPath);
     } else if (isLogin == true) {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      userEmail = prefs.getString(spUserEmail);
-      userId = prefs.getString(spUserId);
-      userName = prefs.getString(spUserName);
-      userRole = prefs.getString(spUserRole);
-      profileDone = prefs.getBool(spProfileDataAdd);
-      userFirstName = prefs.getString(spUserFirstName);
-      userLastName = prefs.getString(spUserLastName);
-      userProfile = prefs.getString(spUserProfile);
-      userMobileNumber = prefs.getString(spUserMobileNumber);
-      log('Home');
+      userEmail = SharedPrefsHelper().getString(SharedPreferencesKeys.userEmailKey);
+      userName = SharedPrefsHelper().getString(SharedPreferencesKeys.userNameKey);
+      hasAcceptedConsent = SharedPrefsHelper().getBool(SharedPreferencesKeys.hasCompleteConsent);
 
-      if (profileDone == true) {
+      if (hasAcceptedConsent == true) {
         GoRouter.of(context).pushReplacement(homeScreenPath);
       } else {
         GoRouter.of(context).pushReplacement(completeProfileScreenPath);
       }
     } else {
-      log('Login');
       GoRouter.of(context).pushReplacement(loginScreenPath);
     }
   }

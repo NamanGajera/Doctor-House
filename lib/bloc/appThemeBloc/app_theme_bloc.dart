@@ -16,11 +16,11 @@ class AppThemeBloc extends Bloc<AppThemeEvent, AppThemeState> {
 
   void _toggleThe(ToggleThemeEvent event, Emitter<AppThemeState> emit) {
     darkTheme = !darkTheme;
-    sharedPreferences.setBool(themeKey, darkTheme);
+    sharedPreferences.setBool(SharedPreferencesKeys.themeKey, darkTheme);
     emit(ToggleThemeEventState(darkTheme));
   }
 
   Future<void> _loadTheme() async {
-    darkTheme = sharedPreferences.getBool(themeKey) ?? false;
+    darkTheme = sharedPreferences.getBool(SharedPreferencesKeys.themeKey) ?? false;
   }
 }

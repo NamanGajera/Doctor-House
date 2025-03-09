@@ -1,8 +1,10 @@
 // lib/core/di/dependency_injection.dart
 
+import 'package:doctor_house/features/onBoarding/bloc/on_boardin_screen_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../bloc/appThemeBloc/app_theme_bloc.dart';
 import '../../features/auth/bloc/auth_bloc.dart';
 import '../network/api_repository.dart';
 import '../network/api_service.dart';
@@ -25,12 +27,8 @@ Future<void> setupDependencies() async {
         apiRepository: getIt<ApiRepository>(),
         sharedPreferences: getIt<SharedPreferences>(),
       ));
-  //
-  // getIt.registerFactory<UserBloc>(() => UserBloc(
-  //       apiRepository: getIt<ApiRepository>(),
-  //     ));
-  //
-  // getIt.registerFactory<ProductsBloc>(() => ProductsBloc(
-  //       apiRepository: getIt<ApiRepository>(),
-  //     ));
+
+  getIt.registerFactory<AppThemeBloc>(() => AppThemeBloc(sharedPreferences: getIt<SharedPreferences>()));
+
+  getIt.registerFactory<OnboardingBloc>(() => OnboardingBloc(sharedPreferences: getIt<SharedPreferences>()));
 }
