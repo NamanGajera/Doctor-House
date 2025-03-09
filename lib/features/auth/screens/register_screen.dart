@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/features/auth/bloc/auth_bloc.dart';
+import 'package:doctor_house/features/auth/bloc/auth_event.dart';
+import 'package:doctor_house/features/auth/bloc/auth_state.dart';
 import 'package:doctor_house/routers/route_path.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +39,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: mainRegisterScreen(),
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthFailureState) {
+            log("Register User Error == >> ${state.message}");
+          }
+          if (state is RegisterUserEventState) {
+            log("User Register Success ==>>> ${state.authModel.toJson()}");
+          }
+        },
+        child: mainRegisterScreen(),
+      ),
     );
   }
 
@@ -204,18 +220,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const SizedBox(
                         height: 40,
                       ),
-                      CustomButton(
-                        onPressed: () {},
-                        label: 'Register',
-                        isLoading: false,
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                        ),
-                        color: primaryBlueColor,
-                        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
-                      ).centered(),
+                      BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
+                        return CustomButton(
+                          onPressed: () {
+                            context.read<AuthBloc>().add(RegisterUserEvent(registerUserData: {
+                                  "name": userNameController.text.trim(),
+                                  "email": emailController.text.trim(),
+                                  "password": passwordController.text.trim(),
+                                }));
+                          },
+                          label: 'Register',
+                          isLoading: state is AuthLoadingState,
+                          textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                          ),
+                          color: primaryBlueColor,
+                          padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+                        ).centered();
+                      }),
                       const SizedBox(
                         height: 30,
                       ),

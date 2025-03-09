@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:doctor_house/features/auth/bloc/auth_event.dart';
 import 'package:doctor_house/features/auth/bloc/auth_state.dart';
 import 'package:doctor_house/features/auth/models/auth_model.dart';
@@ -17,6 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.sharedPreferences,
   }) : super(AuthInitialState()) {
     on<LoginUserEvent>(_onLogin);
+    on<RegisterUserEvent>(_onRegister);
     on<TogglePasswordVisibilityEvent>(_togglePasswordEvent);
   }
 
@@ -34,7 +37,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoadingState());
       authModel = await apiRepository.login(event.loginUserData);
       emit(LoginUserEventState(authModel));
-    } catch (error) {
+    } catch (error, stackTrace) {
+      log("Error==>> $error ==>> $stackTrace");
+      _handleError(error, emit);
+    }
+  }
+
+  Future<void> _onRegister(RegisterUserEvent event, Emitter<AuthState> emit) async {
+    AuthModel authModel;
+    try {
+      emit(AuthLoadingState());
+      authModel = await apiRepository.registerUser(event.registerUserData);
+      emit(RegisterUserEventState(authModel));
+    } catch (error, stackTrace) {
+      log("Error==>> $error ==>> $stackTrace");
       _handleError(error, emit);
     }
   }

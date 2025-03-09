@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
         return mainLoginScreen(state);
       }, listener: (context, state) async {
         if (state is AuthFailureState) {
-          log("Login Error ${state.message}  ${state.message}");
+          log("Login Error ${state.message}");
         }
         if (state is LoginUserEventState) {
           log("Login Success State ${state.authModel.toJson()}");
