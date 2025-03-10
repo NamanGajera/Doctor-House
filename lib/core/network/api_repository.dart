@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import '../../features/auth/models/auth_model.dart';
+import '../../features/onBoarding/model/complete_profile_model.dart';
 import '../constants/api_end_point.dart';
 import 'api_service.dart';
 
@@ -28,6 +29,18 @@ class ApiRepository {
       AuthModel authModel = AuthModel.fromJson(response);
       log("Register Data ==>> ${authModel.toJson()}");
       return authModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// POST: Complete Profile
+  Future<CompleteProfileModel> completeProfile(dynamic body) async {
+    try {
+      Map<String, dynamic> response =
+          await _apiService.multipartPostApiCall(completeProfileEndPoint, fields: body, fileKey: 'profileImage');
+      CompleteProfileModel completeProfileModel = CompleteProfileModel.fromJson(response);
+      return completeProfileModel;
     } catch (e) {
       rethrow;
     }

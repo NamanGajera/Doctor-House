@@ -5,7 +5,6 @@ import 'dart:io';
 import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:path/path.dart';
 
 import '../constants/api_end_point.dart';
 import 'api_exceptions.dart';
@@ -87,35 +86,69 @@ class ApiService {
     }
   }
 
-  // Multipart Request (for file uploads)
-  Future<dynamic> multipartRequest(String endpoint, Map<String, String> fields, List<Map<String, dynamic>> files) async {
-    try {
-      log('Api Route $baseUrl$endpoint');
-      final request = http.MultipartRequest('POST', Uri.parse('$baseUrl$endpoint'));
+  Future<dynamic> multipartPostApiCall(
+    String endPoint, {
+    String? fileKey,
+    Map<String, dynamic>? fields,
+  }) async {
+    var getUrl = '$baseUrl$endPoint';
+    var request = http.MultipartRequest('POST', Uri.parse(getUrl));
 
-      // Add headers
-      request.headers.addAll(_getHeaders());
+    request.headers.addAll(_getHeaders());
 
-      // Add text fields
-      request.fields.addAll(fields);
+    // Add form fields if provided
+    if (fields != null) {
+      for (var key in fields.keys) {
+        var value = fields[key];
+        log('Value $key >>> $value');
+        log('Value Runtime Type $key >>> ${value.runtimeType}');
 
-      // Add files
-      for (var file in files) {
-        final httpFile = await http.MultipartFile.fromPath(
-          file['field'] as String,
-          file['path'] as String,
-          contentType: MediaType(
-            file['contentType']?['type'] as String? ?? 'application',
-            file['contentType']?['subType'] as String? ?? 'octet-stream',
-          ),
-          filename: basename(file['path'] as String),
-        );
-        request.files.add(httpFile);
+        if (key == (fileKey ?? "profileImage") && value is List<File>) {
+          List<File> attachments = value;
+          log('attachments $attachments');
+
+          for (var entry in attachments) {
+            log('entry $entry');
+            String fileExtension = entry.path.split('.').last.toLowerCase();
+            MediaType contentType;
+
+            if (['jpg', 'jpeg', 'png', 'gif', 'bmp'].contains(fileExtension)) {
+              contentType = MediaType('image', fileExtension);
+            } else if (['mp4', 'mov', 'avi', 'mkv', 'flv'].contains(fileExtension)) {
+              contentType = MediaType('video', fileExtension);
+            } else {
+              continue; // Skip unsupported files
+            }
+
+            log('path ${entry.path} contentType $contentType');
+
+            request.files.add(await http.MultipartFile.fromPath(key, entry.path, contentType: contentType));
+          }
+        } else if (key == (fileKey ?? "profileImage") && (value is File)) {
+          String fileExtension = value.path.split('.').last.toLowerCase();
+          MediaType contentType;
+
+          if (['jpg', 'jpeg', 'png', 'gif', 'bmp'].contains(fileExtension)) {
+            contentType = MediaType('image', fileExtension);
+            request.files.add(await http.MultipartFile.fromPath(key, value.path, contentType: contentType));
+          } else if (['mp4', 'mov', 'avi', 'mkv', 'flv'].contains(fileExtension)) {
+            contentType = MediaType('video', fileExtension);
+            request.files.add(await http.MultipartFile.fromPath(key, value.path, contentType: contentType));
+          }
+        } else {
+          request.fields[key] = value.toString();
+        }
       }
+    }
 
-      final streamedResponse = await request.send();
-      final response = await http.Response.fromStream(streamedResponse);
-      return _handleResponse(response);
+    log("Multipart POST URL: $getUrl");
+
+    var postResponseJson;
+
+    try {
+      var streamedResponse = await request.send();
+      var response = await http.Response.fromStream(streamedResponse);
+      postResponseJson = _handleResponse(response);
     } on SocketException {
       throw ConnectionException('No internet connection');
     } on http.ClientException catch (e) {
@@ -123,6 +156,8 @@ class ApiService {
     } catch (e) {
       throw UnknownException(e.toString());
     }
+
+    return postResponseJson;
   }
 
   // Handle API response

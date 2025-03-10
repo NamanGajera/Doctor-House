@@ -73,11 +73,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         },
         child: BlocBuilder<OnboardingBloc, OnboardingState>(
           builder: (context, state) {
-            int currentPage = 0;
-
-            if (state is OnboardingPageChangedState) {
-              currentPage = state.pageIndex;
-            }
+            int currentPage = state.pageIndex;
 
             return Stack(
               children: [

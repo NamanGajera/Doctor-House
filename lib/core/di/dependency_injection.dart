@@ -30,5 +30,5 @@ Future<void> setupDependencies() async {
 
   getIt.registerFactory<AppThemeBloc>(() => AppThemeBloc(sharedPreferences: getIt<SharedPreferences>()));
 
-  getIt.registerFactory<OnboardingBloc>(() => OnboardingBloc(sharedPreferences: getIt<SharedPreferences>()));
+  getIt.registerFactory<OnboardingBloc>(() => OnboardingBloc(apiRepository: getIt<ApiRepository>()));
 }

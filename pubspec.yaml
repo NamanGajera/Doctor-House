@@ -30,8 +30,9 @@ dependencies:
   # Data Store
   shared_preferences: ^2.3.3
 
-  # Bloc
+  # Bloc & Equatable
   flutter_bloc: ^8.1.6
+  equatable: ^2.0.7
 
   # Animation
   animate_do: ^3.3.4
@@ -62,6 +63,9 @@ dependencies:
 
   # Dependency Injection
   get_it: ^8.0.3
+
+  # DropDown
+  dropdown_button2: ^2.3.9
 
 
 

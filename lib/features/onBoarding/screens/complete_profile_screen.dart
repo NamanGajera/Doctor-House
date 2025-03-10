@@ -1,13 +1,18 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/features/onBoarding/bloc/on_boardin_screen_event.dart';
+import 'package:doctor_house/features/onBoarding/bloc/on_boardin_screen_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../core/constants/widgets.dart';
+import '../bloc/on_boardin_screen_bloc.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({super.key});
@@ -22,56 +27,21 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
-  final String _selectedGender = '';
-  final bool _termsAccepted = false;
-  final String _selectedCountryCode = '+1';
-
-  Future<void> _pickImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().pickImage(source: source);
-    if (pickedFile != null) {
-      setState(() {
-        _imageFile = File(pickedFile.path);
-      });
-    }
-  }
-
-  void _showImagePickerBottomSheet() {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-      ),
-      builder: (context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.camera_alt),
-              title: const Text('Take a photo'),
-              onTap: () {
-                Navigator.pop(context);
-                _pickImage(ImageSource.camera);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.photo_library),
-              title: const Text('Choose from gallery'),
-              onTap: () {
-                Navigator.pop(context);
-                _pickImage(ImageSource.gallery);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: completeProfileScreen(),
+      body: BlocListener<OnboardingBloc, OnboardingState>(
+        listener: (context, state) {
+          if (state is CompleteProfileEventState) {
+            log('Complete Profile Success');
+          }
+          if (state is AuthFailureState) {
+            log('Complete Profile Error ==>>> ${state.message}');
+          }
+        },
+        child: completeProfileScreen(),
+      ),
     );
   }
 
@@ -141,9 +111,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// First Name
-                  Text(
+                  CustomText.titleMedium(
                     'First Name',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
+                    fontSize: 15,
                   ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
                   const SizedBox(
                     height: 8,
@@ -172,9 +142,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   const SizedBox(height: 20),
 
                   /// Last Name
-                  Text(
+                  CustomText.titleMedium(
                     'Last Name',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
+                    fontSize: 15,
                   ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
                   const SizedBox(
                     height: 8,
@@ -203,9 +173,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   const SizedBox(height: 20),
 
                   /// Phone Number Name
-                  Text(
+                  CustomText.titleMedium(
                     'Phone Number',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 15),
+                    fontSize: 15,
                   ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
                   const SizedBox(
                     height: 8,
@@ -232,43 +202,131 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       return null;
                     },
                   ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(height: 20),
+
+                  /// Gender Dropdown
+                  CustomText.titleMedium(
+                    'Gender',
+                    fontSize: 15,
+                  ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(height: 8),
+                  BlocBuilder<OnboardingBloc, OnboardingState>(builder: (context, state) {
+                    return CustomDropdown<String>(
+                      items: ['Male', 'Female', 'Other'],
+                      hintText: 'Select Gender',
+                      value: state.selectedGender,
+                      borderColor: primaryDarkBlueColor,
+                      onChanged: (value) {
+                        context.read<OnboardingBloc>().add(SelectGenderEvent(value));
+                      },
+                      enabledBorderColor: primaryDarkBlueColor,
+                      focusedBorderColor: primaryDarkBlueColor,
+                      disabledBorderColor: primaryDarkBlueColor,
+                      itemBuilder: (item) => CustomText(item),
+                    ).withPadding(const EdgeInsets.symmetric(horizontal: 18));
+                  }),
                 ],
               ),
             ),
             const SizedBox(height: 30),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 25,
-                  width: 25,
-                  child: Checkbox(
-                    // value: completeProfileScreenBloc.isCheck,
-                    value: true,
-                    onChanged: (val) {
-                      // completeProfileScreenBloc.add(ToggleCheckBoxEvent());
-                    },
+            BlocBuilder<OnboardingBloc, OnboardingState>(builder: (context, state) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 25,
+                    width: 25,
+                    child: Checkbox(
+                      value: state.isChecked,
+                      onChanged: (val) {
+                        context.read<OnboardingBloc>().add(ToggleConformationCheckBoxEvent());
+                      },
+                    ),
                   ),
-                ),
-                const SizedBox(width: 5),
-                Text('I confirm that I have read and agree to the Terms of Service and Privacy Policy.',
-                        style: Theme.of(context).textTheme.labelMedium)
-                    .onTap(() {
-                  // completeProfileScreenBloc.add(ToggleCheckBoxEvent());
-                }).expand(),
-              ],
-            ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(width: 5),
+                  Text('I confirm that I have read and agree to the Terms of Service and Privacy Policy.',
+                          style: Theme.of(context).textTheme.labelMedium)
+                      .onTap(() {
+                    // completeProfileScreenBloc.add(ToggleCheckBoxEvent());
+                  }).expand(),
+                ],
+              ).withPadding(const EdgeInsets.symmetric(horizontal: 18));
+            }),
             const SizedBox(height: 50),
-            CustomButton(
-              label: 'Continue',
-              onPressed: () {},
-              // textColor: completeProfileScreenBloc.isCheck ? Colors.white : Colors.black,
-              // color: completeProfileScreenBloc.isCheck ? primaryBlueColor : Colors.grey.shade400,
-              borderRadius: 12,
-              width: double.infinity,
-              // isLoading: completeProfileScreenBloc.isLoading,
-              padding: const EdgeInsets.symmetric(vertical: 11),
-            ).centered().withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+            BlocBuilder<OnboardingBloc, OnboardingState>(builder: (context, state) {
+              return CustomButton(
+                label: 'Continue',
+                onPressed: () {
+                  if (state.isChecked) {
+                    log('Consent Form Data ==>>> ${{
+                      "profileImage": _imageFile == null ? null : _imageFile!,
+                      "firstName": _firstNameController.text.trim(),
+                      "lastName": _lastNameController.text.trim(),
+                      "phoneNumber": _phoneController.text.trim(),
+                      "gender": state.selectedGender,
+                    }}');
+
+                    context.read<OnboardingBloc>().add(CompleteProfileEvent(
+                          {
+                            "profileImage": _imageFile,
+                            "firstName": _firstNameController.text.trim(),
+                            "lastName": _lastNameController.text.trim(),
+                            "phoneNumber": _phoneController.text.trim(),
+                            "gender": state.selectedGender,
+                          },
+                        ));
+                  }
+                },
+                textColor: state.isChecked ? Colors.white : Colors.black,
+                color: state.isChecked ? primaryBlueColor : Colors.grey.shade400,
+                borderRadius: 12,
+                width: double.infinity,
+                isLoading: state.showLoader,
+                padding: const EdgeInsets.symmetric(vertical: 11),
+              ).centered().withPadding(const EdgeInsets.symmetric(horizontal: 18));
+            }),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _pickImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path);
+      });
+    }
+  }
+
+  void _showImagePickerBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+      ),
+      builder: (context) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.camera_alt),
+              title: const Text('Take a photo'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickImage(ImageSource.camera);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Choose from gallery'),
+              onTap: () {
+                Navigator.pop(context);
+                _pickImage(ImageSource.gallery);
+              },
+            ),
           ],
         ),
       ),
