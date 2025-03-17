@@ -1,120 +1,80 @@
 class CompleteProfileModel {
   int? statusCode;
-  Data? data;
   String? message;
+  User? user;
 
-  CompleteProfileModel({this.statusCode, this.data, this.message});
+  CompleteProfileModel({this.statusCode, this.message, this.user});
 
   CompleteProfileModel.fromJson(Map<String, dynamic> json) {
     statusCode = json['statusCode'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
     message = json['message'];
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['statusCode'] = this.statusCode;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
     data['message'] = this.message;
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
+    }
     return data;
   }
 }
 
-class Data {
+class User {
   String? id;
+  String? name;
   String? firstName;
   String? lastName;
-  String? phoneNumber;
+  String? email;
   String? gender;
+  String? mobileNumber;
   int? age;
-  String? profileImageUrl;
-  String? bloodGroup;
-  List<String>? allergies;
-  List<String>? medicalConditions;
-  Null? emergencyContact;
-  PrivacySettings? privacySettings;
-  String? consentDate;
+  String? profileImage;
+  String? role;
+  bool? isProfileCompleted;
 
-  Data(
+  User(
       {this.id,
+      this.name,
       this.firstName,
       this.lastName,
-      this.phoneNumber,
+      this.email,
       this.gender,
+      this.mobileNumber,
       this.age,
-      this.profileImageUrl,
-      this.bloodGroup,
-      this.allergies,
-      this.medicalConditions,
-      this.emergencyContact,
-      this.privacySettings,
-      this.consentDate});
+      this.profileImage,
+      this.role,
+      this.isProfileCompleted});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    name = json['name'];
     firstName = json['firstName'];
     lastName = json['lastName'];
-    phoneNumber = json['phoneNumber'];
+    email = json['email'];
     gender = json['gender'];
+    mobileNumber = json['mobileNumber'];
     age = json['age'];
-    profileImageUrl = json['profileImageUrl'];
-    bloodGroup = json['bloodGroup'];
-
-    // Convert JSON list to List<String>
-    allergies = json['allergies'] != null ? List<String>.from(json['allergies']) : null;
-    medicalConditions = json['medicalConditions'] != null ? List<String>.from(json['medicalConditions']) : null;
-
-    emergencyContact = json['emergencyContact'];
-    privacySettings = json['privacySettings'] != null ? PrivacySettings.fromJson(json['privacySettings']) : null;
-    consentDate = json['consentDate'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['id'] = id;
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['phoneNumber'] = phoneNumber;
-    data['gender'] = gender;
-    data['age'] = age;
-    data['profileImageUrl'] = profileImageUrl;
-    data['bloodGroup'] = bloodGroup;
-
-    // Convert List<String> back to JSON format
-    if (allergies != null) {
-      data['allergies'] = allergies;
-    }
-    if (medicalConditions != null) {
-      data['medicalConditions'] = medicalConditions;
-    }
-
-    data['emergencyContact'] = emergencyContact;
-    if (privacySettings != null) {
-      data['privacySettings'] = privacySettings!.toJson();
-    }
-    data['consentDate'] = consentDate;
-
-    return data;
-  }
-}
-
-class PrivacySettings {
-  bool? dataSharing;
-  bool? marketingCommunication;
-
-  PrivacySettings({this.dataSharing, this.marketingCommunication});
-
-  PrivacySettings.fromJson(Map<String, dynamic> json) {
-    dataSharing = json['dataSharing'];
-    marketingCommunication = json['marketingCommunication'];
+    profileImage = json['profileImage'];
+    role = json['role'];
+    isProfileCompleted = json['isProfileCompleted'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['dataSharing'] = this.dataSharing;
-    data['marketingCommunication'] = this.marketingCommunication;
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['firstName'] = this.firstName;
+    data['lastName'] = this.lastName;
+    data['email'] = this.email;
+    data['gender'] = this.gender;
+    data['mobileNumber'] = this.mobileNumber;
+    data['age'] = this.age;
+    data['profileImage'] = this.profileImage;
+    data['role'] = this.role;
+    data['isProfileCompleted'] = this.isProfileCompleted;
     return data;
   }
 }

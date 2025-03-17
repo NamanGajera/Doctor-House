@@ -4,4 +4,4 @@ String loginUserEndPoint = '/auth/login';
 
 String registerUserEndPoint = '/auth/register';
 
-String completeProfileEndPoint = '/consent';
+String completeProfileEndPoint = '/complete-profile';

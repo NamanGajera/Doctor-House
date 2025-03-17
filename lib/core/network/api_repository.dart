@@ -37,8 +37,7 @@ class ApiRepository {
   /// POST: Complete Profile
   Future<CompleteProfileModel> completeProfile(dynamic body) async {
     try {
-      Map<String, dynamic> response =
-          await _apiService.multipartPostApiCall(completeProfileEndPoint, fields: body, fileKey: 'profileImage');
+      Map<String, dynamic> response = await _apiService.multipartPost(completeProfileEndPoint, body);
       CompleteProfileModel completeProfileModel = CompleteProfileModel.fromJson(response);
       return completeProfileModel;
     } catch (e) {

@@ -27,6 +27,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
+  final _ageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -204,6 +205,38 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
                   const SizedBox(height: 20),
 
+                  ///
+                  CustomText.titleMedium(
+                    'Age',
+                    fontSize: 15,
+                  ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  CustomTextField(
+                    controller: _ageController,
+                    hintText: 'Enter Age',
+                    keyboardType: TextInputType.phone,
+                    textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 16),
+                    hintStyle: Theme.of(context).textTheme.bodySmall,
+                    cursorColor: primaryDarkBlueColor,
+                    prefixIcon: Icons.phone,
+                    borderColor: primaryDarkBlueColor,
+                    disabledBorderColor: primaryDarkBlueColor,
+                    enabledBorderColor: primaryDarkBlueColor,
+                    focusedBorderColor: primaryDarkBlueColor,
+                    prefixIconColor: Colors.grey,
+                    contentPadding: EdgeInsets.zero,
+                    borderWidth: 1.5,
+                    validator: (value) {
+                      if (value!.isNullOrEmpty) {
+                        return 'Enter Age';
+                      }
+                      return null;
+                    },
+                  ).withPadding(const EdgeInsets.symmetric(horizontal: 18)),
+                  const SizedBox(height: 20),
+
                   /// Gender Dropdown
                   CustomText.titleMedium(
                     'Gender',
@@ -258,21 +291,23 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 label: 'Continue',
                 onPressed: () {
                   if (state.isChecked) {
-                    log('Consent Form Data ==>>> ${{
+                    log('Profile Form Data ==>>> ${{
                       "profileImage": _imageFile == null ? null : _imageFile!,
                       "firstName": _firstNameController.text.trim(),
                       "lastName": _lastNameController.text.trim(),
-                      "phoneNumber": _phoneController.text.trim(),
+                      "mobileNumber": _phoneController.text.trim(),
                       "gender": state.selectedGender,
+                      "age": _ageController.text.trim(),
                     }}');
 
                     context.read<OnboardingBloc>().add(CompleteProfileEvent(
                           {
-                            "profileImage": _imageFile,
+                            "profileImage": _imageFile == null ? null : _imageFile!,
                             "firstName": _firstNameController.text.trim(),
                             "lastName": _lastNameController.text.trim(),
-                            "phoneNumber": _phoneController.text.trim(),
+                            "mobileNumber": _phoneController.text.trim(),
                             "gender": state.selectedGender,
+                            "age": _ageController.text.trim(),
                           },
                         ));
                   }

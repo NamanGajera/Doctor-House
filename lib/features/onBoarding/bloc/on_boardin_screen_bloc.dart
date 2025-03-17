@@ -1,12 +1,12 @@
 import 'dart:developer';
 
-import 'package:doctor_house/features/onBoarding/model/complete_profile_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/network/api_exceptions.dart';
 import '../../../core/network/api_repository.dart';
 import '../../onBoarding/bloc/on_boardin_screen_event.dart';
 import '../../onBoarding/bloc/on_boardin_screen_state.dart';
+import '../model/complete_profile_model.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final ApiRepository apiRepository;
@@ -39,6 +39,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(state.copyWith(showLoader: true));
     try {
       CompleteProfileModel completeProfileModel = await apiRepository.completeProfile(event.completeProfileBody);
+      emit(CompleteProfileEventState(completeProfileModel));
     } catch (error, stackTrace) {
       log('Error==>> $error == > $stackTrace');
       _handleError(error, emit);
