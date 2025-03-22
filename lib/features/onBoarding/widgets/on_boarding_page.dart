@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/routers/route_path.dart';
@@ -7,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/constants/shared_preferences_keys.dart';
 import '../../../core/constants/widgets.dart';
+import '../../../core/services/shared_prefs_helper.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({
@@ -96,21 +96,21 @@ class OnBoardingPage extends StatelessWidget {
           /// Design for only last page
           islastpage
               ? Column(
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.height * 0.06),
-              CustomButton(
-                onPressed: (){
-                  log('Tappp');
-                  context.replace(loginScreenPath);
-                },
-                label: 'Let\'s Start',
-                color: primaryDarkBlueColor,
-                textColor: Colors.white,
-                fontSize: 16,
-                padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 12),
-              ),
-            ],
-          )
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.06),
+                    CustomButton(
+                      onPressed: () async {
+                        await SharedPrefsHelper().setBool(SharedPreferencesKeys.onBoardingDone, true);
+                        context.replace(loginScreenPath);
+                      },
+                      label: 'Let\'s Start',
+                      color: primaryDarkBlueColor,
+                      textColor: Colors.white,
+                      fontSize: 16,
+                      padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 12),
+                    ),
+                  ],
+                )
               : const SizedBox()
         ],
       ),

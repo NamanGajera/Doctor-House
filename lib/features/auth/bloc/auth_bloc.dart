@@ -12,7 +12,6 @@ import '../../../core/network/api_repository.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final ApiRepository apiRepository;
   final SharedPreferences sharedPreferences;
-  bool showPassword = false;
 
   AuthBloc({
     required this.apiRepository,
@@ -23,20 +22,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<TogglePasswordVisibilityEvent>(_togglePasswordEvent);
   }
 
-  _togglePasswordEvent(
-    TogglePasswordVisibilityEvent event,
-    Emitter<AuthState> emit,
-  ) {
-    showPassword = !showPassword;
-    emit(TogglePasswordVisibilityEventState(showPassword));
+  _togglePasswordEvent(TogglePasswordVisibilityEvent event, Emitter<AuthState> emit) {
+    state.copyWith(showPassword: !state.showPassword);
   }
 
   Future<void> _onLogin(LoginUserEvent event, Emitter<AuthState> emit) async {
     AuthModel authModel;
+    emit(state.copyWith(showLoader: true));
     try {
-      emit(AuthLoadingState());
       authModel = await apiRepository.login(event.loginUserData);
-      emit(LoginUserEventState(authModel));
+      emit(state.copyWith(loginUserModel: authModel));
     } catch (error, stackTrace) {
       log("Error==>> $error ==>> $stackTrace");
       _handleError(error, emit);
@@ -45,10 +40,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onRegister(RegisterUserEvent event, Emitter<AuthState> emit) async {
     AuthModel authModel;
+    emit(state.copyWith(showLoader: true));
     try {
-      emit(AuthLoadingState());
       authModel = await apiRepository.registerUser(event.registerUserData);
-      emit(RegisterUserEventState(authModel));
+      emit(state.copyWith(registerUserModel: authModel));
     } catch (error, stackTrace) {
       log("Error==>> $error ==>> $stackTrace");
       _handleError(error, emit);
@@ -56,6 +51,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _handleError(dynamic error, Emitter<AuthState> emit) {
+    emit(state.copyWith(showLoader: false));
     if (error is BadRequestException) {
       emit(AuthFailureState(statusCode: error.statusCode, message: error.message));
     } else if (error is UnauthorizedException) {

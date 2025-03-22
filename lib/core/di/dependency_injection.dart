@@ -1,5 +1,3 @@
-// lib/core/di/dependency_injection.dart
-
 import 'package:doctor_house/features/onBoarding/bloc/on_boardin_screen_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';

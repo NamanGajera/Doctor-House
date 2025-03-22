@@ -17,6 +17,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<ToggleConformationCheckBoxEvent>(_toggleConformationCheckBox);
     on<SelectGenderEvent>(_selectGender);
     on<CompleteProfileEvent>(_completeProfile);
+    on<SelectUserProfileImageEvent>(_selectUserProfile);
   }
 
   void _onSkipOnboarding(SkipOnboardingEvent event, Emitter<OnboardingState> emit) {
@@ -39,11 +40,15 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     emit(state.copyWith(showLoader: true));
     try {
       CompleteProfileModel completeProfileModel = await apiRepository.completeProfile(event.completeProfileBody);
-      emit(CompleteProfileEventState(completeProfileModel));
+      emit(state.copyWith(completeProfileModel: completeProfileModel));
     } catch (error, stackTrace) {
       log('Error==>> $error == > $stackTrace');
       _handleError(error, emit);
     }
+  }
+
+  void _selectUserProfile(SelectUserProfileImageEvent event, Emitter<OnboardingState> emit) {
+    emit(state.copyWith(selectedUserProfileImage: event.selectedFile));
   }
 
   void _handleError(dynamic error, Emitter<OnboardingState> emit) {

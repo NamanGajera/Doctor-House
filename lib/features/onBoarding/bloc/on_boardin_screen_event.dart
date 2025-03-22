@@ -1,3 +1,5 @@
+import 'dart:io';
+
 abstract class OnboardingEvent {}
 
 class OnboardingPageChangedEvent extends OnboardingEvent {
@@ -20,4 +22,10 @@ class CompleteProfileEvent extends OnboardingEvent {
   final Map<String, dynamic> completeProfileBody;
 
   CompleteProfileEvent(this.completeProfileBody);
+}
+
+class SelectUserProfileImageEvent extends OnboardingEvent {
+  final File? selectedFile;
+
+  SelectUserProfileImageEvent({required this.selectedFile});
 }

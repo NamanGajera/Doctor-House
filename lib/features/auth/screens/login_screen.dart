@@ -33,44 +33,41 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  /// Variables
-  bool showPassword = false;
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<AuthBloc, AuthState>(builder: (context, state) {
-        return mainLoginScreen(state);
-      }, listener: (context, state) async {
-        if (state is AuthFailureState) {
-          log("Login Error ${state.message}");
-        }
-        if (state is LoginUserEventState) {
-          log("Login Success State ${state.authModel.toJson()}");
-          userName = state.authModel.user?.name ?? '';
-          userEmail = state.authModel.user?.email ?? '';
-          accessToken = state.authModel.token ?? '';
-          hasAcceptedConsent = state.authModel.user?.hasAcceptedConsent ?? false;
-
-          await SharedPrefsHelper().setString(SharedPreferencesKeys.accessTokenKey, accessToken ?? '');
-          await SharedPrefsHelper().setString(SharedPreferencesKeys.userNameKey, userName ?? '');
-          await SharedPrefsHelper().setString(SharedPreferencesKeys.userEmailKey, userEmail ?? '');
-          await SharedPrefsHelper().setBool(SharedPreferencesKeys.hasCompleteConsent, hasAcceptedConsent ?? false);
-          await SharedPrefsHelper().setBool(SharedPreferencesKeys.onBoardingDone, true);
-
-          if (hasAcceptedConsent == true) {
-            context.pushReplacement(homeScreenPath);
-          } else {
-            context.pushReplacement(completeProfileScreenPath);
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) async {
+          if (state is AuthFailureState) {
+            log("Login Error ${state.message}");
           }
-        }
-      }),
+          if (state.loginUserModel != null) {
+            log("Login Success State ${state.loginUserModel?.toJson()}");
+            userName = state.loginUserModel?.user?.name ?? '';
+            userEmail = state.loginUserModel?.user?.email ?? '';
+            accessToken = state.loginUserModel?.token ?? '';
+            isCompleteProfileDone = state.loginUserModel?.user?.isCompleteProfileDone ?? false;
+
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.accessToken, accessToken ?? '');
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userName, userName ?? '');
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userEmail, userEmail ?? '');
+            await SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isCompleteProfileDone ?? false);
+
+            if (isCompleteProfileDone == true) {
+              context.pushReplacement(homeScreenPath);
+            } else {
+              context.pushReplacement(completeProfileScreenPath);
+            }
+          }
+        },
+        child: mainLoginScreen(),
+      ),
     );
   }
 
-  Widget mainLoginScreen(AuthState state) {
+  Widget mainLoginScreen() {
     return KeyboardDismissOnTap(
       dismissOnCapturedTaps: true,
       child: Scaffold(
@@ -146,7 +143,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       BlocBuilder<AuthBloc, AuthState>(
                         builder: (context, state) {
-                          final showPassword = state is TogglePasswordVisibilityEventState ? state.showPassword : false;
                           return CustomTextField(
                             controller: passwordController,
                             hintText: 'Enter Password',
@@ -159,8 +155,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             disabledBorderColor: primaryDarkBlueColor,
                             enabledBorderColor: primaryDarkBlueColor,
                             focusedBorderColor: primaryDarkBlueColor,
-                            obscureText: showPassword,
-                            suffixIcon: showPassword ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
+                            obscureText: state.showPassword,
+                            suffixIcon: state.showPassword ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
                             onTapSuffixIcon: () {
                               context.read<AuthBloc>().add(TogglePasswordVisibilityEvent());
                             },
@@ -190,27 +186,31 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 25,
                       ),
-                      CustomButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            log('Login Data====>>  ${{
-                              'email': emailController.text.trim(),
-                              'password': passwordController.text.trim(),
-                            }}');
+                      BlocBuilder<AuthBloc, AuthState>(
+                        builder: (context, state) {
+                          return CustomButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                log('Login Data====>>  ${{
+                                  'email': emailController.text.trim(),
+                                  'password': passwordController.text.trim(),
+                                }}');
 
-                            context.read<AuthBloc>().add(LoginUserEvent(
-                                loginUserData: {"email": emailController.text.trim(), "password": passwordController.text.trim()}));
-                          }
+                                context.read<AuthBloc>().add(LoginUserEvent(
+                                    loginUserData: {"email": emailController.text.trim(), "password": passwordController.text.trim()}));
+                              }
+                            },
+                            isLoading: state.showLoader,
+                            label: 'Login',
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                            ),
+                            color: primaryBlueColor,
+                            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+                          );
                         },
-                        isLoading: state is AuthLoadingState,
-                        label: 'Login',
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                        ),
-                        color: primaryBlueColor,
-                        padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
                       ).centered(),
                       const SizedBox(
                         height: 30,

@@ -285,8 +285,8 @@ class CustomDropdown<T> extends StatelessWidget {
     this.autoFocus = false,
     this.focusNode,
     this.underline,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -354,6 +354,7 @@ class CustomDropdown<T> extends StatelessWidget {
                   color: borderColor,
                   width: borderWidth,
                 ),
+                color: Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
               ),
           offset: const Offset(0, -5),
           scrollbarTheme: ScrollbarThemeData(

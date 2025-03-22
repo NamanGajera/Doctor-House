@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:doctor_house/features/onBoarding/model/complete_profile_model.dart';
 import 'package:equatable/equatable.dart';
 
@@ -6,12 +8,16 @@ class OnboardingState extends Equatable {
   final int pageIndex;
   final String? selectedGender;
   final bool showLoader;
+  final CompleteProfileModel? completeProfileModel;
+  final File? selectedUserProfileImage;
 
   const OnboardingState({
     this.isChecked = false,
     this.pageIndex = 0,
     this.selectedGender,
     this.showLoader = false,
+    this.completeProfileModel,
+    this.selectedUserProfileImage,
   });
 
   OnboardingState copyWith({
@@ -19,12 +25,16 @@ class OnboardingState extends Equatable {
     int? pageIndex,
     String? selectedGender,
     bool? showLoader,
+    CompleteProfileModel? completeProfileModel,
+    File? selectedUserProfileImage,
   }) {
     return OnboardingState(
       isChecked: isChecked ?? this.isChecked,
       pageIndex: pageIndex ?? this.pageIndex,
       selectedGender: selectedGender ?? this.selectedGender,
       showLoader: showLoader ?? this.showLoader,
+      completeProfileModel: completeProfileModel ?? this.completeProfileModel,
+      selectedUserProfileImage: selectedUserProfileImage ?? this.selectedUserProfileImage,
     );
   }
 
@@ -34,6 +44,8 @@ class OnboardingState extends Equatable {
         pageIndex,
         selectedGender,
         showLoader,
+        completeProfileModel,
+        selectedUserProfileImage,
       ];
 }
 
@@ -47,9 +59,3 @@ class AuthFailureState extends OnboardingState {
 class OnboardingInitialState extends OnboardingState {}
 
 class OnboardingSkippedState extends OnboardingState {}
-
-class CompleteProfileEventState extends OnboardingState {
-  final CompleteProfileModel completeProfileModel;
-
-  const CompleteProfileEventState(this.completeProfileModel);
-}

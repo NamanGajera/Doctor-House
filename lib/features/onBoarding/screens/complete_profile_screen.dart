@@ -1,17 +1,21 @@
 import 'dart:developer';
-import 'dart:io';
 
+import 'package:doctor_house/core/constants/app_constants.dart';
 import 'package:doctor_house/core/constants/colors.dart';
+import 'package:doctor_house/core/constants/shared_preferences_keys.dart';
 import 'package:doctor_house/core/extension/string_extension.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
 import 'package:doctor_house/features/onBoarding/bloc/on_boardin_screen_event.dart';
 import 'package:doctor_house/features/onBoarding/bloc/on_boardin_screen_state.dart';
+import 'package:doctor_house/routers/route_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/widgets.dart';
+import '../../../core/services/shared_prefs_helper.dart';
+import '../../../utils/helper_functions.dart';
 import '../bloc/on_boardin_screen_bloc.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
@@ -23,7 +27,6 @@ class CompleteProfileScreen extends StatefulWidget {
 
 class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final _formKey = GlobalKey<FormState>();
-  File? _imageFile;
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -34,8 +37,25 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
     return Scaffold(
       body: BlocListener<OnboardingBloc, OnboardingState>(
         listener: (context, state) {
-          if (state is CompleteProfileEventState) {
-            log('Complete Profile Success');
+          if (state.completeProfileModel != null) {
+            log('Complete Profile Data Done===>>>>> ${state.completeProfileModel?.toJson()}');
+            userFirstName = state.completeProfileModel?.user?.firstName;
+            userLastName = state.completeProfileModel?.user?.lastName;
+            userName = state.completeProfileModel?.user?.name;
+            userEmail = state.completeProfileModel?.user?.email;
+            gender = state.completeProfileModel?.user?.gender;
+            age = state.completeProfileModel?.user?.age;
+            userProfileImage = state.completeProfileModel?.user?.profileImage;
+
+            SharedPrefsHelper().setString(SharedPreferencesKeys.userName, userName ?? '');
+            SharedPrefsHelper().setString(SharedPreferencesKeys.userFirstName, userFirstName ?? '');
+            SharedPrefsHelper().setString(SharedPreferencesKeys.userLastName, userLastName ?? '');
+            SharedPrefsHelper().setString(SharedPreferencesKeys.userEmail, userEmail ?? '');
+            SharedPrefsHelper().setString(SharedPreferencesKeys.userGender, gender ?? '');
+            SharedPrefsHelper().setString(SharedPreferencesKeys.userAge, '${age ?? ''}');
+            SharedPrefsHelper().setString(SharedPreferencesKeys.userProfileImage, userProfileImage ?? '');
+
+            context.pushReplacement(homeScreenPath);
           }
           if (state is AuthFailureState) {
             log('Complete Profile Error ==>>> ${state.message}');
@@ -53,7 +73,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 80),
+            const SizedBox(height: 40),
             Text(
               'Complete Your Profile',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -65,45 +85,49 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               style: Theme.of(context).textTheme.bodySmall,
             ).centered(),
             const SizedBox(height: 30),
-            Stack(
-              children: [
-                Container(
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: BorderRadius.circular(55),
-                  ),
-                  clipBehavior: Clip.hardEdge,
-                  child: _imageFile != null
-                      ? Image.file(
-                          _imageFile!,
-                          fit: BoxFit.cover,
-                        )
-                      : const Icon(
-                          Icons.person,
-                          size: 40,
+            BlocBuilder<OnboardingBloc, OnboardingState>(
+              builder: (context, state) {
+                return Stack(
+                  children: [
+                    Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(55),
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      child: state.selectedUserProfileImage != null
+                          ? Image.file(
+                              state.selectedUserProfileImage!,
+                              fit: BoxFit.cover,
+                            )
+                          : const Icon(
+                              Icons.person,
+                              size: 40,
+                            ),
+                    ),
+                    Positioned(
+                      bottom: 3,
+                      right: 3,
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: primaryYellowColor,
+                          borderRadius: BorderRadius.circular(55),
                         ),
-                ),
-                Positioned(
-                  bottom: 3,
-                  right: 3,
-                  child: Container(
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: primaryYellowColor,
-                      borderRadius: BorderRadius.circular(55),
+                        clipBehavior: Clip.hardEdge,
+                        child: const Icon(
+                          Icons.edit,
+                          size: 18,
+                        ),
+                      ).onTap(() {
+                        _showImagePickerBottomSheet();
+                      }),
                     ),
-                    clipBehavior: Clip.hardEdge,
-                    child: const Icon(
-                      Icons.edit,
-                      size: 18,
-                    ),
-                  ).onTap(() {
-                    _showImagePickerBottomSheet();
-                  }),
-                ),
-              ],
+                  ],
+                );
+              },
             ).centered(),
             const SizedBox(height: 30),
             Form(
@@ -292,7 +316,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 onPressed: () {
                   if (state.isChecked) {
                     log('Profile Form Data ==>>> ${{
-                      "profileImage": _imageFile == null ? null : _imageFile!,
+                      "profileImage": state.selectedUserProfileImage,
                       "firstName": _firstNameController.text.trim(),
                       "lastName": _lastNameController.text.trim(),
                       "mobileNumber": _phoneController.text.trim(),
@@ -302,7 +326,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
 
                     context.read<OnboardingBloc>().add(CompleteProfileEvent(
                           {
-                            "profileImage": _imageFile == null ? null : _imageFile!,
+                            "profileImage": state.selectedUserProfileImage,
                             "firstName": _firstNameController.text.trim(),
                             "lastName": _lastNameController.text.trim(),
                             "mobileNumber": _phoneController.text.trim(),
@@ -320,51 +344,26 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 11),
               ).centered().withPadding(const EdgeInsets.symmetric(horizontal: 18));
             }),
+            const SizedBox(height: 30),
           ],
         ),
       ),
     );
   }
 
-  Future<void> _pickImage(ImageSource source) async {
-    final pickedFile = await ImagePicker().pickImage(source: source);
-    if (pickedFile != null) {
-      setState(() {
-        _imageFile = File(pickedFile.path);
-      });
-    }
-  }
-
-  void _showImagePickerBottomSheet() {
-    showModalBottomSheet(
+  void _showImagePickerBottomSheet() async {
+    final result = await HelperFunctions.pickMedia(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
-      ),
-      builder: (context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.camera_alt),
-              title: const Text('Take a photo'),
-              onTap: () {
-                Navigator.pop(context);
-                _pickImage(ImageSource.camera);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.photo_library),
-              title: const Text('Choose from gallery'),
-              onTap: () {
-                Navigator.pop(context);
-                _pickImage(ImageSource.gallery);
-              },
-            ),
-          ],
-        ),
-      ),
+      bottomSheetTitle: 'Choose an option',
+      cameraLabel: 'Take a photo',
+      galleryLabel: 'Choose from gallery',
+      bottomSheetBorderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+      mediaType: MediaType.image,
     );
+
+    if (result != null) {
+      log('Selected Image==>>> ${result.singleFile}');
+      context.read<OnboardingBloc>().add(SelectUserProfileImageEvent(selectedFile: result.singleFile));
+    }
   }
 }

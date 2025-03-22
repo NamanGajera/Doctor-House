@@ -1,12 +1,12 @@
 String? accessToken;
-bool? hasAcceptedConsent;
+bool? isCompleteProfileDone;
 
 /// User Constants
 String? userName;
 String? userEmail;
-String? userRole;
-String? userId;
 String? userFirstName;
-String? userProfile;
 String? userLastName;
+String? userProfileImage;
 String? userMobileNumber;
+String? gender;
+int? age;

@@ -14,9 +14,12 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/constants/app_constants.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/images.dart';
+import '../../../core/constants/shared_preferences_keys.dart';
 import '../../../core/constants/widgets.dart';
+import '../../../core/services/shared_prefs_helper.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -40,12 +43,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is AuthFailureState) {
             log("Register User Error == >> ${state.message}");
           }
-          if (state is RegisterUserEventState) {
-            log("User Register Success ==>>> ${state.authModel.toJson()}");
+          if (state.registerUserModel != null) {
+            log("Login Success State ${state.loginUserModel?.toJson()}");
+            userName = state.loginUserModel?.user?.name ?? '';
+            userEmail = state.loginUserModel?.user?.email ?? '';
+            accessToken = state.loginUserModel?.token ?? '';
+            isCompleteProfileDone = state.loginUserModel?.user?.isCompleteProfileDone ?? false;
+
+            SharedPrefsHelper().setString(SharedPreferencesKeys.userName, userName ?? '');
+            SharedPrefsHelper().setString(SharedPreferencesKeys.accessToken, accessToken ?? '');
+            SharedPrefsHelper().setString(SharedPreferencesKeys.userEmail, userEmail ?? '');
+            SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isCompleteProfileDone ?? false);
+
+            if (isCompleteProfileDone == true) {
+              context.pushReplacement(homeScreenPath);
+            } else {
+              context.pushReplacement(completeProfileScreenPath);
+            }
           }
         },
         child: mainRegisterScreen(),
@@ -230,7 +248,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 }));
                           },
                           label: 'Register',
-                          isLoading: state is AuthLoadingState,
+                          isLoading: state.showLoader,
                           textStyle: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
