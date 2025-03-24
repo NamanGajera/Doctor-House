@@ -43,5 +43,5 @@ class AuthFailureState extends AuthState {
   final dynamic statusCode;
   final dynamic message;
 
-  AuthFailureState({this.message, this.statusCode});
+  const AuthFailureState({this.message, this.statusCode});
 }

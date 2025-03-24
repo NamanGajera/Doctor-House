@@ -67,8 +67,8 @@ dependencies:
   # DropDown
   dropdown_button2: ^2.3.9
 
-
-
+  # Shimmer
+  shimmer: ^3.0.0
 
 
   path: any

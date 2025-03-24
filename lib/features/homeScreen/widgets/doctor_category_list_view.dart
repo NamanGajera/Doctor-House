@@ -1,5 +1,9 @@
 import 'package:doctor_house/core/constants/images.dart';
+import 'package:doctor_house/features/homeScreen/bloc/home_screen_bloc.dart';
+import 'package:doctor_house/features/homeScreen/model/doctor_category_data_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DoctorCategoryListView extends StatefulWidget {
   const DoctorCategoryListView({super.key});
@@ -38,41 +42,91 @@ class _DoctorCategoryListViewState extends State<DoctorCategoryListView> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 120,
-      child: ListView.builder(
-        itemCount: docTypeIcon.length,
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) {
-          return Container(
+    return BlocBuilder<HomeScreenBloc, HomeScreenState>(
+      builder: (context, state) {
+        return SizedBox(
+          height: 120,
+          child: state.showCategoryLoader
+              ? shimmer()
+              : ListView.builder(
+                  itemCount: state.doctorCategoryData?.length ?? 0,
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    DoctorCategoryData? category = state.doctorCategoryData?[index];
+                    return Container(
+                      width: 90,
+                      margin: const EdgeInsets.only(right: 6),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomDoctorIconContainer(
+                            iconPath: category?.image ?? '',
+                            isNetworkImage: true,
+                            height: 32,
+                            width: 32,
+                            borderRadius: 16,
+                            padding: 14,
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            category?.name ?? '',
+                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                  fontSize: 11,
+                                ),
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+        );
+      },
+    );
+  }
+
+  Widget shimmer() {
+    return ListView.builder(
+      itemCount: 5, // Show 5 shimmer items while loading
+      scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade100,
+          child: Container(
             width: 90,
             margin: const EdgeInsets.only(right: 6),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomDoctorIconContainer(
-                  iconPath: docTypeIcon[index],
-                  height: 32,
-                  width: 32,
-                  borderRadius: 16,
-                  padding: 14,
+                // Shimmer for icon container
+                Container(
+                  height: 60, // Combined height of icon + padding
+                  width: 60, // Combined width of icon + padding
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  docTypeName[index],
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontSize: 11,
-                      ),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                // Shimmer for text
+                Container(
+                  height: 11, // Same as your font size
+                  width: 70, // Width for the text placeholder
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(3),
+                  ),
                 ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
@@ -84,6 +138,7 @@ class CustomDoctorIconContainer extends StatelessWidget {
   final double padding;
   final Color backgroundColor;
   final double borderRadius;
+  final bool isNetworkImage;
 
   const CustomDoctorIconContainer({
     super.key,
@@ -93,6 +148,7 @@ class CustomDoctorIconContainer extends StatelessWidget {
     this.padding = 5.0,
     this.backgroundColor = const Color(0xFFF5F7FF),
     this.borderRadius = 20.0,
+    this.isNetworkImage = false,
   });
 
   @override
@@ -114,12 +170,28 @@ class CustomDoctorIconContainer extends StatelessWidget {
         ],
       ),
       child: Center(
-        child: Image.asset(
-          iconPath,
-          height: height,
-          width: width,
-          fit: BoxFit.contain,
-        ),
+        child: isNetworkImage
+            ? FadeInImage.assetNetwork(
+                placeholder: dermatologistIcon,
+                image: iconPath,
+                height: height,
+                width: width,
+                fit: BoxFit.contain,
+                imageErrorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    dermatologistIcon,
+                    height: height,
+                    width: width,
+                    fit: BoxFit.contain,
+                  );
+                },
+              )
+            : Image.asset(
+                iconPath,
+                height: height,
+                width: width,
+                fit: BoxFit.contain,
+              ),
       ),
     );
   }

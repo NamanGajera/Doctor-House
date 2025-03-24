@@ -96,6 +96,7 @@ class ApiService {
   Future<dynamic> multipartPost(String endpoint, Map<String, dynamic> data) async {
     try {
       log('Api Route $baseUrl$endpoint');
+      log('Headers ${_getHeaders(isMultipart: true)}');
       final request = http.MultipartRequest(
         'POST',
         Uri.parse('$baseUrl$endpoint'),

@@ -18,7 +18,7 @@ import 'package:go_router/go_router.dart';
 
 import '../features/bookAppointmentScreen/patient_details_screen.dart';
 import '../features/doctorListScreen/doctor_list_screen.dart';
-import '../features/homeScreen/home_screen.dart';
+import '../features/homeScreen/screens/home_screen.dart';
 import '../features/onBoarding/screens/complete_profile_screen.dart';
 import '../features/onBoarding/screens/on_boarding_screen.dart';
 

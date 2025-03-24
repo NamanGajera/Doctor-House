@@ -1,5 +1,5 @@
 String? accessToken;
-bool? isCompleteProfileDone;
+bool? isProfileCompleted;
 
 /// User Constants
 String? userName;

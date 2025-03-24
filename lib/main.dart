@@ -1,3 +1,4 @@
+import 'package:doctor_house/features/homeScreen/bloc/home_screen_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => getIt<AppThemeBloc>()),
           BlocProvider(create: (context) => getIt<OnboardingBloc>()),
           BlocProvider(create: (context) => getIt<AuthBloc>()),
+          BlocProvider(create: (context) => getIt<HomeScreenBloc>())
         ],
         child: BlocBuilder<AppThemeBloc, AppThemeState>(
           builder: (context, state) {

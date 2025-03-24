@@ -48,18 +48,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
             log("Register User Error == >> ${state.message}");
           }
           if (state.registerUserModel != null) {
-            log("Login Success State ${state.loginUserModel?.toJson()}");
-            userName = state.loginUserModel?.user?.name ?? '';
-            userEmail = state.loginUserModel?.user?.email ?? '';
-            accessToken = state.loginUserModel?.token ?? '';
-            isCompleteProfileDone = state.loginUserModel?.user?.isCompleteProfileDone ?? false;
+            log("Register Success State ${state.registerUserModel?.toJson()}");
+            userName = state.registerUserModel?.user?.name ?? '';
+            userEmail = state.registerUserModel?.user?.email ?? '';
+            accessToken = state.registerUserModel?.token ?? '';
+            isProfileCompleted = state.registerUserModel?.user?.isProfileCompleted ?? false;
 
             SharedPrefsHelper().setString(SharedPreferencesKeys.userName, userName ?? '');
             SharedPrefsHelper().setString(SharedPreferencesKeys.accessToken, accessToken ?? '');
             SharedPrefsHelper().setString(SharedPreferencesKeys.userEmail, userEmail ?? '');
-            SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isCompleteProfileDone ?? false);
+            SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isProfileCompleted ?? false);
 
-            if (isCompleteProfileDone == true) {
+            if (isProfileCompleted == true) {
               context.pushReplacement(homeScreenPath);
             } else {
               context.pushReplacement(completeProfileScreenPath);

@@ -1,3 +1,4 @@
+import 'package:doctor_house/features/homeScreen/bloc/home_screen_bloc.dart';
 import 'package:doctor_house/features/onBoarding/bloc/on_boardin_screen_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,13 +15,13 @@ Future<void> setupDependencies() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerSingleton<SharedPreferences>(sharedPreferences);
 
-  // API Service
+  /// API Service
   getIt.registerLazySingleton<ApiService>(() => ApiService());
 
-  // Repositories
+  /// Repositories
   getIt.registerLazySingleton<ApiRepository>(() => ApiRepository(getIt<ApiService>()));
 
-  // BLoCs
+  /// BLoCs
   getIt.registerFactory<AuthBloc>(() => AuthBloc(
         apiRepository: getIt<ApiRepository>(),
         sharedPreferences: getIt<SharedPreferences>(),
@@ -29,4 +30,6 @@ Future<void> setupDependencies() async {
   getIt.registerFactory<AppThemeBloc>(() => AppThemeBloc(sharedPreferences: getIt<SharedPreferences>()));
 
   getIt.registerFactory<OnboardingBloc>(() => OnboardingBloc(apiRepository: getIt<ApiRepository>()));
+
+  getIt.registerFactory<HomeScreenBloc>(() => HomeScreenBloc(apiRepository: getIt<ApiRepository>()));
 }

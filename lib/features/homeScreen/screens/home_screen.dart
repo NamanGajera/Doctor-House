@@ -3,14 +3,16 @@ import 'package:doctor_house/core/constants/colors.dart';
 import 'package:doctor_house/core/constants/images.dart';
 import 'package:doctor_house/core/constants/widgets.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/features/homeScreen/bloc/home_screen_bloc.dart';
 import 'package:doctor_house/features/homeScreen/widgets/doctor_category_list_view.dart';
 import 'package:doctor_house/features/homeScreen/widgets/top_specialists_view.dart';
 import 'package:doctor_house/features/homeScreen/widgets/trusted_hospitals_view.dart';
 import 'package:doctor_house/features/homeScreen/widgets/upcoming_schedule_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../routers/route_path.dart';
+import '../../../routers/route_path.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,6 +22,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeScreenBloc>().add(GetDoctorCategoryEvent());
+    context.read<HomeScreenBloc>().add(GetUpcomingScheduleEvent(
+          upcomingDataBody: const {
+            "limit": 5,
+            "sortBy": "appointmentDate",
+            "order": "asc",
+          },
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,44 +82,54 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 8),
 
             /// Upcoming Schedule Text
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Upcoming Schedule',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const SizedBox(width: 8),
-                    Container(
-                      height: 20,
-                      width: 20,
-                      decoration: BoxDecoration(
-                        color: primaryDarkBlueColor,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Text(
-                        '8',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
+
+            BlocBuilder<HomeScreenBloc, HomeScreenState>(builder: (context, state) {
+              return (state.upcomingAppointment ?? []).isEmpty
+                  ? const SizedBox()
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Upcoming Schedule',
+                                  style: Theme.of(context).textTheme.headlineSmall,
+                                ),
+                                const SizedBox(width: 8),
+                                Container(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: BoxDecoration(
+                                    color: primaryDarkBlueColor,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Text(
+                                    '${state.upcomingAppointment?.length ?? 0}',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ).centered(),
+                                ),
+                              ],
+                            ),
+                            const Text(
+                              'See All',
+                              style: TextStyle(
+                                color: primaryBlueColor,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ],
                         ),
-                      ).centered(),
-                    ),
-                  ],
-                ),
-                const Text(
-                  'See All',
-                  style: TextStyle(
-                    color: primaryBlueColor,
-                    fontSize: 13,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
+                        const SizedBox(height: 10),
+                      ],
+                    );
+            }),
 
             /// Upcoming Schedule View
             const UpcomingScheduleView(),

@@ -46,6 +46,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             gender = state.completeProfileModel?.user?.gender;
             age = state.completeProfileModel?.user?.age;
             userProfileImage = state.completeProfileModel?.user?.profileImage;
+            isProfileCompleted = state.completeProfileModel?.user?.isProfileCompleted;
 
             SharedPrefsHelper().setString(SharedPreferencesKeys.userName, userName ?? '');
             SharedPrefsHelper().setString(SharedPreferencesKeys.userFirstName, userFirstName ?? '');
@@ -54,6 +55,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             SharedPrefsHelper().setString(SharedPreferencesKeys.userGender, gender ?? '');
             SharedPrefsHelper().setString(SharedPreferencesKeys.userAge, '${age ?? ''}');
             SharedPrefsHelper().setString(SharedPreferencesKeys.userProfileImage, userProfileImage ?? '');
+            SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isProfileCompleted ?? false);
 
             context.pushReplacement(homeScreenPath);
           }

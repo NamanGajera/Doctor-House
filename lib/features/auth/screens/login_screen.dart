@@ -48,14 +48,14 @@ class _LoginScreenState extends State<LoginScreen> {
             userName = state.loginUserModel?.user?.name ?? '';
             userEmail = state.loginUserModel?.user?.email ?? '';
             accessToken = state.loginUserModel?.token ?? '';
-            isCompleteProfileDone = state.loginUserModel?.user?.isCompleteProfileDone ?? false;
+            isProfileCompleted = state.loginUserModel?.user?.isProfileCompleted ?? false;
 
             await SharedPrefsHelper().setString(SharedPreferencesKeys.accessToken, accessToken ?? '');
             await SharedPrefsHelper().setString(SharedPreferencesKeys.userName, userName ?? '');
             await SharedPrefsHelper().setString(SharedPreferencesKeys.userEmail, userEmail ?? '');
-            await SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isCompleteProfileDone ?? false);
+            await SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isProfileCompleted ?? false);
 
-            if (isCompleteProfileDone == true) {
+            if (isProfileCompleted == true) {
               context.pushReplacement(homeScreenPath);
             } else {
               context.pushReplacement(completeProfileScreenPath);

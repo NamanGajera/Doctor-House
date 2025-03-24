@@ -38,9 +38,9 @@ class _SplashScreenState extends State<SplashScreen> {
     } else if (isLogin == true) {
       userEmail = SharedPrefsHelper().getString(SharedPreferencesKeys.userEmail);
       userName = SharedPrefsHelper().getString(SharedPreferencesKeys.userName);
-      isCompleteProfileDone = SharedPrefsHelper().getBool(SharedPreferencesKeys.isCompleterProfileDone);
+      isProfileCompleted = SharedPrefsHelper().getBool(SharedPreferencesKeys.isCompleterProfileDone);
 
-      if (isCompleteProfileDone == true) {
+      if (isProfileCompleted == true) {
         context.pushReplacement(homeScreenPath);
       } else {
         context.pushReplacement(completeProfileScreenPath);

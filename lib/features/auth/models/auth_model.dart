@@ -26,15 +26,15 @@ class User {
   String? id;
   String? name;
   String? email;
-  bool? isCompleteProfileDone;
+  bool? isProfileCompleted;
 
-  User({this.id, this.name, this.email, this.isCompleteProfileDone});
+  User({this.id, this.name, this.email, this.isProfileCompleted});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    isCompleteProfileDone = json['isCompleteProfileDone'];
+    isProfileCompleted = json['isProfileCompleted'];
   }
 
   Map<String, dynamic> toJson() {
@@ -42,7 +42,7 @@ class User {
     data['id'] = this.id;
     data['name'] = this.name;
     data['email'] = this.email;
-    data['isCompleteProfileDone'] = this.isCompleteProfileDone;
+    data['isProfileCompleted'] = this.isProfileCompleted;
     return data;
   }
 }
