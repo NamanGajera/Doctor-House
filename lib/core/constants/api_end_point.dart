@@ -10,3 +10,11 @@ String completeProfileEndPoint = '/complete-profile';
 String getDoctorCategoryEndPoint = '/doc-category';
 
 String getUpcomingAppointmentEndPoint = '/upcoming-appointment';
+
+String getTopSpecialistEndPoint = '/top-doctor';
+
+String getTrustedHospitalEndPoint = '/top-hospital';
+
+String toggleDoctorLikeEndPoint = '/like-doctor';
+
+String toggleHospitalLikeEndPoint = '/like-hospital';

@@ -10,3 +10,24 @@ class GetUpcomingScheduleEvent extends HomeScreenEvent {
 
   GetUpcomingScheduleEvent({required this.upcomingDataBody});
 }
+
+class GetTopSpecialistsEvent extends HomeScreenEvent {}
+
+class GetTrustedHospitalEvent extends HomeScreenEvent {}
+
+class ToggleDoctorLikeEvent extends HomeScreenEvent {
+  final String doctorId;
+  final bool isLike;
+
+  ToggleDoctorLikeEvent({required this.doctorId, required this.isLike});
+}
+
+class ToggleHospitalLikeEvent extends HomeScreenEvent {
+  final String hospitalId;
+  final bool isLike;
+
+  ToggleHospitalLikeEvent({
+    required this.hospitalId,
+    required this.isLike,
+  });
+}

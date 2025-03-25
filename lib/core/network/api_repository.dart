@@ -1,9 +1,12 @@
 import 'dart:developer';
 
 import 'package:doctor_house/features/homeScreen/model/get_upcoming_schedule_data_model.dart';
+import 'package:doctor_house/features/homeScreen/model/trusted_hospital_data_model.dart';
 
+import '../../commonModel/success_response_model.dart';
 import '../../features/auth/models/auth_model.dart';
 import '../../features/homeScreen/model/doctor_category_data_model.dart';
+import '../../features/homeScreen/model/top_doctor_data_model.dart';
 import '../../features/onBoarding/model/complete_profile_model.dart';
 import '../constants/api_end_point.dart';
 import 'api_service.dart';
@@ -68,6 +71,52 @@ class ApiRepository {
       GetUpcomingScheduleDataModel getUpcomingScheduleDataModel = GetUpcomingScheduleDataModel.fromJson(response);
       log('Get Upcoming Data ==>>> ${getUpcomingScheduleDataModel.toJson()}');
       return getUpcomingScheduleDataModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// GET: TOP SPECIALIST
+  Future<TopDoctorsDataModel> getTopSpecialist() async {
+    try {
+      Map<String, dynamic> response = await _apiService.get(getTopSpecialistEndPoint);
+      TopDoctorsDataModel topDoctorsDataModel = TopDoctorsDataModel.fromJson(response);
+      return topDoctorsDataModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// GET: TRUSTED HOSPITAL
+  Future<TrustedHospitalDataModel> getTrustedHospital() async {
+    try {
+      Map<String, dynamic> response = await _apiService.get(getTrustedHospitalEndPoint);
+      TrustedHospitalDataModel trustedHospitalDataModel = TrustedHospitalDataModel.fromJson(response);
+      return trustedHospitalDataModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// PUT: TOGGLE DOCTOR LIKE
+  Future<SuccessResponseModel> toggleDoctorLike(dynamic body) async {
+    try {
+      Map<String, dynamic> response = await _apiService.put(toggleDoctorLikeEndPoint, body);
+      SuccessResponseModel successResponseModel = SuccessResponseModel.fromJson(response);
+      log('Toggle Doctor Like ==>> ${successResponseModel.toJson()}');
+      return successResponseModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// PUT: TOGGLE DOCTOR LIKE
+  Future<SuccessResponseModel> toggleHospitalLike(dynamic body) async {
+    try {
+      Map<String, dynamic> response = await _apiService.put(toggleHospitalLikeEndPoint, body);
+      SuccessResponseModel successResponseModel = SuccessResponseModel.fromJson(response);
+      log('Toggle Hospital Like ==>> ${successResponseModel.toJson()}');
+      return successResponseModel;
     } catch (e) {
       rethrow;
     }

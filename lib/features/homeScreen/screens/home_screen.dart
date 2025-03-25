@@ -33,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
             "order": "asc",
           },
         ));
+    context.read<HomeScreenBloc>().add(GetTopSpecialistsEvent());
+    context.read<HomeScreenBloc>().add(GetTrustedHospitalEvent());
   }
 
   @override
@@ -136,50 +138,70 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 12),
 
             /// Top Specialists Text
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Top Specialists',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const Text(
-                  'See All',
-                  style: TextStyle(
-                    color: primaryBlueColor,
-                    fontSize: 13,
-                  ),
-                ).onTap(() {
-                  context.push(doctorListScreenPath);
-                }),
-              ],
+            BlocBuilder<HomeScreenBloc, HomeScreenState>(
+              builder: (context, state) {
+                return (state.topDoctor ?? []).isEmpty
+                    ? const SizedBox()
+                    : Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Top Specialists',
+                                style: Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              const Text(
+                                'See All',
+                                style: TextStyle(
+                                  color: primaryBlueColor,
+                                  fontSize: 13,
+                                ),
+                              ).onTap(() {
+                                context.push(doctorListScreenPath);
+                              }),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      );
+              },
             ),
-            const SizedBox(height: 10),
 
             /// Top Specialist View
             const TopSpecialistsView(),
             const SizedBox(height: 10),
 
             /// Trusted Hospitals Text
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Trusted Hospitals',
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const Text(
-                  'See All',
-                  style: TextStyle(
-                    color: primaryBlueColor,
-                    fontSize: 13,
-                  ),
-                ).onTap(() {
-                  context.push(hospitalListScreenPath);
-                }),
-              ],
+            BlocBuilder<HomeScreenBloc, HomeScreenState>(
+              builder: (context, state) {
+                return (state.trustedHospital ?? []).isEmpty
+                    ? const SizedBox()
+                    : Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Trusted Hospitals',
+                                style: Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              const Text(
+                                'See All',
+                                style: TextStyle(
+                                  color: primaryBlueColor,
+                                  fontSize: 13,
+                                ),
+                              ).onTap(() {
+                                context.push(hospitalListScreenPath);
+                              }),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      );
+              },
             ),
-            const SizedBox(height: 10),
 
             /// Trusted Hospitals View
             const TrustedHospitalsView(),
