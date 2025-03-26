@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../commonModel/hospital_details_data_model.dart';
 import '../../../core/constants/images.dart';
-import '../model/trusted_hospital_data_model.dart';
 
 class TrustedHospitalsView extends StatefulWidget {
   const TrustedHospitalsView({super.key});
@@ -34,7 +34,7 @@ class _TrustedHospitalsViewState extends State<TrustedHospitalsView> {
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.only(right: 16, left: 4, bottom: 12),
                       itemBuilder: (context, index) {
-                        TopHospital? hospitalData = state.trustedHospital?[index];
+                        HospitalDetailsData? hospitalData = state.trustedHospital?[index];
 
                         /// Individual hospital card
                         return Container(

@@ -6,9 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../commonModel/doctor_details_data_model.dart';
 import '../../../core/constants/images.dart';
 import '../../../routers/route_path.dart';
-import '../model/top_doctor_data_model.dart';
 
 class TopSpecialistsView extends StatefulWidget {
   const TopSpecialistsView({super.key});
@@ -34,7 +34,7 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                       scrollDirection: Axis.horizontal,
                       padding: const EdgeInsets.only(right: 16, left: 4, bottom: 12),
                       itemBuilder: (context, index) {
-                        TopDoctor? doctorData = state.topDoctor?[index];
+                        DoctorDetailsData? doctorData = state.topDoctor?[index];
 
                         /// Individual specialist card
                         return Container(

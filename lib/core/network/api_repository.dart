@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:doctor_house/features/homeScreen/model/doctor_by_id_data_model.dart';
 import 'package:doctor_house/features/homeScreen/model/get_upcoming_schedule_data_model.dart';
 import 'package:doctor_house/features/homeScreen/model/trusted_hospital_data_model.dart';
 
@@ -117,6 +118,18 @@ class ApiRepository {
       SuccessResponseModel successResponseModel = SuccessResponseModel.fromJson(response);
       log('Toggle Hospital Like ==>> ${successResponseModel.toJson()}');
       return successResponseModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// GET: DOCTOR BY ID
+  Future<DoctorByCategoryIdDataModel> getDoctorById(String? categoryId) async {
+    try {
+      Map<String, dynamic> response = await _apiService.get('$getDoctorByCategoryIdEndPoint/$categoryId');
+      DoctorByCategoryIdDataModel doctorByIdDataModel = DoctorByCategoryIdDataModel.fromJson(response);
+      log('Doctor By Id ==>> ${doctorByIdDataModel.toJson()}');
+      return doctorByIdDataModel;
     } catch (e) {
       rethrow;
     }

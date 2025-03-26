@@ -18,3 +18,5 @@ String getTrustedHospitalEndPoint = '/top-hospital';
 String toggleDoctorLikeEndPoint = '/like-doctor';
 
 String toggleHospitalLikeEndPoint = '/like-hospital';
+
+String getDoctorByCategoryIdEndPoint = '/doctorByCategoryId';

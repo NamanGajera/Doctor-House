@@ -1,9 +1,10 @@
 import 'package:doctor_house/core/constants/images.dart';
-import 'package:doctor_house/features/homeScreen/bloc/home_screen_bloc.dart';
-import 'package:doctor_house/features/homeScreen/model/doctor_category_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../commonModel/category_data_model.dart';
+import '../bloc/home_screen_bloc.dart';
 
 class DoctorCategoryListView extends StatefulWidget {
   const DoctorCategoryListView({super.key});
@@ -53,7 +54,7 @@ class _DoctorCategoryListViewState extends State<DoctorCategoryListView> {
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    DoctorCategoryData? category = state.doctorCategoryData?[index];
+                    CategoryData? category = state.doctorCategoryData?[index];
                     return Container(
                       width: 90,
                       margin: const EdgeInsets.only(right: 6),

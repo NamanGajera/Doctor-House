@@ -1,12 +1,16 @@
 import 'dart:developer';
 
+import 'package:doctor_house/commonModel/doctor_details_data_model.dart';
 import 'package:doctor_house/features/homeScreen/model/doctor_category_data_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../commonModel/category_data_model.dart';
+import '../../../commonModel/hospital_details_data_model.dart';
 import '../../../core/network/api_exceptions.dart';
 import '../../../core/network/api_repository.dart';
+import '../model/doctor_by_id_data_model.dart';
 import '../model/get_upcoming_schedule_data_model.dart';
 import '../model/top_doctor_data_model.dart';
 import '../model/trusted_hospital_data_model.dart';
@@ -24,6 +28,8 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     on<GetTrustedHospitalEvent>(_getTrustedHospital);
     on<ToggleDoctorLikeEvent>(_toggleDoctorLike);
     on<ToggleHospitalLikeEvent>(_toggleHospitalLike);
+    on<SelectDoctorCategoryEvent>(_selectDoctorCategory);
+    on<GetDoctorDataByCategoryIdEvent>(_getDoctorDataByCategoryId);
   }
 
   Future<void> _getDoctorCategory(GetDoctorCategoryEvent event, Emitter<HomeScreenState> emit) async {
@@ -90,19 +96,29 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     }
   }
 
+  Future<void> _getDoctorDataByCategoryId(GetDoctorDataByCategoryIdEvent event, Emitter<HomeScreenState> emit) async {
+    DoctorByCategoryIdDataModel doctorByCategoryIdDataModel;
+    emit(state.copyWith(showDoctorCategoryDataLoader: true));
+    try {
+      doctorByCategoryIdDataModel = await apiRepository.getDoctorById(event.categoryId);
+      emit(state.copyWith(
+        showDoctorCategoryDataLoader: false,
+        doctorDataByCategoryId: doctorByCategoryIdDataModel.doctorData,
+      ));
+    } catch (error, stackTrace) {
+      emit(state.copyWith(showTrustedHospitalLoader: false));
+      log('Error=> $error ==> $stackTrace');
+      _handleError(error, emit);
+    }
+  }
+
   Future<void> _toggleDoctorLike(ToggleDoctorLikeEvent event, Emitter<HomeScreenState> emit) async {
     log('Toggle Doctor Like Data ==>>> ${{
       'DoctorId': event.doctorId,
       'isLike': event.isLike,
     }}');
-    final updatedDoctor = (state.topDoctor ?? []).map((doctor) {
-      if (doctor.id == event.doctorId) {
-        return doctor.copyWith(isLiked: event.isLike);
-      }
-      return doctor;
-    }).toList();
 
-    emit(state.copyWith(topDoctor: updatedDoctor));
+    _updateDoctorLikeStatus(doctorId: event.doctorId, isLike: event.isLike, emit: emit);
 
     try {
       await apiRepository.toggleDoctorLike({
@@ -110,14 +126,8 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         "isLiked": event.isLike,
       });
     } catch (error, stackTrace) {
-      final reverseDoctor = (state.topDoctor ?? []).map((doctor) {
-        if (doctor.id == event.doctorId) {
-          return doctor.copyWith(isLiked: !(doctor.isLiked ?? false));
-        }
-        return doctor;
-      }).toList();
+      _updateDoctorLikeStatus(doctorId: event.doctorId, isLike: !event.isLike, emit: emit);
 
-      emit(state.copyWith(topDoctor: reverseDoctor));
       log('Error=> $error ==> $stackTrace');
       _handleError(error, emit);
     }
@@ -129,14 +139,11 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       "isLiked": event.isLike,
     }}');
 
-    final updatedHospitalData = (state.trustedHospital ?? []).map((hospital) {
-      if (hospital.id == event.hospitalId) {
-        return hospital.copyWith(isLiked: event.isLike);
-      }
-      return hospital;
-    }).toList();
-
-    emit(state.copyWith(trustedHospital: updatedHospitalData));
+    _updateHospitalLikeStatus(
+      hospitalId: event.hospitalId,
+      isLike: event.isLike,
+      emit: emit,
+    );
 
     try {
       await apiRepository.toggleHospitalLike({
@@ -144,17 +151,46 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
         "isLiked": event.isLike,
       });
     } catch (error, stackTrace) {
-      final reverseHospital = (state.trustedHospital ?? []).map((hospital) {
-        if (hospital.id == event.hospitalId) {
-          return hospital.copyWith(isLiked: !event.isLike);
-        }
-        return hospital;
-      }).toList();
-
-      emit(state.copyWith(trustedHospital: reverseHospital));
+      _updateHospitalLikeStatus(
+        hospitalId: event.hospitalId,
+        isLike: !event.isLike,
+        emit: emit,
+      );
       log('Error=> $error ==> $stackTrace');
       _handleError(error, emit);
     }
+  }
+
+  Future<void> _selectDoctorCategory(SelectDoctorCategoryEvent event, Emitter<HomeScreenState> emit) async {
+    emit(state.copyWith(selectedDoctorCategoryId: event.categoryId ?? '1'));
+  }
+
+  void _updateDoctorLikeStatus({String doctorId = '', bool isLike = false, required Emitter<HomeScreenState> emit}) {
+    emit(state.copyWith(
+        topDoctor: _getUpdatedDoctorDataForChangeLike(state.topDoctor ?? [], doctorId, isLike),
+        doctorDataByCategoryId: _getUpdatedDoctorDataForChangeLike(state.doctorDataByCategoryId ?? [], doctorId, isLike)));
+  }
+
+  List<DoctorDetailsData> _getUpdatedDoctorDataForChangeLike(List<DoctorDetailsData> doctorList, String doctorId, bool isLike) {
+    return (doctorList).map((doctor) {
+      if (doctor.id == doctorId) {
+        return doctor.copyWith(isLiked: isLike);
+      }
+      return doctor;
+    }).toList();
+  }
+
+  void _updateHospitalLikeStatus({String hospitalId = '', bool isLike = false, required Emitter<HomeScreenState> emit}) {
+    emit(state.copyWith(trustedHospital: _getUpdatedHospitalDataForChangeLike(state.trustedHospital ?? [], hospitalId, isLike)));
+  }
+
+  List<HospitalDetailsData> _getUpdatedHospitalDataForChangeLike(List<HospitalDetailsData> hospitalList, String hospitalId, bool isLike) {
+    return (hospitalList).map((hospital) {
+      if (hospital.id == hospitalId) {
+        return hospital.copyWith(isLiked: isLike);
+      }
+      return hospital;
+    }).toList();
   }
 
   void _handleError(dynamic error, Emitter<HomeScreenState> emit) {

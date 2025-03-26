@@ -31,3 +31,15 @@ class ToggleHospitalLikeEvent extends HomeScreenEvent {
     required this.isLike,
   });
 }
+
+class SelectDoctorCategoryEvent extends HomeScreenEvent {
+  final String? categoryId;
+
+  SelectDoctorCategoryEvent({required this.categoryId});
+}
+
+class GetDoctorDataByCategoryIdEvent extends HomeScreenEvent {
+  final String? categoryId;
+
+  GetDoctorDataByCategoryIdEvent({required this.categoryId});
+}

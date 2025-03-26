@@ -6,20 +6,26 @@ class HomeScreenState extends Equatable {
   final bool showUpcomingLoader;
   final bool showTopDoctorLoader;
   final bool showTrustedHospitalLoader;
-  final List<DoctorCategoryData>? doctorCategoryData;
+  final bool showDoctorCategoryDataLoader;
+  final String? selectedDoctorCategoryId;
+  final List<CategoryData>? doctorCategoryData;
   final List<AppointmentData>? upcomingAppointment;
-  final List<TopDoctor>? topDoctor;
-  final List<TopHospital>? trustedHospital;
+  final List<DoctorDetailsData>? topDoctor;
+  final List<DoctorDetailsData>? doctorDataByCategoryId;
+  final List<HospitalDetailsData>? trustedHospital;
 
   const HomeScreenState({
     this.showCategoryLoader = false,
     this.showUpcomingLoader = false,
     this.showTopDoctorLoader = false,
     this.showTrustedHospitalLoader = false,
+    this.showDoctorCategoryDataLoader = false,
+    this.selectedDoctorCategoryId = '1',
     this.doctorCategoryData,
     this.upcomingAppointment,
     this.topDoctor,
     this.trustedHospital,
+    this.doctorDataByCategoryId,
   });
 
   @override
@@ -30,8 +36,11 @@ class HomeScreenState extends Equatable {
         showUpcomingLoader,
         showTopDoctorLoader,
         topDoctor,
+        selectedDoctorCategoryId,
         showTrustedHospitalLoader,
         trustedHospital,
+        showDoctorCategoryDataLoader,
+        doctorDataByCategoryId,
       ];
 
   HomeScreenState copyWith({
@@ -39,10 +48,13 @@ class HomeScreenState extends Equatable {
     bool? showUpcomingLoader,
     bool? showTopDoctorLoader,
     bool? showTrustedHospitalLoader,
-    List<DoctorCategoryData>? doctorCategoryData,
+    List<CategoryData>? doctorCategoryData,
     List<AppointmentData>? upcomingAppointment,
-    List<TopDoctor>? topDoctor,
-    List<TopHospital>? trustedHospital,
+    List<DoctorDetailsData>? topDoctor,
+    List<HospitalDetailsData>? trustedHospital,
+    List<DoctorDetailsData>? doctorDataByCategoryId,
+    bool? showDoctorCategoryDataLoader,
+    String? selectedDoctorCategoryId,
   }) {
     return HomeScreenState(
       showCategoryLoader: showCategoryLoader ?? this.showCategoryLoader,
@@ -53,6 +65,9 @@ class HomeScreenState extends Equatable {
       upcomingAppointment: upcomingAppointment ?? this.upcomingAppointment,
       topDoctor: topDoctor ?? this.topDoctor,
       trustedHospital: trustedHospital ?? this.trustedHospital,
+      selectedDoctorCategoryId: selectedDoctorCategoryId ?? this.selectedDoctorCategoryId,
+      doctorDataByCategoryId: doctorDataByCategoryId ?? this.doctorDataByCategoryId,
+      showDoctorCategoryDataLoader: showDoctorCategoryDataLoader ?? this.showDoctorCategoryDataLoader,
     );
   }
 }
