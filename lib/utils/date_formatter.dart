@@ -3,6 +3,41 @@ import 'package:intl/intl.dart';
 import 'enums.dart';
 
 class DateTimeFormatter {
+  /// Converts time between different formats
+  static String convertTime(
+    String time, {
+    DateFormatType from = DateFormatType.timeToTwelveHour,
+    DateFormatType to = DateFormatType.twelveHourTime,
+  }) {
+    try {
+      // Parse the input time
+      DateTime parsedTime;
+
+      // Determine input format
+      if (from == DateFormatType.timeToTwelveHour) {
+        // 24-hour format input
+        parsedTime = DateFormat('HH:mm').parse(time);
+      } else if (from == DateFormatType.timeToTwentyFourHour) {
+        // 12-hour format input with AM/PM
+        parsedTime = DateFormat('hh:mm a').parse(time);
+      } else {
+        throw const FormatException('Unsupported input format');
+      }
+
+      // Format to the desired output
+      if (to == DateFormatType.twelveHourTime) {
+        return DateFormat('hh:mm a').format(parsedTime);
+      } else if (to == DateFormatType.timeToTwentyFourHour) {
+        return DateFormat('HH:mm').format(parsedTime);
+      } else {
+        throw const FormatException('Unsupported output format');
+      }
+    } catch (e) {
+      // Return original time if conversion fails
+      return time;
+    }
+  }
+
   /// Converts DateTime to local time with optional timezone offset
   static DateTime toLocal(DateTime dateTime, {int? timezoneOffset}) {
     if (timezoneOffset != null) {
@@ -102,6 +137,10 @@ class DateTimeFormatter {
         return 'EEEE';
       case DateFormatType.isoFormat:
         return "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+      case DateFormatType.timeToTwelveHour:
+        return 'HH:mm';
+      case DateFormatType.timeToTwentyFourHour:
+        return 'hh:mm a';
     }
   }
 

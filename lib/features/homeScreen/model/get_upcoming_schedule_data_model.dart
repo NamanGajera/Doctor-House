@@ -11,17 +11,17 @@ class GetUpcomingScheduleDataModel {
     if (json['appointmentData'] != null) {
       appointmentData = <AppointmentData>[];
       json['appointmentData'].forEach((v) {
-        appointmentData!.add(new AppointmentData.fromJson(v));
+        appointmentData!.add(AppointmentData.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['statusCode'] = this.statusCode;
-    data['count'] = this.count;
-    if (this.appointmentData != null) {
-      data['appointmentData'] = this.appointmentData!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['statusCode'] = statusCode;
+    data['count'] = count;
+    if (appointmentData != null) {
+      data['appointmentData'] = appointmentData!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -71,19 +71,19 @@ class AppointmentData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['appointmentId'] = this.appointmentId;
-    data['appointmentDate'] = this.appointmentDate;
-    data['appointmentNumber'] = this.appointmentNumber;
-    data['doctorName'] = this.doctorName;
-    data['doctorType'] = this.doctorType;
-    data['doctorImage'] = this.doctorImage;
-    data['clinicName'] = this.clinicName;
-    data['patientName'] = this.patientName;
-    data['appointmentStatus'] = this.appointmentStatus;
-    data['fee'] = this.fee;
-    data['insuranceCovered'] = this.insuranceCovered;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['appointmentId'] = appointmentId;
+    data['appointmentDate'] = appointmentDate;
+    data['appointmentNumber'] = appointmentNumber;
+    data['doctorName'] = doctorName;
+    data['doctorType'] = doctorType;
+    data['doctorImage'] = doctorImage;
+    data['clinicName'] = clinicName;
+    data['patientName'] = patientName;
+    data['appointmentStatus'] = appointmentStatus;
+    data['fee'] = fee;
+    data['insuranceCovered'] = insuranceCovered;
     return data;
   }
 }

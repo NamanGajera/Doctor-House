@@ -11,16 +11,16 @@ class TrustedHospitalDataModel {
     if (json['topHospital'] != null) {
       topHospital = <HospitalDetailsData>[];
       json['topHospital'].forEach((v) {
-        topHospital!.add(new HospitalDetailsData.fromJson(v));
+        topHospital!.add(HospitalDetailsData.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['statusCode'] = this.statusCode;
-    if (this.topHospital != null) {
-      data['topHospital'] = this.topHospital!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['statusCode'] = statusCode;
+    if (topHospital != null) {
+      data['topHospital'] = topHospital!.map((v) => v.toJson()).toList();
     }
     return data;
   }

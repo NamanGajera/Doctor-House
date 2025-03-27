@@ -32,7 +32,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
         key: _formKey,
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             child: Column(
               children: [
                 _buildSection(
@@ -105,7 +105,7 @@ class _PatientDetailsScreenState extends State<PatientDetailsScreen> {
                   onPressed: () {
                     // context.push(patientDetailsScreenPath);
                   },
-                  padding: EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   width: double.infinity,
                   borderRadius: 12,
                   color: primaryBlueColor,

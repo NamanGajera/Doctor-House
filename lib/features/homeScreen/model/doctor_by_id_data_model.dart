@@ -10,18 +10,18 @@ class DoctorByCategoryIdDataModel {
     if (json['doctorData'] != null) {
       doctorData = <DoctorDetailsData>[];
       json['doctorData'].forEach((v) {
-        doctorData!.add(new DoctorDetailsData.fromJson(v));
+        doctorData!.add(DoctorDetailsData.fromJson(v));
       });
     }
     statusCode = json['statusCode'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.doctorData != null) {
-      data['doctorData'] = this.doctorData!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (doctorData != null) {
+      data['doctorData'] = doctorData!.map((v) => v.toJson()).toList();
     }
-    data['statusCode'] = this.statusCode;
+    data['statusCode'] = statusCode;
     return data;
   }
 }

@@ -7,12 +7,14 @@ class HomeScreenState extends Equatable {
   final bool showTopDoctorLoader;
   final bool showTrustedHospitalLoader;
   final bool showDoctorCategoryDataLoader;
+  final bool showDoctorDataFetchLoader;
   final String? selectedDoctorCategoryId;
   final List<CategoryData>? doctorCategoryData;
   final List<AppointmentData>? upcomingAppointment;
   final List<DoctorDetailsData>? topDoctor;
   final List<DoctorDetailsData>? doctorDataByCategoryId;
   final List<HospitalDetailsData>? trustedHospital;
+  final DoctorDetailsData? doctorData;
 
   const HomeScreenState({
     this.showCategoryLoader = false,
@@ -20,12 +22,14 @@ class HomeScreenState extends Equatable {
     this.showTopDoctorLoader = false,
     this.showTrustedHospitalLoader = false,
     this.showDoctorCategoryDataLoader = false,
+    this.showDoctorDataFetchLoader = false,
     this.selectedDoctorCategoryId = '1',
     this.doctorCategoryData,
     this.upcomingAppointment,
     this.topDoctor,
     this.trustedHospital,
     this.doctorDataByCategoryId,
+    this.doctorData,
   });
 
   @override
@@ -41,6 +45,8 @@ class HomeScreenState extends Equatable {
         trustedHospital,
         showDoctorCategoryDataLoader,
         doctorDataByCategoryId,
+        showDoctorDataFetchLoader,
+        doctorData,
       ];
 
   HomeScreenState copyWith({
@@ -48,6 +54,7 @@ class HomeScreenState extends Equatable {
     bool? showUpcomingLoader,
     bool? showTopDoctorLoader,
     bool? showTrustedHospitalLoader,
+    bool? showDoctorDataFetchLoader,
     List<CategoryData>? doctorCategoryData,
     List<AppointmentData>? upcomingAppointment,
     List<DoctorDetailsData>? topDoctor,
@@ -55,6 +62,7 @@ class HomeScreenState extends Equatable {
     List<DoctorDetailsData>? doctorDataByCategoryId,
     bool? showDoctorCategoryDataLoader,
     String? selectedDoctorCategoryId,
+    DoctorDetailsData? doctorData,
   }) {
     return HomeScreenState(
       showCategoryLoader: showCategoryLoader ?? this.showCategoryLoader,
@@ -68,6 +76,8 @@ class HomeScreenState extends Equatable {
       selectedDoctorCategoryId: selectedDoctorCategoryId ?? this.selectedDoctorCategoryId,
       doctorDataByCategoryId: doctorDataByCategoryId ?? this.doctorDataByCategoryId,
       showDoctorCategoryDataLoader: showDoctorCategoryDataLoader ?? this.showDoctorCategoryDataLoader,
+      showDoctorDataFetchLoader: showDoctorDataFetchLoader ?? this.showDoctorDataFetchLoader,
+      doctorData: doctorData ?? this.doctorData,
     );
   }
 }

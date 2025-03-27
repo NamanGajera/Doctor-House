@@ -63,7 +63,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else if (error is ValidationException) {
       emit(AuthFailureState(statusCode: error.statusCode, message: error.message));
     } else if (error is ServerException) {
-      emit(AuthFailureState(statusCode: 500, message: 'No internet connection'));
+      emit(const AuthFailureState(statusCode: 500, message: 'No internet connection'));
     } else {
       emit(AuthFailureState(statusCode: 500, message: '$error'));
     }

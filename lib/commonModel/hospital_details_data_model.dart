@@ -23,15 +23,15 @@ class HospitalDetailsData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['hospitalType'] = this.hospitalType;
-    data['experience'] = this.experience;
-    data['rating'] = this.rating;
-    data['address'] = this.address;
-    data['contactNumber'] = this.contactNumber;
-    data['isLiked'] = this.isLiked;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['hospitalType'] = hospitalType;
+    data['experience'] = experience;
+    data['rating'] = rating;
+    data['address'] = address;
+    data['contactNumber'] = contactNumber;
+    data['isLiked'] = isLiked;
     return data;
   }
 

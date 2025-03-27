@@ -36,7 +36,7 @@ class _AppointmentCardViewState extends State<AppointmentCardView> {
       child: Column(
         children: [
           _buildAppointmentHeader(),
-          Divider(height: 5),
+          const Divider(height: 5),
           Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -57,15 +57,15 @@ class _AppointmentCardViewState extends State<AppointmentCardView> {
   Widget _buildAppointmentHeader() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              Icon(Icons.calendar_today, size: 16),
+              const Icon(Icons.calendar_today, size: 16),
               const SizedBox(width: 8),
               Text(
                 'Aug 25, 2023 - 10:00 AM',
@@ -125,7 +125,7 @@ class _AppointmentCardViewState extends State<AppointmentCardView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Text(
                 'Dr. Jenny William',
                 style: Theme.of(context).textTheme.bodyLarge,

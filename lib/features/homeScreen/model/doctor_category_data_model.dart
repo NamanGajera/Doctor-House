@@ -10,18 +10,18 @@ class DoctorCategoryDataModel {
     if (json['doctorCategoryData'] != null) {
       doctorCategoryData = <CategoryData>[];
       json['doctorCategoryData'].forEach((v) {
-        doctorCategoryData!.add(new CategoryData.fromJson(v));
+        doctorCategoryData!.add(CategoryData.fromJson(v));
       });
     }
     statusCode = json['statusCode'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.doctorCategoryData != null) {
-      data['doctorCategoryData'] = this.doctorCategoryData!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (doctorCategoryData != null) {
+      data['doctorCategoryData'] = doctorCategoryData!.map((v) => v.toJson()).toList();
     }
-    data['statusCode'] = this.statusCode;
+    data['statusCode'] = statusCode;
     return data;
   }
 }

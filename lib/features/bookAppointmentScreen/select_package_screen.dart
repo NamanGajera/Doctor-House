@@ -158,7 +158,7 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                 onPressed: () {
                   context.push(patientDetailsScreenPath);
                 },
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 width: double.infinity,
                 borderRadius: 12,
                 color: primaryBlueColor,
@@ -280,7 +280,7 @@ class _SelectPackageScreenState extends State<SelectPackageScreen> {
                         ),
                       ),
                       child: isSelected
-                          ? Icon(
+                          ? const Icon(
                               Icons.check,
                               size: 16,
                               color: Colors.white,

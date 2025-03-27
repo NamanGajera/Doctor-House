@@ -140,7 +140,11 @@ final GoRouter appRouter = GoRouter(
       path: doctorDetailsScreenPath,
       name: doctorDetailsScreenName,
       builder: (context, state) {
-        return const DoctorDetailsScreen();
+        final extra = state.extra as Map<String, dynamic>?;
+        String? doctorId = extra?['doctorId'];
+        return DoctorDetailsScreen(
+          doctorId: doctorId ?? '',
+        );
       },
     ),
 

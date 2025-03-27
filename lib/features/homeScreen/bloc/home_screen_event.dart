@@ -43,3 +43,9 @@ class GetDoctorDataByCategoryIdEvent extends HomeScreenEvent {
 
   GetDoctorDataByCategoryIdEvent({required this.categoryId});
 }
+
+class GetDoctorByIdEvent extends HomeScreenEvent {
+  final String? doctorId;
+
+  GetDoctorByIdEvent({required this.doctorId});
+}

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:doctor_house/commonModel/doctor_details_data_model.dart';
+import 'package:doctor_house/features/homeScreen/model/doctor_by_id_model.dart';
 import 'package:doctor_house/features/homeScreen/model/doctor_category_data_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +31,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     on<ToggleHospitalLikeEvent>(_toggleHospitalLike);
     on<SelectDoctorCategoryEvent>(_selectDoctorCategory);
     on<GetDoctorDataByCategoryIdEvent>(_getDoctorDataByCategoryId);
+    on<GetDoctorByIdEvent>(_getDoctorById);
   }
 
   Future<void> _getDoctorCategory(GetDoctorCategoryEvent event, Emitter<HomeScreenState> emit) async {
@@ -100,7 +102,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     DoctorByCategoryIdDataModel doctorByCategoryIdDataModel;
     emit(state.copyWith(showDoctorCategoryDataLoader: true));
     try {
-      doctorByCategoryIdDataModel = await apiRepository.getDoctorById(event.categoryId);
+      doctorByCategoryIdDataModel = await apiRepository.getDoctorByCategoryId(event.categoryId);
       emit(state.copyWith(
         showDoctorCategoryDataLoader: false,
         doctorDataByCategoryId: doctorByCategoryIdDataModel.doctorData,
@@ -161,6 +163,22 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     }
   }
 
+  Future<void> _getDoctorById(GetDoctorByIdEvent event, Emitter<HomeScreenState> emit) async {
+    DoctorByIdModel doctorByIdModel;
+    emit(state.copyWith(showDoctorDataFetchLoader: true));
+    try {
+      doctorByIdModel = await apiRepository.getDoctorById(event.doctorId);
+      emit(state.copyWith(
+        showDoctorDataFetchLoader: false,
+        doctorData: doctorByIdModel.doctorData,
+      ));
+    } catch (error, stackTrace) {
+      emit(state.copyWith(showTrustedHospitalLoader: false));
+      log('Error=> $error ==> $stackTrace');
+      _handleError(error, emit);
+    }
+  }
+
   Future<void> _selectDoctorCategory(SelectDoctorCategoryEvent event, Emitter<HomeScreenState> emit) async {
     emit(state.copyWith(selectedDoctorCategoryId: event.categoryId ?? '1'));
   }
@@ -194,7 +212,14 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   }
 
   void _handleError(dynamic error, Emitter<HomeScreenState> emit) {
-    emit(state.copyWith(showCategoryLoader: false));
+    emit(state.copyWith(
+      showCategoryLoader: false,
+      showDoctorDataFetchLoader: false,
+      showDoctorCategoryDataLoader: false,
+      showTopDoctorLoader: false,
+      showUpcomingLoader: false,
+      showTrustedHospitalLoader: false,
+    ));
     if (error is BadRequestException) {
       emit(AuthFailureState(statusCode: error.statusCode, message: error.message));
     } else if (error is UnauthorizedException) {

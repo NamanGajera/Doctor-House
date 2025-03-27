@@ -163,7 +163,7 @@ class ApiService {
       } else if (value is List<File>) {
         // Handle List of File objects (for multiple files with same field name)
         for (int i = 0; i < value.length; i++) {
-          await _addFileToRequest(request, '${key}[$i]', value[i]);
+          await _addFileToRequest(request, '$key[$i]', value[i]);
         }
       } else if (value is Map) {
         // Handle nested Maps by converting to JSON string

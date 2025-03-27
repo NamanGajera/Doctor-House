@@ -6,6 +6,7 @@ import 'package:doctor_house/features/homeScreen/model/trusted_hospital_data_mod
 
 import '../../commonModel/success_response_model.dart';
 import '../../features/auth/models/auth_model.dart';
+import '../../features/homeScreen/model/doctor_by_id_model.dart';
 import '../../features/homeScreen/model/doctor_category_data_model.dart';
 import '../../features/homeScreen/model/top_doctor_data_model.dart';
 import '../../features/onBoarding/model/complete_profile_model.dart';
@@ -82,6 +83,7 @@ class ApiRepository {
     try {
       Map<String, dynamic> response = await _apiService.get(getTopSpecialistEndPoint);
       TopDoctorsDataModel topDoctorsDataModel = TopDoctorsDataModel.fromJson(response);
+      log('Top Doctor Data ==>> ${topDoctorsDataModel.toJson()}');
       return topDoctorsDataModel;
     } catch (e) {
       rethrow;
@@ -123,11 +125,23 @@ class ApiRepository {
     }
   }
 
-  /// GET: DOCTOR BY ID
-  Future<DoctorByCategoryIdDataModel> getDoctorById(String? categoryId) async {
+  /// GET: DOCTOR BY CATEGORY ID
+  Future<DoctorByCategoryIdDataModel> getDoctorByCategoryId(String? categoryId) async {
     try {
       Map<String, dynamic> response = await _apiService.get('$getDoctorByCategoryIdEndPoint/$categoryId');
       DoctorByCategoryIdDataModel doctorByIdDataModel = DoctorByCategoryIdDataModel.fromJson(response);
+      log('Doctor By Category Id ==>> ${doctorByIdDataModel.toJson()}');
+      return doctorByIdDataModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// GET: DOCTOR BY ID
+  Future<DoctorByIdModel> getDoctorById(String? doctorId) async {
+    try {
+      Map<String, dynamic> response = await _apiService.get('$getDoctorByIdEndPoint/$doctorId');
+      DoctorByIdModel doctorByIdDataModel = DoctorByIdModel.fromJson(response);
       log('Doctor By Id ==>> ${doctorByIdDataModel.toJson()}');
       return doctorByIdDataModel;
     } catch (e) {

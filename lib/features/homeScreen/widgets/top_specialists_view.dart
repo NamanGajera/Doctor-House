@@ -64,30 +64,33 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                                 child: Stack(
                                   children: [
                                     /// Doctor image with gradient overlay
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(18),
-                                          topRight: Radius.circular(18),
-                                        ),
-                                        color: Colors.grey.shade100,
-                                        image: const DecorationImage(
-                                          image: AssetImage(doctorSampleImage),
-                                        ),
-                                      ),
+                                    Hero(
+                                      tag: 'doctor_image_tag${doctorData?.id}',
                                       child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius: const BorderRadius.only(
                                             topLeft: Radius.circular(18),
                                             topRight: Radius.circular(18),
                                           ),
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              Colors.black.withOpacity(0.1),
-                                              Colors.black.withOpacity(0.6),
-                                            ],
+                                          color: Colors.grey.shade100,
+                                          image: const DecorationImage(
+                                            image: AssetImage(doctorSampleImage),
+                                          ),
+                                        ),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(18),
+                                              topRight: Radius.circular(18),
+                                            ),
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topCenter,
+                                              end: Alignment.bottomCenter,
+                                              colors: [
+                                                Colors.black.withOpacity(0.1),
+                                                Colors.black.withOpacity(0.6),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -276,7 +279,7 @@ class _TopSpecialistsViewState extends State<TopSpecialistsView> {
                             ],
                           ),
                         ).onTap(() {
-                          context.push(doctorDetailsScreenPath);
+                          context.push(doctorDetailsScreenPath, extra: {'doctorId': doctorData?.id});
                         });
                       },
                     ),

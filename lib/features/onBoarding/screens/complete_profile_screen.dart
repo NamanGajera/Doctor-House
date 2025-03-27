@@ -271,7 +271,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   const SizedBox(height: 8),
                   BlocBuilder<OnboardingBloc, OnboardingState>(builder: (context, state) {
                     return CustomDropdown<String>(
-                      items: ['Male', 'Female', 'Other'],
+                      items: const ['Male', 'Female', 'Other'],
                       hintText: 'Select Gender',
                       value: state.selectedGender,
                       borderColor: primaryDarkBlueColor,

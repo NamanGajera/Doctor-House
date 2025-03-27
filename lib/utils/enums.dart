@@ -19,5 +19,7 @@ enum DateFormatType {
   compactDate, // 20240325
   weekdayShort, // Mon
   weekdayLong, // Monday
-  isoFormat // 2024-03-25T14:30:00.000Z
+  isoFormat, // 2024-03-25T14:30:00.000Z
+  timeToTwelveHour, // Converts 24-hour time to 12-hour time
+  timeToTwentyFourHour, // Converts 12-hour time to 24-hour time
 }

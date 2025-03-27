@@ -24,8 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   checkLogin() async {
-    accessToken = await SharedPrefsHelper().getString(SharedPreferencesKeys.accessToken);
-    bool? isOnboarding = await SharedPrefsHelper().getBool(SharedPreferencesKeys.onBoardingDone);
+    accessToken = SharedPrefsHelper().getString(SharedPreferencesKeys.accessToken);
+    bool? isOnboarding = SharedPrefsHelper().getBool(SharedPreferencesKeys.onBoardingDone);
 
     await Future.delayed(const Duration(seconds: 2));
     navigateUser(accessToken != null, isOnboarding);

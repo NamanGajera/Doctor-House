@@ -8,15 +8,15 @@ class CompleteProfileModel {
   CompleteProfileModel.fromJson(Map<String, dynamic> json) {
     statusCode = json['statusCode'];
     message = json['message'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['statusCode'] = this.statusCode;
-    data['message'] = this.message;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['statusCode'] = statusCode;
+    data['message'] = message;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }
@@ -63,18 +63,18 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['email'] = this.email;
-    data['gender'] = this.gender;
-    data['mobileNumber'] = this.mobileNumber;
-    data['age'] = this.age;
-    data['profileImage'] = this.profileImage;
-    data['role'] = this.role;
-    data['isProfileCompleted'] = this.isProfileCompleted;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['email'] = email;
+    data['gender'] = gender;
+    data['mobileNumber'] = mobileNumber;
+    data['age'] = age;
+    data['profileImage'] = profileImage;
+    data['role'] = role;
+    data['isProfileCompleted'] = isProfileCompleted;
     return data;
   }
 }
