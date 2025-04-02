@@ -1,7 +1,8 @@
 import 'dart:developer';
 
-import 'package:doctor_house/features/homeScreen/model/doctor_by_id_data_model.dart';
+import 'package:doctor_house/features/homeScreen/model/doctor-by_category_id_data_model.dart';
 import 'package:doctor_house/features/homeScreen/model/get_upcoming_schedule_data_model.dart';
+import 'package:doctor_house/features/homeScreen/model/hospital_by_id_data_model.dart';
 import 'package:doctor_house/features/homeScreen/model/trusted_hospital_data_model.dart';
 
 import '../../commonModel/success_response_model.dart';
@@ -144,6 +145,18 @@ class ApiRepository {
       DoctorByIdModel doctorByIdDataModel = DoctorByIdModel.fromJson(response);
       log('Doctor By Id ==>> ${doctorByIdDataModel.toJson()}');
       return doctorByIdDataModel;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// GET: HOSPITAL BY ID
+  Future<HospitalByIdDataModel> getHospitalById(String? hospitalId) async {
+    try {
+      Map<String, dynamic> response = await _apiService.get('$getHospitalByIdEndPoint/$hospitalId');
+      HospitalByIdDataModel hospitalByIdDataModel = HospitalByIdDataModel.fromJson(response);
+      log('Hospital By Id ==>> ${hospitalByIdDataModel.toJson()}');
+      return hospitalByIdDataModel;
     } catch (e) {
       rethrow;
     }

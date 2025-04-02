@@ -1,6 +1,8 @@
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:doctor_house/core/extension/widget_extension.dart';
+import 'package:doctor_house/features/homeScreen/bloc/home_screen_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/images.dart';
@@ -51,27 +53,31 @@ class HospitalHeader extends StatelessWidget {
           top: 135,
           left: 0,
           right: 0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Icons.star, color: Colors.white, size: 16),
-                    SizedBox(width: 4),
-                    Text(
-                      '4.8 (1k+ Review)',
-                      style: TextStyle(color: Colors.white),
+          child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+            builder: (context, state) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                  ],
-                ),
-              ),
-            ],
+                    child: Row(
+                      children: [
+                        Icon(Icons.star, color: Colors.white, size: 16),
+                        SizedBox(width: 4),
+                        Text(
+                          '${state.hospitalData?.rating ?? ''} (1k+ Review)',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
         Positioned(
@@ -97,17 +103,29 @@ class HospitalHeader extends StatelessWidget {
                 ).onTap(() {
                   context.pop();
                 }),
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.favorite_outline,
-                    color: Colors.black,
-                    size: 20,
-                  ),
+                BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                  builder: (context, state) {
+                    return GestureDetector(
+                      onTap: () {
+                        context.read<HomeScreenBloc>().add(ToggleHospitalLikeEvent(
+                              hospitalId: state.hospitalData?.id ?? '',
+                              isLike: !(state.hospitalData?.isLiked ?? false),
+                            ));
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          (state.hospitalData?.isLiked ?? false) ? Icons.favorite : Icons.favorite_outline,
+                          color: (state.hospitalData?.isLiked ?? false) ? Colors.red : Colors.black,
+                          size: 20,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -123,50 +141,54 @@ class HospitalInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Serenity Wellness Clinic',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: context.isDarkTheme ? Colors.white : Colors.black,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Dental, Skin Care, Eye Care',
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 13),
-          ),
-          const SizedBox(height: 12),
-          Row(
+    return BlocBuilder<HomeScreenBloc, HomeScreenState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.location_on, color: Colors.blue, size: 16),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  '8502 Preston Rd. Inglewood, Maine 98380',
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),
+              Text(
+                state.hospitalData?.name ?? '-',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: context.isDarkTheme ? Colors.white : Colors.black,
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              const Icon(Icons.access_time, color: Colors.blue, size: 16),
-              const SizedBox(width: 8),
+              const SizedBox(height: 4),
               Text(
-                '15 min · 1.5km · Mon Sun | 11 am - 11pm',
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),
+                state.hospitalData?.hospitalType ?? '-',
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 13),
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  const Icon(Icons.location_on, color: Colors.blue, size: 16),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      state.hospitalData?.address ?? '-',
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Icon(Icons.access_time, color: Colors.blue, size: 16),
+                  const SizedBox(width: 8),
+                  Text(
+                    '15 min · 1.5km · Mon Sun | 11 am - 11pm',
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -181,35 +203,65 @@ class ActionButtons extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildActionButton(context, Icons.language, 'Website'),
-          _buildActionButton(context, Icons.message_outlined, 'Message'),
-          _buildActionButton(context, Icons.phone_outlined, 'Call'),
-          _buildActionButton(context, Icons.directions_outlined, 'Direction'),
-          _buildActionButton(context, Icons.share, 'Share'),
+          _buildActionButton(
+            context,
+            icon: Icons.language,
+            label: 'Website',
+            onTap: () {},
+          ),
+          _buildActionButton(
+            context,
+            icon: Icons.message_outlined,
+            label: 'Message',
+            onTap: () {},
+          ),
+          _buildActionButton(
+            context,
+            icon: Icons.phone_outlined,
+            label: 'Call',
+            onTap: () {},
+          ),
+          _buildActionButton(
+            context,
+            icon: Icons.directions_outlined,
+            label: 'Direction',
+            onTap: () {},
+          ),
+          _buildActionButton(
+            context,
+            icon: Icons.share,
+            label: 'Share',
+            onTap: () {},
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildActionButton(BuildContext context, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 52,
-          height: 52,
-          decoration: BoxDecoration(
-            color: Colors.blue[50],
-            shape: BoxShape.circle,
+  Widget _buildActionButton(BuildContext context, {required IconData icon, required String label, required Function() onTap}) {
+    return InkWell(
+      onTap: () {
+        onTap();
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              color: Colors.blue[50],
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: Colors.blue, size: 24),
           ),
-          child: Icon(icon, color: Colors.blue, size: 24),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(fontSize: 12),
+          ),
+        ],
+      ),
     );
   }
 }

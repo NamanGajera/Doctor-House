@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:doctor_house/core/constants/app_constants.dart';
+import 'package:doctor_house/core/constants/images.dart';
 import 'package:doctor_house/core/extension/build_context_extenstion.dart';
 import 'package:doctor_house/routers/route_path.dart';
 import 'package:flutter/material.dart';
@@ -164,14 +166,30 @@ class _MenuScreenState extends State<MenuScreen> {
                   child: ClipOval(
                     child: _imageFile != null
                         ? Image.file(_imageFile!, fit: BoxFit.cover)
-                        : Container(
-                            color: Colors.grey.shade200,
-                            child: const Icon(
-                              Icons.person,
-                              size: 50,
-                              color: Colors.grey,
-                            ),
-                          ),
+                        : userProfileImage != null
+                            ? FadeInImage(
+                                image: NetworkImage(userProfileImage ?? ''),
+                                placeholder: AssetImage(doctorProfileImage),
+                                fit: BoxFit.cover,
+                                imageErrorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    color: Colors.grey.shade200,
+                                    child: const Icon(
+                                      Icons.person,
+                                      size: 50,
+                                      color: Colors.grey,
+                                    ),
+                                  );
+                                },
+                              )
+                            : Container(
+                                color: Colors.grey.shade200,
+                                child: const Icon(
+                                  Icons.person,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
+                              ),
                   ),
                 ),
                 Positioned(
@@ -206,7 +224,7 @@ class _MenuScreenState extends State<MenuScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'John Doe',
+                  userName ?? '-',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
@@ -215,7 +233,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'john.doe@email.com',
+                  userEmail ?? '-',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,

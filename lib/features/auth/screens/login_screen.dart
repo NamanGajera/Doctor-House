@@ -49,11 +49,15 @@ class _LoginScreenState extends State<LoginScreen> {
             userEmail = state.loginUserModel?.user?.email ?? '';
             accessToken = state.loginUserModel?.token ?? '';
             isProfileCompleted = state.loginUserModel?.user?.isProfileCompleted ?? false;
+            userProfileImage = state.loginUserModel?.user?.profileImage?.url ?? '';
+
+            log('User Profile ==>>> ${userProfileImage}');
 
             await SharedPrefsHelper().setString(SharedPreferencesKeys.accessToken, accessToken ?? '');
             await SharedPrefsHelper().setString(SharedPreferencesKeys.userName, userName ?? '');
             await SharedPrefsHelper().setString(SharedPreferencesKeys.userEmail, userEmail ?? '');
             await SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isProfileCompleted ?? false);
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userProfileImage, userProfileImage ?? '');
 
             if (isProfileCompleted == true) {
               context.pushReplacement(homeScreenPath);

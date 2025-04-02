@@ -1,4 +1,4 @@
-String baseUrl = 'http://192.168.1.3:5000/api/v1';
+String baseUrl = 'http://192.168.1.12:5000/api/v1';
 
 String loginUserEndPoint = '/auth/login';
 
@@ -22,3 +22,5 @@ String toggleHospitalLikeEndPoint = '/like-hospital';
 String getDoctorByCategoryIdEndPoint = '/doctorByCategoryId';
 
 String getDoctorByIdEndPoint = '/doctors';
+
+String getHospitalByIdEndPoint = '/hospital';

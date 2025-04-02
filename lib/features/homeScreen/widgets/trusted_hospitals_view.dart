@@ -241,7 +241,7 @@ class _TrustedHospitalsViewState extends State<TrustedHospitalsView> {
                             ],
                           ),
                         ).onTap(() {
-                          context.push(hospitalDetailsScreenPath);
+                          context.push(hospitalDetailsScreenPath, extra: {'hospitalId': hospitalData?.id});
                         });
                       },
                     );

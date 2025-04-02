@@ -4,6 +4,7 @@ import 'package:doctor_house/commonModel/doctor_details_data_model.dart';
 import 'package:doctor_house/features/homeScreen/model/doctor_by_id_model.dart';
 import 'package:doctor_house/features/homeScreen/model/doctor_category_data_model.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -11,8 +12,9 @@ import '../../../commonModel/category_data_model.dart';
 import '../../../commonModel/hospital_details_data_model.dart';
 import '../../../core/network/api_exceptions.dart';
 import '../../../core/network/api_repository.dart';
-import '../model/doctor_by_id_data_model.dart';
+import '../model/doctor-by_category_id_data_model.dart';
 import '../model/get_upcoming_schedule_data_model.dart';
+import '../model/hospital_by_id_data_model.dart';
 import '../model/top_doctor_data_model.dart';
 import '../model/trusted_hospital_data_model.dart';
 
@@ -32,6 +34,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     on<SelectDoctorCategoryEvent>(_selectDoctorCategory);
     on<GetDoctorDataByCategoryIdEvent>(_getDoctorDataByCategoryId);
     on<GetDoctorByIdEvent>(_getDoctorById);
+    on<GetHospitalByIdEvent>(_getHospitalById);
   }
 
   Future<void> _getDoctorCategory(GetDoctorCategoryEvent event, Emitter<HomeScreenState> emit) async {
@@ -179,14 +182,34 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     }
   }
 
+  Future<void> _getHospitalById(GetHospitalByIdEvent event, Emitter<HomeScreenState> emit) async {
+    HospitalByIdDataModel hospitalByIdDataModel;
+    emit(state.copyWith(showHospitalDataFetchLoader: true));
+    try {
+      hospitalByIdDataModel = await apiRepository.getHospitalById(event.hospitalId);
+      emit(state.copyWith(
+        showHospitalDataFetchLoader: false,
+        hospitalData: hospitalByIdDataModel.hospitalData,
+      ));
+    } catch (error, stackTrace) {
+      emit(state.copyWith(showTrustedHospitalLoader: false));
+      log('Error=> $error ==> $stackTrace');
+      _handleError(error, emit);
+    }
+  }
+
   Future<void> _selectDoctorCategory(SelectDoctorCategoryEvent event, Emitter<HomeScreenState> emit) async {
     emit(state.copyWith(selectedDoctorCategoryId: event.categoryId ?? '1'));
   }
 
   void _updateDoctorLikeStatus({String doctorId = '', bool isLike = false, required Emitter<HomeScreenState> emit}) {
     emit(state.copyWith(
-        topDoctor: _getUpdatedDoctorDataForChangeLike(state.topDoctor ?? [], doctorId, isLike),
-        doctorDataByCategoryId: _getUpdatedDoctorDataForChangeLike(state.doctorDataByCategoryId ?? [], doctorId, isLike)));
+      topDoctor: _getUpdatedDoctorDataForChangeLike(state.topDoctor ?? [], doctorId, isLike),
+      doctorDataByCategoryId: _getUpdatedDoctorDataForChangeLike(state.doctorDataByCategoryId ?? [], doctorId, isLike),
+      hospitalData: state.hospitalData?.copyWith(
+        doctors: _getUpdatedDoctorDataForChangeLike(state.hospitalData?.doctors ?? [], doctorId, isLike),
+      ),
+    ));
   }
 
   List<DoctorDetailsData> _getUpdatedDoctorDataForChangeLike(List<DoctorDetailsData> doctorList, String doctorId, bool isLike) {
@@ -199,7 +222,10 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   }
 
   void _updateHospitalLikeStatus({String hospitalId = '', bool isLike = false, required Emitter<HomeScreenState> emit}) {
-    emit(state.copyWith(trustedHospital: _getUpdatedHospitalDataForChangeLike(state.trustedHospital ?? [], hospitalId, isLike)));
+    emit(state.copyWith(
+      trustedHospital: _getUpdatedHospitalDataForChangeLike(state.trustedHospital ?? [], hospitalId, isLike),
+      hospitalData: state.hospitalData?.copyWith(isLiked: isLike),
+    ));
   }
 
   List<HospitalDetailsData> _getUpdatedHospitalDataForChangeLike(List<HospitalDetailsData> hospitalList, String hospitalId, bool isLike) {
@@ -219,6 +245,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       showTopDoctorLoader: false,
       showUpcomingLoader: false,
       showTrustedHospitalLoader: false,
+      showHospitalDataFetchLoader: false,
     ));
     if (error is BadRequestException) {
       emit(AuthFailureState(statusCode: error.statusCode, message: error.message));

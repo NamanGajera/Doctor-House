@@ -36,7 +36,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocListener<OnboardingBloc, OnboardingState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state.completeProfileModel != null) {
             log('Complete Profile Data Done===>>>>> ${state.completeProfileModel?.toJson()}');
             userFirstName = state.completeProfileModel?.user?.firstName;
@@ -48,14 +48,14 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             userProfileImage = state.completeProfileModel?.user?.profileImage;
             isProfileCompleted = state.completeProfileModel?.user?.isProfileCompleted;
 
-            SharedPrefsHelper().setString(SharedPreferencesKeys.userName, userName ?? '');
-            SharedPrefsHelper().setString(SharedPreferencesKeys.userFirstName, userFirstName ?? '');
-            SharedPrefsHelper().setString(SharedPreferencesKeys.userLastName, userLastName ?? '');
-            SharedPrefsHelper().setString(SharedPreferencesKeys.userEmail, userEmail ?? '');
-            SharedPrefsHelper().setString(SharedPreferencesKeys.userGender, gender ?? '');
-            SharedPrefsHelper().setString(SharedPreferencesKeys.userAge, '${age ?? ''}');
-            SharedPrefsHelper().setString(SharedPreferencesKeys.userProfileImage, userProfileImage ?? '');
-            SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isProfileCompleted ?? false);
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userName, userName ?? '');
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userFirstName, userFirstName ?? '');
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userLastName, userLastName ?? '');
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userEmail, userEmail ?? '');
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userGender, gender ?? '');
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userAge, '${age ?? ''}');
+            await SharedPrefsHelper().setString(SharedPreferencesKeys.userProfileImage, userProfileImage ?? '');
+            await SharedPrefsHelper().setBool(SharedPreferencesKeys.isCompleterProfileDone, isProfileCompleted ?? false);
 
             context.pushReplacement(homeScreenPath);
           }

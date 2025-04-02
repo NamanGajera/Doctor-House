@@ -84,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 8),
 
             /// Upcoming Schedule Text
-
             BlocBuilder<HomeScreenBloc, HomeScreenState>(builder: (context, state) {
               return (state.upcomingAppointment ?? []).isEmpty
                   ? const SizedBox()

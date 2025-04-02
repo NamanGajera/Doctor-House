@@ -152,7 +152,11 @@ final GoRouter appRouter = GoRouter(
       path: hospitalDetailsScreenPath,
       name: hospitalDetailScreenName,
       builder: (context, state) {
-        return const HospitalDetailsScreen();
+        final extra = state.extra as Map<String, dynamic>?;
+        String? hospitalId = extra?['hospitalId'];
+        return HospitalDetailsScreen(
+          hospitalId: hospitalId ?? '',
+        );
       },
     ),
 

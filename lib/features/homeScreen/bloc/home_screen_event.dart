@@ -49,3 +49,9 @@ class GetDoctorByIdEvent extends HomeScreenEvent {
 
   GetDoctorByIdEvent({required this.doctorId});
 }
+
+class GetHospitalByIdEvent extends HomeScreenEvent {
+  final String? hospitalId;
+
+  GetHospitalByIdEvent({required this.hospitalId});
+}
